@@ -1,0 +1,67 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
+import { refeshTokenEntity } from 'src/entities/refreshtoken.entity';
+import { userEntity } from 'src/entities/user.entity';
+import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt/dist/jwt.service';
+import {v4 as uuidv4} from  'uuid'
+
+
+@Injectable()
+export class AuthService {
+    constructor(
+        @InjectRepository(userEntity) private readonly userRepository : Repository<userEntity>,
+        private readonly jwtService: JwtService,
+        @InjectRepository(refeshTokenEntity) private readonly refreshTokenRepository : Repository<refeshTokenEntity>
+    ){}
+
+
+    async register(payload : LoggingCredentialsDto) {
+        const user = await this.userRepository.findOne({where: {username: payload.username}})
+        if(user) {
+            throw new Error('User already exists')
+        }
+        
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(payload.password, salt)
+        const newUser = {
+            username: payload.username,
+            password: hashedPassword
+        }
+        await this.userRepository.save(newUser)
+    }   
+
+    async login(payload : LoggingCredentialsDto) {
+        const user = await this.userRepository.findOne({where: {username: payload.username}})
+        if(!user) {
+            throw new Error('User not found')
+        }
+        if(!(await bcrypt.compare(payload.password, user.password))) {
+            throw new Error('Invalid password')
+        }
+        return 'Login successful'
+    }
+
+
+    async generateRefreshToken(userId: string) {
+        const payload ={
+            sub : userId
+        }
+        const accesstoken = this.jwtService.sign(payload)
+        const refreshToken = uuidv4()
+        
+    }
+    async storeRefreshToken(userId: string, refreshToken: string) {
+        const expairyDate = new Date();
+        expairyDate.setDate(expairyDate.getDate() + 3)
+        const newRefreshToken = this.refreshTokenRepository.create({
+            userId,
+            token: refreshToken,
+            expiresAt: expairyDate
+        })
+        await this.refreshTokenRepository.save(newRefreshToken)
+    }
+    
+}
