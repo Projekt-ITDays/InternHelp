@@ -1,19 +1,21 @@
 services:
 
+
   db:
     image: postgres:15-alpine 
     container_name: postgres_db
     restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_USER= ${DB_USER:-postgres}
-      - POSTGRES_PASSWORD= ${DB_PASSWORD:-password}
-      - POSTGRES_DB= ${DB_NAME:-intern_db}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
+
   api:
     build:
       context: ./backend
@@ -26,12 +28,11 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      - NODE_ENV=development
-      - DB_HOST=db
+      - DB_HOST=postgres_db
       - DB_PORT=5432
-      - DB_USERNAME= ${DB_USER:-postgres}
-      - DB_PASSWORD= ${DB_PASSWORd:-password}
-      - DB_NAME= ${DB_NAME:-intern_db}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     networks:
       - app-network
 
@@ -45,6 +46,9 @@ services:
       - api
     networks: 
       - app-network
+    volumes:
+      - ./frontend:/usr/src/app 
+      - /usr/src/app/node_modules
 networks:
   app-network:
     driver: bridge

@@ -41,16 +41,24 @@ export class AuthService {
         if(!(await bcrypt.compare(payload.password, user.password))) {
             throw new Error('Invalid password')
         }
-        return 'Login successful'
+        const token = await this.generateToken(user.id)
+        
+        return {
+            ...token,
+            username: payload.username,
+            role: user.role
+        }
     }
 
 
-    async generateRefreshToken(userId: string) {
+    async generateToken(userId: string) {
         const payload ={
             sub : userId
         }
         const accesstoken = this.jwtService.sign(payload)
         const refreshToken = uuidv4()
+        await this.storeRefreshToken(userId, refreshToken)
+        return {accesstoken, refreshToken}
         
     }
     async storeRefreshToken(userId: string, refreshToken: string) {
@@ -63,5 +71,18 @@ export class AuthService {
         })
         await this.refreshTokenRepository.save(newRefreshToken)
     }
-    
+
+    async refreshToken(oldRefreshToken: string) {
+        const storedToken = await this.refreshTokenRepository.findOne({where: {token: oldRefreshToken}})
+        if(!storedToken) {
+            throw new Error('Invalid refresh token')
+        }
+        if(storedToken.expiresAt < new Date()) {
+            
+            throw new Error('Refresh token expired')
+        }
+        await this.refreshTokenRepository.delete(storedToken.id)
+        return this.generateToken(storedToken.userId)
+    }
+
 }
