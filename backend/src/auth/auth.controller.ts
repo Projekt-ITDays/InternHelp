@@ -12,11 +12,10 @@ export class AuthController {
     }
     @Post('login')
     login(@Body() payload: LoggingCredentialsDto)  {
-        return 'Login successful';
-    }
+        return this.authService.login(payload)}
 
     @Post('register')
     register(@Body() payload: LoggingCredentialsDto)  {
-        return 'Registration successful';
+        this.authService.register(payload)
     }
 }
