@@ -17,7 +17,9 @@ export class AuthService {
         @InjectRepository(refeshTokenEntity) private readonly refreshTokenRepository : Repository<refeshTokenEntity>
     ){}
 
-
+    async logout(userId: string) {
+        await this.refreshTokenRepository.delete({userId})
+    }
     async register(payload : LoggingCredentialsDto) {
         const user = await this.userRepository.findOne({where: {username: payload.username}})
         if(user) {

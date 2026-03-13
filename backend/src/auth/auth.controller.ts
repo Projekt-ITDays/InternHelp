@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post } from '@nestjs/common';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
 import { AuthService } from './auth.service';
 
@@ -10,6 +10,7 @@ export class AuthController {
     ){
 
     }
+    
     @Post('login')
     login(@Body() payload: LoggingCredentialsDto)  {
         return 'Login successful';
@@ -19,4 +20,9 @@ export class AuthController {
     register(@Body() payload: LoggingCredentialsDto)  {
         return 'Registration successful';
     }
+    @Post('logout/:userId')
+    logout(@Param('userId') userId: string) {
+         this.authService.logout(userId)
+        return { message: `Użytkownik o ID ${userId} zostałx/ wylogowany` };
+    } 
 }
