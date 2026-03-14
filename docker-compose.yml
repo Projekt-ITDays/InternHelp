@@ -1,8 +1,7 @@
 services:
 
-
   db:
-    image: postgres:15-alpine 
+    image: postgres:15 
     container_name: postgres_db
     restart: always
     environment:
@@ -10,36 +9,33 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     ports:
-      - "5435:5432"
+      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - app-network
+      - db-network
 
   api:
     build:
       context: ./backend
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     depends_on:
       - db
+    env_file:
+      - ./backend/.env
     ports:
        - "3000:3000"
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
-    environment:
-      - DB_HOST=postgres_db
-      - DB_PORT=5432
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
     networks:
       - app-network
+      - db-network
 
   web:
     build:
       context: ./frontend
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     depends_on:
@@ -51,6 +47,8 @@ services:
       - /usr/src/app/node_modules
 networks:
   app-network:
+    driver: bridge
+  db-network:
     driver: bridge
 volumes:
   postgres-data:
