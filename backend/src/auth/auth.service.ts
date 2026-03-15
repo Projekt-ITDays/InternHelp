@@ -8,6 +8,10 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import {v4 as uuidv4} from  'uuid'
 
+type GoogleProfileData = {
+    email: string
+}
+
 
 @Injectable()
 export class AuthService {
@@ -86,5 +90,19 @@ export class AuthService {
         await this.refreshTokenRepository.delete(storedToken.id)
         return this.generateToken(storedToken.userId)
     }
+    async validateGoogleUser(profile: GoogleProfileData) {
+        const user = await this.userRepository.findOneBy({username: profile.email})
+        if(user) {
+            return user
+        }
 
+        const salt = await bcrypt.genSalt(10)
+        const generatedPassword = `google-${uuidv4()}`
+        const hashedPassword = await bcrypt.hash(generatedPassword, salt)
+
+        return this.userRepository.save({
+            username: profile.email,
+            password: hashedPassword
+        })
+    }
 }
