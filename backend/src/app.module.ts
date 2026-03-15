@@ -5,16 +5,13 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { GeminiApiModule } from './gemini-api/gemini-api.module';
-import googleOauthConfig from './auth/config/google-oauth.config';
-import { GoogleStrategy } from './auth/strategies/google.strategy';
-import { AuthService } from './auth/auth.service';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    ConfigModule.forFeature(googleOauthConfig),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
@@ -26,8 +23,15 @@ import { AuthService } from './auth/auth.service';
       synchronize: true, // wylacz to jak skonczymy pracowac nad baza danych, zeby nie stracic danych przy restarcie serwera
     }),
     AuthModule,
-    GeminiApiModule],
+    GeminiApiModule,
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET || 'default_secret',
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
+    
   controllers: [AppController],
-  providers: [AppService ],
+  providers: [AppService],
 })
 export class AppModule {}

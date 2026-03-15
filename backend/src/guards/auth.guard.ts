@@ -18,19 +18,23 @@ export class AuthGuard implements CanActivate   {
             throw new UnauthorizedException('Missing access token')
         }
         try{
+           
             const payload = this.jwtService.verify(token)
             request['user'] = payload
         }
         catch(err) {
+            // throw new UnorderedBulkOperation('Invalid access ');
             throw new UnauthorizedException('Invalid token')
         }
         return true
     }
     async extractTokenFromHeader(request: any): Promise<string | null> {
         const [type , token] = request.headers.authorization?.split(' ') || [];
+        // console.log('Extracted token:', { type, token }); // Log the extracted type and token
         if(type !== 'Bearer' || !token) {
             return null
         }
+        // console.log('Token extracted successfully:', token); // Log the successfully extracted token
         return token      
     }
 }
