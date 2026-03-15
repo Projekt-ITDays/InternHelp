@@ -15,24 +15,46 @@ export class AuthController {
     }
     
     @Post('login')
-    login(@Body() payload: LoggingCredentialsDto)  {
-        return this.authService.login(payload)}
+    async login(@Body() payload: LoggingCredentialsDto, @Res({passthrough : true}) res: Response)  {
+        const resoult =  await this.authService.login(payload)
+        // secure false dla pordukcji bo nie mamy https
+        res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax',maxAge: 3 * 24 * 60 * 60 * 1000 })
+        return {
+            accesstoken: resoult.accesstoken,
+            username: resoult.username,
+            role: resoult.role
+        }
+    }
 
     @Post('register')
     async register(@Body() payload: LoggingCredentialsDto)  {
         await this.authService.register(payload)
     }
+    @Post('refresh')
+    async refreshToken(@Req() req: Request, @Res({passthrough : true}) res: Response) {
+        const refreshToken = req.cookies['refreshToken']
+        if(!refreshToken) {
+            throw new Error('No refresh token provided')
+        }
+        const resoult = await this.authService.refreshToken(refreshToken)
+        // Tutaj tak samo wylacznie do produkcji secure true
+        res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax',maxAge: 3 * 24 * 60 * 60 * 1000 })
+        return {
+            accesstoken: resoult.accesstoken,
+            
+        }
+    }
     @UseGuards(AuthGuard)
-    @Post('logout/:userId')
-    async logout(@Param('userId') userId: string) {
-         await this.authService.logout(userId)
-        return { message: `Użytkownik o ID ${userId} zostałx/ wylogowany` };
-    } 
+    @Post('logout')
+    async logout(@Req() req: Request & { user: { sub: string } }, @Res({passthrough : true}) res: Response) {
+         await this.authService.logout(req.user.sub)
+         res.clearCookie('refreshToken', { httpOnly: true, secure: false, sameSite: 'lax' })
+        return { message: `Użytkownik został wylogowany` };
+    }
     @UseGuards(GoogleGuard)
     @Get('google/login')
-    async googleLogin() { 
-
-    }
+    async googleLogin() {}
+    
      @UseGuards(GoogleGuard)
     @Get('google/callback')
     async googleCallback(@Req() req: Request & { user: any },@Res() res: Response) {
