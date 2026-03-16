@@ -16,11 +16,20 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     forbidNonWhitelisted: true,
     transform: true,
   }))
+
+  // zeby frontend mogl sie polaczyc z backendem bez problemow z CORS
+  app.enableCors({
+    origin: 'http://localhost:4200', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   app.use(cookieParser());  
   await app.listen(process.env.PORT ?? 3000);
 }
