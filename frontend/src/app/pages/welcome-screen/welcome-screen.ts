@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 type FeatureCard = {
   id: string;
   title: string;
   description: string;
   imageUrl: string;
-  caption: string;
+  mobileImageUrl: string;
 };
 
 @Component({
   selector: 'app-welcome-screen',
-  imports: [],
+  standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })
@@ -18,101 +20,92 @@ export class WelcomeScreen {
   protected readonly featureCards: FeatureCard[] = [
     {
       id: 'summary',
-      title: 'Automatyczne streszczenia rozmow z AI',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt lectus in dui dictum, sit amet laoreet massa sodales.',
-      imageUrl: 'https://picsum.photos/seed/internhelp-summary/1280/800',
-      caption: 'Lorem panel: szybkie podsumowanie kandydatow.',
+      title: 'Automatyczne streszczenia rozmów z AI',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt lectus in dui dictum, sit amet laoreet massa sodales.',
+      imageUrl: 'https://picsum.photos/seed/desk-summary/1280/800',
+      mobileImageUrl: 'https://picsum.photos/seed/mob-summary/600/1200',
     },
     {
       id: 'pipeline',
-      title: 'Panel postepu rekrutacji na zywo',
-      description:
-        'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium ligula at sem feugiat, nec pulvinar massa tristique.',
-      imageUrl: 'https://picsum.photos/seed/internhelp-pipeline/1280/800',
-      caption: 'Lorem panel: status i etapy procesu.',
+      title: 'Panel postępu rekrutacji na żywo',
+      description: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium ligula at sem feugiat, nec pulvinar massa tristique.',
+      imageUrl: 'https://picsum.photos/seed/desk-pipeline/1280/800',
+      mobileImageUrl: 'https://picsum.photos/seed/mob-pipeline/600/1200',
     },
     {
       id: 'knowledge',
-      title: 'Baza wiedzy dla internow zespolu',
-      description:
-        'Curabitur non justo et magna auctor volutpat. Duis sodales mi sed ligula luctus, vitae venenatis orci faucibus.',
-      imageUrl: 'https://picsum.photos/seed/internhelp-knowledge/1280/800',
-      caption: 'Lorem panel: wiedza i onboarding w jednym.',
+      title: 'Baza wiedzy dla internów zespołu',
+      description: 'Curabitur non justo et magna auctor volutpat. Duis sodales mi sed ligula luctus, vitae venenatis orci faucibus.',
+      imageUrl: 'https://picsum.photos/seed/desk-knowledge/1280/800',
+      mobileImageUrl: 'https://picsum.photos/seed/mob-knowledge/600/1200',
     },
   ];
 
-  protected activeFeatureId = this.featureCards[0]!.id;
-  protected username = '';
-  protected password = '';
-  protected showErrorWidget = false;
-  protected errorMessage = 'Wypelnij oba pola.';
+  protected activeFeatureId = signal<string>(this.featureCards[0].id);
+  protected username = signal<string>('');
+  protected password = signal<string>('');
+  protected showErrorWidget = signal<boolean>(false);
+  protected errorMessage = signal<string>('Wypełnij oba pola.');
 
   protected setActiveFeature(featureId: string): void {
-    this.activeFeatureId = featureId;
+    this.activeFeatureId.set(featureId);
   }
 
   protected isFeatureActive(featureId: string): boolean {
-    return this.activeFeatureId === featureId;
+    return this.activeFeatureId() === featureId;
   }
 
   protected onFeatureHover(featureId: string): void {
-    if (!this.canUseHover()) {
-      return;
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+      this.setActiveFeature(featureId);
     }
-
-    this.setActiveFeature(featureId);
   }
 
   protected onUsernameInput(event: Event): void {
-    this.username = this.getInputValue(event);
+    this.username.set(this.getInputValue(event));
   }
 
   protected onPasswordInput(event: Event): void {
-    this.password = this.getInputValue(event);
+    this.password.set(this.getInputValue(event));
   }
 
   protected onLoginSubmit(event: Event): void {
     event.preventDefault();
 
-    const normalizedUsername = this.username.trim();
-    const normalizedPassword = this.password.trim();
+    const user = this.username().trim();
+    const pass = this.password().trim();
 
-    if (!normalizedUsername || !normalizedPassword) {
-      this.showError('Wypelnij oba pola.');
+    if (!user || !pass) {
+      this.showError('Wypełnij oba pola.');
       return;
     }
 
-    if (normalizedUsername !== 'lorem' || normalizedPassword !== 'ipsum') {
-      this.showError('Niepoprawny login lub haslo.');
+    if (user !== 'lorem' || pass !== 'ipsum') {
+      this.showError('Niepoprawny login lub hasło.');
       return;
     }
 
-    this.showErrorWidget = false;
+    this.showErrorWidget.set(false);
   }
 
   protected onRegisterClick(): void {
-    this.showError('Rejestracja bedzie dostepna wkrotce.');
+    this.showError('Rejestracja będzie dostępna wkrótce.');
   }
 
   protected onForgotPasswordClick(): void {
-    this.showError('Opcja przypomnienia hasla bedzie dostepna wkrotce.');
+    this.showError('Opcja przypomnienia hasła będzie dostępna wkrótce.');
   }
 
   protected dismissErrorWidget(): void {
-    this.showErrorWidget = false;
+    this.showErrorWidget.set(false);
   }
 
   private showError(message: string): void {
-    this.errorMessage = message;
-    this.showErrorWidget = true;
+    this.errorMessage.set(message);
+    this.showErrorWidget.set(true);
   }
 
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
-  }
-
-  private canUseHover(): boolean {
-    return typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
   }
 }

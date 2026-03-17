@@ -1,22 +1,23 @@
 <div class="welcome-screen">
-	@if (showErrorWidget) {
+	@if (showErrorWidget()) {
 		<section class="error-widget" role="status" aria-live="polite">
-			<span>{{ errorMessage }}</span>
-			<button type="button" (click)="dismissErrorWidget()" aria-label="Zamknij komunikat">
-				Zamknij
-			</button>
+			<span>{{ errorMessage() }}</span>
+			<button type="button" (click)="dismissErrorWidget()" aria-label="Zamknij komunikat">Zamknij</button>
 		</section>
 	}
 
 	<section class="layout-wide">
 		<div class="stage-panel">
-			<img src="assets/internhelp-logo.svg" alt="InternHelp" class="gemini-logo stage-logo" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo stage-logo" />
 
 			<div class="shot-viewport stage-shot" aria-live="polite">
 				@for (feature of featureCards; track feature.id) {
 					@if (isFeatureActive(feature.id)) {
 						<figure class="shot-frame">
-							<img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+							<picture>
+								<source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl">
+								<img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+							</picture>
 						</figure>
 					}
 				}
@@ -30,74 +31,11 @@
 
 		<aside class="right-rail">
 			<section class="feature-panel">
-				<div class="feature-list">
-					@for (feature of featureCards; track feature.id) {
-						<button
-							type="button"
-							class="feature-row"
-							[class.is-active]="isFeatureActive(feature.id)"
-							(mouseenter)="onFeatureHover(feature.id)"
-							(focus)="setActiveFeature(feature.id)"
-							(click)="setActiveFeature(feature.id)"
-							[attr.aria-pressed]="isFeatureActive(feature.id)"
-						>
-							<span class="feature-title">{{ feature.title }}</span>
-							<span class="feature-description">{{ feature.description }}</span>
-						</button>
-					}
-				</div>
+				<ng-container *ngTemplateOutlet="featureListTemplate"></ng-container>
 			</section>
 
 			<section class="auth-panel">
-				<div class="login-card">
-					<form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
-						<div class="credentials-group">
-							<input
-								type="text"
-								name="username"
-								class="username-input"
-								[value]="username"
-								(input)="onUsernameInput($event)"
-								autocomplete="username"
-								placeholder="Login"
-							/>
-
-							<input
-								type="password"
-								name="password"
-								class="password-input"
-								[value]="password"
-								(input)="onPasswordInput($event)"
-								autocomplete="current-password"
-								placeholder="Haslo"
-							/>
-						</div>
-
-						<div class="captcha-box">[ Widzet Captcha ]</div>
-
-						<button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
-							Nie pamietam hasla
-						</button>
-
-						<div class="login-actions">
-							<button type="submit" class="login-button">Zaloguj</button>
-							<button type="button" class="register-button" (click)="onRegisterClick()">
-								Zarejestruj
-							</button>
-						</div>
-
-						<div class="oauth-placeholder" aria-hidden="true">
-							Miejsce na OAuth / OpenID
-						</div>
-
-						<small class="legal-note">
-							Korzystamy z plikow cookies.
-							<span class="legal-acceptance">
-								Rejestrujac sie, akceptujesz&nbsp;<a href="/" (click)="$event.preventDefault()">Regulamin</a>.
-							</span>
-						</small>
-					</form>
-				</div>
+                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
 			</section>
 		</aside>
 	</section>
@@ -105,92 +43,103 @@
 	<section class="layout-mobile">
 		<article class="mobile-login-screen">
 			<div class="mobile-login-inner">
-				<img src="assets/internhelp-logo.svg" alt="InternHelp" class="gemini-logo" />
-
-				<div class="login-card">
-					<form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
-						<div class="credentials-group">
-							<input
-								type="text"
-								name="mobile-username"
-								class="username-input"
-								[value]="username"
-								(input)="onUsernameInput($event)"
-								autocomplete="username"
-								placeholder="Login"
-							/>
-
-							<input
-								type="password"
-								name="mobile-password"
-								class="password-input"
-								[value]="password"
-								(input)="onPasswordInput($event)"
-								autocomplete="current-password"
-								placeholder="Haslo"
-							/>
-						</div>
-
-						<div class="captcha-box">[ Widzet Captcha ]</div>
-
-						<button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
-							Nie pamietam hasla
-						</button>
-
-						<div class="login-actions">
-							<button type="submit" class="login-button">Zaloguj</button>
-							<button type="button" class="register-button" (click)="onRegisterClick()">
-								Zarejestruj
-							</button>
-						</div>
-
-						<div class="oauth-placeholder" aria-hidden="true">
-							Miejsce na OAuth / OpenID
-						</div>
-
-						<small class="legal-note">
-							Korzystamy z plikow cookies.
-							<span class="legal-acceptance">
-								Rejestrujac sie, akceptujesz&nbsp;<a href="/" (click)="$event.preventDefault()">Regulamin</a>.
-							</span>
-						</small>
-					</form>
-				</div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" />
+                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
 			</div>
-
-			<p class="scroll-cue">Przesun w gore: kolejne sekcje czekaja nizej.</p>
-		</article>
+			</article>
 
 		<article class="mobile-feature-screen">
-			<header class="mobile-copy">
-				<p class="eyebrow">Funkcje</p>
-				<h2>Podglad i opisy</h2>
-			</header>
-
 			<div class="shot-viewport mobile-shot" aria-live="polite">
 				@for (feature of featureCards; track feature.id) {
 					@if (isFeatureActive(feature.id)) {
 						<figure class="shot-frame">
-							<img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+							<picture>
+								<source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl">
+								<img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+							</picture>
 						</figure>
 					}
 				}
 			</div>
 
-			<div class="feature-list mobile-feature-list">
-				@for (feature of featureCards; track feature.id) {
-					<button
-						type="button"
-						class="feature-row"
-						[class.is-active]="isFeatureActive(feature.id)"
-						(click)="setActiveFeature(feature.id)"
-						[attr.aria-pressed]="isFeatureActive(feature.id)"
-					>
-						<span class="feature-title">{{ feature.title }}</span>
-						<span class="feature-description">{{ feature.description }}</span>
-					</button>
-				}
-			</div>
+            <div class="feature-list mobile-feature-list">
+			    <ng-container *ngTemplateOutlet="featureListTemplate"></ng-container>
+            </div>
+
+			<footer class="mobile-footer">
+				<a href="/" (click)="$event.preventDefault()">Kontakt</a>
+				<a href="/" (click)="$event.preventDefault()">Regulamin</a>
+			</footer>
 		</article>
 	</section>
+
+    <ng-template #featureListTemplate>
+        <div class="feature-list">
+            @for (feature of featureCards; track feature.id) {
+                <button
+                    type="button"
+                    class="feature-row"
+                    [class.is-active]="isFeatureActive(feature.id)"
+                    (mouseenter)="onFeatureHover(feature.id)"
+                    (focus)="setActiveFeature(feature.id)"
+                    (click)="setActiveFeature(feature.id)"
+                    [attr.aria-pressed]="isFeatureActive(feature.id)"
+                >
+                    <span class="feature-title">{{ feature.title }}</span>
+                    <span class="feature-description">{{ feature.description }}</span>
+                </button>
+            }
+        </div>
+    </ng-template>
+
+    <ng-template #loginFormTemplate>
+        <div class="login-card">
+            <form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
+                <div class="credentials-group">
+                    <input
+                        type="text"
+                        name="username"
+                        class="username-input"
+                        [value]="username()"
+                        (input)="onUsernameInput($event)"
+                        autocomplete="username"
+                        placeholder="Login"
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        class="password-input"
+                        [value]="password()"
+                        (input)="onPasswordInput($event)"
+                        autocomplete="current-password"
+                        placeholder="Hasło"
+                    />
+                </div>
+
+                <div class="captcha-box">[ Widzet Captcha ]</div>
+
+                <button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
+                    Nie pamiętam hasła
+                </button>
+
+                <div class="login-actions">
+                    <button type="submit" class="login-button">Zaloguj</button>
+                    <button type="button" class="register-button" (click)="onRegisterClick()">
+                        Zarejestruj
+                    </button>
+                </div>
+
+                <div class="oauth-placeholder" aria-hidden="true">
+                    Miejsce na OAuth / OpenID
+                </div>
+
+                <small class="legal-note">
+                    Korzystamy z plików cookies.
+                    <span class="legal-acceptance">
+                        Rejestrując się, akceptujesz&nbsp;<a href="/" (click)="$event.preventDefault()">Regulamin</a>.
+                    </span>
+                </small>
+            </form>
+        </div>
+    </ng-template>
 </div>

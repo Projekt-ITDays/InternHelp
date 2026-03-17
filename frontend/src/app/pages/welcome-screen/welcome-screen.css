@@ -71,7 +71,7 @@
 	animation: fade-up 620ms ease both;
 }
 
-.gemini-logo {
+.brand-logo {
 	display: block;
 	width: clamp(90px, 13vw, 160px);
 	height: auto;
@@ -328,7 +328,6 @@
 	font-size: 0.72rem;
 	line-height: 1.2;
 	cursor: pointer;
-	transition: color 220ms ease;
 }
 
 .forgot-button:hover {
@@ -394,27 +393,6 @@
 	display: none;
 }
 
-.eyebrow {
-	margin: 0;
-	text-transform: uppercase;
-	letter-spacing: 0.14em;
-	font-size: 0.74rem;
-	color: rgba(238, 238, 238, 0.58);
-}
-
-.mobile-copy {
-	margin-bottom: 0.25rem;
-}
-
-.mobile-copy h2 {
-	margin: 0.45rem 0 0;
-	font-family: 'Palatino Linotype', 'Book Antiqua', serif;
-	font-size: clamp(1.5rem, 5.5vw, 2rem);
-	font-weight: 700;
-	letter-spacing: -0.01em;
-	line-height: 1.08;
-}
-
 .scroll-cue {
 	margin: 0;
 	text-align: center;
@@ -459,16 +437,12 @@
 		padding-top: 2.2rem;
 	}
 
-	.mobile-login-screen,
-	.mobile-feature-screen {
-		scroll-snap-align: start;
-	}
-
 	.mobile-login-screen {
-		min-height: 92svh;
+		min-height: 60svh;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-start;
+		padding-top: 2vh;
 		gap: 1rem;
 	}
 
@@ -477,15 +451,15 @@
 		margin-inline: auto;
 		display: flex;
 		flex-direction: column;
-		gap: 0.9rem;
+		gap: 0.5rem;
 	}
 
-	.mobile-feature-screen {
-		min-height: 100svh;
-		padding-top: 1.4rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.8rem;
+	.mobile-login-inner .brand-logo {
+		align-self: center;
+		width: clamp(150px, 48vw, 230px);
+		height: auto;
+		margin-top: 0;
+		margin-bottom: 0.8rem;
 	}
 
 	.layout-mobile .login-card {
@@ -512,6 +486,35 @@
 	.error-widget {
 		top: 0.8rem;
 		max-width: calc(100vw - 1.6rem);
+	}
+
+	.mobile-feature-screen {
+		min-height: 100svh;
+		padding-top: 1.4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.mobile-feature-list .feature-row:hover,
+	.mobile-feature-list .feature-row:focus-visible,
+	.mobile-feature-list .feature-row.is-active {
+		background: rgba(32, 208, 128, 0.14);
+		outline: none;
+	}
+
+	.mobile-footer {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		padding: 2rem 0;
+		margin-top: auto;
+	}
+
+	.mobile-footer a {
+		color: var(--color-surface-soft);
+		text-decoration: none;
+		font-size: 0.85rem;
 	}
 }
 
