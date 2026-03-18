@@ -1,7 +1,7 @@
 
 
 export interface LoggingResponseDto {
-    accessToken: string;
+    accesstoken: string;
     username:string;
     refreshToken: string;
 }
