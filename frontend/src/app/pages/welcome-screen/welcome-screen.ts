@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { AuthService } from '../../service/auth.service';
+import { LoggingDto } from '../../interfaces/loggingDto';
 
 type FeatureCard = {
   id: string;
@@ -17,6 +19,10 @@ type FeatureCard = {
   styleUrl: './welcome-screen.css',
 })
 export class WelcomeScreen {
+  constructor(
+    private readonly authService : AuthService
+  ){}
+
   protected readonly featureCards: FeatureCard[] = [
     {
       id: 'summary',
@@ -46,7 +52,13 @@ export class WelcomeScreen {
   protected password = signal<string>('');
   protected showErrorWidget = signal<boolean>(false);
   protected errorMessage = signal<string>('Wypełnij oba pola.');
-
+  protected Login() : void {
+    const LoginDto : LoggingDto = {
+      username: this.username(),
+      password: this.password()
+    }
+    this.authService.login(LoginDto);
+  }
   protected setActiveFeature(featureId: string): void {
     this.activeFeatureId.set(featureId);
   }

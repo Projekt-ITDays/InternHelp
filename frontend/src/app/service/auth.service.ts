@@ -19,6 +19,7 @@ export class AuthService {
      
         const response = await this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, {withCredentials: true}).subscribe({
             next: (data) => {
+                console.log('Login successful:', data);
                 this.setAccessToken(data.accesstoken);
                 localStorage.setItem('username', data.username);
 
