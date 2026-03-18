@@ -1,0 +1,14 @@
+<svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .logo-text {
+        font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+        font-size: 42px;
+        font-weight: 700;
+        fill: #95f4c9;
+        letter-spacing: -0.01em;
+      }
+    </style>
+  </defs>
+  <text x="12" y="48" class="logo-text">InternHelp</text>
+</svg>
