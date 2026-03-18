@@ -6,21 +6,25 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  min-width: 46px;
+  min-width: 52px;
 }
 
 .menu-trigger {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
-  padding: 0 12px;
+  gap: 7px;
+  padding: 0 14px;
   border: 1px solid rgba(145, 171, 158, 0.52);
   border-radius: 0;
   background: rgba(0, 23, 11, 0.96);
   cursor: pointer;
+}
+
+.mobile-trigger {
+  display: none;
 }
 
 .menu-trigger:hover,
@@ -38,9 +42,11 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: min(350px, 92vw);
+  width: min(520px, 96vw);
   display: flex;
   flex-direction: column;
+  max-height: 76vh;
+  overflow-y: auto;
   border: 1px solid rgba(145, 171, 158, 0.42);
   border-radius: 0;
   background: rgba(0, 23, 11, 0.98);
@@ -57,12 +63,12 @@
 
 .menu-action {
   width: 100%;
-  min-height: 44px;
+  min-height: 52px;
   border: 0;
   border-top: 1px solid rgba(145, 171, 158, 0.28);
   border-radius: 0;
-  padding: 0.65rem 0.8rem;
-  font-size: 0.92rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 1rem;
   text-align: left;
   color: #e7f5ed;
   background: transparent;
@@ -85,8 +91,8 @@
 }
 
 .plan-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  position: relative;
+  display: flex;
   align-items: stretch;
 }
 
@@ -95,28 +101,34 @@
 }
 
 .plan-action {
+  flex: 1;
+  padding-right: 3.6rem;
   cursor: pointer;
 }
 
 .delete-plan {
-  width: 44px;
+  position: absolute;
+  top: 50%;
+  right: 0.45rem;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
   border: 0;
-  border-top: 1px solid rgba(145, 171, 158, 0.28);
-  border-left: 1px solid rgba(145, 171, 158, 0.28);
   border-radius: 0;
   background: #9f1f1f;
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transition: opacity 150ms ease, background 150ms ease;
 }
 
 .delete-plan svg {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
 }
 
 .plan-row:hover .delete-plan,
@@ -147,18 +159,39 @@
 }
 
 @media (max-width: 900px) {
-  .menu-trigger {
+  .desktop-trigger {
     display: none;
+  }
+
+  .mobile-trigger {
+    display: inline-flex;
   }
 
   .menu-panel {
     position: static;
-    width: min(380px, 100%);
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    border-top: 0;
+    transition: max-height 200ms ease, opacity 140ms ease;
+  }
+
+  .menu-panel.is-open {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .menu-panel.is-mobile-open {
+    max-height: 70vh;
     opacity: 1;
     pointer-events: auto;
+    border-top: 1px solid rgba(145, 171, 158, 0.42);
   }
 
   .delete-plan {
+    right: 0.4rem;
     opacity: 1;
     pointer-events: auto;
   }

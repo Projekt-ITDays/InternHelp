@@ -4,6 +4,7 @@ import { PlanSummary } from '../../core/plan.model';
 
 @Component({
   selector: 'app-plan-menu',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './plan-menu.html',
   styleUrl: './plan-menu.css',
@@ -18,6 +19,7 @@ export class PlanMenu {
   @Output() createPlan = new EventEmitter<void>();
 
   private readonly isHovered = signal(false);
+  private readonly isMobileMenuOpen = signal(false);
 
   protected get canCreatePlan(): boolean {
     return this.plans.length < 5;
@@ -28,7 +30,11 @@ export class PlanMenu {
   }
 
   protected get isExpanded(): boolean {
-    return this.forceExpanded || this.isHovered();
+    return this.forceExpanded || this.isHovered() || this.isMobileMenuOpen();
+  }
+
+  protected isMobileOpen(): boolean {
+    return this.isMobileMenuOpen();
   }
 
   protected onMenuEnter(): void {
@@ -41,6 +47,10 @@ export class PlanMenu {
     }
 
     this.isHovered.set(false);
+  }
+
+  protected onMenuTriggerClick(): void {
+    this.isMobileMenuOpen.update((value) => !value);
   }
 
   protected onCreatePlan(): void {
