@@ -1,0 +1,19 @@
+<section class="page-frame">
+  <header class="top-bar">
+    <div class="heading-block">
+      <img src="/brand/internhelp-logo.svg" alt="InternHelp" class="brand-logo" />
+
+      @if (title) {
+        <h1 [class.hide-on-mobile]="hideTitleOnMobile">{{ title }}</h1>
+      }
+    </div>
+
+    <div class="menu-slot">
+      <ng-content select="[frame-menu]"></ng-content>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <ng-content select="[frame-content]"></ng-content>
+  </main>
+</section>

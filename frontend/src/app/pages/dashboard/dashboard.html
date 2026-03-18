@@ -1,93 +1,27 @@
-<section class="dashboard-page">
-	<header class="top-bar">
-		<img src="/brand/internhelp-logo.svg" alt="InternHelp" class="brand-logo" />
+<app-page-frame>
+	<app-plan-menu
+		frame-menu
+		[plans]="plans()"
+		[selectedPlanId]="selectedPlanId()"
+		currentPage="dashboard"
+		(createPlan)="onCreatePlan()"
+		(deletePlan)="onDeletePlan($event)"
+		(selectPlan)="onSelectPlan($event)"
+	/>
 
-		<nav class="plan-menu" (mouseenter)="onMenuEnter()" (mouseleave)="onMenuLeave()">
-			@if (!isMenuExpanded) {
-				<button
-					type="button"
-					class="menu-trigger desktop-trigger"
-					aria-label="Menu planow"
-					[attr.aria-expanded]="isMenuExpanded"
-					(focus)="onMenuEnter()"
-				>
-					<span class="trigger-line"></span>
-					<span class="trigger-line"></span>
-					<span class="trigger-line"></span>
-				</button>
-			}
-
-			<button
-				type="button"
-				class="menu-trigger mobile-trigger"
-				aria-label="Menu planow"
-				[attr.aria-expanded]="isMobileOpen()"
-				(click)="onMenuTriggerClick()"
-			>
-				<span class="trigger-line"></span>
-				<span class="trigger-line"></span>
-				<span class="trigger-line"></span>
-			</button>
-
-			<div class="menu-panel" [class.is-open]="isMenuExpanded" [class.is-mobile-open]="isMobileOpen()">
-				@if (canCreatePlan) {
-					<button type="button" class="menu-action create-action" (click)="onCreatePlan()">
-						Utworz nowy plan
-					</button>
-				}
-
-				@if (plans().length === 0) {
-					<p class="empty-state">Brak planow. Dodaj pierwszy plan.</p>
-				}
-
-				@for (plan of plans(); track plan.id) {
-					<div class="plan-row" [class.is-active]="plan.id === selectedPlanId()">
-						<button type="button" class="menu-action plan-action" (click)="onSelectPlan(plan.id)">
-							Plan {{ plan.number }}
-						</button>
-
-						<button
-							type="button"
-							class="delete-plan"
-							(click)="onDeletePlanClick(plan.id, $event)"
-							[attr.aria-label]="'Usun plan ' + plan.number"
-						>
-							<svg viewBox="0 0 24 24" aria-hidden="true">
-								<path
-									d="M9 3.75h6m-7.5 3h9l-.76 11.27a1.5 1.5 0 0 1-1.5 1.4H9.76a1.5 1.5 0 0 1-1.5-1.4L7.5 6.75Zm2.4 3.35v5.8m4.2-5.8v5.8"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="1.8"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</svg>
-						</button>
-					</div>
-				}
-
-				<button type="button" class="menu-action settings-action" (click)="onOpenSettings()">
-					Ustawienia
-				</button>
-			</div>
-		</nav>
-	</header>
-
-	<main class="dashboard-content">
-		@if (selectedPlanNumber !== null) {
-			<article class="plan-card">
-				<p class="plan-label">Wybrany plan</p>
-				<h2>Plan {{ selectedPlanNumber }}</h2>
-				<p>
-					To jest placeholder pod szczegoly planu. Kolejny krok to renderowanie zawartosci planu
-					na tej stronie.
-				</p>
-			</article>
-		} @else {
-			<article class="plan-card is-empty">
-				<h2>Brak planow</h2>
-				<p>Dodaj nowy plan z menu w prawym gornym rogu.</p>
-			</article>
-		}
-	</main>
-</section>
+	@if (selectedPlanNumber !== null) {
+		<article frame-content class="surface-card">
+			<p class="plan-label">Wybrany plan</p>
+			<h2>Plan {{ selectedPlanNumber }}</h2>
+			<p>
+				To jest placeholder pod szczegoly planu. Kolejny krok to renderowanie zawartosci planu
+				na tej stronie.
+			</p>
+		</article>
+	} @else {
+		<article frame-content class="surface-card is-empty">
+			<h2>Brak planow</h2>
+			<p>Dodaj nowy plan z menu w prawym gornym rogu.</p>
+		</article>
+	}
+</app-page-frame>

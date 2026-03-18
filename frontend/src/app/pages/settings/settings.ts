@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { PlanMenu } from '../../shared/plan-menu/plan-menu';
 import { PlansStore } from '../../core/plans.store';
+import { PageFrameShell } from '../../shared/page-frame/page-frame';
 
 @Component({
   selector: 'app-settings',
-  imports: [PlanMenu],
+  imports: [PageFrameShell, PlanMenu],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
 })
