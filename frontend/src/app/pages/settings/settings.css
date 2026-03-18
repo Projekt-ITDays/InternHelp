@@ -1,0 +1,91 @@
+:host {
+  --color-bg: #002010;
+  --color-surface: #eeeeee;
+  --color-accent: #20d080;
+  --page-padding: clamp(0.95rem, 2.6vw, 1.3rem);
+  display: block;
+  min-height: 100svh;
+  color: var(--color-surface);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(32, 208, 128, 0.18), transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(32, 208, 128, 0.14), transparent 46%),
+    linear-gradient(160deg, #00170b 0%, var(--color-bg) 60%, #001209 100%);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+}
+
+.settings-page {
+  min-height: 100svh;
+  padding: var(--page-padding);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.heading-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.brand-logo {
+  display: block;
+  width: clamp(170px, 17vw, 260px);
+  height: auto;
+  padding: 0.45rem 0.9rem 0.5rem;
+  margin-top: calc(-1 * var(--page-padding));
+  margin-left: calc(-1 * var(--page-padding));
+  background: rgba(0, 23, 11, 0.78);
+  border: 1px solid rgba(32, 208, 128, 0.45);
+  border-radius: 0 0 16px 0;
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+}
+
+.top-bar app-plan-menu {
+  margin-top: calc(-1 * var(--page-padding));
+  margin-right: calc(-1 * var(--page-padding));
+}
+
+.settings-card {
+  margin-top: 1.2rem;
+  max-width: 760px;
+  border: 1px solid rgba(145, 174, 159, 0.32);
+  border-radius: 0;
+  background: rgba(7, 33, 19, 0.8);
+  padding: 1.05rem 1.15rem;
+}
+
+.settings-card h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.08rem;
+  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+}
+
+.settings-card p {
+  margin: 0;
+  line-height: 1.5;
+  color: rgba(233, 246, 240, 0.85);
+}
+
+@media (max-width: 900px) {
+  :host {
+    --page-padding: 1rem;
+  }
+
+  .brand-logo {
+    width: clamp(190px, 56vw, 280px);
+  }
+
+  .top-bar {
+    align-items: flex-start;
+  }
+}

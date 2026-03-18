@@ -1,0 +1,22 @@
+<section class="settings-page">
+  <header class="top-bar">
+    <div class="heading-block">
+      <img src="/brand/internhelp-logo.svg" alt="InternHelp" class="brand-logo" />
+      <h1>Ustawienia</h1>
+    </div>
+
+    <app-plan-menu
+      [plans]="plans()"
+      [selectedPlanId]="selectedPlanId()"
+      currentPage="settings"
+      (createPlan)="onCreatePlan()"
+      (deletePlan)="onDeletePlan($event)"
+      (selectPlan)="onSelectPlan($event)"
+    />
+  </header>
+
+  <main class="settings-card">
+    <h2>Panel ustawien konta</h2>
+    <p>Tutaj podlaczymy ustawienia profilu, preferencje i bezpieczenstwo.</p>
+  </main>
+</section>
