@@ -1,0 +1,27 @@
+<app-page-frame>
+	<app-plan-menu
+		frame-menu
+		[plans]="plans()"
+		[selectedPlanId]="selectedPlanId()"
+		currentPage="dashboard"
+		(createPlan)="onCreatePlan()"
+		(deletePlan)="onDeletePlan($event)"
+		(selectPlan)="onSelectPlan($event)"
+	/>
+
+	@if (selectedPlanNumber !== null) {
+		<article frame-content class="surface-card">
+			<p class="plan-label">Wybrany plan</p>
+			<h2>Plan {{ selectedPlanNumber }}</h2>
+			<p>
+				To jest placeholder pod szczegoly planu. Kolejny krok to renderowanie zawartosci planu
+				na tej stronie.
+			</p>
+		</article>
+	} @else {
+		<article frame-content class="surface-card is-empty">
+			<h2>Brak planow</h2>
+			<p>Dodaj nowy plan z menu w prawym gornym rogu.</p>
+		</article>
+	}
+</app-page-frame>

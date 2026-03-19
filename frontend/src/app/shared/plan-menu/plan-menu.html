@@ -1,0 +1,88 @@
+<nav class="plan-menu" (mouseenter)="onMenuEnter()" (mouseleave)="onMenuLeave()">
+  @if (!isExpanded) {
+    <button
+      type="button"
+      class="menu-trigger desktop-trigger"
+      aria-label="Menu planow"
+      [attr.aria-expanded]="isExpanded"
+      (focus)="onMenuEnter()"
+    >
+      <span class="trigger-line"></span>
+      <span class="trigger-line"></span>
+      <span class="trigger-line"></span>
+    </button>
+  }
+
+  <button
+    type="button"
+    class="menu-trigger mobile-trigger"
+    aria-label="Menu planow"
+    [attr.aria-expanded]="isMobileOpen()"
+    (click)="onMenuTriggerClick()"
+  >
+    <span class="trigger-line"></span>
+    <span class="trigger-line"></span>
+    <span class="trigger-line"></span>
+  </button>
+
+  <div class="menu-panel" [class.is-open]="isExpanded" [class.is-mobile-open]="isMobileOpen()">
+    @if (canCreatePlan) {
+      <button type="button" class="menu-action create-action" (click)="onCreatePlan()">
+        Utworz nowy plan
+      </button>
+    }
+
+    @if (plans.length === 0) {
+      <p class="empty-state">Brak planow. Dodaj pierwszy plan.</p>
+    }
+
+    @for (plan of plans; track plan.id) {
+      <div class="plan-row" [class.is-active]="plan.id === selectedPlanId">
+        <button type="button" class="menu-action plan-action" (click)="onSelectPlan(plan.id)">
+          Plan {{ plan.number }}
+        </button>
+
+        <button
+          type="button"
+          class="delete-plan"
+          (click)="onDeletePlan(plan.id, $event)"
+          [attr.aria-label]="'Usun plan ' + plan.number"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M18.4 6.7L17.3 5.6 12 10.9 6.7 5.6 5.6 6.7 10.9 12 5.6 17.3 6.7 18.4 12 13.1 17.3 18.4 18.4 17.3 13.1 12z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </div>
+    }
+
+    <a
+      routerLink="/settings"
+      class="menu-action settings-action"
+      [class.is-current]="currentPage === 'settings'"
+    >
+      Ustawienia
+    </a>
+  </div>
+
+  @if (pendingDeletePlanNumber !== null) {
+    <section class="confirm-delete-overlay" (click)="onCancelDeletePlan()">
+      <article class="confirm-delete-widget" (click)="$event.stopPropagation()">
+        <h3>Potwierdz usuniecie</h3>
+        <p>Czy na pewno chcesz usunac plan {{ pendingDeletePlanNumber }}?</p>
+
+        <div class="confirm-delete-actions">
+          <button type="button" class="confirm-btn cancel-btn" (click)="onCancelDeletePlan()">
+            Anuluj
+          </button>
+
+          <button type="button" class="confirm-btn danger-btn" (click)="onConfirmDeletePlan()">
+            Usun plan
+          </button>
+        </div>
+      </article>
+    </section>
+  }
+</nav>

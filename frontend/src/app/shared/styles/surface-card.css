@@ -1,0 +1,25 @@
+.surface-card {
+  max-width: 920px;
+  border: 1px solid rgba(160, 191, 174, 0.32);
+  border-radius: 0;
+  padding: 1.2rem;
+  background: rgba(5, 34, 19, 0.84);
+  box-shadow: 0 15px 32px rgba(0, 0, 0, 0.28);
+}
+
+.surface-card h2 {
+  margin: 0.35rem 0 0.72rem;
+  font-size: 1.24rem;
+  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+}
+
+.surface-card p {
+  margin: 0;
+  line-height: 1.5;
+  color: rgba(231, 245, 237, 0.86);
+}
+
+.surface-card.is-empty {
+  border-style: dashed;
+  background: rgba(8, 40, 24, 0.6);
+}
