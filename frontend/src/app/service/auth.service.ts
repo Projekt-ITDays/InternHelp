@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
-import { firstValueFrom, Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { firstValueFrom } from "rxjs";
 import { LoggingDto } from "../interfaces/loggingDto";
 import { LoggingResponseDto } from "../interfaces/loggingResponseDto";
 
@@ -14,20 +14,14 @@ export class AuthService {
     ){}
 
     private accesToken: string | null = null;
-    async login(payload : LoggingDto) : Promise<any> {
-     
-     
-        const response = await this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, {withCredentials: true}).subscribe({
-            next: (data) => {
-                console.log('Login successful:', data);
-                this.setAccessToken(data.accesstoken);
-                localStorage.setItem('username', data.username);
+    async login(payload : LoggingDto) : Promise<LoggingResponseDto> {
+        const data = await firstValueFrom(
+            this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
+        );
 
-            }
-        })  
-
-        
-    
+        this.setAccessToken(data.accesstoken);
+        localStorage.setItem('username', data.username);
+        return data;
     }
 
      register(payload : LoggingDto)  {
@@ -36,18 +30,21 @@ export class AuthService {
 
 
     //google login
-    async googleLogin(){
-        await this.http.get(`${this.apiUrl}/google/login`, {withCredentials: true});
+    googleLogin(): void {
+        if (typeof window === 'undefined') {
+            return;
+        }
+
+        window.location.href = `${this.apiUrl}/google/login`;
     }
 
-    async refreshToken() : Promise<any> {
+    async refreshToken() : Promise<{ accesstoken: string }> {
+        const data = await firstValueFrom(
+            this.http.post<{ accesstoken: string }>(`${this.apiUrl}/refresh`, {}, { withCredentials: true })
+        );
 
-        this.http.post(`${this.apiUrl}/refresh`, {}, {withCredentials: true}).subscribe({
-            next: (data: any) => {
-                this.setAccessToken(data.accesstoken);
-            }
-        })
-        // return await this.http.post(`${this.apiUrl}/refresh`, {}, {withCredentials: true});
+        this.setAccessToken(data.accesstoken);
+        return data;
     }
 
     setAccessToken(token: string) {
@@ -56,5 +53,9 @@ export class AuthService {
 
     getAccessToken() {
         return this.accesToken;
+    }
+
+    clearAccessToken() {
+        this.accesToken = null;
     }
 }

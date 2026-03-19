@@ -129,8 +129,11 @@
                     </button>
                 </div>
 
-                <div class="oauth-placeholder" aria-hidden="true">
-                    Miejsce na OAuth / OpenID
+                <div class="oauth-placeholder">
+                    <button type="button" class="google-login-button" (click)="loginWithGoogle()">
+                        <img class="google-login-icon" src="/google-icon.svg" alt="" aria-hidden="true" />
+                        <span>Zaloguj przez Google</span>
+                    </button>
                 </div>
 
                 <small class="legal-note">

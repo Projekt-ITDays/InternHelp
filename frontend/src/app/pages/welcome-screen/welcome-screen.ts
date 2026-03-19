@@ -2,7 +2,8 @@ import { Component, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
 import { LoggingDto } from '../../interfaces/loggingDto';
-
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 type FeatureCard = {
   id: string;
   title: string;
@@ -20,8 +21,11 @@ type FeatureCard = {
 })
 export class WelcomeScreen {
   constructor(
+    private readonly router : Router,
     private readonly authService : AuthService
-  ){}
+  ){
+    this.handleGoogleOAuthCallback();
+  }
 
   protected readonly featureCards: FeatureCard[] = [
     {
@@ -57,7 +61,22 @@ export class WelcomeScreen {
       username: this.username(),
       password: this.password()
     }
-    this.authService.login(LoginDto);
+    this.authService.login(LoginDto)
+      .then(() => {
+        this.router.navigate(['/aiapi']);
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Błąd logowania',
+          text: 'Niepoprawny login lub hasło.',
+        });
+        this.showError('Niepoprawny login lub hasło.');
+      });
+  }
+
+  protected loginWithGoogle(): void {
+    this.authService.googleLogin();
   }
   protected setActiveFeature(featureId: string): void {
     this.activeFeatureId.set(featureId);
@@ -92,12 +111,8 @@ export class WelcomeScreen {
       return;
     }
 
-    if (user !== 'lorem' || pass !== 'ipsum') {
-      this.showError('Niepoprawny login lub hasło.');
-      return;
-    }
-
     this.showErrorWidget.set(false);
+    this.Login();
   }
 
   protected onRegisterClick(): void {
@@ -119,5 +134,27 @@ export class WelcomeScreen {
 
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
+  }
+
+  private handleGoogleOAuthCallback(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const username = params.get('username');
+
+    if (!token) {
+      return;
+    }
+
+    this.authService.setAccessToken(token);
+    if (username) {
+      localStorage.setItem('username', username);
+    }
+
+    window.history.replaceState({}, document.title, window.location.pathname);
+    this.router.navigate(['/aiapi']);
   }
 }

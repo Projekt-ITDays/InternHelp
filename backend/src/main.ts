@@ -23,9 +23,23 @@ async function bootstrap() {
     transform: true,
   }))
 
-  // zeby frontend mogl sie polaczyc z backendem bez problemow z CORS
+  // CORS: jeden middleware, jawne originy (wymagane przy credentials: true)
+  const allowedOrigins = [
+    'http://localhost:4200', // Angular dev server
+    'http://127.0.0.1:4200',
+    'http://localhost', // frontend z Dockera (nginx :80)
+    'http://127.0.0.1',
+  ];
+
   app.enableCors({
-    origin: 'http://localhost:4200', 
+    origin: (origin, callback) => {
+      // pozwól też na requesty bez Origin (np. curl/postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
