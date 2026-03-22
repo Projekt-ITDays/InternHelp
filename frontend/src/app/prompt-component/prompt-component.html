@@ -1,4 +1,87 @@
-<div class="container">
+<div class="app-container">
+  <header class="top-header">
+    <div class="logo">
+      <span class="logo-dots">●●●</span> InternHelp
+    </div>
+    <button class="notification-btn">🔔</button>
+  </header>
+
+  <main class="main-content">
+    
+    <div class="input-section" *ngIf="results.length === 0">
+      <h1>Cześć!</h1>
+      <p>Opisz nam swoje zainteresowania, a my dopasujemy dla Ciebie idealną ścieżkę rozwoju swojej kariery w sektorze IT.</p>
+      
+      <div class="textarea-wrapper">
+        <textarea 
+          [(ngModel)]="prompt" 
+          placeholder="W czym mogę Ci dzisiaj pomóc?"
+          rows="5">
+        </textarea>
+      </div>
+
+      <button class="btn-submit" (click)="sendRequest()" [disabled]="loading || !prompt.trim()">
+        <span *ngIf="!loading">Wyślij</span>
+        <span *ngIf="loading">Analizowanie... ⏳</span>
+      </button>
+    </div>
+
+    <div class="results-section" *ngIf="results.length > 0">
+      <div class="title-section">
+        <span class="subtitle">TWOJE WYNIKI</span>
+        <h1>Twoja ścieżka kariery</h1>
+        <p>Na podstawie Twoich odpowiedzi, wyselekcjonowaliśmy obszary, które najlepiej odpowiadają Twojemu profilowi.</p>
+      </div>
+
+      <div class="cards-container">
+        <div class="card" 
+             *ngFor="let item of results; let i = index" 
+             [ngClass]="{'highlight-card': i === 0}">
+             
+          <div class="badge" *ngIf="i === 0">
+            <span class="icon">🎮</span> NAJWYŻSZE DOPASOWANIE
+          </div>
+          
+          <div class="card-icon" *ngIf="i !== 0">{{ icons[i % icons.length] }}</div>
+          
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+          
+          <div class="tags">
+            <span class="tag" *ngFor="let tag of item.tags">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-card">
+        <h2>Gotowy na kolejny krok?</h2>
+        <p>Wygenerujemy dla Ciebie spersonalizowaną ścieżkę nauki (Roadmap), która pomoże Ci zdobyć potrzebne umiejętności.</p>
+        <button class="btn-primary" (click)="results = []">Zacznij od nowa ↺</button>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <div class="nav-item">
+      <span class="nav-icon">🚪</span>
+      <span>Logowanie</span>
+    </div>
+    <div class="nav-item active">
+      <span class="nav-icon">✨</span>
+      <span>Rekomendacje</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">🗺️</span>
+      <span>Roadmap</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">⚙️</span>
+      <span>Ustawienia</span>
+    </div>
+  </nav>
+</div>
+
+<!-- <div class="container">
   <h1>Sugestie v1</h1>
   
   <div class="chat-box">
@@ -24,4 +107,4 @@
     <p>{{ response }}</p>
   </div>
 </div>
-</div>
+</div> -->

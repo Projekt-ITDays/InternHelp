@@ -11,7 +11,8 @@ export const routes: Routes = [
 	},
 
 	{
-		path : 'aiapi',
+		// Zmiana aiapi -> ai/ask
+		path : 'ai/ask',
 		component : PromptComponent
 	},
 	{

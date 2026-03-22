@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { Injectable } from '@nestjs/common';
-import { response } from 'express';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+
 // pamietac o npm install @google/generative-ai
 @Injectable()
 export class AiService {
@@ -27,18 +27,32 @@ export class AiService {
               }`    ;
 
     const model = this.genAI.getGenerativeModel({ 
-        model: "gemini-2.5-flash",
+        model: "gemini-2.5-flash-lite",
         generationConfig: {
-        maxOutputTokens: 10000, // To go uciszy! 100 tokenów to bardzo mało.
+        maxOutputTokens: 2000,
+        responseMimeType: "application/json",
         }
-    }); 
+    });
+    
+    try {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text();
+      
+      const jsonObject = JSON.parse(text);
+      return jsonObject;
 
-  let result = await model.generateContent(prompt);
+    } catch (error) {
+      console.error("Błąd podczas parsowania JSON od AI:", error);
+      throw new InternalServerErrorException("Błąd podczas przetwarzania danych od AI.");
+    }
 
-  let text = await result.response.text();
-  
-  text = text.slice(8, -3); // Usuwamy "```json" z początku i "```" z końca
+    // stary approach
+    // let result = await model.generateContent(prompt);
 
-  return text;
+    // let text = await result.response.text();
+    
+    // text = text.slice(8, -3); // Usuwamy "```json" z początku i "```" z końca
+
+    //return text;
   }
 }

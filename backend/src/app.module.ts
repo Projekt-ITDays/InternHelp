@@ -4,8 +4,9 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { GeminiApiModule } from './gemini-api/gemini-api.module';
+// import { GeminiApiModule } from './gemini-api/gemini-api.module';
 import { JwtModule } from '@nestjs/jwt';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { JwtModule } from '@nestjs/jwt';
       synchronize: true, // wylacz to jak skonczymy pracowac nad baza danych, zeby nie stracic danych przy restarcie serwera
     }),
     AuthModule,
-    GeminiApiModule,
+    //zmiana
+    AiModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET || 'default_secret',
