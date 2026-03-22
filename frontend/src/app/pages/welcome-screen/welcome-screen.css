@@ -1,18 +1,11 @@
-@import '../../shared/styles/colors.css';
-
+/* Welcome: globalny host i ustawienia strony */
 :host {
 	--rail-width: clamp(312px, 21vw, 404px);
 	display: block;
 	min-height: 100svh;
-	color: var(--theme-text);
-	background: var(--theme-bg);
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
 }
 
-* {
-	box-sizing: border-box;
-}
-
+/* Welcome: glowny kontener i widget bledu */
 .welcome-screen {
 	position: relative;
 	min-height: 100svh;
@@ -38,6 +31,16 @@
 	box-shadow: 0 10px 24px var(--theme-on-contrast);
 }
 
+.error-widget button,
+.login-actions button {
+	border-radius: 8px;
+	padding: 0.58rem;
+	font-family: var(--font-serif);
+	font-size: 0.84rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
 .error-widget button {
 	border: 0;
 	border-radius: 999px;
@@ -45,9 +48,9 @@
 	background: var(--theme-error);
 	color: inherit;
 	font: inherit;
-	cursor: pointer;
 }
 
+/* Welcome: szeroki uklad (desktop) */
 .layout-wide {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) var(--rail-width);
@@ -77,12 +80,17 @@
 	padding: 0.45rem 0.9rem 0.5rem;
 	background: var(--theme-complement);
 	border: 1px solid var(--theme-secondary);
-	border-radius: 0 0 16px 0;
+	border-radius: 0 0 16px;
+}
+
+.shot-viewport,
+.shot-frame {
+	width: 100%;
+	height: 100%;
+	position: relative;
 }
 
 .shot-viewport {
-	width: 100%;
-	height: 100%;
 	overflow: hidden;
 	background: var(--theme-bg);
 }
@@ -90,17 +98,12 @@
 .stage-shot {
 	min-height: 100svh;
 	aspect-ratio: auto;
-	border: 0;
-	border-radius: 0;
-	box-shadow: none;
+	margin: 0;
 	background: var(--theme-bg);
 }
 
 .shot-frame {
-	width: 100%;
-	height: 100%;
 	margin: 0;
-	position: relative;
 	animation: shot-slide 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
@@ -112,6 +115,7 @@
 	filter: saturate(0.95) contrast(1.02);
 }
 
+/* Welcome: linki i prawa kolumna funkcji */
 .stage-links {
 	position: absolute;
 	left: 1.5rem;
@@ -121,7 +125,7 @@
 	gap: 1rem;
 }
 
-.stage-links a {
+.stage-links a { 
 	color: var(--theme-on-contrast);
 	text-decoration: none;
 	font-size: 0.84rem;
@@ -186,14 +190,15 @@
 .right-rail .feature-row:hover,
 .right-rail .feature-row:focus-visible,
 .right-rail .feature-row.is-active {
-	background: var(--theme-complement);
+	background: var(--theme-secondary);
 	outline: none;
 }
 
+/* Welcome: kafle cech i opisy */
 .feature-row {
 	width: 100%;
 	border: 1px solid var(--theme-on-contrast);
-	background: rgba(238, 238, 238, 0.05);
+	background: var(--theme-complement);
 	border-radius: 0;
 	padding: 0.82rem 0.78rem;
 	text-align: left;
@@ -204,7 +209,7 @@
 
 .feature-title {
 	display: block;
-	font-family: 'Roboto', sans-serif;
+	font-family: var(--font-secondary);
 	font-size: 1.12rem;
 	font-weight: 600;
 	line-height: 1.3;
@@ -230,6 +235,7 @@
 	margin-top: 0.5rem;
 }
 
+/* Welcome: panel logowania */
 .auth-panel {
 	flex: 1;
 	min-height: 0;
@@ -242,12 +248,9 @@
 .login-card {
 	width: 100%;
 	height: 100%;
-	max-width: none;
-	border-radius: 0;
 	padding: 1rem;
 	background: var(--theme-complement);
 	color: var(--theme-text);
-	box-shadow: none;
 	border: 1px solid var(--theme-secondary);
 }
 
@@ -264,19 +267,18 @@
 	flex-direction: column;
 	overflow: hidden;
 	border: 1px solid var(--theme-secondary);
-	border-radius: 0;
 	background: var(--theme-complement);
 }
 
 .credentials-group input {
 	width: 100%;
-	border: 0;
 	padding: 0.75rem 0.72rem;
-	background: transparent;
+	background-color: var(--theme-bg);
 	color: var(--theme-text);
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+	font-family: var(--font-primary);
 	font-size: 0.95rem;
 	text-align: right;
+	border: none;
 }
 
 .credentials-group input + input {
@@ -295,13 +297,12 @@
 }
 
 .credentials-group input:focus-visible {
-	outline: 2px solid var(--theme-highlight);
+	outline: 2px solid var(--theme-contrast);
 	outline-offset: -2px;
 }
 
 .captcha-box {
 	border: 2px dashed var(--theme-secondary);
-	border-radius: 0;
 	text-align: center;
 	color: var(--theme-text);
 	background: var(--theme-complement);
@@ -311,10 +312,9 @@
 
 .forgot-button {
 	align-self: flex-start;
-	border: 0;
-	border-radius: 0;
 	padding: 0.2rem 0;
 	background: transparent;
+	border: none;
 	color: var(--theme-text);
 	font-size: 0.72rem;
 	line-height: 1.2;
@@ -332,12 +332,6 @@
 
 .login-actions button {
 	flex: 1;
-	border-radius: 8px;
-	padding: 0.58rem;
-	font-family: 'Palatino Linotype', 'Book Antiqua', serif;
-	font-size: 0.84rem;
-	font-weight: 600;
-	cursor: pointer;
 }
 
 .oauth-placeholder {
@@ -409,10 +403,11 @@
 
 .register-button {
 	border: 1px solid var(--theme-secondary);
-	background: transparent;
+	background: var(--theme-highlight);
 	color: var(--theme-text);
 }
 
+/* Welcome: wersja mobilna */
 .layout-mobile {
 	display: none;
 }
@@ -433,6 +428,7 @@
 	box-shadow: 0 16px 36px var(--theme-on-contrast);
 }
 
+/* Welcome: breakpoint tablet */
 @media (max-width: 1180px) {
 	:host {
 		--rail-width: clamp(330px, 28vw, 450px);
@@ -444,6 +440,7 @@
 	}
 }
 
+/* Welcome: breakpoint mobile */
 @media (max-width: 900px) {
 	.welcome-screen {
 		padding: 1.2rem;
@@ -542,6 +539,7 @@
 	}
 }
 
+/* Welcome: animacje wejscia */
 @keyframes shot-slide {
 	from {
 		opacity: 0;

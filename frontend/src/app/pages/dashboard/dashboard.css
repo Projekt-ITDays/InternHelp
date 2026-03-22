@@ -1,6 +1,6 @@
-@import '../../shared/styles/colors.css';
 @import '../../shared/styles/surface-card.css';
 
+/* Dashboard: label sekcji planu */
 .plan-label {
 	margin: 0;
 	text-transform: uppercase;

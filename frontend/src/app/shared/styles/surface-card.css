@@ -1,5 +1,6 @@
 @import './colors.css';
 
+/* Surface card: kontener kart i pusty stan */
 .surface-card {
   max-width: 920px;
   border: 1px solid var(--theme-secondary);
@@ -15,12 +16,14 @@
   font-family: 'Palatino Linotype', 'Book Antiqua', serif;
 }
 
+/* Surface card: tresc tekstowa */
 .surface-card p {
   margin: 0;
   line-height: 1.5;
   color: var(--theme-text);
 }
 
+/* Surface card: wariant pustego widoku */
 .surface-card.is-empty {
   border-style: dashed;
   background: var(--theme-complement);

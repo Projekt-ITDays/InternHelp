@@ -1,5 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "./app/shared/styles/colors.css";
 @import "tailwindcss";
+
+:root {
+    /* Global fonts */
+	--font-primary: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+	--font-secondary: 'Roboto', sans-serif;
+	--font-serif: 'Palatino Linotype', 'Book Antiqua', serif;
+    /* Global theme colors */
+    --theme-bg: #f0eee6;
+    --theme-text: #141413;
+    --theme-secondary: #e3dacc;
+    --theme-complement: #e8e6dc;
+    --theme-contrast: #141413;
+    --theme-on-contrast: #9e9d9b;
+    --theme-error: #b63c3c;
+    --theme-highlight: #d97757;
+    --theme-input: #ffffff;
+    --theme: #000000;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body, :host {
+	font-family: var(--font-primary);
+	color: var(--theme-text);
+	background: var(--theme-bg);
+}
 
