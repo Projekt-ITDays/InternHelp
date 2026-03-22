@@ -1,0 +1,15 @@
+/* ============================================================================
+ * Theme Palette
+ * Keep only these tokens for easy future edits
+ * ============================================================================ */
+
+:root {
+  --theme-bg: #f0eee6;
+  --theme-text: #141413;
+  --theme-secondary: #e3dacc;
+  --theme-complement: #e8e6dc;
+  --theme-contrast: #141413;
+  --theme-on-contrast: #9e9d9b;
+  --theme-error: #b63c3c;
+  --theme-highlight: #d97757;
+}

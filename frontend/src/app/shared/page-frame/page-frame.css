@@ -1,14 +1,11 @@
+@import '../styles/colors.css';
+
 :host {
-  --color-bg: #002010;
-  --color-surface: #eeeeee;
   --page-padding: clamp(0.95rem, 2.6vw, 1.3rem);
   display: block;
   min-height: 100svh;
-  color: var(--color-surface);
-  background:
-    radial-gradient(circle at 15% 20%, rgba(32, 208, 128, 0.18), transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(32, 208, 128, 0.14), transparent 46%),
-    linear-gradient(160deg, #00170b 0%, var(--color-bg) 60%, #001209 100%);
+  color: var(--theme-text);
+  background: var(--theme-bg);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
 }
 
@@ -42,8 +39,8 @@
   padding: 0.45rem 0.9rem 0.5rem;
   margin-top: calc(-1 * var(--page-padding));
   margin-left: calc(-1 * var(--page-padding));
-  background: rgba(0, 23, 11, 0.78);
-  border: 1px solid rgba(32, 208, 128, 0.45);
+  background: var(--theme-secondary);
+  border: 1px solid var(--theme-highlight);
   border-radius: 0 0 16px 0;
 }
 
@@ -51,6 +48,7 @@ h1 {
   margin: 0;
   font-size: clamp(1.25rem, 2.2vw, 1.7rem);
   font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  color: var(--theme-text);
 }
 
 .menu-slot {

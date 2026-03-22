@@ -1,10 +1,12 @@
+@import './colors.css';
+
 .surface-card {
   max-width: 920px;
-  border: 1px solid rgba(160, 191, 174, 0.32);
+  border: 1px solid var(--theme-secondary);
   border-radius: 0;
   padding: 1.2rem;
-  background: rgba(5, 34, 19, 0.84);
-  box-shadow: 0 15px 32px rgba(0, 0, 0, 0.28);
+  background: var(--theme-complement);
+  box-shadow: 0 15px 32px var(--theme-on-contrast);
 }
 
 .surface-card h2 {
@@ -16,10 +18,10 @@
 .surface-card p {
   margin: 0;
   line-height: 1.5;
-  color: rgba(231, 245, 237, 0.86);
+  color: var(--theme-text);
 }
 
 .surface-card.is-empty {
   border-style: dashed;
-  background: rgba(8, 40, 24, 0.6);
+  background: var(--theme-complement);
 }

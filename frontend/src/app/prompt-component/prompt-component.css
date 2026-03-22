@@ -1,3 +1,5 @@
+@import '../shared/styles/colors.css';
+
 .options-grid {
   display: flex;
   flex-direction: column;
@@ -6,9 +8,9 @@
 }
 
 .option-btn {
-  background: white;
-  border: 2px solid #007bff;
-  color: #007bff;
+  background: var(--theme-complement);
+  border: 2px solid var(--theme-highlight);
+  color: var(--theme-highlight);
   padding: 10px 15px;
   border-radius: 20px;
   text-align: left;
@@ -16,10 +18,11 @@
 }
 
 .option-btn:hover {
-  background: #007bff;
-  color: white;
+  background: var(--theme-highlight);
+  color: var(--theme-complement);
   transform: translateX(5px);
 }
+
 .container {
   padding: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -36,7 +39,7 @@
 textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--theme-secondary);
   border-radius: 8px;
   font-size: 16px;
   resize: vertical;
@@ -44,8 +47,8 @@ textarea {
 
 button {
   padding: 12px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--theme-highlight);
+  color: var(--theme-complement);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -54,18 +57,18 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--theme-highlight);
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: var(--theme-secondary);
   cursor: not-allowed;
 }
 
 .response-area {
   margin-top: 25px;
   padding: 20px;
-  background-color: #f8f9fa;
-  border-left: 5px solid #007bff;
+  background-color: var(--theme-complement);
+  border-left: 5px solid var(--theme-highlight);
   border-radius: 4px;
 }

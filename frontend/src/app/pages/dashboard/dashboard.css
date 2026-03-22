@@ -1,3 +1,4 @@
+@import '../../shared/styles/colors.css';
 @import '../../shared/styles/surface-card.css';
 
 .plan-label {
@@ -5,5 +6,5 @@
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
 	font-size: 0.72rem;
-	color: rgba(231, 245, 237, 0.72);
+	color: var(--theme-text);
 }
