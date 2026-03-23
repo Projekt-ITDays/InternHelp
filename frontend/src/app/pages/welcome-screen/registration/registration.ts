@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, output } from '@angular/core';
+import { Component, signal, output, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Input } from '@angular/core';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registration',
@@ -10,8 +12,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './registration.css',
 })
 export class Registration {
+  initialEmail = input<string>('');
   email = '';
   confirmEmail = '';
+  initialPassword = input<string>('');
   password = '';
   confirmPassword = '';
   termsAccepted = false;
@@ -37,4 +41,8 @@ export class Registration {
   closeRegistration(){
     this.close.emit();
   };
+  ngOnInit() {
+  this.email = this.initialEmail();
+  this.password = this.initialPassword();
+  }
 }

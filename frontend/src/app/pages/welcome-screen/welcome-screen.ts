@@ -3,7 +3,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
 import { LoggingDto } from '../../interfaces/loggingDto';
 import { Router } from '@angular/router';
-import { Signal } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Registration } from './registration/registration';
 

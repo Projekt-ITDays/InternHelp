@@ -145,8 +145,11 @@
             </form>
         </div>
     </ng-template>
-    
 </div>
 @if (showRegistration()) {
-  <app-registration (close)="showRegistration.set(false)" />
+  <app-registration 
+    (close)="showRegistration.set(false)"
+    [initialEmail]="username()" 
+    [initialPassword]="password()"
+  />
 }
