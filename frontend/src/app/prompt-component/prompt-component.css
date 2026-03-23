@@ -1,5 +1,3 @@
-@import '../shared/styles/colors.css';
-
 .options-grid {
   display: flex;
   flex-direction: column;

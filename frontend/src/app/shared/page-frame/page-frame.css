@@ -1,5 +1,3 @@
-@import '../styles/colors.css';
-
 /* Page frame: globalna rama strony */
 :host {
   --page-padding: clamp(0.95rem, 2.6vw, 1.3rem);

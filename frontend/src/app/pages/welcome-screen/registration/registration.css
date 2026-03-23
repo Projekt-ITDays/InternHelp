@@ -1,0 +1,108 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: color-mix(in srgb, var(--theme-contrast) 45%, transparent);
+}
+
+.registration-container {
+    position: relative;
+    width: min(100%, 420px);
+    max-height: min(90svh, 780px);
+    overflow: auto;
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background: var(--theme-complement);
+    border: 1px solid var(--theme-secondary);
+    border-radius: 16px;
+    box-shadow: 0 16px 34px var(--theme-on-contrast);
+}
+
+.close-button {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--theme-secondary);
+    border-radius: 8px;
+    background: var(--theme-bg);
+    color: var(--theme-text);
+    font: inherit;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background: var(--theme-secondary);
+}
+
+.registration-container input[type='email'],
+.registration-container input[type='password'] {
+    width: 100%;
+    padding: 0.75rem 0.72rem;
+    border: 1px solid var(--theme-secondary);
+    background: var(--theme-bg);
+    color: var(--theme-text);
+    font: inherit;
+}
+
+.registration-container input::placeholder {
+    color: var(--theme-on-contrast);
+}
+
+.registration-container label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--theme-text);
+}
+
+.registration-container input[type='checkbox'] {
+    margin-top: 0.15rem;
+    accent-color: var(--theme-highlight);
+}
+
+.error-container {
+    min-height: 1.2rem;
+}
+
+.error-text {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--theme-error);
+}
+
+.register-button {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--theme-secondary);
+    border-radius: 8px;
+    background: var(--theme-highlight);
+    color: var(--theme-text);
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    filter: brightness(0.96);
+}
+
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.05);
+}

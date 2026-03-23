@@ -3,7 +3,10 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
 import { LoggingDto } from '../../interfaces/loggingDto';
 import { Router } from '@angular/router';
+import { Signal } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Registration } from './registration/registration';
+
 type FeatureCard = {
   id: string;
   title: string;
@@ -15,7 +18,7 @@ type FeatureCard = {
 @Component({
   selector: 'app-welcome-screen',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, NgTemplateOutlet, Registration],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })
@@ -157,4 +160,17 @@ export class WelcomeScreen {
     window.history.replaceState({}, document.title, window.location.pathname);
     this.router.navigate(['/aiapi']);
   }
+
+  protected showRegistration = signal(false);
+  protected openRegistration() {
+    this.showRegistration.set(true);
+  }
+
 }
+// export class WelcomePageComponent {
+//   showRegistration = signal(false);
+
+//   openRegistration() {
+//     this.showRegistration.set(true);
+//   }
+// }

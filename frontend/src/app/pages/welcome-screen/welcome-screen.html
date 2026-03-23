@@ -103,7 +103,7 @@
                         [value]="username()"
                         (input)="onUsernameInput($event)"
                         autocomplete="username"
-                        placeholder="Login"
+                        placeholder="Email"
                     />
                     <input
                         type="password"
@@ -124,7 +124,7 @@
 
                 <div class="login-actions">
                     <button type="submit" class="login-button" (click)="Login()">Zaloguj</button>
-                    <button type="button" class="register-button" (click)="onRegisterClick()">
+                    <button type="button" class="register-button" (click)="openRegistration()">
                         Zarejestruj
                     </button>
                 </div>
@@ -145,4 +145,8 @@
             </form>
         </div>
     </ng-template>
+    
 </div>
+@if (showRegistration()) {
+  <app-registration (close)="showRegistration.set(false)" />
+}

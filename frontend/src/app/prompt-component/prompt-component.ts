@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Ai } from '../service/ai';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-prompt-component',
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './prompt-component.html',
   styleUrl: './prompt-component.css',
 })
