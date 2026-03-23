@@ -7,11 +7,12 @@ import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config= new DocumentBuilder()
+  const config = new DocumentBuilder()
     .setTitle('InternHelp API')
     .setDescription('API for InternHelp application')
     .setVersion('1.0')
     .addTag('internhelp')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
@@ -44,7 +45,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  app.use(cookieParser());  
+  app.use(cookieParser());
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

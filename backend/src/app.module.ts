@@ -6,6 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { GeminiApiModule } from './gemini-api/gemini-api.module';
 import { JwtModule } from '@nestjs/jwt';
+import { ExperienceHandlerController } from './experience-handler/experience-handler.controller';
+import { ExperienceHandlerService } from './experience-handler/experience-handler.service';
+import { userEntity } from './entities/user.entity';
+import { achievementEntity } from './entities/achievement.entity';
 
 @Module({
   imports: [
@@ -24,6 +28,7 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     AuthModule,
     GeminiApiModule,
+    TypeOrmModule.forFeature([userEntity, achievementEntity]),
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET || 'default_secret',
@@ -31,7 +36,7 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
     
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ExperienceHandlerController],
+  providers: [AppService, ExperienceHandlerService],
 })
 export class AppModule {}
