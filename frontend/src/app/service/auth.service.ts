@@ -24,8 +24,8 @@ export class AuthService {
         return data;
     }
 
-     register(payload : LoggingDto)  {
-         this.http.post(`${this.apiUrl}/register`, payload);
+     register(payload : LoggingDto)   {
+         return this.http.post(`${this.apiUrl}/register`, payload);
     }
 
 

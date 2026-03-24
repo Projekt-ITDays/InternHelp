@@ -166,10 +166,3 @@ export class WelcomeScreen {
   }
 
 }
-// export class WelcomePageComponent {
-//   showRegistration = signal(false);
-
-//   openRegistration() {
-//     this.showRegistration.set(true);
-//   }
-// }

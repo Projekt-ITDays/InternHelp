@@ -106,3 +106,28 @@
   backdrop-filter: blur(4px);
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+.captcha-box {
+	border: 2px dashed var(--theme-secondary);
+	text-align: center;
+	color: var(--theme-text);
+	background: var(--theme-complement);
+	padding: 0.82rem 0.55rem;
+	font-size: 0.83rem;
+}
+
+.legal-note {
+	display: grid;
+	gap: 0.08rem;
+	font-size: 0.73rem;
+	line-height: 1.4;
+	color: var(--theme-text);
+}
+
+.legal-acceptance {
+	white-space: nowrap;
+}
+
+.legal-note a {
+	font-weight: 600;
+}

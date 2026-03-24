@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, output, input } from '@angular/core';
+import { Component, signal, output, input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Input } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { AuthService } from '../../../service/auth.service';
+import Swal from 'sweetalert2';
+import { LoggingDto } from '../../../interfaces/loggingDto';
 
 @Component({
   selector: 'app-registration',
@@ -12,6 +15,7 @@ import { OnInit } from '@angular/core';
   styleUrl: './registration.css',
 })
 export class Registration {
+  authService = inject(AuthService);
   initialEmail = input<string>('');
   email = '';
   confirmEmail = '';
@@ -33,8 +37,25 @@ export class Registration {
       this.errorMessage.set('Musisz zaakceptować regulamin.');
       return;
     }
-    // Tutaj można dodać logikę rejestracji, np. wywołanie API
-    // Po udanej rejestracji można zamknąć formularz:
+    const payload : LoggingDto = {
+      username: this.email,
+      password: this.password,
+    }
+    this.authService.register(payload).subscribe({
+      next: () => {
+        Swal.fire({ 
+          icon: 'success',
+          title: 'Rejestracja zakończona sukcesem!',
+          text: 'Możesz teraz zalogować się na swoje konto.',
+        }).then(() => {
+          this.closeRegistration();
+        });
+      },
+      error: (err) => {
+        console.error('Błąd rejestracji:', err);
+        this.errorMessage.set('Wystąpił błąd podczas rejestracji. Spróbuj ponownie.');
+      }
+    });
     this.closeRegistration();
   }
   close = output<void>();

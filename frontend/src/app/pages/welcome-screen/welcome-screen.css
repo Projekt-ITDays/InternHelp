@@ -301,15 +301,6 @@
 	outline-offset: -2px;
 }
 
-.captcha-box {
-	border: 2px dashed var(--theme-secondary);
-	text-align: center;
-	color: var(--theme-text);
-	background: var(--theme-complement);
-	padding: 0.82rem 0.55rem;
-	font-size: 0.83rem;
-}
-
 .forgot-button {
 	align-self: flex-start;
 	padding: 0.2rem 0;
@@ -377,22 +368,6 @@
 	width: 18px;
 	height: 18px;
 	display: block;
-}
-
-.legal-note {
-	display: grid;
-	gap: 0.08rem;
-	font-size: 0.73rem;
-	line-height: 1.4;
-	color: var(--theme-text);
-}
-
-.legal-acceptance {
-	white-space: nowrap;
-}
-
-.legal-note a {
-	font-weight: 600;
 }
 
 .login-button {
