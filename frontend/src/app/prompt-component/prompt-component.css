@@ -1,5 +1,3 @@
-/* EKRAN WPROWADZANIA DANYCH */
-/* Główne zmienne dla spójności kolorów */
 :host {
   --bg-color: #f8f9fc;
   --text-main: #1d1d2c;
@@ -12,7 +10,6 @@
   --active-nav-text: #32506d;
 }
 
-/* Kontener aplikacji - symulacja widoku mobilnego */
 .app-container {
   max-width: 480px;
   margin: 0 auto;
@@ -21,10 +18,9 @@
   color: var(--text-main);
   min-height: 100vh;
   position: relative;
-  padding-bottom: 80px; /* Miejsce na dolne menu */
+  padding-bottom: 80px; 
 }
 
-/* Header */
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -52,7 +48,6 @@
   cursor: pointer;
 }
 
-/* Sekcja tytułowa */
 .main-content {
   padding: 0 24px;
 }
@@ -81,7 +76,6 @@
   font-size: 0.95rem;
 }
 
-/* Karty */
 .cards-container {
   display: flex;
   flex-direction: column;
@@ -96,7 +90,7 @@
 }
 
 .highlight-card {
-  border-top-right-radius: 60px; /* Charakterystyczne ścięcie z designu */
+  border-top-right-radius: 60px; 
 }
 
 .badge {
@@ -134,7 +128,6 @@
   margin: 0 0 20px 0;
 }
 
-/* Tagi */
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -150,7 +143,6 @@
   font-weight: 600;
 }
 
-/* Call to Action */
 .cta-card {
   background-color: var(--primary-blue);
   color: white;
@@ -192,7 +184,6 @@
   opacity: 0.9;
 }
 
-/* Dolna nawigacja */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -262,7 +253,7 @@
   resize: none;
   outline: none;
   color: var(--text-main);
-  box-sizing: border-box; /* Ważne, żeby padding nie rozwalał szerokości */
+  box-sizing: border-box; 
 }
 
 .textarea-wrapper textarea::placeholder {
@@ -271,7 +262,7 @@
 
 .btn-submit {
   width: 100%;
-  background-color: #0066ff; /* Kolor z Twojego 1 screena */
+  background-color: #0066ff; 
   color: white;
   border: none;
   padding: 16px;
@@ -291,11 +282,8 @@
   cursor: not-allowed;
 }
 
-/* =========================================
-   RESPONSYWNOŚĆ (DESKTOP I TABLETY) - FULL SCREEN (KARTY POD SOBĄ)
-   ========================================= */
+/* RESPONSYWNOŚĆ na innych urządzeniach */
 @media (min-width: 768px) {
-  /* 1. Rozciągamy aplikację na CAŁY ekran, menu po lewej, treść po prawej */
   .app-container {
     max-width: 100%; 
     width: 100%;
@@ -306,7 +294,6 @@
     min-height: 100vh;
   }
 
-  /* 2. Układamy treść po prawej stronie */
   .top-header { 
     grid-column: 2 / 3; 
     padding: 32px 48px; 
@@ -315,14 +302,12 @@
   .main-content { 
     grid-column: 2 / 3; 
     padding: 0 48px 48px; 
-    /* Ograniczamy szerokość samego tekstu, żeby był czytelny (nie rozciągał się w nieskończoność) */
     max-width: 900px;
-    margin: 0 auto; /* Środkuje kolumnę z kartami w prawej części ekranu */
+    margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
   }
 
-  /* 3. Dolne menu staje się bocznym paskiem (Sidebar) */
   .bottom-nav {
     grid-column: 1 / 2;
     grid-row: 1 / 3; 
@@ -340,7 +325,6 @@
     background-color: var(--card-bg);
   }
 
-  /* 4. Przyciski w bocznym menu */
   .nav-item {
     flex-direction: row; 
     justify-content: flex-start;
@@ -358,10 +342,6 @@
     background-color: var(--active-nav-bg);
   }
 
-  /* KARTY UKŁADAJĄ SIĘ POD SOBĄ */
-  /* Nie musimy nic tu pisać - automatycznie dziedziczą układ kolumnowy z wersji mobilnej! */
-
-  /* 5. Formularz wejściowy */
   .input-section {
     background-color: var(--card-bg);
     padding: 40px;

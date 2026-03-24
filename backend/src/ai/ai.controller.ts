@@ -1,5 +1,6 @@
-import { Controller, Post, Body } from '@nestjs/common'; 
+import { Controller, Post, Body, Sse, Query, MessageEvent } from '@nestjs/common'; 
 import { AiService } from './ai.service';
+import { map, Observable } from 'rxjs';
 
 @Controller('ai')
 export class AiController {
@@ -10,11 +11,10 @@ export class AiController {
     const jsonObject = await this.aiService.getGeminiResponse(prompt);
     return { answer: jsonObject };
   }
-  //TODO
-  @Post('roadmap')
-  async getRoadmap(@Body('careerPath') careerPath: string) {
-    // const jsonObject = await this.aiService.getRoadmapResponse(careerPath);
-    // return { answer: jsonObject };
+
+  @Sse('roadmap')
+  streamRoadmap(@Query('careerPath') careerPath: string): Observable<MessageEvent> {
+    return this.aiService.getRoadmapStream(careerPath);
   }
   
   //stary approach

@@ -73,6 +73,7 @@ export class WelcomeScreen {
           text: 'Niepoprawny login lub hasło.',
         });
         // placeholder - > używać jeżeli nie chcemy korzystać z logowania i autoryzacji
+        // dalej tego używam btw
         this.router.navigate(['/ai/ask']);
 
         this.showError('Niepoprawny login lub hasło.');

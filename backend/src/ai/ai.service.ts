@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, MessageEvent } from '@nestjs/common';
+import { Observable } from 'rxjs';
 
 // pamietac o npm install @google/generative-ai
 @Injectable()
@@ -27,7 +28,9 @@ export class AiService {
               }`    ;
 
     const model = this.genAI.getGenerativeModel({ 
+        // tańszy model
         model: "gemini-2.5-flash-lite",
+        // model: "gemini-2.5-flash",
         generationConfig: {
         maxOutputTokens: 2000,
         responseMimeType: "application/json",
@@ -46,13 +49,37 @@ export class AiService {
       throw new InternalServerErrorException("Błąd podczas przetwarzania danych od AI.");
     }
 
-    // stary approach
-    // let result = await model.generateContent(prompt);
+  }
 
-    // let text = await result.response.text();
-    
-    // text = text.slice(8, -3); // Usuwamy "```json" z początku i "```" z końca
+  getRoadmapStream(careerPath: string): Observable<MessageEvent> {
+    const model = this.genAI.getGenerativeModel({
+      // tańszy model 
+      model: "gemini-2.5-flash-lite",
+      // model: "gemini-2.5-flash",
+      generationConfig: {
+        maxOutputTokens: 2000,
+        responseMimeType: "text/plain", 
+      } 
+    });
 
-    //return text;
+    return new Observable((subscriber) => {
+      (async () => {
+        try {
+          const prompt = `Stwórz szczegółową roadmapę nauki dla ścieżki: ${careerPath}. Zwróć to w czytelnym formacie (użyj Markdown: pogrubienia, listy). Nie używaj formatu JSON.`;
+          
+          const result = await model.generateContentStream(prompt);
+
+         // wysyłanie tokenów "na żywo" z gemini do angulara przez SSE
+          for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            subscriber.next({ data: { chunk: chunkText } });
+          }
+          subscriber.complete();
+        } catch (error) {
+          console.error("Błąd streamingu w NestJS:", error);
+          subscriber.error(error);
+        }
+      })();
+    });
   }
 }

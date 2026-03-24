@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Ai } from './ai';
+import { Ai } from './service/ai';
+
 
 describe('Ai', () => {
   let service: Ai;
