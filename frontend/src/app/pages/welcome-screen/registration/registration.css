@@ -5,7 +5,8 @@
     display: grid;
     place-items: center;
     padding: 1rem;
-    background: color-mix(in srgb, var(--theme-contrast) 45%, transparent);
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .registration-container {
@@ -16,6 +17,7 @@
     display: grid;
     gap: 0.75rem;
     padding: 1.25rem;
+    padding-top: 2.15rem;
     background: var(--theme-complement);
     border: 1px solid var(--theme-secondary);
     border-radius: 16px;
@@ -85,49 +87,10 @@
     border-radius: 8px;
     background: var(--theme-highlight);
     color: var(--theme-text);
-    font-family: var(--font-serif);
-    font-size: 0.9rem;
-    font-weight: 600;
+    font: 600 0.9rem/1 var(--font-serif);
     cursor: pointer;
 }
 
 .register-button:hover {
     filter: brightness(0.96);
-}
-
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.captcha-box {
-	border: 2px dashed var(--theme-secondary);
-	text-align: center;
-	color: var(--theme-text);
-	background: var(--theme-complement);
-	padding: 0.82rem 0.55rem;
-	font-size: 0.83rem;
-}
-
-.legal-note {
-	display: grid;
-	gap: 0.08rem;
-	font-size: 0.73rem;
-	line-height: 1.4;
-	color: var(--theme-text);
-}
-
-.legal-acceptance {
-	white-space: nowrap;
-}
-
-.legal-note a {
-	font-weight: 600;
 }

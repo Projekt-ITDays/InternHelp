@@ -5,7 +5,6 @@
   min-height: 100svh;
   color: var(--theme-text);
   background: var(--theme-bg);
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
 }
 
 .page-frame {
@@ -47,7 +46,7 @@
 h1 {
   margin: 0;
   font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-family: var(--font-serif);
   color: var(--theme-text);
 }
 

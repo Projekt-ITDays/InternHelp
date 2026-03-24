@@ -5,6 +5,7 @@ import { PageFrameShell } from '../../shared/page-frame/page-frame';
 
 @Component({
   selector: 'app-settings',
+  standalone: true,
   imports: [PageFrameShell, PlanMenu],
   templateUrl: './settings.html',
   styleUrl: './settings.css',

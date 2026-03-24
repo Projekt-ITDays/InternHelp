@@ -13,7 +13,7 @@
 .surface-card h2 {
   margin: 0.35rem 0 0.72rem;
   font-size: 1.24rem;
-  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-family: var(--font-serif);
 }
 
 /* Surface card: tresc tekstowa */

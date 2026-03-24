@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, output, input, inject } from '@angular/core';
+import { Component, signal, output, input, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Input } from '@angular/core';
-import { OnInit } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import Swal from 'sweetalert2';
 import { LoggingDto } from '../../../interfaces/loggingDto';
@@ -24,7 +22,7 @@ export class Registration {
   confirmPassword = '';
   termsAccepted = false;
   errorMessage = signal('');
-  register() {
+  register(): void {
     if (this.email !== this.confirmEmail) {
       this.errorMessage.set('Adresy email nie są zgodne.');
       return;
@@ -59,11 +57,12 @@ export class Registration {
     this.closeRegistration();
   }
   close = output<void>();
-  closeRegistration(){
+  closeRegistration(): void {
     this.close.emit();
-  };
-  ngOnInit() {
-  this.email = this.initialEmail();
-  this.password = this.initialPassword();
+  }
+
+  ngOnInit(): void {
+    this.email = this.initialEmail();
+    this.password = this.initialPassword();
   }
 }

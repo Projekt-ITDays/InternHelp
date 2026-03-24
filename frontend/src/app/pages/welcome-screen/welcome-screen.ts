@@ -17,7 +17,7 @@ type FeatureCard = {
 @Component({
   selector: 'app-welcome-screen',
   standalone: true,
-  imports: [NgTemplateOutlet, NgTemplateOutlet, Registration],
+  imports: [NgTemplateOutlet, Registration],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })

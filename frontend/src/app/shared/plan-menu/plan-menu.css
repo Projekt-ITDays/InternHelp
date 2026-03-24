@@ -185,7 +185,7 @@
 .confirm-delete-widget h3 {
   margin: 0;
   font-size: 1.05rem;
-  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-family: var(--font-serif);
 }
 
 .confirm-delete-widget p {

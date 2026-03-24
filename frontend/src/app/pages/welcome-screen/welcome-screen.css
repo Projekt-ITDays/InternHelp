@@ -307,7 +307,7 @@
 	background: transparent;
 	border: none;
 	color: var(--theme-text);
-	font-size: 0.72rem;
+	font-size: 0.75rem;
 	line-height: 1.2;
 	cursor: pointer;
 }

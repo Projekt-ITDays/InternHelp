@@ -13,7 +13,7 @@ export class AuthService {
         private readonly http : HttpClient
     ){}
 
-    private accesToken: string | null = null;
+    private accessToken: string | null = null;
     async login(payload : LoggingDto) : Promise<LoggingResponseDto> {
         const data = await firstValueFrom(
             this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
@@ -24,7 +24,7 @@ export class AuthService {
         return data;
     }
 
-     register(payload : LoggingDto)   {
+    register(payload : LoggingDto) {
          return this.http.post(`${this.apiUrl}/register`, payload);
     }
 
@@ -47,15 +47,15 @@ export class AuthService {
         return data;
     }
 
-    setAccessToken(token: string) {
-        this.accesToken = token;
+    setAccessToken(token: string): void {
+        this.accessToken = token;
     }
 
-    getAccessToken() {
-        return this.accesToken;
+    getAccessToken(): string | null {
+        return this.accessToken;
     }
 
-    clearAccessToken() {
-        this.accesToken = null;
+    clearAccessToken(): void {
+        this.accessToken = null;
     }
 }
