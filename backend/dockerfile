@@ -1,11 +1,22 @@
-FROM node:20-alpine
-
+FROM node:20-alpine AS base
 WORKDIR /usr/src/app
-
 COPY  package*.json ./
 
+FROM base AS dev
 RUN npm install
 COPY . . 
 EXPOSE 3000
-
 CMD [ "npm" , "run" ,"start:dev" ]
+
+FROM base AS build
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM base AS prod
+ENV NODE_ENV=production
+RUN npm install --only=production
+COPY --from=build /usr/src/app/dist ./dist
+USER node
+EXPOSE 3000
+CMD ["node", "dist/main.js"]
