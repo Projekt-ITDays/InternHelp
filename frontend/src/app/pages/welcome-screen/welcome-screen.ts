@@ -58,6 +58,7 @@ export class WelcomeScreen {
   protected password = signal<string>('');
   protected showErrorWidget = signal<boolean>(false);
   protected errorMessage = signal<string>('Wypełnij oba pola.');
+  protected loginError = signal<string>('');
   protected Login() : void {
     const LoginDto : LoggingDto = {
       username: this.username(),
@@ -68,12 +69,12 @@ export class WelcomeScreen {
         this.router.navigate(['/aiapi']);
       })
       .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Błąd logowania',
-          text: 'Niepoprawny login lub hasło.',
-        });
-        this.showError('Niepoprawny login lub hasło.');
+        if (this.username().trim() === '' || this.password().trim() === '') {
+          this.loginError.set('Wypełnij oba pola.');
+        } else {
+          this.loginError.set('Nieprawidłowa nazwa użytkownika lub hasło.');
+        }
+        this.showErrorWidget.set(true);
       });
   }
 
@@ -109,7 +110,8 @@ export class WelcomeScreen {
     const pass = this.password().trim();
 
     if (!user || !pass) {
-      this.showError('Wypełnij oba pola.');
+      this.loginError.set('Wypełnij oba pola.');
+      this.showErrorWidget.set(true);
       return;
     }
 
@@ -117,20 +119,8 @@ export class WelcomeScreen {
     this.Login();
   }
 
-  protected onRegisterClick(): void {
-    this.showError('Rejestracja będzie dostępna wkrótce.');
-  }
-
   protected onForgotPasswordClick(): void {
-    this.showError('Opcja przypomnienia hasła będzie dostępna wkrótce.');
-  }
-
-  protected dismissErrorWidget(): void {
-    this.showErrorWidget.set(false);
-  }
-
-  private showError(message: string): void {
-    this.errorMessage.set(message);
+    this.loginError.set('Opcja przypomnienia hasła będzie dostępna wkrótce.');
     this.showErrorWidget.set(true);
   }
 

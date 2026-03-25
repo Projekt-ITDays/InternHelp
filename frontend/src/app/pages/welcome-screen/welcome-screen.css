@@ -13,24 +13,6 @@
 	isolation: isolate;
 }
 
-.error-widget {
-	position: fixed;
-	left: 50%;
-	top: 1.1rem;
-	transform: translateX(-50%);
-	z-index: 10;
-	display: flex;
-	align-items: center;
-	gap: 0.8rem;
-	padding: 0.66rem 0.94rem;
-	border-radius: 999px;
-	border: 1px solid var(--theme-error);
-	background: var(--theme-complement);
-	color: var(--theme-contrast);
-	font-size: 0.84rem;
-	box-shadow: 0 10px 24px var(--theme-on-contrast);
-}
-
 .error-widget button,
 .login-actions button {
 	border-radius: 8px;
@@ -255,11 +237,10 @@
 }
 
 .login-form {
-	display: flex;
-	flex-direction: column;
+	display: grid;
 	height: 100%;
 	gap: 0.66rem;
-	justify-content: center;
+	align-content: center;
 }
 
 .credentials-group {
@@ -302,7 +283,7 @@
 }
 
 .forgot-button {
-	align-self: flex-start;
+	justify-self: start;
 	padding: 0.2rem 0;
 	background: transparent;
 	border: none;
@@ -314,6 +295,21 @@
 
 .forgot-button:hover {
 	color: var(--theme-contrast);
+}
+
+.error-message {
+	height: 1.3rem;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	color: var(--theme-error);
+	font-size: 0.75rem;
+	line-height: 1.3rem;
+	text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .login-actions {

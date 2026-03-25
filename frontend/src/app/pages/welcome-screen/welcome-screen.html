@@ -1,11 +1,4 @@
 <div class="welcome-screen">
-	@if (showErrorWidget()) {
-		<section class="error-widget" role="status" aria-live="polite">
-			<span>{{ errorMessage() }}</span>
-			<button type="button" (click)="dismissErrorWidget()" aria-label="Zamknij komunikat">Zamknij</button>
-		</section>
-	}
-
 	<section class="layout-wide">
 		<div class="stage-panel">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo stage-logo" />
@@ -95,6 +88,7 @@
     <ng-template #loginFormTemplate>
         <div class="login-card">
             <form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
+                <p class="error-message">{{ loginError() }}</p>
                 <div class="credentials-group">
                     <input
                         type="text"
