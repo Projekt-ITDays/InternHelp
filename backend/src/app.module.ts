@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GeminiApiModule } from './gemini-api/gemini-api.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ExperienceHandlerController } from './experience-handler/experience-handler.controller';
@@ -19,18 +19,19 @@ import { achievementEntity } from './entities/achievement.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
+      port: 5432,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       ssl: true,
       extra: {
         ssl: {
           rejectUnauthorized: false,
         },
+        family: 4,
       },
-      port: parseInt(process.env.DB_PORT || '5432'),
-      username: process.env.DB_USER || '',
-      password: process.env.DB_PASSWORD || 'password',
-      database: process.env.DB_NAME || 'moja_aplikacja',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // wylacz to jak skonczymy pracowac nad baza danych, zeby nie stracic danych przy restarcie serwera
+      synchronize: true,
     }),
     AuthModule,
     GeminiApiModule,
