@@ -18,7 +18,7 @@ import { achievementEntity } from './entities/achievement.entity';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
+      host: process.env.DB_HOST,
       ssl: true,
       extra: {
         ssl: {
