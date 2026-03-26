@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { Injectable } from '@nestjs/common';
-import { response } from 'express';
+import { Injectable, InternalServerErrorException, MessageEvent } from '@nestjs/common';
+import { Observable } from 'rxjs';
+
 // pamietac o npm install @google/generative-ai
 @Injectable()
 export class AiService {
@@ -27,18 +28,58 @@ export class AiService {
               }`    ;
 
     const model = this.genAI.getGenerativeModel({ 
-        model: "gemini-2.5-flash",
+        // tańszy model
+        model: "gemini-2.5-flash-lite",
+        // model: "gemini-2.5-flash",
         generationConfig: {
-        maxOutputTokens: 10000, // To go uciszy! 100 tokenów to bardzo mało.
+        maxOutputTokens: 2000,
+        responseMimeType: "application/json",
         }
-    }); 
+    });
+    
+    try {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text();
+      
+      const jsonObject = JSON.parse(text);
+      return jsonObject;
 
-  let result = await model.generateContent(prompt);
+    } catch (error) {
+      console.error("Błąd podczas parsowania JSON od AI:", error);
+      throw new InternalServerErrorException("Błąd podczas przetwarzania danych od AI.");
+    }
 
-  let text = await result.response.text();
-  
-  text = text.slice(8, -3); // Usuwamy "```json" z początku i "```" z końca
+  }
 
-  return text;
+  getRoadmapStream(careerPath: string): Observable<MessageEvent> {
+    const model = this.genAI.getGenerativeModel({
+      // tańszy model 
+      model: "gemini-2.5-flash-lite",
+      // model: "gemini-2.5-flash",
+      generationConfig: {
+        maxOutputTokens: 2000,
+        responseMimeType: "text/plain", 
+      } 
+    });
+
+    return new Observable((subscriber) => {
+      (async () => {
+        try {
+          const prompt = `Stwórz szczegółową roadmapę nauki dla ścieżki: ${careerPath}. Zwróć to w czytelnym formacie (użyj Markdown: pogrubienia, listy). Nie używaj formatu JSON.`;
+          
+          const result = await model.generateContentStream(prompt);
+
+         // wysyłanie tokenów "na żywo" z gemini do angulara przez SSE
+          for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            subscriber.next({ data: { chunk: chunkText } });
+          }
+          subscriber.complete();
+        } catch (error) {
+          console.error("Błąd streamingu w NestJS:", error);
+          subscriber.error(error);
+        }
+      })();
+    });
   }
 }

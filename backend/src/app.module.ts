@@ -4,18 +4,21 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { GeminiApiModule } from './gemini-api/gemini-api.module';
+// import { GeminiApiModule } from './gemini-api/gemini-api.module';
 import { JwtModule } from '@nestjs/jwt';
+import { AiModule } from './ai/ai.module';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { ExperienceHandlerController } from './experience-handler/experience-handler.controller';
 import { ExperienceHandlerService } from './experience-handler/experience-handler.service';
-import { userEntity } from './entities/user.entity';
 import { achievementEntity } from './entities/achievement.entity';
+import { userEntity } from './entities/user.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    TypeOrmModule.forFeature([achievementEntity,userEntity]),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
@@ -27,8 +30,8 @@ import { achievementEntity } from './entities/achievement.entity';
       synchronize: true, // wylacz to jak skonczymy pracowac nad baza danych, zeby nie stracic danych przy restarcie serwera
     }),
     AuthModule,
-    GeminiApiModule,
-    TypeOrmModule.forFeature([userEntity, achievementEntity]),
+    //zmiana
+    AiModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET || 'default_secret',

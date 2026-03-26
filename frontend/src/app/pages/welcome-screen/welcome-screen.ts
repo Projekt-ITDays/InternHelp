@@ -63,7 +63,8 @@ export class WelcomeScreen {
     }
     this.authService.login(LoginDto)
       .then(() => {
-        this.router.navigate(['/aiapi']);
+        // Zmiana aiapi -> ai/ask
+        this.router.navigate(['/ai/ask']);
       })
       .catch(() => {
         Swal.fire({
@@ -71,6 +72,10 @@ export class WelcomeScreen {
           title: 'Błąd logowania',
           text: 'Niepoprawny login lub hasło.',
         });
+        // placeholder - > używać jeżeli nie chcemy korzystać z logowania i autoryzacji
+        // dalej tego używam btw
+        this.router.navigate(['/ai/ask']);
+
         this.showError('Niepoprawny login lub hasło.');
       });
   }
@@ -153,8 +158,8 @@ export class WelcomeScreen {
     if (username) {
       localStorage.setItem('username', username);
     }
-
+    // Zmiana aiapi -> ai/ask
     window.history.replaceState({}, document.title, window.location.pathname);
-    this.router.navigate(['/aiapi']);
+    this.router.navigate(['/ai/ask']);
   }
 }

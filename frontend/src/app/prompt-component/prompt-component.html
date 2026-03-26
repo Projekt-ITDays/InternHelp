@@ -1,27 +1,92 @@
-<div class="container">
-  <h1>Sugestie v1</h1>
-  
-  <div class="chat-box">
-    <textarea 
-      [(ngModel)]="prompt" 
-      (keydown.enter)="$event.preventDefault(); sendRequest()"
-      placeholder="W czym mogę Ci dzisiaj pomóc?" 
-      rows="4">
-    </textarea>
+<div class="app-container">
+  <header class="top-header">
+    <div class="logo">
+      <span class="logo-dots">●●●</span> InternHelp
+    </div>
+    <button class="notification-btn">🔔</button>
+  </header>
+
+  <main class="main-content">
     
-    <button (click)="sendRequest()" [disabled]="loading">
-      {{ loading ? 'Myślę' : 'Wyślij' }}
-    </button>
-  </div>
+    <div class="input-section" *ngIf="results.length === 0">
+      <h1>Cześć!</h1>
+      <p>Opisz nam swoje zainteresowania, a my dopasujemy dla Ciebie idealną ścieżkę rozwoju kariery w sektorze IT.</p>
+      
+      <div class="error-box" *ngIf="errorMessage" style="color: red; margin-bottom: 1rem;">
+        🚨 {{ errorMessage }}
+      </div>
 
-  <div class="container">
-  <div *ngIf="loading" class="loader">
-    Generowanie odpowiedzi
-  </div>
+      <div class="textarea-wrapper">
+        <textarea 
+          [(ngModel)]="prompt" 
+          (keydown.enter)="!loading && prompt.trim() ? sendRequest() : null; $event.preventDefault()"
+          [disabled]="loading"
+          placeholder="W czym mogę Ci dzisiaj pomóc?"
+          rows="5">
+        </textarea>
+      </div>
 
-  <div *ngIf="response" class="response-area">
-    <strong>jsonowa odpowiedz:</strong>
-    <p>{{ response }}</p>
-  </div>
-</div>
+      <button class="btn-submit" (click)="sendRequest()" [disabled]="loading || !prompt.trim()">
+        <span *ngIf="!loading">Wyślij</span>
+        <span *ngIf="loading">Analizowanie... ⏳</span>
+      </button>
+    </div>
+
+    <div class="results-section" *ngIf="results.length > 0">
+      <div class="title-section">
+        <span class="subtitle">TWOJE WYNIKI</span>
+        <h1>Twoja ścieżka kariery</h1>
+        <p>Na podstawie Twoich odpowiedzi, wyselekcjonowaliśmy obszary, które najlepiej odpowiadają Twojemu profilowi.</p>
+      </div>
+
+      <div class="cards-container">
+        <div class="card" 
+             *ngFor="let item of results; let i = index" 
+             [ngClass]="{'highlight-card': i === 0}">
+             
+          <div class="badge" *ngIf="i === 0">
+            <span class="icon">🎮</span> NAJWYŻSZE DOPASOWANIE
+          </div>
+          
+          <div class="card-icon" *ngIf="i !== 0">{{ icons[i % icons.length] }}</div>
+          
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+          
+          <div class="tags">
+            <span class="tag" *ngFor="let tag of item.tags">{{ tag }}</span>
+          </div>
+
+          <button class="btn-roadmap" (click)="goToRoadmap(item.title)" style="margin-top: 15px; width: 100%;">
+            Generuj Roadmapę 🗺️
+          </button>
+        </div>
+      </div>
+
+      <div class="cta-card">
+        <h2>Gotowy na kolejny krok?</h2>
+        <p>Możesz wygenerować nową listę propozycji, jeśli chcesz zmienić preferencje.</p>
+        <button class="btn-primary" (click)="results = []; prompt = ''">Zacznij od nowa ↺</button>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <div class="nav-item">
+      <span class="nav-icon">🚪</span>
+      <span>Logowanie</span>
+    </div>
+    <div class="nav-item active">
+      <span class="nav-icon">✨</span>
+      <span>Rekomendacje</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">🗺️</span>
+      <span>Roadmap</span>
+    </div>
+    <div class="nav-item">
+      <span class="nav-icon">⚙️</span>
+      <span>Ustawienia</span>
+    </div>
+  </nav>
 </div>
