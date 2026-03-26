@@ -1,10 +1,18 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Injectable, InternalServerErrorException, MessageEvent } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Observable } from 'rxjs';
+import { SurveyDto } from 'src/dto/survey.dto';
+import { SurveysEntity } from 'src/entities/Surveys.entity';
+import { Repository } from 'typeorm/repository/Repository.js';
+
 
 // pamietac o npm install @google/generative-ai
 @Injectable()
 export class AiService {
+  constructor(
+    @InjectRepository(SurveysEntity) private surveysRepository : Repository<SurveysEntity>
+  ){}
   private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
   async getGeminiResponse(userPrompt: string) {
@@ -56,6 +64,7 @@ export class AiService {
       // tańszy model 
       model: "gemini-2.5-flash-lite",
       // model: "gemini-2.5-flash",
+      
       generationConfig: {
         maxOutputTokens: 2000,
         responseMimeType: "text/plain", 
@@ -82,4 +91,10 @@ export class AiService {
       })();
     });
   }
+
+
+  sendSurveyData(surveyData: SurveyDto) {
+      const surveyEntity = this.surveysRepository.create(surveyData);
+      return this.surveysRepository.save(surveyEntity);
+  } 
 }

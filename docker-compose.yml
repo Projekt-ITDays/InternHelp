@@ -1,7 +1,7 @@
 services:
 
   db:
-    image: postgres:15
+    image: postgres:15 
     container_name: postgres_db
     restart: always
     environment:
@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -25,7 +25,7 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "3000:3000"
+       - "3000:3000"
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
@@ -41,10 +41,10 @@ services:
       - "80:80"
     depends_on:
       - api
-    networks:
+    networks: 
       - app-network
     volumes:
-      - ./frontend:/usr/src/app
+      - ./frontend:/usr/src/app 
       - /usr/src/app/node_modules
 networks:
   app-network:

@@ -1,6 +1,7 @@
 import { Role } from "src/enums/role.enum";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { achievementEntity } from "./achievement.entity";
+import { SurveysEntity } from "./Surveys.entity";
 
 
 @Entity('User')
@@ -24,5 +25,6 @@ export class userEntity{
 
     @OneToMany(() => achievementEntity, (achievement) => achievement.user)
     achievements: achievementEntity[]
-    
+    @OneToMany(() => SurveysEntity, (survey) => survey.user)
+    surveys: SurveysEntity[]
 }
