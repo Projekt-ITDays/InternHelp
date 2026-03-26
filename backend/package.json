@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@langchain/core": "^1.1.36",
+    "@langchain/google": "^0.1.8",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
@@ -34,6 +36,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.4",
     "cookie-parser": "^1.4.7",
+    "langchain": "^1.2.37",
     "mongoose": "^9.3.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
