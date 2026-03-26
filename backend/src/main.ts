@@ -30,6 +30,7 @@ async function bootstrap() {
     'http://127.0.0.1:4200',
     'http://localhost', // frontend z Dockera (nginx :80)
     'http://127.0.0.1',
+    'http://localhost:3000'
   ];
 
   app.enableCors({

@@ -19,6 +19,12 @@ import { achievementEntity } from './entities/achievement.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
+      ssl: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
       port: parseInt(process.env.DB_PORT || '5432'),
       username: process.env.DB_USER || '',
       password: process.env.DB_PASSWORD || 'password',
@@ -35,8 +41,8 @@ import { achievementEntity } from './entities/achievement.entity';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-    
+
   controllers: [AppController, ExperienceHandlerController],
   providers: [AppService, ExperienceHandlerService],
 })
-export class AppModule {}
+export class AppModule { }
