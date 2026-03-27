@@ -31,8 +31,9 @@ async function bootstrap() {
     'http://localhost', // frontend z Dockera (nginx :80)
     'http://127.0.0.1',
     'http://localhost:3000',
-    'https://carriersign-app.thankfulrock-d61f60a3.switzerlandnorth.azurecontainerapps.io',
-    process.env.FRONTEND_URL,
+    'https://carriersign-app.thankfulrock-d61f60a3.switzerlandnorth.azurecontainerapps.io', //backend
+    'https://carriersign-web.thankfulrock-d61f60a3.switzerlandnorth.azurecontainerapps.io' //frontend
+
   ];
 
   app.enableCors({
