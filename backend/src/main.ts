@@ -32,7 +32,9 @@ async function bootstrap() {
     'http://127.0.0.1',
     'http://localhost:3000',
     'https://carriersign-app.thankfulrock-d61f60a3.switzerlandnorth.azurecontainerapps.io', //backend
-    'https://carriersign-web.thankfulrock-d61f60a3.switzerlandnorth.azurecontainerapps.io' //frontend
+    'https://carriersign-web.thankfulrock-d61f60a3.switzerlandnorth.azurecontainerapps.io', //frontend
+    'https://api.carriersign.batko.it',
+    'https://carriersign.batko.it'
 
   ];
 
