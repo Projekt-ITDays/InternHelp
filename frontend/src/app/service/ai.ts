@@ -1,18 +1,20 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Ai {
-  private apiUrl = 'http://localhost:3000/ai/ask';
-  private sseUrl = 'http://localhost:3000/ai/roadmap';
+
+  private apiUrl = `${environment.apiUrl}/ai/ask`;
+  private sseUrl = `${environment.apiUrl}/ai/roadmap`;
 
   constructor(
     private http: HttpClient,
-    private zone: NgZone 
-  ) {}
+    private zone: NgZone
+  ) { }
 
   // Post
   askGemini(prompt: string): Observable<{ answer: any }> {
@@ -29,7 +31,7 @@ export class Ai {
         this.zone.run(() => {
           try {
             const parsedData = JSON.parse(event.data);
-            const textChunk = parsedData.chunk || parsedData.text || ''; 
+            const textChunk = parsedData.chunk || parsedData.text || '';
             observer.next(textChunk);
           } catch (e) {
             observer.next(event.data);
@@ -41,7 +43,7 @@ export class Ai {
       eventSource.onerror = (error) => {
         this.zone.run(() => {
           eventSource.close();
-          observer.complete(); 
+          observer.complete();
         });
       };
 

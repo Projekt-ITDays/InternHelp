@@ -1,0 +1,98 @@
+name: Deploy CarrierSign
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push backend image
+        run: |
+          docker build -f ./backend/dockerfile --target prod \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/backend:${{ github.sha }} \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/backend:latest \
+            ./backend
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/backend:${{ github.sha }}
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/backend:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push frontend image
+        run: |
+          docker build -f ./frontend/dockerfile \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/frontend:${{ github.sha }} \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/frontend:latest \
+            ./frontend
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/frontend:${{ github.sha }}
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/frontend:latest
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: build-backend
+    steps:
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy backend to Azure Container Apps
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          acrName: carriersign
+          containerAppName: carriersign-app
+          resourceGroup: CarrierSign
+          imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/backend:${{ github.sha }}
+          targetPort: 3000
+          environmentVariables: >-
+            DATABASE_URL=postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@${{ secrets.DB_HOST }}:5432/postgres?sslmode=require
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_PORT=5432
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_NAME=${{ secrets.DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+            GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }}
+            GOOGLE_CALLBACK_URL=${{ secrets.GOOGLE_CALLBACK_URL }}
+            PORT=3000
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: build-frontend
+    steps:
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy frontend to Azure Container Apps
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          acrName: carriersign
+          containerAppName: carriersign-web
+          resourceGroup: CarrierSign
+          imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/frontend:${{ github.sha }}
+          targetPort: 80

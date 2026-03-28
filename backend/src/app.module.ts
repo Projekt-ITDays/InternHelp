@@ -18,16 +18,23 @@ import { userEntity } from './entities/user.entity';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forFeature([achievementEntity,userEntity]),
+    TypeOrmModule.forFeature([achievementEntity, userEntity]),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT || '5432'),
-      username: process.env.DB_USER || '',
-      password: process.env.DB_PASSWORD || 'password',
-      database: process.env.DB_NAME || 'moja_aplikacja',
+      host: process.env.DB_HOST,
+      port: 5432,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      ssl: true,                                                // | Jak chcecie uzywac lokalnej bazy to zakomentujcie SSL (7 linijek od tej)
+      extra: {                                                  // |
+        ssl: {                                                  // |
+          rejectUnauthorized: false,                            // |
+        },                                                      // |
+        family: 4,                                              // |
+      },                                                        // |
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // wylacz to jak skonczymy pracowac nad baza danych, zeby nie stracic danych przy restarcie serwera
+      synchronize: true,
     }),
     AuthModule,
     //zmiana
@@ -38,8 +45,8 @@ import { userEntity } from './entities/user.entity';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-    
+
   controllers: [AppController, ExperienceHandlerController],
   providers: [AppService, ExperienceHandlerService],
 })
-export class AppModule {}
+export class AppModule { }

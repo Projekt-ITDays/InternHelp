@@ -3,18 +3,19 @@ import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
 import { LoggingDto } from "../interfaces/loggingDto";
 import { LoggingResponseDto } from "../interfaces/loggingResponseDto";
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private readonly apiUrl = 'http://localhost:3000/auth';
+    private readonly apiUrl = `${environment.apiUrl}/auth`;
     constructor(
-        private readonly http : HttpClient
-    ){}
+        private readonly http: HttpClient
+    ) { }
 
     private accesToken: string | null = null;
-    async login(payload : LoggingDto) : Promise<LoggingResponseDto> {
+    async login(payload: LoggingDto): Promise<LoggingResponseDto> {
         const data = await firstValueFrom(
             this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
         );
@@ -24,8 +25,8 @@ export class AuthService {
         return data;
     }
 
-     register(payload : LoggingDto)  {
-         this.http.post(`${this.apiUrl}/register`, payload);
+    register(payload: LoggingDto) {
+        this.http.post(`${this.apiUrl}/register`, payload);
     }
 
 
@@ -38,7 +39,7 @@ export class AuthService {
         window.location.href = `${this.apiUrl}/google/login`;
     }
 
-    async refreshToken() : Promise<{ accesstoken: string }> {
+    async refreshToken(): Promise<{ accesstoken: string }> {
         const data = await firstValueFrom(
             this.http.post<{ accesstoken: string }>(`${this.apiUrl}/refresh`, {}, { withCredentials: true })
         );
