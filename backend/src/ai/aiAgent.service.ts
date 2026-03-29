@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import {ChatGoogle} from "@langchain/google";
-import { createAgent, tool } from "langchain";
+import { createAgent, tool, ToolRuntime } from "langchain";
 import { z } from "zod";    
 import { InjectRepository } from "@nestjs/typeorm";
 import { SurveysEntity } from "src/entities/Surveys.entity";
@@ -13,21 +13,28 @@ export class AiAgentService {
 
 
     model = new ChatGoogle('gemini-2.5-flash-lite')
-    prompt = ` Jesteś ekspertem w dziedzienie rozwoju kariery . Stwórz szczególowa roadmape nauki i zdobywania wiedy w danym okresie czasu  , plan ma byc scisly i wykonany szczegółowo i dokładnie podzielony na osobne sekcje. 
-Każda sekcja ma zawierać konkretne tematy do nauki, które są kluczowe dla rozwoju kariery w . Dla każdego tematu podaj krótki opis, dlaczego jest ważny, oraz przykładowe zasoby do nauki (np. książki, kursy online, artykuły).
-Odpowiedź powinna być w formacie JSON, gdzie kluczami będą nazwy sekcji (np. "Podstawy", "Zaawansowane tematy", "Projekty praktyczne"), a wartościami będą obiekty zawierające listę tematów, ich opisy i zasoby. 
-Masz dostepna baze odpowiedzi zebrana od uzywkonikow : BAZAMONGODB , korzystaj z niej aby tworzyc jak najbardziej spersonalizowane i dopasowane do potrzeb uzytkownika odpowiedzi.
-Uzytkownik poda ci swoja edukajce  , swoje doswiadczenie  oraz zainteresowania  , korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopasowane do potrzeb uzytkownika odpowiedzi.
-ponadto poda ci swoje cele zawodowe  , korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopasowane do potrzeb uzytkownika odpowiedzi.
-Pamitaj nie mów ogólniakami tylko skup sie na tym o co cie prosi uzytkownik , zeby był to zbity plan , który jest realny i da mu szanse wejsc do branzy w jak najkrótszym czasie.
-Masz dostęp do narzędzi które podadza ci szcególowe informacje co do uzytkownika
-- jego edukacja get_education()
-- jego doswiadczenie get_expreience()
-- jego zainteresowania get_intrest()
-- jego cele zawodowe get_goal()
-- dane z internetu get_web_data()
-Korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopasowane do potrzeb uzytkownika odpowiedzi.
-    `
+    prompt = `Jesteś ekspertem ds. rozwoju kariery i tworzysz spersonalizowane plany dla użytkownika.
+
+ZASADY OBOWIĄZKOWE:
+1) Zawsze pobieraj userId z kontekstu narzędzia "get_user_id". Nigdy nie zakładaj ani nie zgaduj userId.
+2) Następnie użyj pobranego userId do wywołania:
+   - get_education({ userId })
+   - get_experience({ userId })
+   - get_intrest({ userId })
+   - get_goal({ userId })
+3) Dopiero po zebraniu danych przygotuj finalną odpowiedź.
+4) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user".
+
+Jeśli użytkownik prosi o plan/roadmapę:
+- Zwróć wynik w JSON.
+- Podziel plan na sekcje czasowe.
+- Dla każdej sekcji podaj: tematy, powód, zasoby, zadania praktyczne.
+- Unikaj ogólników, podawaj konkretne kroki.
+
+Jeśli pytanie nie dotyczy planu (np. "What is my name?"):
+- Odpowiedz krótko i zgodnie z danymi z narzędzi.
+- Nie zgaduj danych, których nie masz.
+`
     getEducationTool = tool(
         async ({ userId }) => {
             const surveyData = await this.surveysRepository.findOne({ where: { userId } });
@@ -43,7 +50,7 @@ Korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopas
             name: "get_education",
             description: "Zwraca informacje o edukacji użytkownika.",
             schema: z.object({
-                userId: z.string().describe("Id użytkownika"),
+                userId: z.string().uuid().describe("Id użytkownika (UUID)"),
             }),
         },
     );
@@ -60,13 +67,17 @@ Korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopas
             name: "get_experience",
             description: "Zwraca informacje o doświadczeniu użytkownika.",
             schema: z.object({
-                userId: z.string().describe("Id użytkownika"),
+                userId: z.string().uuid().describe("Id użytkownika (UUID)"),
             }),
         }
     );
     getInterestTool = tool(
-        async ({userId}) =>{
+        async ({userId}, config  : ToolRuntime) =>{
+            const writer = config.writer;
             const surveyData = await this.surveysRepository.findOne({ where: { userId } });
+            if(writer) {
+                writer( `Pobieranie danych o zainteresowaniach użytkownika o id ${userId}...`);
+            }
             if (!surveyData) {
                 return "Brak danych o zainteresowaniach dla tego użytkownika.";
             }
@@ -79,7 +90,7 @@ Korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopas
             name: "get_intrest",
             description: "Zwraca informacje o zainteresowaniach użytkownika.",
             schema: z.object({
-                userId: z.string().describe("Id użytkownika"),
+                userId: z.string().uuid().describe("Id użytkownika (UUID)"),
             }),
         }
 
@@ -97,22 +108,42 @@ Korzystaj z tych informacji aby tworzyc jak najbardziej spersonalizowane i dopas
             name: "get_goal",
             description: "Zwraca informacje o celach zawodowych użytkownika.",
             schema: z.object({
-                userId: z.string().describe("Id użytkownika"),
+                userId: z.string().uuid().describe("Id użytkownika (UUID)"),
             }),
         }
     )
     async getAgentResponse(userId: string, userPrompt: string) {
-        
-        const agent = createAgent({
-            model: this.model,
-            tools: this.getTools(),
-            systemPrompt: `${this.prompt}\nId użytkownika: ${userId}. Używaj narzędzi, gdy potrzebujesz danych użytkownika.`,
-        });
-        
-        const result = await agent.invoke({
-            messages: [{ role: "user", content: userPrompt }],
+            const getUserID = tool(
+            (_, config) => {
+                return config.context.userId
+            },
+            {
+                name: "get_user_id",
+                description: "Get the user's ID.",
+                schema: z.object({}),
+            }
+        );
+            const contextSchema = z.object({
+            userId: z.string(),
         });
 
+        const agent = createAgent({
+            model: this.model,
+            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool,getUserID],
+            systemPrompt: this.prompt,
+            contextSchema,
+        });
+        
+        
+        const result = await agent.invoke(
+                        {
+                                messages: [{ role: "user", content: userPrompt }]
+                        },
+                        {
+                                context: { userId },
+                        },
+                );
+        
         return result;
     }
 
