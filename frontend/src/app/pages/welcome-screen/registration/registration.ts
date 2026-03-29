@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal, output, input, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../service/auth.service';
 import Swal from 'sweetalert2';
 import { LoggingDto } from '../../../interfaces/loggingDto';
@@ -23,6 +24,8 @@ export class Registration {
   termsAccepted = false;
   errorMessage = signal('');
   register(): void {
+    this.errorMessage.set('');
+
     if (this.email !== this.confirmEmail) {
       this.errorMessage.set('Adresy email nie są zgodne.');
       return;
@@ -51,10 +54,9 @@ export class Registration {
       },
       error: (err) => {
         console.error('Błąd rejestracji:', err);
-        this.errorMessage.set('Wystąpił błąd podczas rejestracji. Spróbuj ponownie.');
+        this.errorMessage.set(this.extractErrorMessage(err));
       }
     });
-    this.closeRegistration();
   }
   close = output<void>();
   closeRegistration(): void {
@@ -64,5 +66,27 @@ export class Registration {
   ngOnInit(): void {
     this.email = this.initialEmail();
     this.password = this.initialPassword();
+  }
+
+  private extractErrorMessage(err: unknown): string {
+    if (!(err instanceof HttpErrorResponse)) {
+      return 'Wystąpił błąd podczas rejestracji. Spróbuj ponownie.';
+    }
+
+    const backendError = err.error;
+
+    if (typeof backendError === 'string' && backendError.trim()) {
+      return backendError;
+    }
+
+    if (Array.isArray(backendError?.message) && backendError.message.length > 0) {
+      return backendError.message[0];
+    }
+
+    if (typeof backendError?.message === 'string' && backendError.message.trim()) {
+      return backendError.message;
+    }
+
+    return 'Wystąpił błąd podczas rejestracji. Spróbuj ponownie.';
   }
 }

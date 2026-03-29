@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
 import { LoggingDto } from '../../interfaces/loggingDto';
 import { Router } from '@angular/router';
@@ -68,11 +69,11 @@ export class WelcomeScreen {
       .then(() => {
         this.router.navigate(['/aiapi']);
       })
-      .catch(() => {
+      .catch((err: unknown) => {
         if (this.username().trim() === '' || this.password().trim() === '') {
           this.loginError.set('Wypełnij oba pola.');
         } else {
-          this.loginError.set('Nieprawidłowa nazwa użytkownika lub hasło.');
+          this.loginError.set(this.extractErrorMessage(err, 'Nieprawidłowa nazwa użytkownika lub hasło.'));
         }
         this.showErrorWidget.set(true);
       });
@@ -153,6 +154,28 @@ export class WelcomeScreen {
   protected showRegistration = signal(false);
   protected openRegistration() {
     this.showRegistration.set(true);
+  }
+
+  private extractErrorMessage(err: unknown, fallback: string): string {
+    if (!(err instanceof HttpErrorResponse)) {
+      return fallback;
+    }
+
+    const backendError = err.error;
+
+    if (typeof backendError === 'string' && backendError.trim()) {
+      return backendError;
+    }
+
+    if (Array.isArray(backendError?.message) && backendError.message.length > 0) {
+      return backendError.message[0];
+    }
+
+    if (typeof backendError?.message === 'string' && backendError.message.trim()) {
+      return backendError.message;
+    }
+
+    return fallback;
   }
 
 }
