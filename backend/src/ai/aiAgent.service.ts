@@ -5,10 +5,14 @@ import { z } from "zod";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SurveysEntity } from "src/entities/Surveys.entity";
 import { Repository } from "typeorm";
+import { InjectModel } from "@nestjs/mongoose";
+import { AgentResponse } from "src/entities/AgentResposne.schema";
+import { Model } from "mongoose";
 @Injectable()
 export class AiAgentService {
     constructor(
-        @InjectRepository(SurveysEntity) private surveysRepository : Repository<SurveysEntity>
+        @InjectRepository(SurveysEntity) private surveysRepository : Repository<SurveysEntity>,
+        @InjectModel("AgentResponse") private agentResponseModel: Model<AgentResponse>  ,
     ) {}
 
 
