@@ -1,10 +1,12 @@
 FROM node:20-alpine as build
 
+ARG BUILD_CONFIGURATION=production
+
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build -- --configuration=production
+RUN npm run build -- --configuration=${BUILD_CONFIGURATION}
 FROM nginx:stable-alpine
 
 COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html

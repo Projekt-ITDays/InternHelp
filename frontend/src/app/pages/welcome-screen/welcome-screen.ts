@@ -21,9 +21,9 @@ type FeatureCard = {
 })
 export class WelcomeScreen {
   constructor(
-    private readonly router : Router,
-    private readonly authService : AuthService
-  ){
+    private readonly router: Router,
+    private readonly authService: AuthService
+  ) {
     this.handleGoogleOAuthCallback();
   }
 
@@ -56,8 +56,8 @@ export class WelcomeScreen {
   protected password = signal<string>('');
   protected showErrorWidget = signal<boolean>(false);
   protected errorMessage = signal<string>('Wypełnij oba pola.');
-  protected Login() : void {
-    const LoginDto : LoggingDto = {
+  protected Login(): void {
+    const LoginDto: LoggingDto = {
       username: this.username(),
       password: this.password()
     }
@@ -74,7 +74,7 @@ export class WelcomeScreen {
         });
         // placeholder - > używać jeżeli nie chcemy korzystać z logowania i autoryzacji
         // dalej tego używam btw
-        this.router.navigate(['/ai/ask']);
+        // this.router.navigate(['/ai/ask']);
 
         this.showError('Niepoprawny login lub hasło.');
       });
