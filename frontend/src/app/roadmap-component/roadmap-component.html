@@ -1,6 +1,6 @@
 <div class="app-container">
-  <header class="top-header" style="justify-content: flex-start; gap: 20px;">
-    <button class="btn-primary" (click)="goBack()" style="padding: 5px 15px;">← Wróć</button>
+  <header class="top-header">
+    <button class="btn-primary" (click)="goBack()">← Wróć</button>
     <div class="logo">Roadmapa: {{ careerPath }}</div>
   </header>
 
@@ -12,12 +12,12 @@
         <p *ngIf="!isGenerating">Oto Twój kompletny plan działania!</p>
       </div>
 
-      <div class="error-box" *ngIf="errorMessage" style="color: red;">
+      <div class="error-box" *ngIf="errorMessage">
         🚨 {{ errorMessage }}
       </div>
 
-      <div class="roadmap-box" style="background: #1e1e1e; padding: 20px; border-radius: 12px; margin-top: 20px;">
-        <pre style="white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', monospace; color: #e0e0e0; line-height: 1.5;">
+      <div class="roadmap-box">
+        <pre>
 {{ roadmapContent }}<span class="cursor" *ngIf="isGenerating">▋</span>
         </pre>
       </div>

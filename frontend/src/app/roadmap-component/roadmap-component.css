@@ -1,0 +1,85 @@
+:host {
+	display: block;
+}
+
+.app-container {
+	min-height: 100vh;
+	background:
+		radial-gradient(circle at 8% 18%, rgba(217, 119, 66, 0.16), transparent 35%),
+		var(--ih-bg);
+	color: var(--ih-surface);
+	padding: 1rem;
+}
+
+.top-header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0.9rem;
+	margin-bottom: 1rem;
+}
+
+.logo {
+	font-weight: 600;
+	font-size: 1rem;
+}
+
+.btn-primary {
+	border: 1px solid transparent;
+	background: linear-gradient(180deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
+	color: #fff;
+	border-radius: 10px;
+	padding: 0.45rem 0.75rem;
+	font-size: 0.86rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.main-content {
+	max-width: 980px;
+	margin: 0 auto;
+}
+
+.results-section {
+	border: 1px solid var(--ih-border-dark);
+	border-radius: var(--ih-radius-lg);
+	background: rgba(26, 23, 19, 0.84);
+	box-shadow: var(--ih-shadow-md);
+	padding: 1rem;
+}
+
+.title-section h1 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.4rem, 3.6vw, 1.9rem);
+}
+
+.title-section p {
+	margin: 0;
+	color: var(--ih-surface-soft);
+}
+
+.error-box {
+	margin-top: 0.8rem;
+	color: #ffb4b4;
+}
+
+.roadmap-box {
+	margin-top: 1rem;
+	border: 1px solid var(--ih-border-dark);
+	border-radius: 12px;
+	background: rgba(17, 16, 13, 0.92);
+	padding: 1rem;
+}
+
+.roadmap-box pre {
+	margin: 0;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+	color: #e9e2d7;
+	line-height: 1.55;
+}
+
+.cursor {
+	color: var(--ih-accent-strong);
+}

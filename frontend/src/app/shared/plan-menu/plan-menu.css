@@ -17,9 +17,9 @@
   justify-content: center;
   gap: 7px;
   padding: 0 14px;
-  border: 1px solid rgba(145, 171, 158, 0.52);
-  border-radius: 0;
-  background: rgba(0, 23, 11, 0.96);
+  border: 1px solid var(--ih-border-dark);
+  border-radius: 12px;
+  background: rgba(17, 16, 13, 0.9);
   cursor: pointer;
 }
 
@@ -29,13 +29,13 @@
 
 .menu-trigger:hover,
 .menu-trigger:focus-visible {
-  background: rgba(6, 37, 20, 0.98);
+  background: rgba(26, 23, 19, 0.95);
 }
 
 .trigger-line {
   width: 100%;
   height: 2px;
-  background: #e7f5ed;
+  background: var(--ih-surface);
 }
 
 .menu-panel {
@@ -47,10 +47,10 @@
   flex-direction: column;
   max-height: 84vh;
   overflow-y: auto;
-  border: 1px solid rgba(145, 171, 158, 0.42);
-  border-radius: 0;
-  background: rgba(0, 23, 11, 0.98);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--ih-border-dark);
+  border-radius: 14px;
+  background: rgba(17, 16, 13, 0.98);
+  box-shadow: var(--ih-shadow-md);
   opacity: 0;
   pointer-events: none;
   z-index: 8;
@@ -65,12 +65,12 @@
   width: 100%;
   min-height: 56px;
   border: 0;
-  border-top: 1px solid rgba(145, 171, 158, 0.28);
+  border-top: 1px solid rgba(243, 239, 230, 0.14);
   border-radius: 0;
   padding: 0.9rem 1.1rem;
   font-size: 1rem;
   text-align: left;
-  color: #e7f5ed;
+  color: var(--ih-surface);
   background: transparent;
 }
 
@@ -82,12 +82,12 @@
 
 .menu-action:hover,
 .menu-action:focus-visible {
-  background: rgba(32, 208, 128, 0.14);
+  background: rgba(217, 119, 66, 0.14);
   outline: none;
 }
 
 .create-action {
-  color: #bcffd9;
+  color: #ffd1b3;
 }
 
 .plan-row {
@@ -97,7 +97,7 @@
 }
 
 .plan-row.is-active .plan-action {
-  background: rgba(32, 208, 128, 0.18);
+  background: rgba(217, 119, 66, 0.2);
 }
 
 .plan-action {
@@ -114,8 +114,8 @@
   width: 38px;
   height: 38px;
   border: 0;
-  border-radius: 0;
-  background: #9f1f1f;
+  border-radius: 10px;
+  background: #8f2727;
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -139,15 +139,15 @@
 
 .delete-plan:hover,
 .delete-plan:focus-visible {
-  background: #7f1212;
+  background: #771b1b;
 }
 
 .empty-state {
   margin: 0;
-  border-top: 1px solid rgba(145, 171, 158, 0.28);
+  border-top: 1px solid rgba(243, 239, 230, 0.14);
   padding: 0.65rem 0.8rem;
   font-size: 0.85rem;
-  color: rgba(231, 245, 237, 0.84);
+  color: var(--ih-surface-soft);
 }
 
 .settings-action {
@@ -155,7 +155,7 @@
 }
 
 .settings-action.is-current {
-  background: rgba(32, 208, 128, 0.22);
+  background: rgba(217, 119, 66, 0.24);
 }
 
 .confirm-delete-overlay {
@@ -171,23 +171,23 @@
 
 .confirm-delete-widget {
   width: min(430px, 100%);
-  border: 1px solid rgba(160, 191, 174, 0.42);
-  border-radius: 0;
-  background: rgba(0, 23, 11, 0.98);
+  border: 1px solid var(--ih-border-dark);
+  border-radius: 14px;
+  background: rgba(17, 16, 13, 0.98);
   padding: 1rem;
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.42);
+  box-shadow: var(--ih-shadow-lg);
 }
 
 .confirm-delete-widget h3 {
   margin: 0;
   font-size: 1.05rem;
-  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-weight: 600;
 }
 
 .confirm-delete-widget p {
   margin: 0.7rem 0 0;
   line-height: 1.45;
-  color: rgba(231, 245, 237, 0.9);
+  color: var(--ih-surface-soft);
 }
 
 .confirm-delete-actions {
@@ -199,22 +199,22 @@
 
 .confirm-btn {
   min-height: 42px;
-  border: 1px solid rgba(145, 171, 158, 0.52);
-  border-radius: 0;
+  border: 1px solid var(--ih-border-dark);
+  border-radius: 10px;
   padding: 0.45rem 0.9rem;
   background: transparent;
-  color: #e7f5ed;
+  color: var(--ih-surface);
   cursor: pointer;
 }
 
 .confirm-btn:hover,
 .confirm-btn:focus-visible {
-  background: rgba(32, 208, 128, 0.14);
+  background: rgba(217, 119, 66, 0.14);
   outline: none;
 }
 
 .danger-btn {
-  border-color: rgba(192, 80, 80, 0.7);
+  border-color: rgba(192, 80, 80, 0.58);
   background: rgba(159, 31, 31, 0.26);
 }
 
@@ -224,7 +224,7 @@
 }
 
 .cancel-btn {
-  color: rgba(231, 245, 237, 0.9);
+  color: var(--ih-surface-soft);
 }
 
 @media (min-width: 901px) and (max-width: 1500px) {
@@ -255,7 +255,7 @@
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
-    border-top: 1px solid rgba(145, 171, 158, 0.42);
+    border-top: 1px solid var(--ih-border-dark);
     transition: max-height 220ms ease, opacity 160ms ease;
   }
 

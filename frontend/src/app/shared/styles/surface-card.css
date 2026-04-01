@@ -1,25 +1,25 @@
 .surface-card {
   max-width: 920px;
-  border: 1px solid rgba(160, 191, 174, 0.32);
-  border-radius: 0;
+  border: 1px solid var(--ih-border-dark);
+  border-radius: var(--ih-radius-lg);
   padding: 1.2rem;
-  background: rgba(5, 34, 19, 0.84);
-  box-shadow: 0 15px 32px rgba(0, 0, 0, 0.28);
+  background: rgba(26, 23, 19, 0.86);
+  box-shadow: var(--ih-shadow-md);
 }
 
 .surface-card h2 {
   margin: 0.35rem 0 0.72rem;
   font-size: 1.24rem;
-  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-weight: 600;
 }
 
 .surface-card p {
   margin: 0;
   line-height: 1.5;
-  color: rgba(231, 245, 237, 0.86);
+  color: var(--ih-surface-soft);
 }
 
 .surface-card.is-empty {
   border-style: dashed;
-  background: rgba(8, 40, 24, 0.6);
+  background: rgba(21, 19, 16, 0.72);
 }

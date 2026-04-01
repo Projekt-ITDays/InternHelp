@@ -1,15 +1,12 @@
 :host {
-  --color-bg: #002010;
-  --color-surface: #eeeeee;
   --page-padding: clamp(0.95rem, 2.6vw, 1.3rem);
   display: block;
   min-height: 100svh;
-  color: var(--color-surface);
+  color: var(--ih-surface);
   background:
-    radial-gradient(circle at 15% 20%, rgba(32, 208, 128, 0.18), transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(32, 208, 128, 0.14), transparent 46%),
-    linear-gradient(160deg, #00170b 0%, var(--color-bg) 60%, #001209 100%);
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+    radial-gradient(circle at 14% 20%, rgba(217, 119, 66, 0.18), transparent 40%),
+    radial-gradient(circle at 84% 74%, rgba(217, 119, 66, 0.1), transparent 46%),
+    linear-gradient(150deg, #0f0e0c 0%, #11100d 58%, #0f0d0b 100%);
 }
 
 .page-frame {
@@ -42,15 +39,17 @@
   padding: 0.45rem 0.9rem 0.5rem;
   margin-top: calc(-1 * var(--page-padding));
   margin-left: calc(-1 * var(--page-padding));
-  background: rgba(0, 23, 11, 0.78);
-  border: 1px solid rgba(32, 208, 128, 0.45);
-  border-radius: 0 0 16px 0;
+  background: rgba(17, 16, 13, 0.74);
+  border: 1px solid var(--ih-border-dark);
+  border-radius: 0 0 14px 0;
+  backdrop-filter: blur(6px);
 }
 
 h1 {
   margin: 0;
   font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .menu-slot {

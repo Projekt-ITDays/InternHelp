@@ -1,4 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+
+:root {
+	--ih-bg: #11100d;
+	--ih-bg-soft: #1a1713;
+	--ih-surface: #f3efe6;
+	--ih-surface-soft: rgba(243, 239, 230, 0.74);
+	--ih-ink: #1b1915;
+	--ih-ink-soft: #625949;
+	--ih-accent: #d97742;
+	--ih-accent-strong: #e38a54;
+	--ih-border-dark: rgba(243, 239, 230, 0.18);
+	--ih-border-light: rgba(27, 25, 21, 0.16);
+	--ih-radius-lg: 20px;
+	--ih-radius-md: 14px;
+	--ih-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.22);
+	--ih-shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.32);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	min-height: 100%;
+	font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	background: var(--ih-bg);
+	color: var(--ih-surface);
+}
+
+button,
+input,
+textarea {
+	font: inherit;
+}
+
+a {
+	color: inherit;
+}
 
