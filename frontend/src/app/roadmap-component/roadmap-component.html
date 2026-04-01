@@ -5,22 +5,36 @@
   </header>
 
   <main class="main-content">
-    <div class="results-section">
-      <div class="title-section">
-        <h1>Twoja dedykowana ścieżka 🗺️</h1>
-        <p *ngIf="isGenerating">Sztuczna inteligencja właśnie przygotowuje dla Ciebie plan działania...</p>
-        <p *ngIf="!isGenerating">Oto Twój kompletny plan działania!</p>
-      </div>
+    <!-- Fixed Overlay for AI Streaming -->
+    <div class="fixed-overlay">
+      <div class="results-section">
+        <div class="title-section">
+          <h1>Szczegóły Ścieżki 🗺️</h1>
+          <p *ngIf="isGenerating">Tworzę dla Ciebie dedykowany opis...</p>
+          <p *ngIf="!isGenerating">Oto Twój kompletny opis i ścieżka działania!</p>
+        </div>
 
-      <div class="error-box" *ngIf="errorMessage">
-        🚨 {{ errorMessage }}
-      </div>
+        <div class="error-box" *ngIf="errorMessage">
+          🚨 {{ errorMessage }}
+        </div>
 
-      <div class="roadmap-box">
-        <pre>
-{{ roadmapContent }}<span class="cursor" *ngIf="isGenerating">▋</span>
-        </pre>
+        <div class="roadmap-box">
+          <div class="markdown-body" [innerHTML]="parsedRoadmapContent"></div>
+          <span class="cursor" *ngIf="isGenerating" style="display:inline-block; margin-top: 10px;">▌ Generowanie...</span>
+        </div>
       </div>
+    </div>
+
+    <!-- Full Screen Hexagonal Grid -->
+    <div class="honeycomb-container" (mousedown)="onMouseDown($event)" [class.dragging]="isDragging">
+      <ul class="honeycomb" [style.transform]="'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px)'">
+        <li class="honeycomb-cell" *ngFor="let cell of gridCells" [ngClass]="{'empty-cell': cell.empty}">
+          <div class="honeycomb-content" *ngIf="!cell.empty">
+            <span class="cell-title">{{ cell.data.title }}</span>
+            <span class="cell-desc">{{ cell.data.description }}</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </main>
 </div>

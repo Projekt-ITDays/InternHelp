@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+// placeholder
+// import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 // import { GeminiApiModule } from './gemini-api/gemini-api.module';
 import { JwtModule } from '@nestjs/jwt';
@@ -12,32 +15,33 @@ import { ExperienceHandlerController } from './experience-handler/experience-han
 import { ExperienceHandlerService } from './experience-handler/experience-handler.service';
 import { achievementEntity } from './entities/achievement.entity';
 import { userEntity } from './entities/user.entity';
-import {MongooseModule} from "@nestjs/mongoose";
+// placeholder
+// import { MongooseModule } from "@nestjs/mongoose";
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MANGO_URL!, {
-    }),
-    TypeOrmModule.forFeature([achievementEntity, userEntity]),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: 5432,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      // ssl: true,                                                // | Jak chcecie uzywac lokalnej bazy to zakomentujcie SSL (7 linijek od tej)
-      // extra: {                                                  // |
-      //   ssl: {                                                  // |
-      //     rejectUnauthorized: false,                            // |
-      //   },                                                      // |
-      //   family: 4,                                              // |
-      // },                                                        // |
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    // MongooseModule.forRoot(process.env.MANGO_URL!, {
+    // }),
+    // TypeOrmModule.forFeature([achievementEntity, userEntity]),
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: process.env.DB_HOST,
+    //   port: 5432,
+    //   username: process.env.DB_USER,
+    //   password: process.env.DB_PASSWORD,
+    //   database: process.env.DB_NAME,
+    //   // ssl: true,                                                // | Jak chcecie uzywac lokalnej bazy to zakomentujcie SSL (7 linijek od tej)
+    //   // extra: {                                                  // |
+    //   //   ssl: {                                                  // |
+    //   //     rejectUnauthorized: false,                            // |
+    //   //   },                                                      // |
+    //   //   family: 4,                                              // |
+    //   // },                                                        // |
+    //   entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    //   synchronize: true,
+    // }),
     AuthModule,
     //zmiana
     AiModule,
@@ -49,6 +53,12 @@ import {MongooseModule} from "@nestjs/mongoose";
   ],
 
   controllers: [AppController, ExperienceHandlerController],
-  providers: [AppService, ExperienceHandlerService],
+  providers: [
+    AppService, 
+    ExperienceHandlerService,
+    { provide: getRepositoryToken(achievementEntity), useValue: {} },
+    { provide: getRepositoryToken(userEntity), useValue: {} },
+    { provide: DataSource, useValue: {} }
+  ],
 })
 export class AppModule { }
