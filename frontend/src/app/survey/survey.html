@@ -1,0 +1,42 @@
+<body>
+    <div class="survey-container">
+        <h1>Survey</h1>
+        <form>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="feedback">Major:</label>
+            <input type="text" id="major" name="major" required>
+        </div>
+        <div class="form-group">
+            <label for="feedback">Year of study:</label>
+            <input type="text" id="year" name="year" required>
+        </div>
+        <div class = "form-group">
+            <label for="feedback">What are your career aspirations, preferred Internship?</label>
+            <input type="text" id="aspirations" name="aspirations" required>
+        </div>
+        <div class="form-group">
+            <mat-autocomplete #auto="matAutocomplete">
+                @for (item of timeRangestoChoose; track $index) {
+                    <mat-option [value]="item">
+                        {{ item }}
+                    </mat-option>
+                }
+            </mat-autocomplete>
+        </div>
+        <div class="form-group">
+            <label for="feedback">What are yours intrests</label>
+            <input type="text" id="intrests" >
+
+        </div>
+        <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>

@@ -15,6 +15,7 @@ export class AuthService {
     ) { }
 
     private accesToken: string | null = null;
+    private isLogged : boolean | null = null;
     async login(payload: LoggingDto): Promise<LoggingResponseDto> {
         const data = await firstValueFrom(
             this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
@@ -22,6 +23,7 @@ export class AuthService {
 
         this.setAccessToken(data.accesstoken);
         localStorage.setItem('username', data.username);
+        this.isLogged =true;
         return data;
     }
 
@@ -58,5 +60,11 @@ export class AuthService {
 
     clearAccessToken() {
         this.accesToken = null;
+    }
+    isLoggedIn(): boolean {
+        if (this.isLogged === null) {
+            return false;
+        }
+        return true;
     }
 }
