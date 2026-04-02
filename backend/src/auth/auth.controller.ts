@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
+import { LoginDto } from 'src/dto/login.dto';
 import { AuthService } from './auth.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { GoogleGuard } from 'src/guards/googleguard.guard';
@@ -15,7 +16,7 @@ export class AuthController {
     }
     
     @Post('login')
-    async login(@Body() payload: LoggingCredentialsDto, @Res({passthrough : true}) res: Response)  {
+    async login(@Body() payload: LoginDto, @Res({passthrough : true}) res: Response)  {
         const resoult =  await this.authService.login(payload)
         // secure false dla pordukcji bo nie mamy https
         res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax',maxAge: 3 * 24 * 60 * 60 * 1000 })

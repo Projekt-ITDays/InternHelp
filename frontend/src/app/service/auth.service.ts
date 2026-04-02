@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
     private readonly apiUrl = `${environment.apiUrl}/auth`;
+    // private readonly apiUrl = `${environment.apiUrl}/auth`;
     constructor(
         private readonly http: HttpClient
     ) { }
@@ -17,6 +18,7 @@ export class AuthService {
     private accesToken: string | null = null;
     private isLogged : boolean | null = null;
     async login(payload: LoggingDto): Promise<LoggingResponseDto> {
+        
         const data = await firstValueFrom(
             this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
         );
@@ -52,6 +54,7 @@ export class AuthService {
 
     setAccessToken(token: string) {
         this.accesToken = token;
+        this.isLogged = true;
     }
 
     getAccessToken() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
+import { LoginDto } from 'src/dto/login.dto';
 import { refeshTokenEntity } from 'src/entities/refreshtoken.entity';
 import { userEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -39,7 +40,7 @@ export class AuthService {
         await this.userRepository.save(newUser)
     }   
 
-    async login(payload : LoggingCredentialsDto) {
+    async login(payload : LoginDto) {
         const user = await this.userRepository.findOne({where: {username: payload.username}})
         if(!user) {
             throw new Error('User not found')

@@ -1,15 +1,50 @@
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { SurveyDto } from '../interfaces/survey';
+import { SurveyService } from '../service/survey.service';
 
 @Component({
   selector: 'app-survey',
-  imports: [FormsModule , MatFormField ,  MatInputModule ,MatAutocompleteModule,ReactiveFormsModule ],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './survey.html',
   styleUrl: './survey.css',
 })
 export class Survey {
-    timeRangestoChoose = ['3 months', '6 months', '9 months', '1 year', '2 years'];
+    constructor(private readonly surveyService: SurveyService){}
+    timeRangestoChoose = [3, 6, 9, 12, 24];
+    abilityLevels = ['Beginner', 'Junior', 'Mid', 'Advanced'];
+
+    surveyModel: SurveyDto = {
+      id: 0,
+      userId: '',
+      Major: '',
+      YearOfStudy: 1,
+      PreferredInternshipType: '',
+      TimeLeft: 3,
+      Inrest: '',
+      Expierience: '',
+      skills: '',
+      AbilitiesLevel: 'Beginner',
+      SideProjectsHobby: '',
+      Strengths: '',
+      Weaknesses: '',
+      University: '',
+      GraduationYear: new Date().getFullYear(),
+    };
+
+    async onSubmit(): Promise<void> {
+        this.surveyModel.userId = localStorage.getItem('username') || '';
+        (await this.surveyService.postSurvey(this.surveyModel)).subscribe({
+            next: (response) => {
+                console.log('Survey submitted successfully', response);
+                alert('Ankieta została pomyślnie przesłana!');
+            },
+            error: (error) => {
+                console.error('Error submitting survey', error);
+                alert('Wystąpił błąd podczas przesyłania ankiety. Proszę spróbować ponownie.');
+            }
+        })
+        ;
+    }
 }

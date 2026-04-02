@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://api.carriersign.batko.it'
+    apiUrl: 'http://localhost:3000'
 };

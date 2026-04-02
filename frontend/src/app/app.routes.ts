@@ -5,6 +5,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { RoadmapComponent } from './roadmap-component/roadmap-component';
 import { Settings } from './pages/settings/settings';
 import { authGuard } from './guards/auth.guard';
+import { Survey } from './survey/survey';
 
 export const routes: Routes = [
 	{
@@ -12,7 +13,12 @@ export const routes: Routes = [
 		component: WelcomeScreen,
 		pathMatch: 'full',
 	},
+	{	
+		path: 'survey',
+		component : Survey,
+		canActivate : [authGuard]
 
+	},
 	{
 		// Zmiana aiapi -> ai/ask
 		path : 'ai/ask',

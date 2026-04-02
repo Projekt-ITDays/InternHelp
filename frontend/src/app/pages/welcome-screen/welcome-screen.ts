@@ -74,7 +74,7 @@ export class WelcomeScreen {
         });
         // placeholder - > używać jeżeli nie chcemy korzystać z logowania i autoryzacji
         // dalej tego używam btw
-        this.router.navigate(['/ai/ask']);
+        // this.router.navigate(['/ai/ask']);
 
         this.showError('Niepoprawny login lub hasło.');
       });
@@ -121,7 +121,7 @@ export class WelcomeScreen {
   }
 
   protected onRegisterClick(): void {
-    this.showError('Rejestracja będzie dostępna wkrótce.');
+    this.router.navigate(['/survey']);
   }
 
   protected onForgotPasswordClick(): void {
