@@ -16,7 +16,6 @@ export class Survey {
     abilityLevels = ['Beginner', 'Junior', 'Mid', 'Advanced'];
 
     surveyModel: SurveyDto = {
-      id: 0,
       userId: '',
       Major: '',
       YearOfStudy: 1,
