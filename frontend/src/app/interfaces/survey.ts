@@ -1,7 +1,6 @@
 export interface SurveyDto {
 
 
-    id: number;
     userId: string;
     Major: string;
     YearOfStudy: number;
