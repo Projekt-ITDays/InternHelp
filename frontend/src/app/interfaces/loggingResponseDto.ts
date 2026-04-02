@@ -2,6 +2,8 @@
 
 export interface LoggingResponseDto {
     accesstoken: string;
+    userId : string;
     username:string;
-    refreshToken: string;
+    role?: string;
+    refreshToken?: string;
 }

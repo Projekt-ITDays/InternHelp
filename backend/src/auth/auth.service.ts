@@ -49,9 +49,10 @@ export class AuthService {
             throw new Error('Invalid password')
         }
         const token = await this.generateToken(user.id)
-        
+        console.log(user.id)
         return {
             ...token,
+            userId : user.id,
             username: payload.username,
             role: user.role
         }

@@ -22,9 +22,10 @@ export class AuthService {
         const data = await firstValueFrom(
             this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
         );
-
+        
         this.setAccessToken(data.accesstoken);
         localStorage.setItem('username', data.username);
+        localStorage.setItem('userId', data.userId);
         this.isLogged =true;
         return data;
     }

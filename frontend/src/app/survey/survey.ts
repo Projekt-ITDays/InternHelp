@@ -33,7 +33,8 @@ export class Survey {
     };
 
     async onSubmit(): Promise<void> {
-        this.surveyModel.userId = localStorage.getItem('username') || '';
+        this.surveyModel.userId = localStorage.getItem('userId') || '';
+        console.log(this.surveyModel.userId);
         (await this.surveyService.postSurvey(this.surveyModel)).subscribe({
             next: (response) => {
                 console.log('Survey submitted successfully', response);

@@ -22,6 +22,7 @@ export class AuthController {
         res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax',maxAge: 3 * 24 * 60 * 60 * 1000 })
         return {
             accesstoken: resoult.accesstoken,
+            userId: resoult.userId,
             username: resoult.username,
             role: resoult.role
         }
