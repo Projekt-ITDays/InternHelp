@@ -64,7 +64,8 @@ export class WelcomeScreen {
     this.authService.login(LoginDto)
       .then(() => {
         // Zmiana aiapi -> ai/ask
-        this.router.navigate(['/ai/ask']);
+        // this.router.navigate(['/ai/ask']);
+        this.router.navigate(['/dashboard']);
       })
       .catch(() => {
         Swal.fire({

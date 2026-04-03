@@ -1,27 +1,310 @@
-<app-page-frame>
-	<app-plan-menu
-		frame-menu
-		[plans]="plans()"
-		[selectedPlanId]="selectedPlanId()"
-		currentPage="dashboard"
-		(createPlan)="onCreatePlan()"
-		(deletePlan)="onDeletePlan($event)"
-		(selectPlan)="onSelectPlan($event)"
-	/>
+<app-navbar></app-navbar>
 
-	@if (selectedPlanNumber !== null) {
-		<article frame-content class="surface-card">
-			<p class="plan-label">Wybrany plan</p>
-			<h2>Plan {{ selectedPlanNumber }}</h2>
-			<p>
-				To jest placeholder pod szczegoly planu. Kolejny krok to renderowanie zawartosci planu
-				na tej stronie.
-			</p>
-		</article>
-	} @else {
-		<article frame-content class="surface-card is-empty">
-			<h2>Brak planow</h2>
-			<p>Dodaj nowy plan z menu w prawym gornym rogu.</p>
-		</article>
-	}
-</app-page-frame>
+<main class="mx-auto max-w-[1600px] px-6 py-8">
+  <div class="flex flex-col gap-8 lg:flex-row">
+    <div class="flex flex-1 flex-col gap-8 lg:w-2/3">
+      <div class="flex flex-col gap-5 sm:flex-row">
+        <button id="btn-new-plan" (click)="navigateToNewPlan()" class="group relative flex items-center gap-3 overflow-hidden rounded-2xl
+                       bg-gradient-to-r from-[#c07a50] to-[#d9935f]
+                       px-8 py-5 font-semibold text-white shadow-lg
+                       transition-all hover:scale-[1.02] hover:shadow-xl active:scale-[0.98]
+                       sm:min-w-[260px]">
+          <ng-icon name="heroPlus" size="24" class="transition-transform group-hover:rotate-90" />
+          <span class="text-lg">Stwórz Nowy Plan</span>
+          <div
+            class="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/10 blur-2xl transition-opacity group-hover:opacity-60">
+          </div>
+        </button>
+
+        <div
+          class="flex flex-1 flex-col justify-center gap-3 rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-5 shadow-md">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-sm text-[#a0988c]">Mój Poziom Zaawansowania</span>
+              <div class="mt-0.5 text-lg font-bold text-[var(--ih-surface)]">
+                {{ levelLabel() }}
+                <span class="ml-1 text-[var(--ih-accent)]">(Lvl {{ level() }})</span>
+              </div>
+            </div>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
+              <ng-icon name="heroTrophy" size="24" class="text-[var(--ih-accent)]" />
+            </div>
+          </div>
+
+          <div class="relative h-3 overflow-hidden rounded-full bg-[#1a1713]">
+            <div
+              class="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#c07a50] to-[#e3a06a] transition-all duration-700"
+              [style.width.%]="levelProgress()">
+            </div>
+          </div>
+
+          <div class="flex justify-between text-xs text-[#a0988c]">
+            <span>{{ xpCurrent() | number }} XP</span>
+            <span>{{ xpMax() | number }} XP</span>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-bold text-[var(--ih-surface)]">Twoje Plany Rozwoju</h2>
+          <span class="text-sm text-[#a0988c]">{{ sourcePlans().length }} planów</span>
+        </div>
+
+        @if (plansLoading()) {
+        <div
+          class="flex items-center justify-center rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-10 shadow-md">
+          <div class="plan-loader"></div>
+          <span class="ml-4 text-sm text-[#a0988c]">Ładowanie planów…</span>
+        </div>
+        } @else if (sourcePlans().length === 0) {
+        <div
+          class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-10 text-center shadow-md">
+          <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#3e2f23]">
+            <ng-icon name="heroClipboardDocumentList" size="28" class="text-[var(--ih-accent)]" />
+          </div>
+          <p class="text-[#a0988c]">Nie masz jeszcze żadnych planów.</p>
+          <button (click)="navigateToNewPlan()"
+            class="flex items-center justify-center gap-1.5 rounded-xl border border-[var(--ih-accent)]/40 px-6 py-2 text-sm font-medium text-[var(--ih-accent)] transition-colors hover:bg-[var(--ih-accent)]/10">
+            <ng-icon name="heroPlus" size="16" />
+            Stwórz pierwszy plan
+          </button>
+        </div>
+        } @else {
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          @for (plan of visiblePlans(); track plan._id) {
+          <div
+            class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-5 shadow-md
+                      transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg"
+            (click)="openPlan(plan)">
+
+            <div class="mb-3 flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 rounded-full bg-[#3e2f23] px-3 py-1 text-xs font-medium text-[var(--ih-accent)]">
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--ih-accent)]"></span>
+                {{ plan.status || 'active' }}
+              </span>
+              <ng-icon name="heroChevronRight" size="16" class="text-[#a0988c]" />
+            </div>
+
+            <h3 class="mb-1 font-semibold text-[var(--ih-surface)]">{{ getPlanTitle(plan) }}</h3>
+            <p class="mb-3 line-clamp-2 text-xs text-[#a0988c]">
+              {{ plan.planData?.podsumowanie_profilu || 'Twój wygenerowany plan rozwoju' }}
+            </p>
+
+            <div class="mb-4 flex items-center gap-4 text-xs text-[#a0988c]">
+              <span class="flex items-center gap-1.5">
+                <ng-icon name="heroCalendar" size="14" class="text-[var(--ih-accent)]" />
+                {{ getPlanDate(plan) }}
+              </span>
+              <span class="flex items-center gap-1.5">
+                <ng-icon name="heroBookOpen" size="14" class="text-[var(--ih-accent)]" />
+                {{ plan.planData?.plan?.length || 0 }} etapów
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5">
+              @for (stage of plan.planData?.plan?.slice(0, 3); track $index) {
+              <span class="rounded-md bg-[#1a1713] px-2 py-0.5 text-[11px] text-[#a0988c]">
+                Etap {{ $index + 1 }}
+              </span>
+              }
+              @if ((plan.planData?.plan?.length || 0) > 3) {
+              <span class="rounded-md bg-[#1a1713] px-2 py-0.5 text-[11px] text-[var(--ih-accent)]">
+                +{{ (plan.planData?.plan?.length || 0) - 3 }}
+              </span>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        @if (!showAllPlans() && sourcePlans().length > 6) {
+        <button (click)="showMorePlans()"
+          class="mt-4 rounded-xl border border-[var(--ih-accent)]/40 px-6 py-2 text-sm font-medium text-[var(--ih-accent)] transition-colors hover:bg-[var(--ih-accent)]/10">
+          Pokaż więcej
+        </button>
+        }
+        }
+      </section>
+
+
+      <section class="rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-6 shadow-md">
+        <div class="mb-5 flex items-center gap-3">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
+            <ng-icon name="heroCube" size="20" class="text-[var(--ih-accent)]" />
+          </div>
+          <h2 class="text-lg font-bold text-[var(--ih-surface)]">Statystyki</h2>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <div class="rounded-xl bg-[#1a1713] p-4">
+            <div class="mb-1 text-2xl font-bold text-[var(--ih-accent)]">{{ plansGenerated() }}</div>
+            <div class="text-xs text-[#a0988c]">Wygenerowane plany</div>
+          </div>
+          <div class="rounded-xl bg-[#1a1713] p-4">
+            <div class="mb-1 text-2xl font-bold text-[var(--ih-accent)]">{{ level() }}</div>
+            <div class="text-xs text-[#a0988c]">Twój poziom</div>
+          </div>
+          <div class="rounded-xl bg-[#1a1713] p-4">
+            <div class="mb-1 text-2xl font-bold text-[var(--ih-accent)]">{{ xpCurrent() | number }}</div>
+            <div class="text-xs text-[#a0988c]">Zdobyte XP</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <aside class="flex flex-col gap-5 lg:w-[380px]">
+      <h2 class="text-xl font-bold text-[var(--ih-surface)]">Powiadomienia i Wskazówki AI</h2>
+
+      @for (notif of notifications(); track notif.id) {
+      <div
+        class="rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-5 shadow-md transition-all hover:border-[var(--ih-accent)]/25">
+        <div class="mb-2 flex items-center gap-3">
+
+          @if (notif.type === 'tip') {
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
+            <ng-icon name="heroLightBulb" size="20" class="text-[var(--ih-accent)]" />
+          </div>
+          }
+          @if (notif.type === 'info') {
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
+            <ng-icon name="heroInformationCircle" size="20" class="text-[var(--ih-accent)]" />
+          </div>
+          }
+          @if (notif.type === 'warning') {
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
+            <ng-icon name="heroExclamationTriangle" size="20" class="text-[var(--ih-accent)]" />
+          </div>
+          }
+
+          <h3 class="font-semibold text-[var(--ih-surface)]">{{ notif.title }}</h3>
+        </div>
+
+        <p class="pl-12 text-sm leading-relaxed text-[#a0988c]">{{ notif.message }}</p>
+      </div>
+      }
+    </aside>
+
+  </div>
+</main>
+
+
+@if (selectedPlan()) {
+<div class="plan-overlay" (click)="closePlan()">
+  <div class="plan-detail" (click)="$event.stopPropagation()">
+
+    <div class="flex items-start justify-between border-b border-[var(--ih-border-dark)] pb-4 mb-6">
+      <div>
+        <h2 class="text-xl font-bold text-[var(--ih-surface)]">{{ getPlanTitle(selectedPlan()!) }}</h2>
+        <p class="mt-1 text-sm text-[#a0988c]">{{ getPlanDate(selectedPlan()!) }} · {{
+          selectedPlan()!.planData?.szacowany_czas_tygodniowo }}</p>
+      </div>
+      <button (click)="closePlan()"
+        class="flex items-center justify-center text-[var(--ih-accent)] transition-colors hover:text-[var(--ih-accent-strong)]">
+        <ng-icon name="heroXMark" size="24" />
+      </button>
+    </div>
+
+    @if (selectedPlan()!.planData?.podsumowanie_profilu) {
+    <div class="mb-6 flex gap-3 rounded-xl bg-[#1a1713] p-4">
+      <ng-icon name="heroInformationCircle" size="18" class="mt-0.5 shrink-0 text-[var(--ih-accent)]" />
+      <p class="text-sm leading-relaxed text-[#a0988c]">{{ selectedPlan()!.planData.podsumowanie_profilu }}</p>
+    </div>
+    }
+
+    <div class="flex flex-col gap-6">
+      @for (stage of selectedPlan()!.planData?.plan; track $index) {
+      <div class="rounded-2xl border border-[var(--ih-border-dark)] bg-[#1a1713] p-5">
+        <div class="mb-4 flex items-start gap-4 border-b border-[var(--ih-border-dark)] pb-3">
+          <div
+            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ih-accent)] text-sm font-bold text-white">
+            {{ $index + 1 }}
+          </div>
+          <div class="flex-1">
+            <h3 class="font-semibold text-[var(--ih-surface)]">{{ stage.etap }}</h3>
+            <p class="mt-0.5 text-sm text-[#a0988c]">{{ stage.cel_glowny }}</p>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+            <ng-icon name="heroWrenchScrewdriver" size="14" class="text-[var(--ih-accent)]" />
+            Umiejętności
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            @for (skill of stage.umiejetnosci?.twarde; track $index) {
+            <span
+              class="inline-flex items-center rounded-md border border-[var(--ih-accent)]/25 bg-[var(--ih-accent)]/15 px-2 py-1 text-xs font-medium text-[var(--ih-accent)]">
+              {{ skill }}
+            </span>
+            }
+            @for (skill of stage.umiejetnosci?.miekkie; track $index) {
+            <span
+              class="inline-flex items-center rounded-md border border-[#648cb4]/20 bg-[#648cb4]/10 px-2 py-1 text-xs font-medium text-[#8ab4d6]">
+              {{ skill }}
+            </span>
+            }
+          </div>
+        </div>
+
+        @if (stage.zasoby_edukacyjne?.length) {
+        <div class="mt-4">
+          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+            <ng-icon name="heroAcademicCap" size="14" class="text-[var(--ih-accent)]" />
+            Zasoby edukacyjne
+          </div>
+          <ul class="flex flex-col gap-1.5 pl-0">
+            @for (res of stage.zasoby_edukacyjne; track $index) {
+            <li class="resource-item text-[13px] text-[#a0988c]">{{ res }}</li>
+            }
+          </ul>
+        </div>
+        }
+
+        @if (stage.projekt_portfolio) {
+        <div class="mt-4">
+          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+            <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]" />
+            Projekt portfolio
+          </div>
+          <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-3.5">
+            <h4 class="text-sm font-semibold text-[var(--ih-surface)]">{{ stage.projekt_portfolio.nazwa }}</h4>
+            <p class="mt-1 text-xs text-[#a0988c]">{{ stage.projekt_portfolio.opis }}</p>
+            @if (stage.projekt_portfolio.kryteria_akceptacji?.length) {
+            <div class="mt-2 flex flex-col gap-1">
+              @for (criteria of stage.projekt_portfolio.kryteria_akceptacji; track $index) {
+              <div class="flex items-start gap-2 text-xs text-[#a0988c]">
+                <ng-icon name="heroCheck" size="12" class="mt-0.5 shrink-0 text-[var(--ih-accent)]" />
+                <span>{{ criteria }}</span>
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </div>
+        }
+
+        @if (stage.wskazniki_sukcesu_kpi?.length) {
+        <div class="mt-4">
+          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+            <ng-icon name="heroClipboardDocumentList" size="14" class="text-[var(--ih-accent)]" />
+            Wskaźniki sukcesu / Zadania
+          </div>
+          <div class="flex flex-col gap-2">
+            @for (kpi of stage.wskazniki_sukcesu_kpi; track $index) {
+            <div class="flex items-start gap-2.5">
+              <div class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--ih-accent)]"></div>
+              <span class="text-sm text-[var(--ih-surface)]">{{ kpi }}</span>
+            </div>
+            }
+          </div>
+        </div>
+        }
+
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
