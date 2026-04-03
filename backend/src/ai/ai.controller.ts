@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Sse, Query, MessageEvent, Req } from '@nestjs/common'; 
+import { Controller, Post, Body, Sse, Query, MessageEvent, Req, Get, UseGuards } from '@nestjs/common'; 
+import { AuthGuard } from 'src/guards/auth.guard';
 import { AiService } from './ai.service';
 import { map, Observable } from 'rxjs';
 import { SurveyDto } from 'src/dto/survey.dto';
@@ -33,6 +34,13 @@ export class AiController {
     const userprompt = data.prompt; 
     return this.aiAgentService.getAgentResponse(userId, userprompt);
   }
+
+  @UseGuards(AuthGuard)
+  @Get('plans')
+  async getUserPlans(@Req() req: Request & { user: { sub: string } }) {
+    return this.aiAgentService.getUserPlans(req.user.sub);
+  }
+
   //stary approach
   //@Post('ask') 
   //async askGemini(@Body('prompt') prompt: string) {

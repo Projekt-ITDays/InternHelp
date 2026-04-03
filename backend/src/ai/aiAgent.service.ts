@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import {ChatGoogle} from "@langchain/google";
-import { createAgent, tool, ToolRuntime } from "langchain";
-import { z } from "zod";    
+import { ChatGoogle } from "@langchain/google";
+import { createReactAgent } from "@langchain/langgraph/prebuilt";
+import { tool, ToolRuntime } from "langchain";
+import { z } from "zod";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SurveysEntity } from "src/entities/Surveys.entity";
 import { Repository } from "typeorm";
@@ -11,23 +12,22 @@ import { Model } from "mongoose";
 @Injectable()
 export class AiAgentService {
     constructor(
-        @InjectRepository(SurveysEntity) private surveysRepository : Repository<SurveysEntity>,
-        @InjectModel("AgentResponse") private agentResponseModel: Model<AgentResponse>  ,
-    ) {}
+        @InjectRepository(SurveysEntity) private surveysRepository: Repository<SurveysEntity>,
+        @InjectModel("AgentResponse") private agentResponseModel: Model<AgentResponse>,
+    ) { }
 
 
     model = new ChatGoogle('gemini-2.5-flash-lite')
     prompt = `Jesteś elitarnym Architektem Kariery i Mentorem Technologicznym. Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
 
 ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
-1) Zawsze najpierw pobieraj userId z kontekstu narzędzia "get_user_id". Nigdy nie zakładaj ani nie zgaduj userId.
-2) Następnie użyj pobranego userId do wywołania następujących narzędzi:
+1) Użyj ID użytkownika przekazanego na końcu tego promptu, aby wywołać WSZYSTKIE poniższe narzędzia i zebrać o nim pełne informacje:
    - get_education({ userId })
    - get_experience({ userId })
    - get_intrest({ userId })
    - get_goal({ userId })
-3) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
-4) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user". Nie halucynuj danych o użytkowniku.
+2) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
+3) Nie halucynuj danych o użytkowniku. Zawsze opieraj się na wynikach z narzędzi.
 
 WYTYCZNE DLA TWORZENIA PLANU (Jeśli użytkownik prosi o plan/roadmapę):
 - Zwróć wynik WYŁĄCZNIE jako poprawny obiekt JSON, bez żadnego dodatkowego tekstu przed lub po.
@@ -95,22 +95,22 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
                 return "Brak danych o doświadczeniu dla tego użytkownika.";
             }
             const experience = surveyData.Expierience;
-            
+
             return `Doświadczenie użytkownika: ${experience}.`;
-        },{
-            name: "get_experience",
-            description: "Zwraca informacje o doświadczeniu użytkownika.",
-            schema: z.object({
-                userId: z.string().uuid().describe("Id użytkownika (UUID)"),
-            }),
-        }
+        }, {
+        name: "get_experience",
+        description: "Zwraca informacje o doświadczeniu użytkownika.",
+        schema: z.object({
+            userId: z.string().uuid().describe("Id użytkownika (UUID)"),
+        }),
+    }
     );
     getInterestTool = tool(
-        async ({userId}, config  : ToolRuntime) =>{
+        async ({ userId }, config: ToolRuntime) => {
             const writer = config.writer;
             const surveyData = await this.surveysRepository.findOne({ where: { userId } });
-            if(writer) {
-                writer( `Pobieranie danych o zainteresowaniach użytkownika o id ${userId}...`);
+            if (writer) {
+                writer(`Pobieranie danych o zainteresowaniach użytkownika o id ${userId}...`);
             }
             if (!surveyData) {
                 return "Brak danych o zainteresowaniach dla tego użytkownika.";
@@ -130,14 +130,14 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
 
     )
     getGoalTool = tool(
-        async ({userId}) =>{
+        async ({ userId }) => {
             const surveyData = await this.surveysRepository.findOne({ where: { userId } });
             if (!surveyData) {
                 return "Brak danych o celach zawodowych dla tego użytkownika.";
             }
             const goal = surveyData.PreferredInternshipType;
             return `Cele zawodowe użytkownika: ${goal}.`;
-        },  
+        },
         {
             name: "get_goal",
             description: "Zwraca informacje o celach zawodowych użytkownika.",
@@ -147,42 +147,75 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         }
     )
     async getAgentResponse(userId: string, userPrompt: string) {
-            const getUserID = tool(
-            (_, config) => {
-                return config.context.userId
-            },
-            {
-                name: "get_user_id",
-                description: "Get the user's ID.",
-                schema: z.object({}),
-            }
-        );
-            const contextSchema = z.object({
-            userId: z.string(),
+        const agent = createReactAgent({
+            llm: this.model,
+            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool],
+            stateModifier: `${this.prompt}\n\n=================\nID AKTUALNEGO UŻYTKOWNIKA TO: ${userId}. Użyj tego ID jako parametru userId wywołując wszystkie cztery narzędzia przed zredagowaniem odpowiedzi.\n=================`,
         });
 
-        const agent = createAgent({
-            model: this.model,
-            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool,getUserID],
-            systemPrompt: this.prompt,
-            contextSchema,
-        });
-        
-        
+
         const result = await agent.invoke(
-                        {
-                                messages: [{ role: "user", content: userPrompt }]
-                        },
-                        {
-                                context: { userId },
-                        },
-                );
-        
-        return result;
+            {
+                messages: [{ role: "user", content: userPrompt }]
+            }
+        );
+        return await this.extractAndSavePlan(userId, result);
     }
 
     getTools() {
-        return [this.getEducationTool,this.getExperienceTool , this.getInterestTool , this.getGoalTool];
+        return [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool];
+    }
+
+    async extractAndSavePlan(userId: string, response: any) {
+        try {
+            const messages = response.messages;
+            const lastMessage = messages[messages.length - 1];
+
+            let rawContent = "";
+            if (typeof lastMessage.content === 'string') {
+                rawContent = lastMessage.content;
+            } else if (Array.isArray(lastMessage.content)) {
+                const textBlock = lastMessage.content.find((c: any) => typeof c === 'string' || c.type === 'text');
+                rawContent = typeof textBlock === 'string' ? textBlock : (textBlock?.text || "");
+            }
+
+            const firstBrace = rawContent.indexOf('{');
+            const lastBrace = rawContent.lastIndexOf('}');
+
+            if (firstBrace === -1 || lastBrace === -1) {
+                console.log(`Agent zwrócił odpowiedź tekstową: "${rawContent.substring(0, 100)}..."`);
+                return { message: rawContent.trim() };
+            }
+
+            const cleanJsonString = rawContent.substring(firstBrace, lastBrace + 1);
+            let planObject;
+            try {
+                planObject = JSON.parse(cleanJsonString);
+            } catch (e) {
+                console.log(`Agent zwrócił uszkodzony JSON (nie udało się sparsować).`);
+                return { message: rawContent.trim() };
+            }
+
+            if (planObject.plan && Array.isArray(planObject.plan)) {
+                const newSavedPlan = new this.agentResponseModel({
+                    userId: userId,
+                    status: 'active',
+                    planData: planObject,
+                    fullHistory: response
+                });
+                await newSavedPlan.save();
+                console.log(`Zapisano plan dla użytkownika ${userId}`);
+            }
+
+            return planObject;
+        } catch (error) {
+            console.error("Błąd parsowania lub zapisu planu z AI:", error);
+            throw new Error("Nie udało się rozkodować odpowiedzi agenta do bazy.");
+        }
+    }
+
+    async getUserPlans(userId: string) {
+        return await this.agentResponseModel.find({ userId: userId }).sort({ createdAt: -1 }).exec();
     }
 
 
