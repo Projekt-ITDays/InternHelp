@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import {ChatGoogle} from "@langchain/google";
-import { createAgent, tool, ToolRuntime } from "langchain";
+import { createAgent, SystemMessage, tool, ToolRuntime } from "langchain";
 import { z } from "zod";    
 import { InjectRepository } from "@nestjs/typeorm";
 import { SurveysEntity } from "src/entities/Surveys.entity";
@@ -9,8 +9,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { AgentResponse } from "src/entities/AgentResposne.schema";
 import { Model } from "mongoose";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
-import {  GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 
 
 @Injectable()
@@ -23,15 +21,12 @@ export class AiAgentService {
 
     model = new ChatGoogle('gemini-2.5-flash-lite')
     private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    private embeddingModel = new GoogleGenerativeAIEmbeddings(
-        {
-            model: "models/gemini-embedding-001",
-        }
-    )
-    private vectorstore = new MemoryVectorStore(this.embeddingModel);
+    private embeddingModel = this.genAI.getGenerativeModel({
+        model: "models/gemini-embedding-001",
+    });
 
 
-    prompt = `Jesteś elitarnym Architektem Kariery i Mentorem Technologicznym. Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
+    prompt = new SystemMessage(`Jesteś elitarnym Architektem Kariery i Mentorem Technologicznym. Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
 
 ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
 1) Zawsze najpierw pobieraj userId z kontekstu narzędzia "get_user_id". Nigdy nie zakładaj ani nie zgaduj userId.
@@ -40,7 +35,7 @@ ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
    - get_experience({ userId })
    - get_intrest({ userId })
    - get_goal({ userId })
-    - get_knowledge_base({ userId, query })
+    - retrieve({ query })
 3) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
 4) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user". Nie halucynuj danych o użytkowniku.
 
@@ -83,7 +78,7 @@ WYMAGANA STRUKTURA JSON DLA PLANU:
 ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imię?"):
 - Odpowiedz naturalnym językiem (nie JSON-em), krótko, zwięźle i wyłącznie na podstawie danych pobranych z narzędzi.
 - Jeśli nie masz danych, aby odpowiedzieć na pytanie, przyznaj to wprost.
-`
+`)
     getEducationTool = tool(
         async ({ userId }) => {
             const surveyData = await this.surveysRepository.findOne({ where: { userId } });
@@ -174,15 +169,24 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         );
             const contextSchema = z.object({
             userId: z.string(),
-        });
+        }); 
 
         const agent = createAgent({
             model: this.model,
-            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool,getUserID],
+            tools: [this.retrive,this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool,getUserID],
             systemPrompt: this.prompt,
             contextSchema,
         });
-        
+        let agentInputs = { messages: [{ role: "user", content: userPrompt }] };
+        const stream = await agent.stream(agentInputs ,
+            {
+                streamMode : "values",
+                context: { userId },
+            }
+        )
+        for await (const chunk of stream) {
+            console.log("Otrzymano chunk z agenta:", chunk);
+        }
         
         const result = await agent.invoke(
                         {
@@ -200,7 +204,116 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         return [this.getEducationTool,this.getExperienceTool , this.getInterestTool , this.getGoalTool];
     }
 
-    retrieve(){
-        
+    private async createEmbedding(query: string): Promise<number[]> {
+        const result = await this.embeddingModel.embedContent(query);
+        return result.embedding.values;
     }
+
+    private extractText(doc: Record<string, unknown>): string {
+        const content = doc.content ?? doc.text ?? doc.chunk ?? doc.pageContent ?? doc.response;
+        if (typeof content === "string" && content.trim().length > 0) {
+            return content;
+        }
+        return JSON.stringify(doc);
+    }
+
+    private getRagCollectionName(): string {
+        return process.env.SCRAPED_DATA_COLLECTION || this.agentResponseModel.collection.name;
+    }
+
+    
+        private retriveSchema = z.object({
+            query : z.string().describe("Zapytanie do bazy wiedzy"),
+        })
+         retrive = tool(
+            async ({query}, _config : ToolRuntime) => {
+
+                const collectionName = this.getRagCollectionName();
+                const collection = this.agentResponseModel.db.collection(collectionName);
+
+                const vectorField = process.env.MONGO_VECTOR_FIELD || "embedding";
+                const vectorIndexName = process.env.MONGO_VECTOR_INDEX || "vector_index";
+
+                try {
+                    const queryVector = await this.createEmbedding(query);
+
+                    const vectorResults = await collection.aggregate([
+                        {
+                            $vectorSearch: {
+                                index: vectorIndexName,
+                                path: vectorField,
+                                queryVector,
+                                numCandidates: 80,
+                                limit: 5,
+                            },
+                        },
+                        {
+                            $project: {
+                                _id: 0,
+                                source: 1,
+                                title: 1,
+                                url: 1,
+                                content: 1,
+                                text: 1,
+                                chunk: 1,
+                                pageContent: 1,
+                                response: 1,
+                                score: { $meta: "vectorSearchScore" },
+                            },
+                        },
+                    ]).toArray();
+
+                    if (vectorResults.length > 0) {
+                        const serialized = vectorResults
+                            .map((doc, idx) => {
+                                const source = typeof doc.source === "string" ? doc.source : "unknown";
+                                const score = typeof doc.score === "number" ? doc.score.toFixed(4) : "n/a";
+                                const text = this.extractText(doc as Record<string, unknown>);
+                                return `Fragment ${idx + 1} | source=${source} | score=${score}\n${text}`;
+                            })
+                            .join("\n\n");
+
+                        return [serialized, vectorResults];
+                    }
+                } catch {
+                    // fallback na regex, np. gdy brak Mongo Atlas Vector Search
+                }
+
+                const regexResults = await collection.find({
+                    $or: [
+                        { content: { $regex: query, $options: "i" } },
+                        { text: { $regex: query, $options: "i" } },
+                        { chunk: { $regex: query, $options: "i" } },
+                        { pageContent: { $regex: query, $options: "i" } },
+                        { response: { $regex: query, $options: "i" } },
+                    ],
+                }).limit(5).toArray();
+
+                if (regexResults.length > 0) {
+                    const serialized = regexResults
+                        .map((doc, idx) => `Fragment ${idx + 1} | fallback=regex\n${this.extractText(doc as Record<string, unknown>)}`)
+                        .join("\n\n");
+
+                    return [serialized, regexResults];
+                }
+
+                const latestResults = await collection.find({}).sort({ _id: -1 }).limit(3).toArray();
+                if (latestResults.length > 0) {
+                    const serialized = latestResults
+                        .map((doc, idx) => `Najnowszy fragment ${idx + 1}\n${this.extractText(doc as Record<string, unknown>)}`)
+                        .join("\n\n");
+
+                    return [serialized, latestResults];
+                }
+
+                return [`Brak danych RAG w kolekcji ${collectionName}.`, []];
+            },
+             {
+            name: "retrieve",
+            description: "Pobiera kontekst RAG z MongoDB dla zapytania (globalna baza wiedzy).",
+            schema: this.retriveSchema,
+            responseFormat: "content_and_artifact",
+  }
+        )
+    
 }
