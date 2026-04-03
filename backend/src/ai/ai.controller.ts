@@ -24,7 +24,7 @@ export class AiController {
   @Post('survey')
   async submitSurvey(@Body() surveyData : SurveyDto) {
     console.log('Received survey data:', surveyData);
-      this.aiService.sendSurveyData(surveyData);
+      this.aiService.sendSurveyData(surveyData);  
       return { message: 'Survey data received' };
   }
   @Post('survey-results')
