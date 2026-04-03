@@ -5,6 +5,7 @@ export interface SavedRoadmap {
   roadmapContent: string;
   gridCells: any[];
   timestamp: number;
+  currentLevel: number;
 }
 
 @Injectable({

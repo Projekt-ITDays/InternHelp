@@ -20,21 +20,50 @@
 
         <div class="roadmap-box">
           <div class="markdown-body" [innerHTML]="parsedRoadmapContent"></div>
-          <span class="cursor" *ngIf="isGenerating" style="display:inline-block; margin-top: 10px;">▌ Generowanie...</span>
+          <span class="cursor" *ngIf="isGenerating" style="display:inline-block; margin-top: 10px;">▌
+            Generowanie...</span>
         </div>
       </div>
     </div>
 
-    <!-- Full Screen Hexagonal Grid -->
     <div class="honeycomb-container" (mousedown)="onMouseDown($event)" [class.dragging]="isDragging">
       <ul class="honeycomb" [style.transform]="'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px)'">
-        <li class="honeycomb-cell" *ngFor="let cell of gridCells" [ngClass]="{'empty-cell': cell.empty}">
-          <div class="honeycomb-content" *ngIf="!cell.empty">
+        <li class="honeycomb-cell" *ngFor="let cell of gridCells; let i = index" [ngClass]="{'empty-cell': cell.empty}">
+          <div class="honeycomb-content" 
+               *ngIf="!cell.empty" 
+               (click)="openCellModal(cell)" 
+               [class.skeleton-loader]="cell.data.loading"
+               [class.is-completed]="cell.data.completed">
             <span class="cell-title">{{ cell.data.title }}</span>
-            <span class="cell-desc">{{ cell.data.description }}</span>
+            
+            <!-- Przycisk ukończenia -->
+            <button class="btn-complete" 
+                    *ngIf="!cell.data.completed && !cell.data.loading" 
+                    (click)="onCompleteTask(i, $event)">
+              Ukończ
+            </button>
+
+            <!-- Ikona ukończenia -->
+            <div class="complete-badge" *ngIf="cell.data.completed">
+              <span class="check-mark">✔</span>
+            </div>
           </div>
         </li>
       </ul>
     </div>
   </main>
+
+
+  <div class="difficulty-overlay" *ngIf="selectedCell" (click)="closeCellModal()">
+    <div class="difficulty-modal" (click)="$event.stopPropagation()">
+      <h3>{{ selectedCell.data.title }}</h3>
+      <p>{{ selectedCell.data.description }}</p>
+      <div class="difficulty-actions">
+        <button class="btn-diff easy" (click)="onDifficultyClick('Łatwy')">Łatwy</button>
+        <button class="btn-diff medium" (click)="onDifficultyClick('Średni')">Średni</button>
+        <button class="btn-diff hard" (click)="onDifficultyClick('Trudny')">Trudny</button>
+      </div>
+      <button class="btn-close" (click)="closeCellModal()">Zamknij</button>
+    </div>
+  </div>
 </div>

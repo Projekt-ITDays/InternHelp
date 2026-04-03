@@ -192,6 +192,14 @@
   cursor: pointer;
 }
 
+.honeycomb-cell.empty-cell {
+  cursor: default;
+}
+
+.honeycomb-cell .skeleton-loader {
+  cursor: wait;
+}
+
 /* 9-8-9-8 Pattern. Total cycle = 17 elements */
 .honeycomb-cell:nth-child(17n+10) {
   margin-left: 85px; /* offset for interlocking pattern */
@@ -239,24 +247,140 @@
   transition: 0.3s;
 }
 
-.cell-desc {
-  font-size: 12px;
+.cell-title {
+  font-weight: 700;
   text-align: center;
-  color: rgba(255,255,255,0.85);
-  padding: 0 16px;
-  opacity: 0; 
-  max-height: 0;
-  transform: translateY(10px);
-  transition: all 0.3s;
+  font-size: 15px;
+  padding: 0 10px;
+  transition: 0.3s;
 }
 
-/* Show details on hover */
-.honeycomb-cell:hover .cell-desc {
-  opacity: 1;
-  max-height: 100px;
-  transform: translateY(0);
-}
+/* Show details on hover - now only slightly scaling title or glow */
 .honeycomb-cell:hover .cell-title {
-  transform: translateY(-5px);
+  transform: scale(1.05);
+}
+
+/* --- BUTTONS & BADGES --- */
+.btn-complete {
+  margin-top: 10px;
+  padding: 5px 12px;
+  background: var(--ih-accent-strong, #df7339);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  z-index: 5;
+}
+
+.btn-complete:hover {
+  transform: scale(1.08);
+  background: #ff8c42;
+}
+
+.complete-badge {
+  margin-top: 8px;
+  width: 24px;
+  height: 24px;
+  background: #4caf50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
+
+.check-mark {
+  color: white;
+  font-size: 12px;
+}
+
+/* Successfully completed state for hexagon content */
+.honeycomb-content.is-completed {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), transparent);
+}
+.honeycomb-cell:has(.is-completed) {
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Skeletons */
+.skeleton-loader {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.2; }
+  100% { opacity: 0.6; }
+}
+
+/* Modal Overlay */
+.difficulty-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.difficulty-modal {
+  background: var(--ih-bg, #111);
+  border: 1px solid var(--ih-accent-strong, #df7339);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(223, 115, 57, 0.2);
+}
+
+.difficulty-modal h3 {
+  color: var(--ih-accent-strong, #df7339);
+  margin-top: 0;
+}
+
+.difficulty-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.btn-diff {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-diff:hover {
+  transform: scale(1.05);
+}
+
+.btn-diff.easy { background: #2e7d32; color: #fff; }
+.btn-diff.medium { background: #f57c00; color: #fff; }
+.btn-diff.hard { background: #c62828; color: #fff; }
+
+.btn-close {
+  background: transparent;
+  color: #888;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+.btn-close:hover {
+  color: #fff;
+  border-color: #888;
 }
 

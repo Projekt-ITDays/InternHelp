@@ -10,7 +10,7 @@ import googleOauthConfig from './config/google-oauth.config';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  
+
   controllers: [AuthController],
   providers: [
     AuthService,
@@ -18,7 +18,7 @@ import { PassportModule } from '@nestjs/passport';
     { provide: getRepositoryToken(userEntity), useValue: {} },
     { provide: getRepositoryToken(refeshTokenEntity), useValue: {} }
   ],
-  imports: [PassportModule.register({ session: false }),/*TypeOrmModule.forFeature([userEntity, refeshTokenEntity]),*/ConfigModule.forFeature(googleOauthConfig) ,
- ],
+  imports: [PassportModule.register({ session: false }),/*TypeOrmModule.forFeature([userEntity, refeshTokenEntity]),*/ConfigModule.forFeature(googleOauthConfig),
+  ],
 })
-export class AuthModule {}
+export class AuthModule { }
