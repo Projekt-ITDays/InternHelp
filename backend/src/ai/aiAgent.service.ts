@@ -9,6 +9,11 @@ import { Repository } from "typeorm";
 import { InjectModel } from "@nestjs/mongoose";
 import { AgentResponse } from "src/entities/AgentResposne.schema";
 import { Model } from "mongoose";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
+import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+
+
 @Injectable()
 export class AiAgentService {
     constructor(
@@ -18,6 +23,15 @@ export class AiAgentService {
 
 
     model = new ChatGoogle('gemini-2.5-flash-lite')
+    private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    private embeddingModel = new GoogleGenerativeAIEmbeddings(
+        {
+            model: "models/gemini-embedding-001",
+        }
+    )
+    private vectorstore = new MemoryVectorStore(this.embeddingModel);
+
+
     prompt = `Jesteś elitarnym Architektem Kariery i Mentorem Technologicznym. Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
 
 ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
@@ -26,8 +40,9 @@ ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
    - get_experience({ userId })
    - get_intrest({ userId })
    - get_goal({ userId })
-2) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
-3) Nie halucynuj danych o użytkowniku. Zawsze opieraj się na wynikach z narzędzi.
+    - get_knowledge_base({ userId, query })
+3) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
+4) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user". Nie halucynuj danych o użytkowniku.
 
 WYTYCZNE DLA TWORZENIA PLANU (Jeśli użytkownik prosi o plan/roadmapę):
 - Zwróć wynik WYŁĄCZNIE jako poprawny obiekt JSON, bez żadnego dodatkowego tekstu przed lub po.
@@ -218,5 +233,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         return await this.agentResponseModel.find({ userId: userId }).sort({ createdAt: -1 }).exec();
     }
 
+    retrieve() {
 
+    }
 }

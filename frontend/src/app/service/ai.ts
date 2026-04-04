@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -19,6 +19,19 @@ export class Ai {
   // Post
   askGemini(prompt: string): Observable<{ answer: any }> {
     return this.http.post<{ answer: any }>(this.apiUrl, { prompt });
+  }
+
+  // Pobieranie konceptów JSON z uwzględnieniem poziomu i wykluczeń
+  getHexagonConcepts(careerPath: string, level: number = 1, exclude: string[] = []): Observable<{ concepts: { title: string, description: string }[] }> {
+    let params = new HttpParams()
+      .set('careerPath', careerPath)
+      .set('level', level.toString());
+
+    exclude.forEach(topic => {
+      params = params.append('exclude', topic);
+    });
+
+    return this.http.get<{ concepts: { title: string, description: string }[] }>(`${environment.apiUrl}/ai/roadmap-concepts`, { params });
   }
 
   // Strumień SSE

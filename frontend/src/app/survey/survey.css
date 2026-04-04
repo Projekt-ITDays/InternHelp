@@ -1,0 +1,129 @@
+:host {
+	display: block;
+}
+
+.survey-shell {
+	min-height: 100vh;
+	padding: 1.1rem;
+	background:
+		radial-gradient(circle at 12% 20%, rgba(217, 119, 66, 0.16), transparent 34%),
+		var(--ih-bg);
+	color: var(--ih-surface);
+}
+
+.survey-card {
+	max-width: 980px;
+	margin: 0 auto;
+	border: 1px solid var(--ih-border-dark);
+	border-radius: var(--ih-radius-lg);
+	background: rgba(26, 23, 19, 0.86);
+	box-shadow: var(--ih-shadow-md);
+	padding: 1.15rem;
+}
+
+.survey-header {
+	margin-bottom: 1rem;
+}
+
+.survey-kicker {
+	margin: 0;
+	text-transform: uppercase;
+	letter-spacing: 0.11em;
+	font-size: 0.72rem;
+	color: #ffd7c2;
+}
+
+.survey-header h1 {
+	margin: 0.4rem 0 0.55rem;
+	font-size: clamp(1.5rem, 3.5vw, 2rem);
+	font-weight: 600;
+}
+
+.survey-header p {
+	margin: 0;
+	color: var(--ih-surface-soft);
+	line-height: 1.5;
+}
+
+.survey-form {
+	display: grid;
+	gap: 0.95rem;
+}
+
+.form-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.8rem;
+}
+
+.form-group {
+	display: grid;
+	gap: 0.36rem;
+}
+
+.form-group span {
+	font-size: 0.8rem;
+	color: rgba(243, 239, 230, 0.9);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+	width: 100%;
+	border: 1px solid var(--ih-border-dark);
+	border-radius: 12px;
+	background: rgba(243, 239, 230, 0.06);
+	color: var(--ih-surface);
+	padding: 0.68rem 0.72rem;
+	outline: none;
+	transition: border-color 160ms ease, background 160ms ease, box-shadow 180ms ease;
+}
+
+.form-group textarea {
+	resize: vertical;
+	min-height: 92px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+	border-color: rgba(217, 119, 66, 0.62);
+	box-shadow: 0 0 0 3px rgba(217, 119, 66, 0.2);
+	background: rgba(243, 239, 230, 0.08);
+}
+
+.full-width {
+	grid-column: 1 / -1;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.actions button {
+	border: 1px solid transparent;
+	background: linear-gradient(180deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
+	color: #fff;
+	border-radius: 12px;
+	padding: 0.72rem 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: transform 140ms ease, filter 180ms ease, opacity 180ms ease;
+}
+
+.actions button:hover:not(:disabled) {
+	transform: translateY(-1px);
+	filter: brightness(1.04);
+}
+
+.actions button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+@media (max-width: 860px) {
+	.form-grid {
+		grid-template-columns: 1fr;
+	}
+}

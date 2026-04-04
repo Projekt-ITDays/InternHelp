@@ -1,21 +1,18 @@
+export interface SurveyDto {
 
 
-// to dla ciebie Krzysiu to msaz jak moze wygaldac ta aniekta moj pomsyl mozesz poprawic oczywscie 
-
-export interface Survey {
-    id : number;
-
-    age : number;
-
-    Education : string;
-    WhenWantToStartToWork : string;
-    WhatIsYourExperience : string;
-    Abilitties : string[];
-    FieldOfIntrest : string; 
-    Major :string;
-    Location : string;
-    University : string;
-    Languages : string;
-
-
+    userId: string;
+    Major: string;
+    YearOfStudy: number;
+    PreferredInternshipType: string;
+    TimeLeft: number;
+    Inrest: string;
+    Expierience: string;
+    skills: string;
+    AbilitiesLevel: string;
+    SideProjectsHobby: string;
+    Strengths: string;
+    Weaknesses: string;
+    University: string;
+    GraduationYear: number;
 }
