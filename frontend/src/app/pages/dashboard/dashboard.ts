@@ -29,7 +29,6 @@ import {
 import { ExperienceService } from '../../service/experience.service';
 import { Ai } from '../../service/ai';
 import { Navbar } from '../../layout/navbar/navbar';
-import { NotificationService } from '../../service/notification.service';
 
 // ── Interfaces ──
 
@@ -98,9 +97,6 @@ interface UserPlan {
   ],
 })
 export class Dashboard implements OnInit {
-
-  private notificationService = inject(NotificationService);
-  notifications = this.notificationService.notifications;
 
   constructor(
     private router: Router,

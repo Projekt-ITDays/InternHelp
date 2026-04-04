@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 
 <main class="mx-auto max-w-[1600px] px-6 py-8">
-  <div class="flex flex-col gap-8 lg:flex-row">
-    <div class="flex flex-1 flex-col gap-8 lg:w-2/3">
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8">
       <div class="flex flex-col gap-5 sm:flex-row">
         <button id="btn-new-plan" (click)="navigateToNewPlan()" class="group relative flex items-center gap-3 overflow-hidden rounded-2xl
                        bg-gradient-to-r from-[#c07a50] to-[#d9935f]
@@ -152,40 +152,6 @@
         </div>
       </section>
     </div>
-
-
-    <aside class="flex flex-col gap-5 lg:w-[380px]">
-      <h2 class="text-xl font-bold text-[var(--ih-surface)]">Powiadomienia i Wskazówki AI</h2>
-
-      @for (notif of notifications(); track notif.id) {
-      <div
-        class="rounded-2xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-5 shadow-md transition-all hover:border-[var(--ih-accent)]/25">
-        <div class="mb-2 flex items-center gap-3">
-
-          @if (notif.type === 'tip') {
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
-            <ng-icon name="heroLightBulb" size="20" class="text-[var(--ih-accent)]" />
-          </div>
-          }
-          @if (notif.type === 'info') {
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
-            <ng-icon name="heroInformationCircle" size="20" class="text-[var(--ih-accent)]" />
-          </div>
-          }
-          @if (notif.type === 'warning') {
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3e2f23]">
-            <ng-icon name="heroExclamationTriangle" size="20" class="text-[var(--ih-accent)]" />
-          </div>
-          }
-
-          <h3 class="font-semibold text-[var(--ih-surface)]">{{ notif.title }}</h3>
-        </div>
-
-        <p class="pl-12 text-sm leading-relaxed text-[#a0988c]">{{ notif.message }}</p>
-      </div>
-      }
-    </aside>
-
   </div>
 </main>
 
