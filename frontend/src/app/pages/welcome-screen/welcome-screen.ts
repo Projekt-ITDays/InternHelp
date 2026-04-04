@@ -121,7 +121,7 @@ export class WelcomeScreen {
   }
 
   protected onRegisterClick(): void {
-    this.showError('Rejestracja będzie dostępna wkrótce.');
+
   }
 
   protected onForgotPasswordClick(): void {

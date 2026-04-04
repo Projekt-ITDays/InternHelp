@@ -10,18 +10,23 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
     private readonly apiUrl = `${environment.apiUrl}/auth`;
+    // private readonly apiUrl = `${environment.apiUrl}/auth`;
     constructor(
         private readonly http: HttpClient
     ) { }
 
     private accesToken: string | null = null;
+    private isLogged : boolean | null = null;
     async login(payload: LoggingDto): Promise<LoggingResponseDto> {
+        
         const data = await firstValueFrom(
             this.http.post<LoggingResponseDto>(`${this.apiUrl}/login`, payload, { withCredentials: true })
         );
-
+        
         this.setAccessToken(data.accesstoken);
         localStorage.setItem('username', data.username);
+        localStorage.setItem('userId', data.userId);
+        this.isLogged =true;
         return data;
     }
 
@@ -50,6 +55,7 @@ export class AuthService {
 
     setAccessToken(token: string) {
         this.accesToken = token;
+        this.isLogged = true;
     }
 
     getAccessToken() {
@@ -58,5 +64,11 @@ export class AuthService {
 
     clearAccessToken() {
         this.accesToken = null;
+    }
+    isLoggedIn(): boolean {
+        if (this.isLogged === null) {
+            return false;
+        }
+        return true;
     }
 }
