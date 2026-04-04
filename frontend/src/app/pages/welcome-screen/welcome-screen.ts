@@ -121,7 +121,7 @@ export class WelcomeScreen {
   }
 
   protected onRegisterClick(): void {
-    this.router.navigate(['/survey']);
+
   }
 
   protected onForgotPasswordClick(): void {
