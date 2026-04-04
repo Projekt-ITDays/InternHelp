@@ -3,6 +3,7 @@ import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
 import { PromptComponent } from './prompt-component/prompt-component';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { RoadmapComponent } from './roadmap-component/roadmap-component';
+import { RoadmapListComponent } from './pages/roadmap-list/roadmap-list';
 import { Settings } from './pages/settings/settings';
 import { authGuard } from './guards/auth.guard';
 import { Survey } from './survey/survey';
@@ -25,6 +26,10 @@ export const routes: Routes = [
 		component : PromptComponent,
 		canActivate : [authGuard]
 
+	},
+	{
+		path: 'ai/roadmap',
+		component: RoadmapListComponent,
 	},
 	{
 		path: 'ai/roadmap/:careerPath',

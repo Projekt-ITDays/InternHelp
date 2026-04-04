@@ -64,6 +64,10 @@ export class PromptComponent {
     this.router.navigate(['/ai/roadmap', encodeURIComponent(pathName)]);
   }
 
+  goToRoadmapList() {
+    this.router.navigate(['/ai/roadmap']);
+  }
+
   // sendRequest() {
   //   if (!this.prompt.trim()) return;
 
