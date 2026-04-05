@@ -21,6 +21,11 @@ export class Ai {
     return this.http.post<{ answer: any }>(this.apiUrl, { prompt });
   }
 
+  submitSurveyPrompt(prompt: string, userId: string): Observable<any> {
+    const url = `${environment.apiUrl}/ai/survey-results`;
+    return this.http.post<any>(url, { prompt, userId });
+  }
+
   // Pobieranie konceptów JSON z uwzględnieniem poziomu i wykluczeń
   getHexagonConcepts(careerPath: string, level: number = 1, exclude: string[] = []): Observable<{ concepts: { title: string, description: string }[] }> {
     let params = new HttpParams()

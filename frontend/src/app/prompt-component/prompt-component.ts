@@ -15,11 +15,11 @@ import { Router } from '@angular/router';
 })
 export class PromptComponent {
   prompt = '';
-  // response = ''; 
   loading = false;
   errorMessage = '';
 
-  results: any[] = [];
+  responseMessage = '';
+  planGenerated = false;
 
   // Emotki (placeholder)
   icons = ['🎮', '👥', '🐞', '🚀', '💡', '🛡️'];
@@ -34,21 +34,30 @@ export class PromptComponent {
     if (!this.prompt.trim()) return;
 
     this.loading = true;
-    this.results = []; 
+    this.errorMessage = '';
+    this.responseMessage = '';
+    this.planGenerated = false;
+    
     const currentPrompt = this.prompt;
     this.prompt = '';
 
-    this.ai.askGemini(currentPrompt).subscribe({
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      this.errorMessage = 'Brak identyfikatora użytkownika. Zaloguj się ponownie.';
+      this.loading = false;
+      return;
+    }
+
+    this.ai.submitSurveyPrompt(currentPrompt, userId).subscribe({
       next: (data: any) => {
-        const jsonResponse = data.answer;
-        
-        this.results = Object.keys(jsonResponse).map(key => {
-          return {
-            title: key,
-            description: jsonResponse[key].description,
-            tags: jsonResponse[key].examples
-          };
-        });
+        if (data.plan) {
+          this.planGenerated = true;
+          this.responseMessage = data.podsumowanie_profilu || 'Twój plan został pomyślnie wygenerowany i zapisany!';
+        } else if (data.message) {
+          this.responseMessage = data.message;
+        } else {
+          this.responseMessage = 'Otrzymano odpowiedź w nieznanym formacie.';
+        }
 
         this.loading = false;
         this.cdr.detectChanges();
@@ -60,8 +69,8 @@ export class PromptComponent {
       }
     });
   }
-  goToRoadmap(pathName: string) {
-    this.router.navigate(['/ai/roadmap', encodeURIComponent(pathName)]);
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
   }
 
   goToRoadmapList() {

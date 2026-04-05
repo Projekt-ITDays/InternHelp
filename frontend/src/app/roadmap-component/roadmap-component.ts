@@ -5,13 +5,34 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Ai } from '../service/ai';
 import { RoadmapStorageService } from '../service/roadmap-storage.service';
 import { marked } from 'marked';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import {
+  heroInformationCircle,
+  heroWrenchScrewdriver,
+  heroAcademicCap,
+  heroRocketLaunch,
+  heroCheck,
+  heroClipboardDocumentList,
+  heroXMark
+} from '@ng-icons/heroicons/outline';
 
 @Component({
   selector: 'app-roadmap',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgIconComponent],
   templateUrl: './roadmap-component.html',
-  styleUrl: './roadmap-component.css'
+  styleUrl: './roadmap-component.css',
+  providers: [
+    provideIcons({
+      heroInformationCircle,
+      heroWrenchScrewdriver,
+      heroAcademicCap,
+      heroRocketLaunch,
+      heroCheck,
+      heroClipboardDocumentList,
+      heroXMark
+    })
+  ]
 })
 export class RoadmapComponent implements OnInit, OnDestroy {
   careerPath: string = '';
@@ -39,6 +60,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
   // Pełna siatka komórek
   gridCells: any[] = [];
+  selectedPlan: any | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,97 +77,117 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     this.parsedRoadmapContent = this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const pathParam = this.route.snapshot.paramMap.get('careerPath');
-    console.log('pathParam', pathParam);
-    this.careerPath = pathParam ? decodeURIComponent(pathParam) : 'Twoja Ścieżka';
-    console.log('careerPath', this.careerPath);
+    const planId = pathParam ? decodeURIComponent(pathParam) : '';
 
-    const saved = this.storage.getRoadmap(this.careerPath);
-    if (saved) {
-      this.currentLevel = saved.currentLevel || 1;
-      this.roadmapContent = saved.roadmapContent;
-      this.updateParsedContent();
-      this.gridCells = saved.gridCells;
-      this.isGenerating = false;
-      return;
-    }
+    if (!planId) return;
 
-    // Generujemy siatkę ze szkieletem (skeleton) na czas ładowania z AI
-    const totalCells = 150;
-    const activePositions = [62, 63, 64, 65, 71, 72, 73, 80, 81, 82];
+    try {
+      const userPlans = await this.ai.getUserPlans();
+      const plan = userPlans.find((p: any) => p._id === planId);
 
-    for (let i = 0; i < totalCells; i++) {
-      if (activePositions.includes(i)) {
-        this.gridCells.push({
-          empty: false,
-          data: { title: '...', description: 'Generowanie konceptu...', loading: true }
-        });
-      } else {
-        this.gridCells.push({
-          empty: true,
-          data: null
-        });
+      if (!plan) {
+        this.errorMessage = 'Nie znaleziono planu w bazie.';
+        this.isGenerating = false;
+        return;
       }
+
+      this.careerPath = this.getPlanTitle(plan);
+
+      const saved = this.storage.getRoadmap(planId);
+      if (saved) {
+        this.selectedPlan = plan;
+        this.currentLevel = saved.currentLevel || 1;
+        this.roadmapContent = saved.roadmapContent;
+        this.updateParsedContent();
+        this.gridCells = saved.gridCells;
+        this.isGenerating = false;
+        return;
+      }
+
+      this.renderPlan(plan);
+
+    } catch (err) {
+      console.error(err);
+      this.errorMessage = 'Błąd pobierania danych planu z bazy.';
+      this.isGenerating = false;
     }
-
-    // generowanie tekstu roadmapy
-    this.generateRoadmap();
-
-    // koncepty do hexagonow (początkowe)
-    this.fetchHexagonConcepts(true);
   }
 
-  fetchHexagonConcepts(isInitial: boolean = true) {
-    if (this.isFetchingExtra) return;
-    this.isFetchingExtra = true;
+  getPlanTitle(plan: any): string {
+    const stages = plan?.planData?.plan;
+    if (stages && stages.length > 0) {
+      const firstStage = stages[0].etap;
+      const colonIdx = firstStage.indexOf(':');
+      if (colonIdx !== -1) {
+        const rest = firstStage.substring(colonIdx + 1).trim();
+        const commaIdx = rest.indexOf(',');
+        return commaIdx !== -1 ? rest.substring(0, commaIdx).trim() : rest;
+      }
+      return firstStage;
+    }
+    return 'Plan rozwoju';
+  }
 
-    const exclude = this.gridCells
-      .filter(cell => !cell.empty && cell.data && !cell.data.loading && cell.data.title !== '...')
-      .map(cell => cell.data.title);
+  getPlanDate(plan: any): string {
+    return plan?.createdAt
+      ? new Date(plan.createdAt).toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' })
+      : '';
+  }
 
-    this.ai.getHexagonConcepts(this.careerPath, this.currentLevel, exclude).subscribe({
-      next: (res) => {
-        this.isFetchingExtra = false;
-        if (!res.concepts || res.concepts.length === 0) return;
+  renderPlan(plan: any) {
+    this.selectedPlan = plan;
+    const totalCells = 150;
+    this.gridCells = Array(totalCells).fill(null).map(() => ({ empty: true, data: null }));
 
-        if (isInitial) {
-          // bierzemy element jeden reszte usuwamy
-          const firstTopic = res.concepts[0];
-          const remainingTopics = res.concepts.slice(1);
+    const stages = plan.planData?.plan || [];
+    let allTopics: any[] = [];
 
-          this.gridCells = this.gridCells.map((cell, idx) => {
-            if (idx === 30) {
-              return { empty: false, data: { ...firstTopic, loading: false, completed: false } };
-            }
-            return { empty: true, data: null };
+    stages.forEach((stage: any, sIdx: number) => {
+      allTopics.push({
+        title: `Etap ${sIdx + 1}`,
+        description: stage.etap + " - " + stage.cel_glowny,
+        loading: false,
+        completed: false
+      });
+      if (stage.wskazniki_sukcesu_kpi) {
+        stage.wskazniki_sukcesu_kpi.forEach((kpi: string) => {
+          allTopics.push({
+            title: kpi.length > 30 ? kpi.substring(0, 30) + '...' : kpi,
+            description: kpi,
+            loading: false,
+            completed: false
           });
-
-          this.topicStack = remainingTopics.map(t => ({ ...t, completed: false }));
-        } else {
-
-          const newTopics = res.concepts.map(t => ({ ...t, completed: false }));
-          this.topicStack.push(...newTopics);
-          // console.log(`${newTopics.length} nowych tematów rozmiar stosu: ${this.topicStack.length}`);
-        }
-
-        this.cdr.detectChanges();
-        this.saveCurrentState();
-      },
-      error: (err) => {
-        this.isFetchingExtra = false;
-        console.error('Błąd pobierania', err);
-        if (isInitial) {
-          this.gridCells = this.gridCells.map(cell => {
-            if (!cell.empty && cell.data?.loading) {
-              cell.data = { title: 'Błąd AI', description: 'Brak', loading: false };
-            }
-            return cell;
+        });
+      }
+      if (stage.umiejetnosci?.twarde) {
+        stage.umiejetnosci.twarde.forEach((skill: string) => {
+          allTopics.push({
+            title: skill,
+            description: 'Wymagana umiejętność techniczna',
+            loading: false,
+            completed: false
           });
-        }
-        this.cdr.detectChanges();
+        });
       }
     });
+
+    if (allTopics.length > 0) {
+      this.gridCells[30] = {
+        empty: false,
+        data: allTopics[0]
+      };
+      this.topicStack = allTopics.slice(1);
+    }
+
+    this.isGenerating = false;
+    this.cdr.detectChanges();
+    this.saveCurrentState();
+  }
+
+  generatePlanMarkdown(plan: any): string {
+    return '';
   }
 
   getNeighborIndices(index: number): number[] {
@@ -205,52 +247,16 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
     this.cdr.detectChanges();
     this.saveCurrentState();
-
-    // doładowanie jak jest za mało tematów
-    if (this.topicStack.length < 6 && this.currentLevel < 10 && !this.isFetchingExtra) {
-      this.currentLevel++;
-      // console.log(`więcej tematów, poziom ${this.currentLevel}`);
-      this.fetchHexagonConcepts(false);
-    }
   }
 
   saveCurrentState() {
+    if (!this.selectedPlan || !this.selectedPlan._id) return;
     this.storage.saveRoadmap({
-      careerPath: this.careerPath,
+      careerPath: this.selectedPlan._id,
       roadmapContent: this.roadmapContent,
       gridCells: this.gridCells,
       timestamp: Date.now(),
       currentLevel: this.currentLevel
-    });
-  }
-
-  generateRoadmap() {
-    this.isGenerating = true;
-    this.roadmapContent = '';
-
-    this.streamSub = this.ai.streamRoadmap(this.careerPath).subscribe({
-      next: (chunk: string) => {
-        this.roadmapContent += chunk;
-        this.updateParsedContent();
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.error('Błąd streamingu:', err);
-        this.errorMessage = 'Coś poszło nie tak podczas generowania mapy.';
-        this.isGenerating = false;
-        this.cdr.detectChanges();
-      },
-      complete: () => {
-        this.isGenerating = false;
-        this.storage.saveRoadmap({
-          careerPath: this.careerPath,
-          roadmapContent: this.roadmapContent,
-          gridCells: this.gridCells,
-          timestamp: Date.now(),
-          currentLevel: this.currentLevel
-        });
-        this.cdr.detectChanges();
-      }
     });
   }
 
@@ -288,7 +294,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.router.navigate(['/ai/roadmap']);
+    this.router.navigate(['/dashboard']);
   }
 
 

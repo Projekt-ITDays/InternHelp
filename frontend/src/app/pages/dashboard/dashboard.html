@@ -166,10 +166,16 @@
         <p class="mt-1 text-sm text-[#a0988c]">{{ getPlanDate(selectedPlan()!) }} · {{
           selectedPlan()!.planData?.szacowany_czas_tygodniowo }}</p>
       </div>
-      <button (click)="closePlan()"
-        class="flex items-center justify-center text-[var(--ih-accent)] transition-colors hover:text-[var(--ih-accent-strong)]">
-        <ng-icon name="heroXMark" size="24" />
-      </button>
+      <div class="flex items-center gap-4">
+        <button (click)="openRoadmapGraph(selectedPlan()!._id)"
+           class="rounded-xl border border-[var(--ih-accent)]/40 px-4 py-2 text-sm font-medium text-[var(--ih-accent)] transition-colors hover:bg-[var(--ih-accent)]/10">
+          Zobacz graf 🗺️
+        </button>
+        <button (click)="closePlan()"
+          class="flex items-center justify-center text-[var(--ih-accent)] transition-colors hover:text-[var(--ih-accent-strong)]">
+          <ng-icon name="heroXMark" size="24"></ng-icon>
+        </button>
+      </div>
     </div>
 
     @if (selectedPlan()!.planData?.podsumowanie_profilu) {

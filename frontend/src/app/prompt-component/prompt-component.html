@@ -8,7 +8,7 @@
 
   <main class="main-content">
     
-    <div class="input-section" *ngIf="results.length === 0">
+    <div class="input-section" *ngIf="!responseMessage">
       <h1>Cześć!</h1>
       <p>Opisz nam swoje zainteresowania, a my dopasujemy dla Ciebie idealną ścieżkę rozwoju kariery w sektorze IT.</p>
       
@@ -32,41 +32,32 @@
       </button>
     </div>
 
-    <div class="results-section" *ngIf="results.length > 0">
+    <div class="results-section" *ngIf="responseMessage">
       <div class="title-section">
         <span class="subtitle">TWOJE WYNIKI</span>
-        <h1>Twoja ścieżka kariery</h1>
-        <p>Na podstawie Twoich odpowiedzi, wyselekcjonowaliśmy obszary, które najlepiej odpowiadają Twojemu profilowi.</p>
+        <h1 *ngIf="planGenerated">Twój nowy plan jest gotowy!</h1>
+        <h1 *ngIf="!planGenerated">Odpowiedź asystenta</h1>
+        <p>{{ responseMessage }}</p>
       </div>
 
-      <div class="cards-container">
-        <div class="card" 
-             *ngFor="let item of results; let i = index" 
-             [ngClass]="{'highlight-card': i === 0}">
-             
-          <div class="badge" *ngIf="i === 0">
-            <span class="icon">🎮</span> NAJWYŻSZE DOPASOWANIE
+      <div class="cards-container" *ngIf="planGenerated">
+         <div class="card highlight-card">
+          <div class="badge">
+            <span class="icon">🚀</span> NOWY PLAN
           </div>
+          <h2>Plan zapisany</h2>
+          <p>Szczegóły Twojego nowego planu rozwoju znajdziesz w swoim Dashboardzie. Możesz tam sprawdzić etapy, zadania oraz przypisane wskaźniki sukcesu i materiały edukacyjne.</p>
           
-          <div class="card-icon" *ngIf="i !== 0">{{ icons[i % icons.length] }}</div>
-          
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.description }}</p>
-          
-          <div class="tags">
-            <span class="tag" *ngFor="let tag of item.tags">{{ tag }}</span>
-          </div>
-
-          <button class="btn-roadmap" (click)="goToRoadmap(item.title)" style="margin-top: 15px; width: 100%;">
-            Generuj Roadmapę 🗺️
+          <button class="btn-roadmap" (click)="goToDashboard()" style="margin-top: 15px; width: 100%;">
+            Przejdź do Twojego Profilu AI 📊
           </button>
         </div>
       </div>
 
       <div class="cta-card">
-        <h2>Gotowy na kolejny krok?</h2>
-        <p>Możesz wygenerować nową listę propozycji, jeśli chcesz zmienić preferencje.</p>
-        <button class="btn-primary" (click)="results = []; prompt = ''">Zacznij od nowa ↺</button>
+        <h2>Chcesz stworzyć odrębną wariację?</h2>
+        <p>Możesz zadać kolejne pytanie by sprawdzić inne wizje profilu.</p>
+        <button class="btn-primary" (click)="responseMessage = ''; planGenerated = false; prompt = ''">Odśwież pole ↺</button>
       </div>
     </div>
   </main>

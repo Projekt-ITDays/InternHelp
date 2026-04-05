@@ -160,6 +160,10 @@ export class Dashboard implements OnInit {
     }
   }
 
+  openRoadmapGraph(planId: string) {
+    this.router.navigate(['/ai/roadmap', planId]);
+  }
+
   openPlan(plan: UserPlan): void {
     this.selectedPlan.set(plan);
   }
