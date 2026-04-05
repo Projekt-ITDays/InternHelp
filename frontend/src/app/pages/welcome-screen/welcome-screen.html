@@ -8,17 +8,21 @@
 
 	<section class="layout-wide">
 		<div class="stage-panel">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo stage-logo" />
+              <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo stage-logo" /> -->
 
 			<div class="shot-viewport stage-shot" aria-live="polite">
 				@for (feature of featureCards; track feature.id) {
 					@if (isFeatureActive(feature.id)) {
-						<figure class="shot-frame">
-							<picture>
-								<source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl">
-								<img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
-							</picture>
-						</figure>
+                        @if (feature.id === 'summary') {
+                            <app-main-page></app-main-page>
+                        } @else {
+                            <figure class="shot-frame">
+                                <picture>
+                                    <source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl" />
+                                    <img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+                                </picture>
+                            </figure>
+                        }
 					}
 				}
 			</div>
@@ -43,7 +47,7 @@
 	<section class="layout-mobile">
 		<article class="mobile-login-screen">
 			<div class="mobile-login-inner">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" />
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" /> -->
                 <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
 			</div>
 			</article>

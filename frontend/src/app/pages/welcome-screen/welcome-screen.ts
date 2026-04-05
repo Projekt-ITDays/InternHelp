@@ -4,6 +4,7 @@ import { AuthService } from '../../service/auth.service';
 import { LoggingDto } from '../../interfaces/loggingDto';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MainPage } from '../../main-page/main-page';
 type FeatureCard = {
   id: string;
   title: string;
@@ -15,7 +16,7 @@ type FeatureCard = {
 @Component({
   selector: 'app-welcome-screen',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet ,MainPage],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })
@@ -30,21 +31,21 @@ export class WelcomeScreen {
   protected readonly featureCards: FeatureCard[] = [
     {
       id: 'summary',
-      title: 'Automatyczne streszczenia rozmów z AI',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt lectus in dui dictum, sit amet laoreet massa sodales.',
+      title: 'Our mission and principles',
+      description: 'We want to show students the best path to get an internship. We want to show them what they need to learn and how to do it. We want to show them how to get an internship and how to prepare for it.',
       imageUrl: 'https://picsum.photos/seed/desk-summary/1280/800',
       mobileImageUrl: 'https://picsum.photos/seed/mob-summary/600/1200',
     },
     {
       id: 'pipeline',
-      title: 'Panel postępu rekrutacji na żywo',
+      title: 'PlaceHolder',
       description: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium ligula at sem feugiat, nec pulvinar massa tristique.',
       imageUrl: 'https://picsum.photos/seed/desk-pipeline/1280/800',
       mobileImageUrl: 'https://picsum.photos/seed/mob-pipeline/600/1200',
     },
     {
       id: 'knowledge',
-      title: 'Baza wiedzy dla internów zespołu',
+      title: 'PlaceHolder',
       description: 'Curabitur non justo et magna auctor volutpat. Duis sodales mi sed ligula luctus, vitae venenatis orci faucibus.',
       imageUrl: 'https://picsum.photos/seed/desk-knowledge/1280/800',
       mobileImageUrl: 'https://picsum.photos/seed/mob-knowledge/600/1200',
