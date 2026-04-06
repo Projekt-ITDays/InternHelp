@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SurveyDto } from '../interfaces/survey';
 import { SurveyService } from '../service/survey.service';
+import { Navbar } from '../layout/navbar/navbar';
 
 @Component({
   selector: 'app-survey',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, Navbar],
   templateUrl: './survey.html',
   styleUrl: './survey.css',
 })

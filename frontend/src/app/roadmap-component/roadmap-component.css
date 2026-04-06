@@ -1,46 +1,49 @@
 :host {
-	display: block;
+  display: block;
 }
 
 .app-container {
-	min-height: 100vh;
-	background:
-		radial-gradient(circle at 8% 18%, rgba(217, 119, 66, 0.16), transparent 35%),
-		var(--ih-bg);
-	color: var(--ih-surface);
-	padding: 1rem;
-    overflow-x: hidden; /* Prevent scrollbar if grid overflows small screens */
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 18%, rgba(217, 119, 66, 0.16), transparent 35%),
+    var(--ih-bg);
+  color: var(--ih-surface);
+  padding: 1rem;
+  overflow-x: hidden;
+  /* Prevent scrollbar if grid overflows small screens */
 }
 
 .top-header {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	gap: 0.9rem;
-	margin-bottom: 1rem;
-    position: relative;
-    z-index: 100; /* Makes back button clickable over the background grid */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 100;
+  /* Makes back button clickable over the background grid */
 }
 
 .logo {
-	font-weight: 600;
-	font-size: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .btn-primary {
-	border: 1px solid transparent;
-	background: linear-gradient(180deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
-	color: #fff;
-	border-radius: 10px;
-	padding: 0.45rem 0.75rem;
-	font-size: 0.86rem;
-	font-weight: 600;
-	cursor: pointer;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .main-content {
-	max-width: 100%; /* allows the grid to span full screen */
-	margin: 0 auto;
+  max-width: 100%;
+  /* allows the grid to span full screen */
+  margin: 0 auto;
 }
 
 .text-center {
@@ -65,7 +68,8 @@
   width: 420px;
   max-width: 90vw;
   z-index: 100;
-  pointer-events: none; /* Allows clicking through the empty space around */
+  pointer-events: none;
+  /* Allows clicking through the empty space around */
 }
 
 .results-section {
@@ -73,14 +77,15 @@
   border-radius: var(--ih-radius-lg, 12px);
   background: rgba(26, 23, 19, 0.88);
   backdrop-filter: blur(8px);
-  box-shadow: var(--ih-shadow-md, 0 10px 30px rgba(0,0,0,0.5));
+  box-shadow: var(--ih-shadow-md, 0 10px 30px rgba(0, 0, 0, 0.5));
   padding: 1.2rem;
-  pointer-events: auto; /* Panel catches clicks/scrolls */
+  pointer-events: auto;
+  /* Panel catches clicks/scrolls */
 }
 
 .title-section p {
   margin: 0;
-  color: var(--ih-surface-soft, rgba(255,255,255,0.7));
+  color: var(--ih-surface-soft, rgba(255, 255, 255, 0.7));
   font-size: 0.9rem;
 }
 
@@ -102,13 +107,17 @@
   color: #e9e2d7;
   line-height: 1.55;
   font-size: 0.9rem;
-  max-height: 400px; /* still enable scrolling */
+  max-height: 400px;
+  /* still enable scrolling */
   overflow-y: auto;
-  font-family: inherit; /* use regular font instead of monospace */
+  font-family: inherit;
+  /* use regular font instead of monospace */
   padding-right: 8px;
 }
 
-.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
   color: var(--ih-accent-strong);
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -118,7 +127,8 @@
   margin-bottom: 0.8rem;
 }
 
-.markdown-body ul, .markdown-body ol {
+.markdown-body ul,
+.markdown-body ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -150,16 +160,20 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden; /* cleanly hide overflow grid */
+  overflow: hidden;
+  /* cleanly hide overflow grid */
   z-index: 0;
   cursor: grab;
   user-select: none;
 }
+
 .honeycomb-container.dragging {
   cursor: grabbing;
 }
+
 .honeycomb-container.dragging .honeycomb-cell {
-  pointer-events: none; /* disables hover bugs while quickly panning */
+  pointer-events: none;
+  /* disables hover bugs while quickly panning */
 }
 
 .honeycomb {
@@ -169,8 +183,10 @@
   transform: translateX(-50%);
   display: flex;
   flex-wrap: wrap;
-  width: 1485px; /* force exactly 9 hexagons per row */
-  min-width: 1485px; /* prevent flexbox shrinking */
+  width: 1485px;
+  /* force exactly 9 hexagons per row */
+  min-width: 1485px;
+  /* prevent flexbox shrinking */
   padding: 0;
   margin: 0;
   list-style: none;
@@ -178,8 +194,10 @@
 
 .honeycomb-cell {
   width: 160px;
-  height: 184px; /* width * 1.1547 for perfect hex */
-  margin: -46px 2.5px 0 2.5px; /* pull up by an exact offset to interlock vertically */
+  height: 184px;
+  /* width * 1.1547 for perfect hex */
+  margin: -46px 2.5px 0 2.5px;
+  /* pull up by an exact offset to interlock vertically */
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: rgba(26, 23, 19, 0.95);
   position: relative;
@@ -202,7 +220,8 @@
 
 /* 9-8-9-8 Pattern. Total cycle = 17 elements */
 .honeycomb-cell:nth-child(17n+10) {
-  margin-left: 85px; /* offset for interlocking pattern */
+  margin-left: 85px;
+  /* offset for interlocking pattern */
 }
 
 /* 1st row does not need negative margin top */
@@ -213,17 +232,22 @@
 .honeycomb-cell:not(.empty-cell):hover {
   transform: scale(1.1);
   z-index: 10;
-  background: var(--ih-accent, #cf6329); /* Accent color from design */
+  background: var(--ih-accent, #cf6329);
+  /* Accent color from design */
 }
 
 /* Empty Cell Styling */
 .empty-cell {
-  background: rgba(26, 23, 19, 0.3); /* Lekko widoczne transparentne tło */
-  border: 1px solid rgba(255,255,255,0.05); /* opcjonalny outline w css na przyszłosc, choć clip path go ucieło */
+  background: rgba(26, 23, 19, 0.3);
+  /* Lekko widoczne transparentne tło */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* opcjonalny outline w css na przyszłosc, choć clip path go ucieło */
   cursor: default;
 }
+
 .empty-cell:hover {
-  background: rgba(26, 23, 19, 0.5); /* lekki hover glow na pustych, by też 'żyły' */
+  background: rgba(26, 23, 19, 0.5);
+  /* lekki hover glow na pustych, by też 'żyły' */
   transform: scale(1.02);
   z-index: 1;
 }
@@ -301,6 +325,7 @@
 .honeycomb-content.is-completed {
   background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), transparent);
 }
+
 .honeycomb-cell:has(.is-completed) {
   border: 1px solid rgba(76, 175, 80, 0.3);
 }
@@ -309,17 +334,29 @@
 .skeleton-loader {
   animation: pulse 1.5s infinite ease-in-out;
 }
+
 @keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 0.2; }
-  100% { opacity: 0.6; }
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
 }
 
 /* Modal Overlay */
 .difficulty-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
   z-index: 1000;
   display: flex;
@@ -365,9 +402,20 @@
   transform: scale(1.05);
 }
 
-.btn-diff.easy { background: #2e7d32; color: #fff; }
-.btn-diff.medium { background: #f57c00; color: #fff; }
-.btn-diff.hard { background: #c62828; color: #fff; }
+.btn-diff.easy {
+  background: #2e7d32;
+  color: #fff;
+}
+
+.btn-diff.medium {
+  background: #f57c00;
+  color: #fff;
+}
+
+.btn-diff.hard {
+  background: #c62828;
+  color: #fff;
+}
 
 .btn-close {
   background: transparent;
@@ -379,8 +427,8 @@
   transition: all 0.2s;
   width: 100%;
 }
+
 .btn-close:hover {
   color: #fff;
   border-color: #888;
 }
-

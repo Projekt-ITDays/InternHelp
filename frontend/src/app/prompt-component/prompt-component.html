@@ -1,28 +1,22 @@
+<app-navbar></app-navbar>
+
 <div class="app-container">
-  <header class="top-header">
-    <div class="logo">
-      <span class="logo-dots">●●●</span> InternHelp
-    </div>
-    <button class="notification-btn">🔔</button>
-  </header>
+  <!-- Original header removed to use unified Navbar -->
 
   <main class="main-content">
-    
+    <!-- ... same as before ... -->
     <div class="input-section" *ngIf="!responseMessage">
       <h1>Cześć!</h1>
       <p>Opisz nam swoje zainteresowania, a my dopasujemy dla Ciebie idealną ścieżkę rozwoju kariery w sektorze IT.</p>
-      
+
       <div class="error-box" *ngIf="errorMessage" style="color: red; margin-bottom: 1rem;">
         🚨 {{ errorMessage }}
       </div>
 
       <div class="textarea-wrapper">
-        <textarea 
-          [(ngModel)]="prompt" 
+        <textarea [(ngModel)]="prompt"
           (keydown.enter)="!loading && prompt.trim() ? sendRequest() : null; $event.preventDefault()"
-          [disabled]="loading"
-          placeholder="W czym mogę Ci dzisiaj pomóc?"
-          rows="5">
+          [disabled]="loading" placeholder="W czym mogę Ci dzisiaj pomóc?" rows="5">
         </textarea>
       </div>
 
@@ -41,13 +35,14 @@
       </div>
 
       <div class="cards-container" *ngIf="planGenerated">
-         <div class="card highlight-card">
+        <div class="card highlight-card">
           <div class="badge">
             <span class="icon">🚀</span> NOWY PLAN
           </div>
           <h2>Plan zapisany</h2>
-          <p>Szczegóły Twojego nowego planu rozwoju znajdziesz w swoim Dashboardzie. Możesz tam sprawdzić etapy, zadania oraz przypisane wskaźniki sukcesu i materiały edukacyjne.</p>
-          
+          <p>Szczegóły Twojego nowego planu rozwoju znajdziesz w swoim Dashboardzie. Możesz tam sprawdzić etapy, zadania
+            oraz przypisane wskaźniki sukcesu i materiały edukacyjne.</p>
+
           <button class="btn-roadmap" (click)="goToDashboard()" style="margin-top: 15px; width: 100%;">
             Przejdź do Twojego Profilu AI 📊
           </button>
@@ -57,27 +52,11 @@
       <div class="cta-card">
         <h2>Chcesz stworzyć odrębną wariację?</h2>
         <p>Możesz zadać kolejne pytanie by sprawdzić inne wizje profilu.</p>
-        <button class="btn-primary" (click)="responseMessage = ''; planGenerated = false; prompt = ''">Odśwież pole ↺</button>
+        <button class="btn-primary" (click)="responseMessage = ''; planGenerated = false; prompt = ''">Odśwież pole
+          ↺</button>
       </div>
     </div>
   </main>
 
-  <nav class="bottom-nav">
-    <div class="nav-item">
-      <span class="nav-icon">🚪</span>
-      <span>Logowanie</span>
-    </div>
-    <div class="nav-item active">
-      <span class="nav-icon">✨</span>
-      <span>Rekomendacje</span>
-    </div>
-    <div class="nav-item" (click)="goToRoadmapList()">
-      <span class="nav-icon">🗺️</span>
-      <span>Roadmap</span>
-    </div>
-    <div class="nav-item">
-      <span class="nav-icon">⚙️</span>
-      <span>Ustawienia</span>
-    </div>
-  </nav>
-</div>
+  <!-- Unified Navbar handled navigation -->
+</div>

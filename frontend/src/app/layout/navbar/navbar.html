@@ -1,15 +1,30 @@
-<header class="sticky top-0 z-50 w-full border-b border-[var(--ih-border-dark)] bg-[#1a1713]/90 backdrop-blur-xl">
-    <div class="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-6">
-
-        <span class="text-xl font-bold tracking-tight text-[var(--ih-surface)]">
-            <span class="text-[var(--ih-accent)]">Carrier</span>Sign
-        </span>
-
-        <div class="flex items-center gap-4">
-            <div
-                class="ml-1 flex h-9 w-9 items-center justify-center rounded-full border-2 border-[var(--ih-accent)] bg-[#3e2f23] text-sm font-bold text-[var(--ih-accent)]">
-                JD
-            </div>
-        </div>
+<header class="global-nav">
+  <div class="nav-container">
+    <div class="logo-section" (click)="navigateTo('/')">
+      <span class="logo-accent">Intern</span>Help
     </div>
+
+    <div class="nav-grid">
+      <div class="nav-tile" (click)="navigateTo('/')" title="Logowanie">
+        <ng-icon name="heroArrowRightOnRectangle" size="18"></ng-icon>
+        <span>Logowanie</span>
+      </div>
+      <div class="nav-tile" (click)="navigateTo('/ai/ask')" title="Generacja">
+        <ng-icon name="heroSparkles" size="18"></ng-icon>
+        <span>Generacja</span>
+      </div>
+      <div class="nav-tile" (click)="navigateTo('/dashboard')" title="Dashboard">
+        <ng-icon name="heroChartBarSquare" size="18"></ng-icon>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-tile" (click)="navigateTo('/survey')" title="Ankieta">
+        <ng-icon name="heroClipboardDocumentList" size="18"></ng-icon>
+        <span>Ankieta</span>
+      </div>
+    </div>
+
+    <div class="user-section">
+      <div class="user-avatar">JD</div>
+    </div>
+  </div>
 </header>

@@ -15,18 +15,23 @@
           🚨 {{ errorMessage }}
         </div>
 
-        <div class="roadmap-box" style="padding: 0; background: transparent; border: none; box-shadow: none; overflow-y: auto; flex: 1; padding-right: 8px;">
+        <div class="roadmap-box"
+          style="padding: 0; background: transparent; border: none; box-shadow: none; overflow-y: auto; flex: 1; padding-right: 8px;">
           <ng-container *ngIf="selectedPlan">
             <div class="flex flex-col gap-6 w-full text-left">
-              
-              <div *ngIf="selectedPlan.planData?.podsumowanie_profilu" class="mb-2 flex gap-3 rounded-xl bg-[#1a1713] p-4 text-left border border-[var(--ih-border-dark)]">
-                <ng-icon name="heroInformationCircle" size="18" class="mt-0.5 shrink-0 text-[var(--ih-accent)]"></ng-icon>
+
+              <div *ngIf="selectedPlan.planData?.podsumowanie_profilu"
+                class="mb-2 flex gap-3 rounded-xl bg-[#1a1713] p-4 text-left border border-[var(--ih-border-dark)]">
+                <ng-icon name="heroInformationCircle" size="18"
+                  class="mt-0.5 shrink-0 text-[var(--ih-accent)]"></ng-icon>
                 <p class="text-sm leading-relaxed text-[#a0988c]">{{ selectedPlan.planData.podsumowanie_profilu }}</p>
               </div>
 
-              <div *ngFor="let stage of selectedPlan.planData?.plan; let i = index" class="rounded-2xl border border-[var(--ih-border-dark)] bg-[#1a1713] p-5 text-left mb-6">
+              <div *ngFor="let stage of selectedPlan.planData?.plan; let i = index"
+                class="rounded-2xl border border-[var(--ih-border-dark)] bg-[#1a1713] p-5 text-left mb-6">
                 <div class="mb-4 flex items-start gap-4 border-b border-[var(--ih-border-dark)] pb-3">
-                  <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ih-accent)] text-sm font-bold text-white">
+                  <div
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ih-accent)] text-sm font-bold text-white">
                     {{ i + 1 }}
                   </div>
                   <div class="flex-1">
@@ -36,22 +41,26 @@
                 </div>
 
                 <div class="mt-3">
-                  <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+                  <div
+                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
                     <ng-icon name="heroWrenchScrewdriver" size="14" class="text-[var(--ih-accent)]"></ng-icon>
                     Umiejętności
                   </div>
                   <div class="flex flex-wrap gap-1.5">
-                    <span *ngFor="let skill of stage.umiejetnosci?.twarde" class="inline-flex items-center rounded-md border border-[var(--ih-accent)]/25 bg-[var(--ih-accent)]/15 px-2 py-1 text-xs font-medium text-[var(--ih-accent)]">
+                    <span *ngFor="let skill of stage.umiejetnosci?.twarde"
+                      class="inline-flex items-center rounded-md border border-[var(--ih-accent)]/25 bg-[var(--ih-accent)]/15 px-2 py-1 text-xs font-medium text-[var(--ih-accent)]">
                       {{ skill }}
                     </span>
-                    <span *ngFor="let skill of stage.umiejetnosci?.miekkie" class="inline-flex items-center rounded-md border border-[#648cb4]/20 bg-[#648cb4]/10 px-2 py-1 text-xs font-medium text-[#8ab4d6]">
+                    <span *ngFor="let skill of stage.umiejetnosci?.miekkie"
+                      class="inline-flex items-center rounded-md border border-[#648cb4]/20 bg-[#648cb4]/10 px-2 py-1 text-xs font-medium text-[#8ab4d6]">
                       {{ skill }}
                     </span>
                   </div>
                 </div>
 
                 <div *ngIf="stage.zasoby_edukacyjne?.length" class="mt-4">
-                  <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+                  <div
+                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
                     <ng-icon name="heroAcademicCap" size="14" class="text-[var(--ih-accent)]"></ng-icon>
                     Zasoby edukacyjne
                   </div>
@@ -63,15 +72,18 @@
                 </div>
 
                 <div *ngIf="stage.projekt_portfolio" class="mt-4">
-                  <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+                  <div
+                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
                     <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]"></ng-icon>
                     Projekt portfolio
                   </div>
                   <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[#2a2520] p-3.5">
-                    <h4 class="text-sm font-semibold text-[var(--ih-surface)] m-0 leading-tight mb-1">{{ stage.projekt_portfolio.nazwa }}</h4>
+                    <h4 class="text-sm font-semibold text-[var(--ih-surface)] m-0 leading-tight mb-1">{{
+                      stage.projekt_portfolio.nazwa }}</h4>
                     <p class="mt-1 mb-0 text-xs text-[#a0988c]">{{ stage.projekt_portfolio.opis }}</p>
                     <div *ngIf="stage.projekt_portfolio.kryteria_akceptacji?.length" class="mt-3 flex flex-col gap-1.5">
-                      <div *ngFor="let criteria of stage.projekt_portfolio.kryteria_akceptacji" class="flex items-start gap-2 text-xs text-[#a0988c]">
+                      <div *ngFor="let criteria of stage.projekt_portfolio.kryteria_akceptacji"
+                        class="flex items-start gap-2 text-xs text-[#a0988c]">
                         <ng-icon name="heroCheck" size="14" class="mt-0.5 shrink-0 text-[var(--ih-accent)]"></ng-icon>
                         <span style="flex:1; line-height: 1.4;">{{ criteria }}</span>
                       </div>
@@ -80,7 +92,8 @@
                 </div>
 
                 <div *ngIf="stage.wskazniki_sukcesu_kpi?.length" class="mt-4">
-                  <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
+                  <div
+                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#a0988c]">
                     <ng-icon name="heroClipboardDocumentList" size="14" class="text-[var(--ih-accent)]"></ng-icon>
                     Wskaźniki sukcesu / Zadania
                   </div>
@@ -102,17 +115,13 @@
     <div class="honeycomb-container" (mousedown)="onMouseDown($event)" [class.dragging]="isDragging">
       <ul class="honeycomb" [style.transform]="'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px)'">
         <li class="honeycomb-cell" *ngFor="let cell of gridCells; let i = index" [ngClass]="{'empty-cell': cell.empty}">
-          <div class="honeycomb-content" 
-               *ngIf="!cell.empty" 
-               (click)="openCellModal(cell)" 
-               [class.skeleton-loader]="cell.data.loading"
-               [class.is-completed]="cell.data.completed">
+          <div class="honeycomb-content" *ngIf="!cell.empty" (click)="openCellModal(cell)"
+            [class.skeleton-loader]="cell.data.loading" [class.is-completed]="cell.data.completed">
             <span class="cell-title">{{ cell.data.title }}</span>
-            
+
             <!-- Przycisk ukończenia -->
-            <button class="btn-complete" 
-                    *ngIf="!cell.data.completed && !cell.data.loading" 
-                    (click)="onCompleteTask(i, $event)">
+            <button class="btn-complete" *ngIf="!cell.data.completed && !cell.data.loading"
+              (click)="onCompleteTask(i, $event)">
               Ukończ
             </button>
 

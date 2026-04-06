@@ -5,6 +5,8 @@ import { LoggingDto } from '../../interfaces/loggingDto';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MainPage } from '../../main-page/main-page';
+import { Navbar } from '../../layout/navbar/navbar';
+
 type FeatureCard = {
   id: string;
   title: string;
@@ -16,7 +18,7 @@ type FeatureCard = {
 @Component({
   selector: 'app-welcome-screen',
   standalone: true,
-  imports: [NgTemplateOutlet ,MainPage],
+  imports: [NgTemplateOutlet, MainPage, Navbar],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })

@@ -17,8 +17,7 @@ export const routes: Routes = [
 	{	
 		path: 'survey',
 		component : Survey,
-
-
+		canActivate : [authGuard]
 	},
 	{
 		// Zmiana aiapi -> ai/ask

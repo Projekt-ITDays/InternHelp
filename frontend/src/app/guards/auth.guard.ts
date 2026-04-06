@@ -1,6 +1,7 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AuthService } from "../service/auth.service";
+import Swal from 'sweetalert2';
 
 
 export const authGuard : CanActivateFn = (route, state) =>{
@@ -9,7 +10,15 @@ export const authGuard : CanActivateFn = (route, state) =>{
 
     if (authService.isLoggedIn() === true){
         return true;
-    }else{
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Brak dostępu',
+            text: 'Musisz się zalogować, aby zobaczyć tę stronę.',
+            background: '#1a1713',
+            color: '#fff',
+            confirmButtonColor: '#cf6329'
+        });
         router.navigate(['/']);
         return false;
     }

@@ -1,14 +1,17 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Ai } from '../service/ai';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Navbar } from '../layout/navbar/navbar';
 
 @Component({
   selector: 'app-prompt-component',
+  standalone: true,
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    Navbar
   ],
   templateUrl: './prompt-component.html',
   styleUrl: './prompt-component.css',
@@ -20,15 +23,15 @@ export class PromptComponent {
 
   responseMessage = '';
   planGenerated = false;
-
+  results = {};
   // Emotki (placeholder)
   icons = ['🎮', '👥', '🐞', '🚀', '💡', '🛡️'];
 
   constructor(
-    private ai: Ai, 
+    private ai: Ai,
     private cdr: ChangeDetectorRef,
     private router: Router
-  ) {}
+  ) { }
 
   sendRequest() {
     if (!this.prompt.trim()) return;
@@ -37,7 +40,6 @@ export class PromptComponent {
     this.errorMessage = '';
     this.responseMessage = '';
     this.planGenerated = false;
-    
     const currentPrompt = this.prompt;
     this.prompt = '';
 
