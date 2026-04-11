@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Sse, Query, MessageEvent, Req, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Sse, Query, MessageEvent, Req, Get, UseGuards, Param, Patch, HttpException, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AiService } from './ai.service';
 import { map, Observable } from 'rxjs';
@@ -52,6 +52,30 @@ export class AiController {
   @Get('plans')
   async getUserPlans(@Req() req: Request & { user: { sub: string } }) {
     return this.aiAgentService.getUserPlans(req.user.sub);
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('plans/:id/grid-state')
+  async saveGridState(
+    @Param('id') planId: string,
+    @Body() body: { gridCells: any[]; topicStack: any[]; currentLevel: number },
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    try {
+      return await this.aiAgentService.saveGridState(planId, req.user.sub, body);
+    } catch (e: any) {
+      throw new HttpException(e.message || 'Błąd zapisu stanu grafu.', HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('plans/:id/grid-state')
+  async getGridState(
+    @Param('id') planId: string,
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    const state = await this.aiAgentService.getGridState(planId, req.user.sub);
+    return { gridState: state };
   }
 
   //stary approach

@@ -238,6 +238,26 @@ Jeśli tworzysz roadmapę, zwróć dokładnie taki kształt:
         return await this.agentResponseModel.find({ userId: userId }).sort({ createdAt: -1 }).exec();
     }
 
+    async saveGridState(planId: string, userId: string, gridState: {
+        gridCells: any[];
+        topicStack: any[];
+        currentLevel: number;
+    }) {
+        const plan = await this.agentResponseModel.findOne({ _id: planId, userId });
+        if (!plan) {
+            throw new Error(`Plan ${planId} nie istnieje lub nie należy do użytkownika.`);
+        }
+        plan.gridState = { ...gridState, updatedAt: Date.now() };
+        await plan.save();
+        return { success: true };
+    }
+
+    async getGridState(planId: string, userId: string) {
+        const plan = await this.agentResponseModel.findOne({ _id: planId, userId }, { gridState: 1 }).exec();
+        if (!plan) return null;
+        return plan.gridState ?? null;
+    }
+
     retrieve() {
 
     }

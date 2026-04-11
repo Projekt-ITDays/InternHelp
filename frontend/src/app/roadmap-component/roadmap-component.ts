@@ -94,14 +94,12 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       }
 
       this.careerPath = this.getPlanTitle(plan);
-
-      const saved = this.storage.getRoadmap(planId);
-      if (saved) {
+      const savedState = await this.storage.getGridState(planId);
+      if (savedState) {
         this.selectedPlan = plan;
-        this.currentLevel = saved.currentLevel || 1;
-        this.roadmapContent = saved.roadmapContent;
-        this.updateParsedContent();
-        this.gridCells = saved.gridCells;
+        this.currentLevel = savedState.currentLevel || 1;
+        this.gridCells = savedState.gridCells;
+        this.topicStack = savedState.topicStack || [];
         this.isGenerating = false;
         return;
       }
@@ -251,11 +249,10 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
   saveCurrentState() {
     if (!this.selectedPlan || !this.selectedPlan._id) return;
-    this.storage.saveRoadmap({
-      careerPath: this.selectedPlan._id,
-      roadmapContent: this.roadmapContent,
+    // Zapisujemy asynchronicznie w tle - nie blokujemy UI
+    this.storage.saveGridState(this.selectedPlan._id, {
       gridCells: this.gridCells,
-      timestamp: Date.now(),
+      topicStack: this.topicStack,
       currentLevel: this.currentLevel
     });
   }
@@ -318,14 +315,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       this.streamSub.unsubscribe();
     }
 
-    if (this.careerPath) {
-      this.storage.saveRoadmap({
-        careerPath: this.careerPath,
-        roadmapContent: this.roadmapContent || 'Wczytywanie przerwane...',
-        gridCells: this.gridCells,
-        timestamp: Date.now(),
-        currentLevel: this.currentLevel
-      });
-    }
+    // Ostatni zapis stanu przed zniszczeniem komponentu
+    this.saveCurrentState();
   }
 }

@@ -50,14 +50,27 @@
   text-align: center;
 }
 
+.title-section {
+  text-align: center;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ih-border-dark);
+  flex-shrink: 0;
+}
+
 .title-section h1 {
   margin: 0 0 0.5rem;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 800;
+  line-height: 1.3;
+  padding: 0.1em 0.2em;
   background: var(--ih-accent-strong);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
 }
 
 /* Fixed Overlay Panel */
@@ -65,8 +78,8 @@
   position: fixed;
   top: 90px;
   left: 20px;
-  width: 420px;
-  max-width: 90vw;
+  width: 450px;
+  max-width: calc(100vw - 40px);
   z-index: 100;
   pointer-events: none;
   /* Allows clicking through the empty space around */
@@ -75,12 +88,14 @@
 .results-section {
   border: 1px solid var(--ih-border-dark);
   border-radius: var(--ih-radius-lg, 12px);
-  background: rgba(26, 23, 19, 0.88);
-  backdrop-filter: blur(8px);
+  background: rgba(26, 23, 19, 0.92);
+  backdrop-filter: blur(12px);
   box-shadow: var(--ih-shadow-md, 0 10px 30px rgba(0, 0, 0, 0.5));
   padding: 1.2rem;
   pointer-events: auto;
-  /* Panel catches clicks/scrolls */
+  max-height: calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
 }
 
 .title-section p {
@@ -92,14 +107,46 @@
 .error-box {
   margin-top: 0.8rem;
   color: #ffb4b4;
+  flex-shrink: 0;
 }
 
+/* Scrollable content area */
 .roadmap-box {
-  margin-top: 1rem;
-  border: 1px solid var(--ih-border-dark);
-  border-radius: 12px;
-  background: rgba(17, 16, 13, 0.92);
-  padding: 1rem;
+  margin-top: 0.6rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  position: relative;
+
+  /* Mask fade at bottom edge */
+  mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+}
+
+/* Custom scrollbar */
+.roadmap-box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.roadmap-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.roadmap-box::-webkit-scrollbar-thumb {
+  background: rgba(217, 119, 66, 0.3);
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.roadmap-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 66, 0.55);
+}
+
+/* Firefox scrollbar */
+.roadmap-box {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 119, 66, 0.3) transparent;
 }
 
 .markdown-body {
