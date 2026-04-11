@@ -2,103 +2,118 @@
 
 <section class="survey-shell">
     <article class="survey-card">
-        <header class="survey-header">
-            <p class="survey-kicker">Profil kandydata</p>
-            <h1>Ankieta stażowa</h1>
-            <p>Uzupełnij pola, aby przygotować precyzyjny plan rozwoju i dopasowane rekomendacje.</p>
+        <header class="survey-header text-center">
+            <div class="survey-kicker badge-style">Profil kandydata</div>
+            <h1>Zbudujmy Twój profil</h1>
+            <p>Podziel się z nami swoimi planami i doświadczeniem, a nasz agent AI przygotuje dla Ciebie
+                spersonalizowaną ścieżkę rozwoju oraz interaktywną roadmapę kariery.</p>
         </header>
 
         <form class="survey-form" #surveyForm="ngForm" (ngSubmit)="onSubmit()">
-            <div class="form-grid">
-                
 
-                <label class="form-group">
-                    <span>Kierunek (Major)</span>
-                    <input type="text" name="Major" [(ngModel)]="surveyModel.Major" required />
-                </label>
+            <div class="form-section">
+                <h3 class="section-title"><span class="icon"></span> Edukacja i zaplecze</h3>
+                <div class="form-grid">
+                    <label class="form-group">
+                        <span>Kierunek (Major)</span>
+                        <input type="text" name="Major" [(ngModel)]="surveyModel.Major" placeholder="np. Informatyka"
+                            required />
+                    </label>
 
-                <label class="form-group">
-                    <span>Rok studiów</span>
-                    <input type="number" min="1" name="YearOfStudy" [(ngModel)]="surveyModel.YearOfStudy" required />
-                </label>
+                    <label class="form-group">
+                        <span>Rok studiów</span>
+                        <input type="number" min="1" name="YearOfStudy" [(ngModel)]="surveyModel.YearOfStudy"
+                            placeholder="np. 3" required />
+                    </label>
 
-                <label class="form-group">
-                    <span>Typ preferowanego stażu</span>
-                    <input
-                        type="text"
-                        name="PreferredInternshipType"
-                        [(ngModel)]="surveyModel.PreferredInternshipType"
-                        required
-                    />
-                </label>
+                    <label class="form-group">
+                        <span>Uczelnia</span>
+                        <input type="text" name="University" [(ngModel)]="surveyModel.University"
+                            placeholder="np. Politechnika..." required />
+                    </label>
 
-                <label class="form-group">
-                    <span>Ile czasu możesz poświęcić (miesiące)</span>
-                    <select name="TimeLeft" [(ngModel)]="surveyModel.TimeLeft" required>
-                        @for (range of timeRangestoChoose; track $index) {
+                    <label class="form-group">
+                        <span>Rok ukończenia</span>
+                        <input type="number" min="2000" name="GraduationYear" [(ngModel)]="surveyModel.GraduationYear"
+                            placeholder="np. 2025" required />
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title"><span class="icon"></span> Oczekiwania i czas</h3>
+                <div class="form-grid">
+                    <label class="form-group">
+                        <span>Typ preferowanego stażu</span>
+                        <input type="text" name="PreferredInternshipType"
+                            [(ngModel)]="surveyModel.PreferredInternshipType" placeholder="np. Pół etatu, Zdalnie"
+                            required />
+                    </label>
+
+                    <label class="form-group">
+                        <span>Czas, który możesz poświęcić</span>
+                        <select name="TimeLeft" [(ngModel)]="surveyModel.TimeLeft" required>
+                            @for (range of timeRangestoChoose; track $index) {
                             <option [value]="range">{{ range }}</option>
-                        }
-                    </select>
-                </label>
+                            }
+                        </select>
+                    </label>
+                </div>
+            </div>
 
-                <label class="form-group full-width">
-                    <span>Zainteresowania</span>
-                    <textarea name="Inrest" rows="3" [(ngModel)]="surveyModel.Inrest" required></textarea>
-                </label>
+            <div class="form-section">
+                <h3 class="section-title"><span class="icon"></span> Twoje umiejętności i potencjał</h3>
+                <div class="form-grid">
+                    <label class="form-group">
+                        <span>Mocne strony</span>
+                        <input type="text" name="Strengths" [(ngModel)]="surveyModel.Strengths"
+                            placeholder="np. Logiczne myślenie, Praca w zespole" required />
+                    </label>
 
-                <label class="form-group full-width">
-                    <span>Doświadczenie</span>
-                    <textarea name="Expierience" rows="3" [(ngModel)]="surveyModel.Expierience" required></textarea>
-                </label>
+                    <label class="form-group">
+                        <span>Słabe strony</span>
+                        <input type="text" name="Weaknesses" [(ngModel)]="surveyModel.Weaknesses"
+                            placeholder="np. Brak komercyjnego expa" required />
+                    </label>
 
-                <label class="form-group full-width">
-                    <span>Umiejętności</span>
-                    <textarea name="skills" rows="2" [(ngModel)]="surveyModel.skills" required></textarea>
-                </label>
-
-                <label class="form-group">
-                    <span>Poziom umiejętności</span>
-                    <select name="AbilitiesLevel" [(ngModel)]="surveyModel.AbilitiesLevel" required>
-                        @for (level of abilityLevels; track $index) {
+                    <label class="form-group">
+                        <span>Poziom umiejętności</span>
+                        <select name="AbilitiesLevel" [(ngModel)]="surveyModel.AbilitiesLevel" required>
+                            @for (level of abilityLevels; track $index) {
                             <option [value]="level">{{ level }}</option>
-                        }
-                    </select>
-                </label>
+                            }
+                        </select>
+                    </label>
+                    <div class="empty-spacer hidden-mobile"></div>
 
-                <label class="form-group full-width">
-                    <span>Projekty poboczne / hobby</span>
-                    <textarea name="SideProjectsHobby" rows="2" [(ngModel)]="surveyModel.SideProjectsHobby" required></textarea>
-                </label>
+                    <label class="form-group full-width">
+                        <span>Umiejętności (Twarde)</span>
+                        <textarea name="skills" rows="2" [(ngModel)]="surveyModel.skills"
+                            placeholder="np. JavaScript, Python, Docker..." required></textarea>
+                    </label>
 
-                <label class="form-group">
-                    <span>Mocne strony</span>
-                    <input type="text" name="Strengths" [(ngModel)]="surveyModel.Strengths" required />
-                </label>
+                    <label class="form-group full-width">
+                        <span>Doświadczenie (nawet to z projektów)</span>
+                        <textarea name="Expierience" rows="3" [(ngModel)]="surveyModel.Expierience"
+                            placeholder="Opisz swoje najważniejsze doświadczenia" required></textarea>
+                    </label>
 
-                <label class="form-group">
-                    <span>Słabe strony</span>
-                    <input type="text" name="Weaknesses" [(ngModel)]="surveyModel.Weaknesses" required />
-                </label>
+                    <label class="form-group full-width">
+                        <span>Projekty poboczne i hobby</span>
+                        <textarea name="SideProjectsHobby" rows="2" [(ngModel)]="surveyModel.SideProjectsHobby"
+                            placeholder="Nad czym aktualnie dłubiesz?" required></textarea>
+                    </label>
 
-                <label class="form-group">
-                    <span>Uczelnia</span>
-                    <input type="text" name="University" [(ngModel)]="surveyModel.University" required />
-                </label>
-
-                <label class="form-group">
-                    <span>Rok ukończenia</span>
-                    <input
-                        type="number"
-                        min="2000"
-                        name="GraduationYear"
-                        [(ngModel)]="surveyModel.GraduationYear"
-                        required
-                    />
-                </label>
+                    <label class="form-group full-width">
+                        <span>Zainteresowania ogólne</span>
+                        <textarea name="Inrest" rows="2" [(ngModel)]="surveyModel.Inrest" required></textarea>
+                    </label>
+                </div>
             </div>
 
             <footer class="actions">
-                <button type="submit" [disabled]="surveyForm.invalid">Zapisz ankietę</button>
+                <button type="submit" [disabled]="surveyForm.invalid" class="btn-submit-survey">Zapisz profil i
+                    wygeneruj plan ✨</button>
             </footer>
         </form>
     </article>

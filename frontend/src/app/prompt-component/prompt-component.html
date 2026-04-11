@@ -5,25 +5,82 @@
 
   <main class="main-content">
     <!-- ... same as before ... -->
-    <div class="input-section" *ngIf="!responseMessage">
-      <h1>Cześć!</h1>
-      <p>Opisz nam swoje zainteresowania, a my dopasujemy dla Ciebie idealną ścieżkę rozwoju kariery w sektorze IT.</p>
+    <div class="input-section hero-style" *ngIf="!responseMessage">
+      <div class="hero-info-column">
+        <div class="info-badge">Wygeneruj swój plan</div>
+        <h1 class="hero-title-left">Twój asystent kariery</h1>
+        <p class="hero-subtitle">
+          Nasz agent AI wygeneruje Ci 3-etapowy plan rozwoju i dorzuci <strong>interaktywną mapę z zadaniami</strong>
+          dopasowaną do Ciebie.
+        </p>
+        <h4 class="preview-label"
+          style="text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ih-surface-soft); margin: 2rem 0 0.5rem; font-weight: 700;">
+          Przykład: Fundamenty Backendowe i SQL</h4>
 
-      <div class="error-box" *ngIf="errorMessage" style="color: red; margin-bottom: 1rem;">
-        🚨 {{ errorMessage }}
+        <div class="preview-roadmap-card">
+          <div class="preview-card-number">1</div>
+          <div class="preview-card-content">
+            <h3 class="preview-card-title">Etap 1: Fundamenty Backendowe i SQL</h3>
+            <p class="preview-card-desc">Ugruntowanie wiedzy z zakresu budowy aplikacji webowych i baz danych SQL.</p>
+          </div>
+        </div>
+
+        <div class="preview-roadmap-card" style="opacity: 0.7; transform: scale(0.98); margin-top: 0.5rem;">
+          <div class="preview-card-number">2</div>
+          <div class="preview-card-content">
+            <h3 class="preview-card-title">Etap 2: Rozszerzenie wiedzy o Docker i bezpieczeństwo, Miesiące 4-6</h3>
+            <p class="preview-card-desc">Opanowanie narzędzi do konteneryzacji i pogłębienie wiedzy z zakresu
+              bezpieczeństwa aplikacji webowych.</p>
+          </div>
+        </div>
+
+        <div class="preview-roadmap-card" style="opacity: 0.4; transform: scale(0.95); margin-top: 0.5rem;">
+          <div class="preview-card-number">3</div>
+          <div class="preview-card-content">
+            <h3 class="preview-card-title">Etap 3: Rozwój umiejętności miękkich i językowych, Miesiące 7-9</h3>
+            <p class="preview-card-desc">Poprawa znajomości języka angielskiego i umiejętności miękkich kluczowych w
+              pracy zespołowej.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="textarea-wrapper">
-        <textarea [(ngModel)]="prompt"
-          (keydown.enter)="!loading && prompt.trim() ? sendRequest() : null; $event.preventDefault()"
-          [disabled]="loading" placeholder="W czym mogę Ci dzisiaj pomóc?" rows="5">
-        </textarea>
-      </div>
+      <div class="hero-form-column">
+        <div class="error-box" *ngIf="errorMessage" style="color: red; margin-bottom: 1rem">
+          🚨 {{ errorMessage }}
+        </div>
 
-      <button class="btn-submit" (click)="sendRequest()" [disabled]="loading || !prompt.trim()">
-        <span *ngIf="!loading">Wyślij</span>
-        <span *ngIf="loading">Analizowanie... ⏳</span>
-      </button>
+        <div class="search-bar-wrapper">
+          <span class="search-icon">🔍</span>
+          <textarea [(ngModel)]="prompt"
+            (keydown.enter)="!loading && prompt.trim() ? sendRequest() : null; $event.preventDefault()"
+            [disabled]="loading"
+            placeholder="Opisz nam po swojemu co Cię interesuje, a my zrobimy z tego karierę (np. lubię analizować dane i rozwiązywać zagadki logiczne...)"
+            rows="3" class="search-textarea"></textarea>
+          <button class="btn-search" (click)="sendRequest()" [disabled]="loading || !prompt.trim()">
+            <span *ngIf="!loading">Szukaj</span>
+            <span *ngIf="loading">⏳</span>
+          </button>
+        </div>
+
+        <div class="suggestions" *ngIf="!prompt && !loading" style="justify-content: flex-start;">
+          <span class="suggestion-chip"
+            (click)="setPrompt('Chcę zostać Front-end Developerem w React. Co muszę umieć?')">Frontend React</span>
+          <span class="suggestion-chip"
+            (click)="setPrompt('Jaka jest najlepsza ścieżka do zostania Data Scientist?')">Data Science</span>
+          <span class="suggestion-chip"
+            (click)="setPrompt('Znam podstawy C++. W którą stronę warto pójść (Gamedev czy Embedded)?')">C++
+            Kierunki</span>
+        </div>
+
+        <div class="survey-hint" (click)="goToSurvey()">
+          <div class="survey-hint-icon">📋</div>
+          <div class="survey-hint-text">
+            <strong>Uzyskaj lepsze powiązania z rynkiem!</strong>
+            <span>Po wypełnieniu ankiety profilowej nasza sztuczna inteligencja zaproponuje znacznie precyzyjniejszą i
+              dopasowaną roadmapę. <a>Kliknij tutaj, aby przejść do ankiety.</a></span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="results-section" *ngIf="responseMessage">
@@ -36,14 +93,14 @@
 
       <div class="cards-container" *ngIf="planGenerated">
         <div class="card highlight-card">
-          <div class="badge">
-            <span class="icon">🚀</span> NOWY PLAN
-          </div>
+          <div class="badge"><span class="icon">🚀</span> NOWY PLAN</div>
           <h2>Plan zapisany</h2>
-          <p>Szczegóły Twojego nowego planu rozwoju znajdziesz w swoim Dashboardzie. Możesz tam sprawdzić etapy, zadania
-            oraz przypisane wskaźniki sukcesu i materiały edukacyjne.</p>
+          <p>
+            Szczegóły Twojego nowego planu rozwoju znajdziesz w swoim Dashboardzie. Możesz tam
+            sprawdzić etapy, zadania oraz przypisane wskaźniki sukcesu i materiały edukacyjne.
+          </p>
 
-          <button class="btn-roadmap" (click)="goToDashboard()" style="margin-top: 15px; width: 100%;">
+          <button class="btn-roadmap" (click)="goToDashboard()" style="margin-top: 15px; width: 100%">
             Przejdź do Twojego Profilu AI 📊
           </button>
         </div>
@@ -52,11 +109,12 @@
       <div class="cta-card">
         <h2>Chcesz stworzyć odrębną wariację?</h2>
         <p>Możesz zadać kolejne pytanie by sprawdzić inne wizje profilu.</p>
-        <button class="btn-primary" (click)="responseMessage = ''; planGenerated = false; prompt = ''">Odśwież pole
-          ↺</button>
+        <button class="btn-primary" (click)="responseMessage = ''; planGenerated = false; prompt = ''">
+          Odśwież pole ↺
+        </button>
       </div>
     </div>
   </main>
 
-  <!-- Unified Navbar handled navigation -->
-</div>
+  <!-- zamiana na navbar -->
+</div>

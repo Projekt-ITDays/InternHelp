@@ -71,12 +71,20 @@ export class PromptComponent {
       }
     });
   }
+
+  setPrompt(text: string) {
+    this.prompt = text;
+  }
   goToDashboard() {
     this.router.navigate(['/dashboard']);
   }
 
   goToRoadmapList() {
     this.router.navigate(['/ai/roadmap']);
+  }
+
+  goToSurvey() {
+    this.router.navigate(['/survey']);
   }
 
   // sendRequest() {

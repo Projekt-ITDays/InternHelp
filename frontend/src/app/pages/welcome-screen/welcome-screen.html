@@ -1,99 +1,93 @@
 <app-navbar></app-navbar>
 
 <div class="welcome-screen">
-	@if (showErrorWidget()) {
-		<section class="error-widget" role="status" aria-live="polite">
-			<span>{{ errorMessage() }}</span>
-			<button type="button" (click)="dismissErrorWidget()" aria-label="Zamknij komunikat">Zamknij</button>
-		</section>
-	}
+    @if (showErrorWidget()) {
+    <section class="error-widget" role="status" aria-live="polite">
+        <span>{{ errorMessage() }}</span>
+        <button type="button" (click)="dismissErrorWidget()" aria-label="Zamknij komunikat">Zamknij</button>
+    </section>
+    }
 
-	<section class="layout-wide">
-		<div class="stage-panel">
-              <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo stage-logo" /> -->
+    <section class="layout-wide">
+        <div class="stage-panel">
+            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo stage-logo" /> -->
 
-			<div class="shot-viewport stage-shot" aria-live="polite">
-				@for (feature of featureCards; track feature.id) {
-					@if (isFeatureActive(feature.id)) {
-                        @if (feature.id === 'summary') {
-                            <app-main-page></app-main-page>
-                        } @else {
-                            <figure class="shot-frame">
-                                <picture>
-                                    <source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl" />
-                                    <img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
-                                </picture>
-                            </figure>
-                        }
-					}
-				}
-			</div>
-
-			<nav class="stage-links" aria-label="Informacje prawne">
-				<a href="/" (click)="$event.preventDefault()">Kontakt</a>
-				<a href="/" (click)="$event.preventDefault()">Regulamin</a>
-			</nav>
-		</div>
-
-		<aside class="right-rail">
-			<section class="feature-panel">
-				<ng-container *ngTemplateOutlet="featureListTemplate"></ng-container>
-			</section>
-
-			<section class="auth-panel">
-                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
-			</section>
-		</aside>
-	</section>
-
-	<section class="layout-mobile">
-		<article class="mobile-login-screen">
-			<div class="mobile-login-inner">
-                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" /> -->
-                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
-			</div>
-			</article>
-
-		<article class="mobile-feature-screen">
-			<div class="shot-viewport mobile-shot" aria-live="polite">
-				@for (feature of featureCards; track feature.id) {
-					@if (isFeatureActive(feature.id)) {
-						<figure class="shot-frame">
-							<picture>
-								<source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl">
-								<img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
-							</picture>
-						</figure>
-					}
-				}
-			</div>
-
-            <div class="feature-list mobile-feature-list">
-			    <ng-container *ngTemplateOutlet="featureListTemplate"></ng-container>
+            <div class="shot-viewport stage-shot" aria-live="polite">
+                @for (feature of featureCards; track feature.id) {
+                @if (isFeatureActive(feature.id)) {
+                @if (feature.id === 'summary') {
+                <app-main-page></app-main-page>
+                } @else {
+                <figure class="shot-frame">
+                    <picture>
+                        <source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl" />
+                        <img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+                    </picture>
+                </figure>
+                }
+                }
+                }
             </div>
 
-			<footer class="mobile-footer">
-				<a href="/" (click)="$event.preventDefault()">Kontakt</a>
-				<a href="/" (click)="$event.preventDefault()">Regulamin</a>
-			</footer>
-		</article>
-	</section>
+            <nav class="stage-links" aria-label="Informacje prawne">
+                <a href="/" (click)="$event.preventDefault()">Kontakt</a>
+                <a href="/" (click)="$event.preventDefault()">Regulamin</a>
+            </nav>
+        </div>
+
+        <aside class="right-rail">
+            <section class="feature-panel">
+                <ng-container *ngTemplateOutlet="featureListTemplate"></ng-container>
+            </section>
+
+            <section class="auth-panel">
+                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+            </section>
+        </aside>
+    </section>
+
+    <section class="layout-mobile">
+        <article class="mobile-login-screen">
+            <div class="mobile-login-inner">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" /> -->
+                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+            </div>
+        </article>
+
+        <article class="mobile-feature-screen">
+            <div class="shot-viewport mobile-shot" aria-live="polite">
+                @for (feature of featureCards; track feature.id) {
+                @if (isFeatureActive(feature.id)) {
+                <figure class="shot-frame">
+                    <picture>
+                        <source media="(max-width: 900px)" [srcset]="feature.mobileImageUrl">
+                        <img [src]="feature.imageUrl" [alt]="feature.title" loading="lazy" />
+                    </picture>
+                </figure>
+                }
+                }
+            </div>
+
+            <div class="feature-list mobile-feature-list">
+                <ng-container *ngTemplateOutlet="featureListTemplate"></ng-container>
+            </div>
+
+            <footer class="mobile-footer">
+                <a href="/" (click)="$event.preventDefault()">Kontakt</a>
+                <a href="/" (click)="$event.preventDefault()">Regulamin</a>
+            </footer>
+        </article>
+    </section>
 
     <ng-template #featureListTemplate>
         <div class="feature-list">
             @for (feature of featureCards; track feature.id) {
-                <button
-                    type="button"
-                    class="feature-row"
-                    [class.is-active]="isFeatureActive(feature.id)"
-                    (mouseenter)="onFeatureHover(feature.id)"
-                    (focus)="setActiveFeature(feature.id)"
-                    (click)="setActiveFeature(feature.id)"
-                    [attr.aria-pressed]="isFeatureActive(feature.id)"
-                >
-                    <span class="feature-title">{{ feature.title }}</span>
-                    <span class="feature-description">{{ feature.description }}</span>
-                </button>
+            <button type="button" class="feature-row" [class.is-active]="isFeatureActive(feature.id)"
+                (mouseenter)="onFeatureHover(feature.id)" (focus)="setActiveFeature(feature.id)"
+                (click)="setActiveFeature(feature.id)" [attr.aria-pressed]="isFeatureActive(feature.id)">
+                <span class="feature-title">{{ feature.title }}</span>
+                <span class="feature-description">{{ feature.description }}</span>
+            </button>
             }
         </div>
     </ng-template>
@@ -102,24 +96,10 @@
         <div class="login-card">
             <form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
                 <div class="credentials-group">
-                    <input
-                        type="text"
-                        name="username"
-                        class="username-input"
-                        [value]="username()"
-                        (input)="onUsernameInput($event)"
-                        autocomplete="username"
-                        placeholder="Login"
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        class="password-input"
-                        [value]="password()"
-                        (input)="onPasswordInput($event)"
-                        autocomplete="current-password"
-                        placeholder="Hasło"
-                    />
+                    <input type="text" name="username" class="username-input" [value]="username()"
+                        (input)="onUsernameInput($event)" autocomplete="username" placeholder="Login" />
+                    <input type="password" name="password" class="password-input" [value]="password()"
+                        (input)="onPasswordInput($event)" autocomplete="current-password" placeholder="Hasło" />
                 </div>
 
                 <div class="captcha-box">[ Widzet Captcha ]</div>

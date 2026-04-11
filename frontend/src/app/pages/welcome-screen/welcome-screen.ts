@@ -25,7 +25,7 @@ type FeatureCard = {
 export class WelcomeScreen {
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {
     this.handleGoogleOAuthCallback();
   }
@@ -34,21 +34,24 @@ export class WelcomeScreen {
     {
       id: 'summary',
       title: 'Our mission and principles',
-      description: 'We want to show students the best path to get an internship. We want to show them what they need to learn and how to do it. We want to show them how to get an internship and how to prepare for it.',
+      description:
+        'We want to show students the best path to get an internship. We want to show them what they need to learn and how to do it. We want to show them how to get an internship and how to prepare for it.',
       imageUrl: 'https://picsum.photos/seed/desk-summary/1280/800',
       mobileImageUrl: 'https://picsum.photos/seed/mob-summary/600/1200',
     },
     {
       id: 'pipeline',
-      title: 'PlaceHolder',
-      description: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer pretium ligula at sem feugiat, nec pulvinar massa tristique.',
+      title: 'Smart Internship Pipeline',
+      description:
+        'Track your application status, manage interviews, and keep all your job search activities in one place. Never miss a deadline again.',
       imageUrl: 'https://picsum.photos/seed/desk-pipeline/1280/800',
       mobileImageUrl: 'https://picsum.photos/seed/mob-pipeline/600/1200',
     },
     {
       id: 'knowledge',
-      title: 'PlaceHolder',
-      description: 'Curabitur non justo et magna auctor volutpat. Duis sodales mi sed ligula luctus, vitae venenatis orci faucibus.',
+      title: 'Knowledge & Skills Hub',
+      description:
+        'Access a library of resources, tutorials, and guides specifically chosen for your career path. Learn the skills that actually matter.',
       imageUrl: 'https://picsum.photos/seed/desk-knowledge/1280/800',
       mobileImageUrl: 'https://picsum.photos/seed/mob-knowledge/600/1200',
     },
@@ -62,9 +65,10 @@ export class WelcomeScreen {
   protected Login(): void {
     const LoginDto: LoggingDto = {
       username: this.username(),
-      password: this.password()
-    }
-    this.authService.login(LoginDto)
+      password: this.password(),
+    };
+    this.authService
+      .login(LoginDto)
       .then(() => {
         // Zmiana aiapi -> ai/ask
         // this.router.navigate(['/ai/ask']);
@@ -124,9 +128,7 @@ export class WelcomeScreen {
     this.Login();
   }
 
-  protected onRegisterClick(): void {
-
-  }
+  protected onRegisterClick(): void {}
 
   protected onForgotPasswordClick(): void {
     this.showError('Opcja przypomnienia hasła będzie dostępna wkrótce.');
