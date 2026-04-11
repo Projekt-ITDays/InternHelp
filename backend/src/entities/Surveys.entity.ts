@@ -1,6 +1,12 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { userEntity } from "./user.entity";
 
+const deafultDate = () => {
+    const date = new Date();
+    date.setHours(date.getHours() + 2); 
+    return date;
+
+}
 @Entity('surveys')
 export class SurveysEntity {
     @PrimaryGeneratedColumn()
@@ -36,4 +42,7 @@ export class SurveysEntity {
     University : string
     @Column()
     GraduationYear : number
+    @Column({default : () => "CURRENT_TIMESTAMP"})
+    createdAt : Date
 }
+

@@ -22,7 +22,7 @@ export class AiAgentService {
     ) { }
 
 
-    model = new ChatGoogle('gemini-2.5-flash-lite')
+    model = new ChatGoogle('gemini-2.5-flash')
     private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
     private embeddingModel = new GoogleGenerativeAIEmbeddings(
         {
@@ -32,61 +32,61 @@ export class AiAgentService {
     private vectorstore = new MemoryVectorStore(this.embeddingModel);
 
 
-    prompt = `Jesteś elitarnym Architektem Kariery i Mentorem Technologicznym. Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
+        prompt = `Jesteś Elitarnym Architektem Kariery 360°. Pomagasz tworzyć realistyczne, praktyczne i dopasowane do profilu użytkownika plany rozwoju oraz odpowiadasz rzeczowo na pytania o karierę.
 
-ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
-1) Użyj ID użytkownika przekazanego na końcu tego promptu, aby wywołać WSZYSTKIE poniższe narzędzia i zebrać o nim pełne informacje:
-   - get_education({ userId })
-   - get_experience({ userId })
-   - get_intrest({ userId })
-   - get_goal({ userId })
-    - get_knowledge_base({ userId, query })
-3) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
-4) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user". Nie halucynuj danych o użytkowniku.
+### ZASADY PRACY Z KONTEXTEM
+Masz dostęp wyłącznie do tych narzędzi:
+- get_education
+- get_experience
+- get_intrest
+- get_goal
 
-WYTYCZNE DLA TWORZENIA PLANU (Jeśli użytkownik prosi o plan/roadmapę):
-- Zwróć wynik WYŁĄCZNIE jako poprawny obiekt JSON, bez żadnego dodatkowego tekstu przed lub po.
-- Podziel plan na logiczne etapy czasowe (np. "Miesiące 1-3", "Miesiące 4-6", itd.).
-- Unikaj ogólników (zamiast "naucz się baz danych", napisz "opanuj podstawy agregacji w MongoDB").
-- Zadania praktyczne muszą spełniać kryteria SMART (Skonkretyzowane, Mierzalne, Osiągalne, Istotne, Określone w czasie) i nadawać się do wpisania w portfolio.
-- Wskazuj konkretne typy zasobów (konkretne tytuły książek, nazwy platform, frameworków).
+Zanim odpowiesz, zawsze pobierz kontekst z wszystkich czterech narzędzi, używając tego samego userId przekazanego w systemowej instrukcji.
+Nie wymyślaj danych. Jeśli któreś narzędzie zwróci brak informacji, napisz to wprost i oprzyj odpowiedź tylko na dostępnych danych.
+Nie odwołuj się do żadnych innych narzędzi ani do bazy wiedzy, bo nie są dostępne.
 
-WYMAGANA STRUKTURA JSON DLA PLANU:
+Priorytet interpretacji danych jest następujący: get_goal > get_experience > get_education > get_intrest.
+Jeśli get_goal wskazuje na consulting, strategy, operations, finance, advisory albo podobny tor kariery, roadmapa ma być konsultingowa i nie wolno zamieniać jej na roadmapę IT/backendową, chyba że użytkownik wyraźnie o to poprosi.
+Jeśli w danych pojawiają się interesy IT, programowanie lub narzędzia techniczne, traktuj je jako kompetencje wspierające analizę i automatyzację, a nie jako główny kierunek kariery, jeśli cel zawodowy wskazuje consulting.
+
+Jeśli cel użytkownika dotyczy konsultingu, używaj języka i przykładów właściwych dla tego obszaru: case interview, market sizing, issue tree, hypothesis-driven analysis, financial modeling, Excel, PowerPoint, research rynkowy, komunikacja z interesariuszami i strukturyzowanie problemów.
+Nie proponuj jako głównego kierunku: backendu, mikroserwisów, DevOps ani pełnej ścieżki software engineering, chyba że użytkownik tego wyraźnie chce.
+
+### TRYB ODPOWIEDZI
+1. Jeśli użytkownik prosi o roadmapę, plan rozwoju albo analizę ścieżki kariery, odpowiedz WYŁĄCZNIE poprawnym JSON-em.
+2. Jeśli użytkownik zadaje inne pytanie, odpowiedz naturalnym, profesjonalnym językiem po pobraniu kontekstu z narzędzi.
+3. Nie dodawaj markdown, komentarzy ani wyjaśnień poza treścią odpowiedzi.
+
+### WYMAGANIA DLA JSON
+Jeśli tworzysz roadmapę, zwróć dokładnie taki kształt:
 {
-  "podsumowanie_profilu": "Krótkie (2-3 zdania) podsumowanie obecnego stanu użytkownika i jego głównego celu.",
-  "szacowany_czas_tygodniowo": "np. 10-15 godzin",
-  "plan": [
-    {
-      "etap": "Nazwa i ramy czasowe etapu (np. Etap 1: Fundamenty Backendowe, 0-3 miesiące)",
-      "cel_glowny": "Główny cel tego etapu",
-      "umiejetnosci": {
-        "twarde": ["Konkretna technologia 1", "Konkretna technologia 2"],
-        "miekkie": ["np. komunikacja w zespole rozproszonym", "zarządzanie czasem"]
-      },
-      "zasoby_edukacyjne": [
-        "Precyzyjnie nazwany kurs/książka/dokumentacja 1",
-        "Precyzyjnie nazwany kurs/książka/dokumentacja 2"
-      ],
-      "projekt_portfolio": {
-        "nazwa": "Nazwa praktycznego projektu",
-        "opis": "Co aplikacja będzie robić i jakie technologie wykorzysta",
-        "kryteria_akceptacji": ["Funkcjonalność A działa", "Pokrycie testami min. 70%"]
-      },
-      "wskazniki_sukcesu_kpi": [
-        "Zbudowanie i wdrożenie projektu X na Heroku/AWS",
-        "Rozwiązanie 20 zadań na LeetCode"
-      ]
-    }
-  ]
+    "analiza_potencjalu": "4-5 zdań o dopasowaniu obecnego profilu do celu, z naciskiem na umiejętności transferowalne i luki kompetencyjne.",
+    "intensywnosc_pracy": "Jedno konkretne zalecenie godzinowe tygodniowo.",
+    "kamienie_milowe": [
+        {
+            "etap": "Nazwa etapu z horyzontem czasu",
+            "fundamenty_merytoryczne": ["Konkretne standardy, przepisy, teorie lub frameworki"],
+            "narzedzia_i_technologie": ["Konkretne narzędzia, oprogramowanie lub technologie"],
+            "umiejetnosci_miekkie": ["Konkretny skill miękki"],
+            "zasoby_eksperckie": ["Precyzyjne książki, kursy, portale, raporty branżowe"],
+            "zadanie_praktyczne_portfolio": {
+                "nazwa": "Jedno konkretne zadanie końcowe",
+                "opis": "Jasny scenariusz wykonania",
+                "kryteria_sukcesu": ["Mierzalny wynik 1", "Mierzalny wynik 2"]
+            },
+            "kpi_postepu": ["Mierzalny postęp 1", "Mierzalny postęp 2"]
+        }
+    ]
 }
 
-ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imię?"):
-- Odpowiedz naturalnym językiem (nie JSON-em), krótko, zwięźle i wyłącznie na podstawie danych pobranych z narzędzi.
-- Jeśli nie masz danych, aby odpowiedzieć na pytanie, przyznaj to wprost.
-`
+### JAKOŚĆ TREŚCI
+- Bądź konkretny i wymagający, ale wspierający.
+- Jeśli cel dotyczy konkretnej branży, dobieraj język, narzędzia i kryteria do tej branży.
+- Każdy etap ma kończyć się realnym artefaktem: projektem, certyfikatem, audytem, analizą lub wdrożeniem.
+- Jeśli brakuje danych, wskaż brak i zaproponuj bezpieczny kierunek działania zamiast zgadywać.`
     getEducationTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } });
+            const surveyData = await this.surveysRepository.findOne({ where: { userId } ,order : { createdAt : "DESC"}} );
             if (!surveyData) {
                 return "Brak danych edukacyjnych dla tego użytkownika.";
             }
@@ -105,7 +105,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     );
     getExperienceTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } });
+            const surveyData = await this.surveysRepository.findOne({ where: { userId }  ,order : { createdAt : "DESC"}} );
             if (!surveyData) {
                 return "Brak danych o doświadczeniu dla tego użytkownika.";
             }
@@ -123,7 +123,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     getInterestTool = tool(
         async ({ userId }, config: ToolRuntime) => {
             const writer = config.writer;
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } });
+            const surveyData = await this.surveysRepository.findOne({ where: { userId } ,order : { createdAt : "DESC"}} );
             if (writer) {
                 writer(`Pobieranie danych o zainteresowaniach użytkownika o id ${userId}...`);
             }
@@ -146,11 +146,14 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     )
     getGoalTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } });
+            const surveyData = await this.surveysRepository.findOne({ where: { userId } , order : { createdAt : "DESC"}} ,
+                
+             );
             if (!surveyData) {
                 return "Brak danych o celach zawodowych dla tego użytkownika.";
             }
             const goal = surveyData.PreferredInternshipType;
+            console.log(`Pobieranie danych o celach zawodowych użytkownika o id ${userId}...` , goal);
             return `Cele zawodowe użytkownika: ${goal}.`;
         },
         {
@@ -211,7 +214,9 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
                 return { message: rawContent.trim() };
             }
 
-            if (planObject.plan && Array.isArray(planObject.plan)) {
+            const hasRoadmapShape = Array.isArray(planObject.plan) || Array.isArray(planObject.kamienie_milowe);
+
+            if (hasRoadmapShape) {
                 const newSavedPlan = new this.agentResponseModel({
                     userId: userId,
                     status: 'active',

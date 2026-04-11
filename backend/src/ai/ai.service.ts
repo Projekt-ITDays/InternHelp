@@ -127,12 +127,11 @@ export class AiService {
 
 
   async sendSurveyData(surveyData: SurveyDto) {
-    const existing = await this.surveysRepository.findOne({ where: { userId: surveyData.userId } });
-    if (existing) {
-      Object.assign(existing, surveyData);
-      return this.surveysRepository.save(existing);
-    }
-    const surveyEntity = this.surveysRepository.create(surveyData);
+    
+    const surveyEntity = this.surveysRepository.create({
+      ...surveyData,
+      createdAt: new Date()
+    });
     return this.surveysRepository.save(surveyEntity);
   }
 }

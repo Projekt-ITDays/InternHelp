@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsInt, IsOptional, IsString, IsUUID, Min } from "class-validator";
+import { IsDate, IsInt, IsOptional, IsString, IsUUID, Min } from "class-validator";
 
 
 
@@ -53,4 +53,5 @@ export class SurveyDto {
 
     @IsInt()
     GraduationYear: number;
+    
 }
