@@ -3,7 +3,7 @@
   top: 0;
   z-index: 1000;
   width: 100%;
-  background: rgba(26, 23, 19, 0.9);
+  background: var(--ih-nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--ih-border-dark);
   padding: 0.6rem 0;
@@ -22,7 +22,7 @@
 .logo-section {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--ih-surface);
+  color: var(--ih-nav-fg);
   cursor: pointer;
   letter-spacing: -0.02em;
 }
@@ -38,8 +38,8 @@
 }
 
 .nav-tile {
-  background: rgba(42, 37, 32, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--ih-nav-tile-bg);
+  border: 1px solid color-mix(in srgb, var(--ih-nav-fg) 22%, transparent);
   border-radius: 10px;
   padding: 8px 16px;
   display: flex;
@@ -47,16 +47,26 @@
   gap: 10px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #a0988c;
+  color: color-mix(in srgb, var(--ih-nav-fg) 74%, transparent);
   min-width: 120px;
   justify-content: center;
 }
 
 .nav-tile:hover {
-  background: rgba(62, 47, 35, 0.8);
+  background: color-mix(in srgb, var(--ih-nav-fg) 16%, transparent);
   border-color: var(--ih-accent);
-  color: var(--ih-surface);
+  color: var(--ih-nav-fg);
   transform: translateY(-1px);
+}
+
+.nav-tile.is-active {
+  background: var(--ih-nav-tile-active-bg);
+  color: var(--ih-nav-tile-active-fg);
+  border-color: var(--ih-nav-tile-active-bg);
+}
+
+.nav-tile.is-active ng-icon {
+  color: var(--ih-nav-tile-active-fg);
 }
 
 .nav-tile ng-icon {
@@ -82,7 +92,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #3e2f23;
+  background: var(--ih-accent-soft);
   border: 2px solid var(--ih-accent);
   color: var(--ih-accent);
   display: flex;

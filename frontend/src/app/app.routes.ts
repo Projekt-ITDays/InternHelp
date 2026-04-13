@@ -16,29 +16,29 @@ export const routes: Routes = [
 	{
 		path: 'survey',
 		component: Survey,
-		canActivate: [authGuard]
+		canActivate: []
 	},
 	{
 		// Zmiana aiapi -> ai/ask
 		path: 'ai/ask',
 		component: PromptComponent,
-		canActivate: [authGuard]
+		canActivate: []
 
 	},
 	{
 		path: 'ai/roadmap/:careerPath',
 		component: RoadmapComponent,
-		canActivate: [authGuard]
+		canActivate: []
 	},
 	{
 		path: 'dashboard',
 		component: Dashboard,
-		canActivate: [authGuard]
+		canActivate: []
 	},
 	{
 		path: 'Settings',
 		component: Settings,
-		canActivate: [authGuard]
+		canActivate: []
 	},
 	{
 		path: '**',

@@ -26,7 +26,7 @@
 
 .eyebrow {
   margin: 0 0 0.55rem;
-  color: #ffd6bf;
+  color: var(--ih-accent-soft);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -90,8 +90,8 @@ h2 {
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
-  box-shadow: 0 0 0 4px rgba(217, 119, 66, 0.14);
+  background: var(--ih-accent);
+  box-shadow: 0 0 0 4px var(--ih-accent-soft);
 }
 
 .benefits strong {
@@ -131,15 +131,19 @@ h2 {
 }
 
 .btn--primary {
-  color: #fff;
-  background: linear-gradient(135deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
-  box-shadow: 0 10px 28px rgba(217, 119, 66, 0.35);
+  color: var(--ih-button-text);
+  background: var(--ih-button-bg);
+  box-shadow: var(--ih-shadow-md);
+}
+
+.btn--primary:hover {
+  background: var(--ih-button-bg-hover);
 }
 
 .btn--ghost {
   color: var(--ih-surface);
-  background: rgba(243, 239, 230, 0.06);
-  border: 1px solid rgba(243, 239, 230, 0.16);
+  background: var(--ih-surface-06);
+  border: 1px solid var(--ih-border-dark);
 }
 
 @media (max-width: 860px) {

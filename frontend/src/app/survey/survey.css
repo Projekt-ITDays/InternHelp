@@ -6,7 +6,7 @@
 	min-height: 100vh;
 	padding: 1.1rem;
 	background:
-		radial-gradient(circle at 12% 20%, rgba(217, 119, 66, 0.16), transparent 34%),
+		radial-gradient(circle at 12% 20%, var(--ih-accent-soft), transparent 34%),
 		var(--ih-bg);
 	color: var(--ih-surface);
 }
@@ -29,7 +29,7 @@
 .badge-style {
 	display: inline-flex;
 	align-items: center;
-	background: rgba(217, 119, 66, 0.15);
+	background: var(--ih-accent-soft);
 	color: var(--ih-accent-strong);
 	padding: 6px 16px;
 	border-radius: 99px;
@@ -60,21 +60,21 @@
 }
 
 .form-section {
-	background: rgba(243, 239, 230, 0.02);
-	border: 1px solid rgba(243, 239, 230, 0.05);
+	background: var(--ih-surface-02);
+	border: 1px solid var(--ih-surface-05);
 	border-radius: 16px;
 	padding: 1.8rem;
 }
 
 .section-title {
 	font-size: 1.15rem;
-	color: #f3efe6;
+	color: var(--ih-surface);
 	margin: 0 0 1.25rem;
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	padding-bottom: 0.85rem;
-	border-bottom: 1px dashed rgba(243, 239, 230, 0.1);
+	border-bottom: 1px dashed var(--ih-surface-10);
 	font-weight: 600;
 }
 
@@ -96,16 +96,16 @@
 .form-group span {
 	font-size: 0.85rem;
 	font-weight: 600;
-	color: rgba(243, 239, 230, 0.85);
+	color: var(--ih-surface-85);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
 	width: 100%;
-	border: 1px solid rgba(243, 239, 230, 0.1);
+	border: 1px solid var(--ih-surface-10);
 	border-radius: 10px;
-	background: rgba(17, 16, 13, 0.6);
+	background: var(--ih-bg-overlay-60);
 	color: var(--ih-surface);
 	padding: 0.8rem 1rem;
 	font-size: 0.95rem;
@@ -116,7 +116,7 @@
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-	color: rgba(243, 239, 230, 0.3);
+	color: var(--ih-surface-12);
 }
 
 .form-group textarea {
@@ -127,9 +127,9 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-	border-color: rgba(217, 119, 66, 0.5);
-	box-shadow: 0 0 0 3px rgba(217, 119, 66, 0.15);
-	background: rgba(26, 23, 19, 0.9);
+	border-color: var(--ih-accent-border);
+	box-shadow: 0 0 0 3px var(--ih-accent-soft);
+	background: var(--ih-bg-overlay-90);
 }
 
 .full-width {
@@ -144,20 +144,21 @@
 
 .btn-submit-survey {
 	border: none;
-	background: linear-gradient(135deg, var(--ih-accent-strong) 0%, var(--ih-accent) 100%);
-	color: #fff;
+	background: var(--ih-button-bg);
+	color: var(--ih-button-text);
 	border-radius: 12px;
 	padding: 1rem 2rem;
 	font-size: 1.05rem;
 	font-weight: 700;
 	cursor: pointer;
 	transition: all 0.2s ease;
-	box-shadow: 0 4px 15px rgba(217, 119, 66, 0.3);
+	box-shadow: var(--ih-shadow-md);
 }
 
 .btn-submit-survey:hover:not(:disabled) {
+	background: var(--ih-button-bg-hover);
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(217, 119, 66, 0.4);
+	box-shadow: var(--ih-shadow-lg);
 	filter: brightness(1.1);
 }
 

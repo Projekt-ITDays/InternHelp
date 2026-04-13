@@ -30,4 +30,11 @@ export class Navbar {
   navigateTo(path: string) {
     this.router.navigate([path]);
   }
+
+  isActive(path: string): boolean {
+    if (path === '/') {
+      return this.router.url === '/';
+    }
+    return this.router.url.startsWith(path);
+  }
 }

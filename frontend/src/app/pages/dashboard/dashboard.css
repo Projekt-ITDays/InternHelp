@@ -18,7 +18,7 @@
 .plan-loader {
   width: 24px;
   height: 24px;
-  border: 3px solid #3e2f23;
+  border: 3px solid var(--ih-border-dark);
   border-top-color: var(--ih-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--ih-overlay-50);
   backdrop-filter: blur(6px);
   animation: fadeIn 0.2s ease-out;
 }
@@ -55,8 +55,8 @@
   overflow-y: auto;
   border-radius: 1.25rem;
   border: 1px solid var(--ih-border-dark);
-  background: #2a2520;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  background: var(--ih-bg-overlay-95);
+  box-shadow: var(--ih-shadow-lg);
   padding: 2rem;
   animation: slideUp 0.25s ease-out;
 }
@@ -91,7 +91,7 @@
 }
 
 .plan-detail::-webkit-scrollbar-thumb {
-  background: #3e2f23;
+  background: var(--ih-bg-soft);
   border-radius: 3px;
 }
 
