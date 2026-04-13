@@ -1,20 +1,167 @@
 @import "tailwindcss";
 
 :root {
-	--ih-bg: #11100d;
-	--ih-bg-soft: #1a1713;
-	--ih-surface: #f3efe6;
-	--ih-surface-soft: rgba(243, 239, 230, 0.74);
-	--ih-ink: #1b1915;
-	--ih-ink-soft: #625949;
-	--ih-accent: #d97742;
-	--ih-accent-strong: #e38a54;
-	--ih-border-dark: rgba(243, 239, 230, 0.18);
-	--ih-border-light: rgba(27, 25, 21, 0.16);
+	--color-bg: #f0eee6;
+	--color-surface: #e3dacc;
+	--color-text: #232322;
+	--color-text-muted: #47463f;
+	--color-contrast: #141413;
+	--color-on-contrast: #c1c1bd;
+	--color-accent: #dd8669;
+	--color-accent-strong: #bc694c;
+	--color-danger: #b15f4b;
+	--color-success: #bcd1ca;
+	--color-info: #cbcadb;
+
+	--layer-subtle: color-mix(in srgb, var(--color-contrast) 8%, transparent);
+	--layer-soft: color-mix(in srgb, var(--color-contrast) 14%, transparent);
+	--overlay-soft: color-mix(in srgb, var(--color-surface) 94%, transparent);
+	--overlay-strong: color-mix(in srgb, var(--color-surface) 98%, transparent);
+	--accent-soft: color-mix(in srgb, var(--color-accent) 16%, transparent);
+	--accent-mid: color-mix(in srgb, var(--color-accent) 26%, transparent);
+	--accent-border: color-mix(in srgb, var(--color-accent) 50%, transparent);
+
+	--ih-base-bg: var(--color-bg);
+	--ih-base-element: var(--color-surface);
+	--ih-base-contrast: var(--color-contrast);
+	--ih-base-third: var(--color-bg);
+	--ih-base-text: var(--color-text);
+	--ih-base-text-on-contrast: var(--color-on-contrast);
+	--ih-base-attention: var(--color-accent);
+	--ih-extra-01: var(--color-surface);
+	--ih-extra-02: var(--color-success);
+	--ih-extra-03: var(--color-info);
+	--ih-extra-04: var(--color-accent-strong);
+
+	--ih-bg: var(--color-bg);
+	--ih-bg-soft: var(--color-surface);
+	--ih-surface: var(--color-text);
+	--ih-surface-soft: var(--color-text-muted);
+	--ih-ink: var(--color-text);
+	--ih-ink-soft: var(--color-text-muted);
+	--ih-accent: var(--color-accent);
+	--ih-accent-strong: var(--color-accent-strong);
+	--ih-border-dark: color-mix(in srgb, var(--color-contrast) 22%, transparent);
+	--ih-border-light: color-mix(in srgb, var(--color-contrast) 16%, transparent);
 	--ih-radius-lg: 20px;
 	--ih-radius-md: 14px;
-	--ih-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.22);
-	--ih-shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.32);
+	--ih-shadow-md: 0 10px 30px color-mix(in srgb, var(--color-contrast) 12%, transparent);
+	--ih-shadow-lg: 0 24px 56px color-mix(in srgb, var(--color-contrast) 16%, transparent);
+	--ih-button-bg: var(--ih-base-contrast);
+	--ih-button-bg-hover: var(--ih-base-text);
+	--ih-button-text: var(--ih-base-text-on-contrast);
+	--ih-nav-bg: var(--ih-base-contrast);
+	--ih-nav-fg: var(--ih-base-text-on-contrast);
+	--ih-nav-tile-bg: color-mix(in srgb, var(--ih-nav-fg) 10%, transparent);
+	--ih-nav-tile-active-bg: var(--ih-accent);
+	--ih-nav-tile-active-fg: var(--ih-base-contrast);
+
+	/* shared color helpers for component-level styles */
+	--ih-accent-faint: var(--accent-soft);
+	--ih-accent-soft: var(--accent-soft);
+	--ih-accent-mid: var(--accent-mid);
+	--ih-accent-strong-soft: var(--accent-mid);
+	--ih-accent-border: var(--accent-border);
+	--ih-accent-border-strong: var(--accent-border);
+
+	--ih-surface-02: var(--layer-subtle);
+	--ih-surface-05: var(--layer-subtle);
+	--ih-surface-06: var(--layer-subtle);
+	--ih-surface-08: var(--layer-subtle);
+	--ih-surface-10: var(--layer-soft);
+	--ih-surface-12: var(--layer-soft);
+	--ih-surface-58: color-mix(in srgb, var(--color-text) 58%, transparent);
+	--ih-surface-85: color-mix(in srgb, var(--color-text) 85%, transparent);
+
+	--ih-bg-overlay: var(--overlay-soft);
+	--ih-bg-overlay-50: var(--overlay-soft);
+	--ih-bg-overlay-60: var(--overlay-soft);
+	--ih-bg-overlay-72: var(--overlay-soft);
+	--ih-bg-overlay-74: var(--overlay-soft);
+	--ih-bg-overlay-84: var(--overlay-strong);
+	--ih-bg-overlay-86: var(--overlay-strong);
+	--ih-bg-overlay-90: var(--overlay-strong);
+	--ih-bg-overlay-95: var(--overlay-strong);
+	--ih-bg-overlay-96: var(--overlay-strong);
+	--ih-bg-overlay-98: var(--overlay-strong);
+	--ih-bg-overlay-strong: var(--overlay-strong);
+
+	--ih-danger: var(--color-danger);
+	--ih-danger-dark: color-mix(in srgb, var(--color-danger) 82%, var(--color-contrast));
+	--ih-skill-blue: var(--color-accent);
+	--ih-skill-blue-text: var(--color-accent-strong);
+	--ih-danger-border: color-mix(in srgb, var(--color-danger) 50%, transparent);
+	--ih-danger-soft: color-mix(in srgb, var(--color-danger) 20%, transparent);
+	--ih-danger-soft-strong: color-mix(in srgb, var(--color-danger) 32%, transparent);
+	--ih-success: var(--color-success);
+	--ih-success-strong: color-mix(in srgb, var(--color-success) 78%, var(--color-contrast));
+	--ih-success-soft: color-mix(in srgb, var(--color-success) 18%, transparent);
+	--ih-success-border: color-mix(in srgb, var(--color-success) 36%, transparent);
+	--ih-success-shadow: color-mix(in srgb, var(--color-success) 30%, transparent);
+	--ih-warning: var(--color-accent);
+	--ih-warning-strong: var(--color-accent-strong);
+	--ih-overlay-50: rgba(0, 0, 0, 0.5);
+	--ih-overlay-inset: color-mix(in srgb, var(--color-contrast) 12%, transparent);
+	--ih-overlay-shadow: color-mix(in srgb, var(--color-contrast) 18%, transparent);
+}
+
+:root[data-theme='dark'],
+html[data-theme='dark'],
+body[data-theme='dark'] {
+	--color-bg: #141413;
+	--color-surface: #1d1d1b;
+	--color-text: #f0eee6;
+	--color-text-muted: #c1c1bd;
+	--color-contrast: #f0eee6;
+	--color-on-contrast: #141413;
+	--color-accent: #dd8669;
+	--color-accent-strong: #bc694c;
+
+	--layer-subtle: color-mix(in srgb, var(--color-text) 8%, transparent);
+	--layer-soft: color-mix(in srgb, var(--color-text) 14%, transparent);
+	--overlay-soft: color-mix(in srgb, var(--color-surface) 88%, transparent);
+	--overlay-strong: color-mix(in srgb, var(--color-surface) 95%, transparent);
+
+	--ih-bg: var(--color-bg);
+	--ih-bg-soft: var(--color-surface);
+	--ih-surface: var(--color-text);
+	--ih-surface-soft: var(--color-text-muted);
+	--ih-ink: var(--color-text);
+	--ih-ink-soft: var(--color-text-muted);
+	--ih-accent: var(--color-accent);
+	--ih-accent-strong: var(--color-accent-strong);
+	--ih-button-bg: var(--color-accent);
+	--ih-button-bg-hover: var(--color-accent-strong);
+	--ih-button-text: var(--color-on-contrast);
+	--ih-nav-bg: var(--color-contrast);
+	--ih-nav-fg: var(--color-on-contrast);
+	--ih-nav-tile-bg: color-mix(in srgb, var(--ih-nav-fg) 16%, transparent);
+	--ih-nav-tile-active-bg: var(--color-accent);
+	--ih-nav-tile-active-fg: var(--color-on-contrast);
+	--ih-border-dark: color-mix(in srgb, var(--color-text) 18%, transparent);
+	--ih-border-light: color-mix(in srgb, var(--color-text) 14%, transparent);
+	--ih-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.24);
+	--ih-shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.36);
+	--ih-surface-02: var(--layer-subtle);
+	--ih-surface-05: var(--layer-subtle);
+	--ih-surface-06: var(--layer-subtle);
+	--ih-surface-08: var(--layer-subtle);
+	--ih-surface-10: var(--layer-soft);
+	--ih-surface-12: var(--layer-soft);
+	--ih-surface-58: color-mix(in srgb, var(--color-text) 58%, transparent);
+	--ih-surface-85: color-mix(in srgb, var(--color-text) 85%, transparent);
+	--ih-bg-overlay: var(--overlay-soft);
+	--ih-bg-overlay-50: var(--overlay-soft);
+	--ih-bg-overlay-60: var(--overlay-soft);
+	--ih-bg-overlay-72: var(--overlay-soft);
+	--ih-bg-overlay-74: var(--overlay-soft);
+	--ih-bg-overlay-84: var(--overlay-strong);
+	--ih-bg-overlay-86: var(--overlay-strong);
+	--ih-bg-overlay-90: var(--overlay-strong);
+	--ih-bg-overlay-95: var(--overlay-strong);
+	--ih-bg-overlay-96: var(--overlay-strong);
+	--ih-bg-overlay-98: var(--overlay-strong);
+	--ih-bg-overlay-strong: var(--overlay-strong);
 }
 
 * {

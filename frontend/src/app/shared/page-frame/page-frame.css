@@ -3,10 +3,7 @@
   display: block;
   min-height: 100svh;
   color: var(--ih-surface);
-  background:
-    radial-gradient(circle at 14% 20%, rgba(217, 119, 66, 0.18), transparent 40%),
-    radial-gradient(circle at 84% 74%, rgba(217, 119, 66, 0.1), transparent 46%),
-    linear-gradient(150deg, #0f0e0c 0%, #11100d 58%, #0f0d0b 100%);
+    background: var(--ih-bg);
 }
 
 .page-frame {
@@ -39,7 +36,7 @@
   padding: 0.45rem 0.9rem 0.5rem;
   margin-top: calc(-1 * var(--page-padding));
   margin-left: calc(-1 * var(--page-padding));
-  background: rgba(17, 16, 13, 0.74);
+  background: var(--ih-bg-overlay-74);
   border: 1px solid var(--ih-border-dark);
   border-radius: 0 0 14px 0;
   backdrop-filter: blur(6px);

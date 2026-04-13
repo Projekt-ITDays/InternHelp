@@ -5,19 +5,19 @@
     </div>
 
     <div class="nav-grid">
-      <div class="nav-tile" (click)="navigateTo('/')" title="Logowanie">
+      <div class="nav-tile" [class.is-active]="isActive('/')" (click)="navigateTo('/')" title="Logowanie">
         <ng-icon name="heroArrowRightOnRectangle" size="18"></ng-icon>
         <span>Logowanie</span>
       </div>
-      <div class="nav-tile" (click)="navigateTo('/ai/ask')" title="Generacja">
+      <div class="nav-tile" [class.is-active]="isActive('/ai/ask')" (click)="navigateTo('/ai/ask')" title="Generacja">
         <ng-icon name="heroSparkles" size="18"></ng-icon>
         <span>Generacja</span>
       </div>
-      <div class="nav-tile" (click)="navigateTo('/dashboard')" title="Dashboard">
+      <div class="nav-tile" [class.is-active]="isActive('/dashboard')" (click)="navigateTo('/dashboard')" title="Dashboard">
         <ng-icon name="heroChartBarSquare" size="18"></ng-icon>
         <span>Dashboard</span>
       </div>
-      <div class="nav-tile" (click)="navigateTo('/survey')" title="Ankieta">
+      <div class="nav-tile" [class.is-active]="isActive('/survey')" (click)="navigateTo('/survey')" title="Ankieta">
         <ng-icon name="heroClipboardDocumentList" size="18"></ng-icon>
         <span>Ankieta</span>
       </div>

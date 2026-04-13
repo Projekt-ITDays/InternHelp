@@ -19,7 +19,7 @@
   padding: 0 14px;
   border: 1px solid var(--ih-border-dark);
   border-radius: 12px;
-  background: rgba(17, 16, 13, 0.9);
+  background: var(--ih-bg-overlay-90);
   cursor: pointer;
 }
 
@@ -29,7 +29,7 @@
 
 .menu-trigger:hover,
 .menu-trigger:focus-visible {
-  background: rgba(26, 23, 19, 0.95);
+  background: var(--ih-bg-overlay-95);
 }
 
 .trigger-line {
@@ -49,7 +49,7 @@
   overflow-y: auto;
   border: 1px solid var(--ih-border-dark);
   border-radius: 14px;
-  background: rgba(17, 16, 13, 0.98);
+  background: var(--ih-bg-overlay-98);
   box-shadow: var(--ih-shadow-md);
   opacity: 0;
   pointer-events: none;
@@ -65,7 +65,7 @@
   width: 100%;
   min-height: 56px;
   border: 0;
-  border-top: 1px solid rgba(243, 239, 230, 0.14);
+  border-top: 1px solid var(--ih-border-dark);
   border-radius: 0;
   padding: 0.9rem 1.1rem;
   font-size: 1rem;
@@ -82,12 +82,12 @@
 
 .menu-action:hover,
 .menu-action:focus-visible {
-  background: rgba(217, 119, 66, 0.14);
+  background: var(--ih-accent-soft);
   outline: none;
 }
 
 .create-action {
-  color: #ffd1b3;
+  color: var(--ih-accent-soft);
 }
 
 .plan-row {
@@ -97,7 +97,7 @@
 }
 
 .plan-row.is-active .plan-action {
-  background: rgba(217, 119, 66, 0.2);
+  background: var(--ih-accent-mid);
 }
 
 .plan-action {
@@ -115,8 +115,8 @@
   height: 38px;
   border: 0;
   border-radius: 10px;
-  background: #8f2727;
-  color: #fff;
+  background: var(--ih-danger);
+  color: var(--ih-surface);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -139,12 +139,12 @@
 
 .delete-plan:hover,
 .delete-plan:focus-visible {
-  background: #771b1b;
+  background: var(--ih-danger-dark);
 }
 
 .empty-state {
   margin: 0;
-  border-top: 1px solid rgba(243, 239, 230, 0.14);
+  border-top: 1px solid var(--ih-border-dark);
   padding: 0.65rem 0.8rem;
   font-size: 0.85rem;
   color: var(--ih-surface-soft);
@@ -155,7 +155,7 @@
 }
 
 .settings-action.is-current {
-  background: rgba(217, 119, 66, 0.24);
+  background: var(--ih-accent-mid);
 }
 
 .confirm-delete-overlay {
@@ -165,7 +165,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--ih-overlay-50);
   z-index: 35;
 }
 
@@ -173,7 +173,7 @@
   width: min(430px, 100%);
   border: 1px solid var(--ih-border-dark);
   border-radius: 14px;
-  background: rgba(17, 16, 13, 0.98);
+  background: var(--ih-bg-overlay-98);
   padding: 1rem;
   box-shadow: var(--ih-shadow-lg);
 }
@@ -209,18 +209,18 @@
 
 .confirm-btn:hover,
 .confirm-btn:focus-visible {
-  background: rgba(217, 119, 66, 0.14);
+  background: var(--ih-accent-soft);
   outline: none;
 }
 
 .danger-btn {
-  border-color: rgba(192, 80, 80, 0.58);
-  background: rgba(159, 31, 31, 0.26);
+  border-color: var(--ih-danger-border);
+  background: var(--ih-danger-soft);
 }
 
 .danger-btn:hover,
 .danger-btn:focus-visible {
-  background: rgba(159, 31, 31, 0.45);
+  background: var(--ih-danger-soft-strong);
 }
 
 .cancel-btn {
