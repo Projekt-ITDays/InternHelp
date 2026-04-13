@@ -36,7 +36,7 @@
   padding: 0.45rem 0.9rem 0.5rem;
   margin-top: calc(-1 * var(--page-padding));
   margin-left: calc(-1 * var(--page-padding));
-  background: var(--ih-bg-overlay-74);
+  background: var(--ih-bg-overlay-84);
   border: 1px solid var(--ih-border-dark);
   border-radius: 0 0 14px 0;
   backdrop-filter: blur(6px);

@@ -19,7 +19,7 @@
   padding: 0 14px;
   border: 1px solid var(--ih-border-dark);
   border-radius: 12px;
-  background: var(--ih-bg-overlay-90);
+  background: var(--ih-bg-overlay-84);
   cursor: pointer;
 }
 
@@ -49,7 +49,7 @@
   overflow-y: auto;
   border: 1px solid var(--ih-border-dark);
   border-radius: 14px;
-  background: var(--ih-bg-overlay-98);
+  background: var(--ih-bg-overlay-95);
   box-shadow: var(--ih-shadow-md);
   opacity: 0;
   pointer-events: none;
@@ -173,7 +173,7 @@
   width: min(430px, 100%);
   border: 1px solid var(--ih-border-dark);
   border-radius: 14px;
-  background: var(--ih-bg-overlay-98);
+  background: var(--ih-bg-overlay-95);
   padding: 1rem;
   box-shadow: var(--ih-shadow-lg);
 }

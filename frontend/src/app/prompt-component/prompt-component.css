@@ -5,7 +5,7 @@
 .app-container {
   width: 100%;
   margin: 0 auto;
-  background: radial-gradient(circle at 12% 12%, var(--ih-accent-soft), transparent 42%), var(--ih-bg);
+  background: var(--ih-bg);
   color: var(--ih-surface);
   min-height: 100vh;
   position: relative;
@@ -33,7 +33,7 @@
 }
 
 .notification-btn {
-  background: var(--ih-surface-08);
+  background: var(--ih-surface-06);
   border: 1px solid var(--ih-border-dark);
   border-radius: 10px;
   font-size: 1.05rem;
@@ -76,7 +76,7 @@
 
 .input-section,
 .results-section {
-  background: var(--ih-bg-overlay-84);
+  background: var(--ih-bg-overlay-95);
   border: 1px solid var(--ih-border-dark);
   border-radius: var(--ih-radius-lg);
   padding: 1.1rem;
@@ -90,7 +90,7 @@
 }
 
 .card {
-  background: var(--ih-surface-05);
+  background: var(--ih-bg-overlay-84);
   border: 1px solid var(--ih-border-dark);
   border-radius: var(--ih-radius-md);
   padding: 1rem;
@@ -113,7 +113,7 @@
 }
 
 .card-icon {
-  background-color: var(--ih-surface-08);
+  background-color: var(--ih-surface-06);
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -213,7 +213,7 @@
 
 .btn-search {
   background: var(--ih-accent-strong);
-  color: var(--ih-base-text-on-contrast);
+  color: var(--ih-button-text);
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
@@ -379,7 +379,7 @@
 
 .suggestion-chip {
   background: var(--ih-accent-soft);
-  border: 1px solid var(--ih-accent-strong-soft);
+  border: 1px solid var(--ih-accent-mid);
   color: var(--ih-surface);
   padding: 8px 14px;
   border-radius: 20px;
@@ -390,7 +390,7 @@
 
 .suggestion-chip:hover {
   background: var(--ih-accent-mid);
-  border-color: var(--ih-accent-border-strong);
+  border-color: var(--ih-accent-border);
   transform: translateY(-2px);
 }
 
@@ -398,7 +398,7 @@
   display: flex;
   align-items: flex-start;
   background: var(--ih-accent-soft);
-  border: 1px dashed var(--ih-accent-strong-soft);
+  border: 1px dashed var(--ih-accent-mid);
   border-radius: 12px;
   padding: 14px 18px;
   margin-top: 1rem;
@@ -468,7 +468,7 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: 520px;
-  background: var(--ih-bg-overlay-96);
+  background: var(--ih-bg-overlay-95);
   display: flex;
   justify-content: space-around;
   padding: 0.65rem 0 1.05rem;
@@ -533,7 +533,7 @@
     padding: 1.4rem 0.7rem;
     border-right: 1px solid var(--ih-border-dark);
     border-top: 0;
-    background: var(--ih-bg-overlay-86);
+    background: var(--ih-bg-overlay-84);
   }
 
   .nav-item {

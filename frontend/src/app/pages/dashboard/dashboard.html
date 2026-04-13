@@ -17,7 +17,7 @@
         </button>
 
         <div
-          class="flex flex-1 flex-col justify-center gap-3 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-50)] p-5 shadow-md">
+          class="flex flex-1 flex-col justify-center gap-3 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-5 shadow-md">
           <div class="flex items-center justify-between">
             <div>
               <span class="text-sm text-[var(--ih-ink-soft)]">Mój Poziom Zaawansowania</span>
@@ -26,14 +26,14 @@
                 <span class="ml-1 text-[var(--ih-accent)]">(Lvl {{ level() }})</span>
               </div>
             </div>
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--ih-bg-overlay-50)]">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--ih-bg-soft)]">
               <ng-icon name="heroTrophy" size="24" class="text-[var(--ih-accent)]" />
             </div>
           </div>
 
           <div class="relative h-3 overflow-hidden rounded-full bg-[var(--ih-bg-soft)]">
             <div
-              class="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[var(--ih-accent)] to-[var(--ih-accent-strong)] transition-all duration-700"
+              class="absolute inset-y-0 left-0 rounded-full bg-[var(--ih-accent)] transition-all duration-700"
               [style.width.%]="levelProgress()">
             </div>
           </div>
@@ -53,14 +53,14 @@
 
         @if (plansLoading()) {
         <div
-          class="flex items-center justify-center rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-50)] p-10 shadow-md">
+          class="flex items-center justify-center rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-10 shadow-md">
           <div class="plan-loader"></div>
           <span class="ml-4 text-sm text-[var(--ih-ink-soft)]">Ładowanie planów…</span>
         </div>
         } @else if (sourcePlans().length === 0) {
         <div
-          class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-50)] p-10 text-center shadow-md">
-          <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ih-bg-overlay-50)]">
+          class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-10 text-center shadow-md">
+          <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ih-bg-soft)]">
             <ng-icon name="heroClipboardDocumentList" size="28" class="text-[var(--ih-accent)]" />
           </div>
           <p class="text-[var(--ih-ink-soft)]">Nie masz jeszcze żadnych planów.</p>
@@ -74,13 +74,13 @@
         <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           @for (plan of visiblePlans(); track plan._id) {
           <div
-            class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-50)] p-5 shadow-md
+            class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-5 shadow-md
                       transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg"
             (click)="openPlan(plan)">
 
             <div class="mb-3 flex items-center justify-between">
               <span
-                class="inline-flex items-center gap-1.5 rounded-full bg-[var(--ih-bg-overlay-50)] px-3 py-1 text-xs font-medium text-[var(--ih-accent)]">
+                class="inline-flex items-center gap-1.5 rounded-full bg-[var(--ih-bg-soft)] px-3 py-1 text-xs font-medium text-[var(--ih-accent)]">
                 <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--ih-accent)]"></span>
                 {{ plan.status || 'active' }}
               </span>
@@ -89,7 +89,7 @@
 
             <h3 class="mb-1 font-semibold text-[var(--ih-surface)]">{{ getPlanTitle(plan) }}</h3>
             <p class="mb-3 line-clamp-2 text-xs text-[var(--ih-ink-soft)]">
-              {{ plan.planData?.podsumowanie_profilu || 'Twój wygenerowany plan rozwoju' }}
+              {{ plan.planData.podsumowanie_profilu || 'Twój wygenerowany plan rozwoju' }}
             </p>
 
             <div class="mb-4 flex items-center gap-4 text-xs text-[var(--ih-ink-soft)]">
@@ -99,19 +99,19 @@
               </span>
               <span class="flex items-center gap-1.5">
                 <ng-icon name="heroBookOpen" size="14" class="text-[var(--ih-accent)]" />
-                {{ plan.planData?.plan?.length || 0 }} etapów
+                {{ plan.planData.plan.length || 0 }} etapów
               </span>
             </div>
 
             <div class="flex flex-wrap gap-1.5">
-              @for (stage of plan.planData?.plan?.slice(0, 3); track $index) {
+              @for (stage of plan.planData.plan.slice(0, 3); track $index) {
               <span class="rounded-md bg-[var(--ih-bg-soft)] px-2 py-0.5 text-[11px] text-[var(--ih-ink-soft)]">
                 Etap {{ $index + 1 }}
               </span>
               }
-              @if ((plan.planData?.plan?.length || 0) > 3) {
+              @if ((plan.planData.plan.length || 0) > 3) {
               <span class="rounded-md bg-[var(--ih-bg-soft)] px-2 py-0.5 text-[11px] text-[var(--ih-accent)]">
-                +{{ (plan.planData?.plan?.length || 0) - 3 }}
+                +{{ (plan.planData.plan.length || 0) - 3 }}
               </span>
               }
             </div>
@@ -128,9 +128,9 @@
       </section>
 
 
-      <section class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-50)] p-6 shadow-md">
+      <section class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-6 shadow-md">
         <div class="mb-5 flex items-center gap-3">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--ih-bg-overlay-50)]">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--ih-bg-soft)]">
             <ng-icon name="heroCube" size="20" class="text-[var(--ih-accent)]" />
           </div>
           <h2 class="text-lg font-bold text-[var(--ih-surface)]">Statystyki</h2>
@@ -164,7 +164,7 @@
       <div>
         <h2 class="text-xl font-bold text-[var(--ih-surface)]">{{ getPlanTitle(selectedPlan()!) }}</h2>
         <p class="mt-1 text-sm text-[var(--ih-ink-soft)]">{{ getPlanDate(selectedPlan()!) }} · {{
-          selectedPlan()!.planData?.szacowany_czas_tygodniowo }}</p>
+          selectedPlan()!.planData.szacowany_czas_tygodniowo }}</p>
       </div>
       <div class="flex items-center gap-4">
         <button (click)="openRoadmapGraph(selectedPlan()!._id)"
@@ -178,7 +178,7 @@
       </div>
     </div>
 
-    @if (selectedPlan()!.planData?.podsumowanie_profilu) {
+    @if (selectedPlan()!.planData.podsumowanie_profilu) {
     <div class="mb-6 flex gap-3 rounded-xl bg-[var(--ih-bg-soft)] p-4">
       <ng-icon name="heroInformationCircle" size="18" class="mt-0.5 shrink-0 text-[var(--ih-accent)]" />
       <p class="text-sm leading-relaxed text-[var(--ih-ink-soft)]">{{ selectedPlan()!.planData.podsumowanie_profilu }}</p>
@@ -186,7 +186,7 @@
     }
 
     <div class="flex flex-col gap-6">
-      @for (stage of selectedPlan()!.planData?.plan; track $index) {
+      @for (stage of selectedPlan()!.planData.plan; track $index) {
       <div class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-soft)] p-5">
         <div class="mb-4 flex items-start gap-4 border-b border-[var(--ih-border-dark)] pb-3">
           <div
@@ -205,13 +205,13 @@
             Umiejętności
           </div>
           <div class="flex flex-wrap gap-1.5">
-            @for (skill of stage.umiejetnosci?.twarde; track $index) {
+            @for (skill of stage.umiejetnosci.twarde; track $index) {
             <span
               class="inline-flex items-center rounded-md border border-[var(--ih-accent)]/25 bg-[var(--ih-accent)]/15 px-2 py-1 text-xs font-medium text-[var(--ih-accent)]">
               {{ skill }}
             </span>
             }
-            @for (skill of stage.umiejetnosci?.miekkie; track $index) {
+            @for (skill of stage.umiejetnosci.miekkie; track $index) {
             <span
               class="inline-flex items-center rounded-md border border-[var(--ih-skill-blue)]/20 bg-[var(--ih-skill-blue)]/10 px-2 py-1 text-xs font-medium text-[var(--ih-skill-blue-text)]">
               {{ skill }}
@@ -220,7 +220,7 @@
           </div>
         </div>
 
-        @if (stage.zasoby_edukacyjne?.length) {
+        @if (stage.zasoby_edukacyjne.length) {
         <div class="mt-4">
           <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
             <ng-icon name="heroAcademicCap" size="14" class="text-[var(--ih-accent)]" />
@@ -240,10 +240,10 @@
             <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]" />
             Projekt portfolio
           </div>
-          <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-50)] p-3.5">
+          <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-3.5">
             <h4 class="text-sm font-semibold text-[var(--ih-surface)]">{{ stage.projekt_portfolio.nazwa }}</h4>
             <p class="mt-1 text-xs text-[var(--ih-ink-soft)]">{{ stage.projekt_portfolio.opis }}</p>
-            @if (stage.projekt_portfolio.kryteria_akceptacji?.length) {
+            @if (stage.projekt_portfolio.kryteria_akceptacji.length) {
             <div class="mt-2 flex flex-col gap-1">
               @for (criteria of stage.projekt_portfolio.kryteria_akceptacji; track $index) {
               <div class="flex items-start gap-2 text-xs text-[var(--ih-ink-soft)]">
@@ -257,7 +257,7 @@
         </div>
         }
 
-        @if (stage.wskazniki_sukcesu_kpi?.length) {
+        @if (stage.wskazniki_sukcesu_kpi.length) {
         <div class="mt-4">
           <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
             <ng-icon name="heroClipboardDocumentList" size="14" class="text-[var(--ih-accent)]" />
