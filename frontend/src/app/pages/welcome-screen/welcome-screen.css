@@ -21,7 +21,7 @@
     color: var(--surface);
     background: var(--bg-page);
     font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    letter-spacing: 0.01em;
+    letter-spacing: 0;
 }
 
 * {
@@ -112,7 +112,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: var(--ih-bg-overlay-50);
+    background: transparent;
 }
 
 .stage-shot {
@@ -147,9 +147,12 @@
 }
 
 .stage-links a {
-    color: var(--surface-soft);
+    color: var(--ih-nav-fg);
+    background: color-mix(in srgb, var(--ih-nav-bg) 82%, transparent);
+    border-color: color-mix(in srgb, var(--ih-nav-fg) 22%, transparent);
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.86rem;
+    font-weight: 500;
     padding: 0.3rem 0.55rem;
     border-radius: 999px;
     border: 1px solid transparent;
@@ -157,9 +160,9 @@
 }
 
 .stage-links a:hover {
-    border-color: var(--border-dark);
-    background: var(--ih-surface-08);
-    color: var(--surface);
+    border-color: var(--ih-accent);
+    background: color-mix(in srgb, var(--ih-nav-bg) 92%, transparent);
+    color: var(--ih-nav-fg);
 }
 
 .right-rail {
@@ -195,7 +198,7 @@
     width: 100%;
     border: 1px solid var(--border-dark);
     border-radius: var(--radius-md);
-    background: var(--ih-surface-02);
+    background: var(--ih-surface-06);
     padding: 1rem 1rem;
     text-align: left;
     color: var(--surface);
@@ -208,14 +211,14 @@
 .right-rail .feature-row.is-active {
     transform: translateY(-1px);
     background: var(--ih-accent-soft);
-    border-color: var(--ih-accent-border-strong);
+    border-color: var(--ih-accent-border);
     outline: none;
 }
 
 .feature-row {
     width: 100%;
     border: 1px solid var(--border-dark);
-    background: var(--ih-surface-02);
+    background: var(--ih-surface-06);
     border-radius: var(--radius-md);
     padding: 0.82rem 0.78rem;
     text-align: left;
@@ -238,9 +241,9 @@
     opacity: 0;
     overflow: hidden;
     margin-top: 0;
-    color: var(--surface-soft);
-    font-size: 0.9rem;
-    line-height: 1.48;
+    color: var(--ih-ink);
+    font-size: 0.95rem;
+    line-height: 1.56;
     transition: max-height 320ms ease, opacity 220ms ease, margin-top 220ms ease;
 }
 
@@ -266,7 +269,7 @@
     height: 100%;
     padding: 1.1rem;
     border-radius: var(--radius-lg);
-    background: var(--surface);
+    background: color-mix(in srgb, var(--ih-bg-soft) 82%, var(--ih-bg));
     color: var(--ink);
     box-shadow: var(--shadow-xl);
     border: 1px solid var(--border-light);
@@ -286,7 +289,7 @@
     overflow: hidden;
     border: 1px solid var(--border-light);
     border-radius: 12px;
-    background: var(--bg-page);
+    background: color-mix(in srgb, var(--ih-bg-soft) 86%, var(--ih-bg));
 }
 
 .credentials-group input {
@@ -335,7 +338,7 @@
     padding: 0.2rem 0;
     background: transparent;
     color: var(--ink-soft);
-    font-size: 0.76rem;
+    font-size: 0.82rem;
     line-height: 1.3;
     cursor: pointer;
 }
@@ -380,7 +383,7 @@
     justify-content: center;
     gap: 0.62rem;
     border: 1px solid var(--border-light);
-    background: var(--bg-page);
+    background: color-mix(in srgb, var(--ih-bg-soft) 86%, var(--ih-bg));
     color: var(--ink);
     border-radius: 12px;
     padding: 0.66rem 0.92rem;
@@ -392,13 +395,13 @@
 }
 
 .google-login-button:hover {
-    background: var(--ih-base-third);
+    background: var(--ih-bg-soft);
     border-color: var(--border-dark);
     box-shadow: var(--shadow-md);
 }
 
 .google-login-button:focus-visible {
-    outline: 2px solid var(--ih-accent-border-strong);
+    outline: 2px solid var(--ih-accent-border);
     outline-offset: 2px;
 }
 
@@ -411,8 +414,8 @@
 .legal-note {
     display: grid;
     gap: 0.08rem;
-    font-size: 0.73rem;
-    line-height: 1.45;
+    font-size: 0.8rem;
+    line-height: 1.55;
     color: var(--ink-soft);
 }
 
@@ -438,7 +441,7 @@
 
 .register-button {
     border: 1px solid var(--border-light);
-    background: var(--bg-page);
+    background: color-mix(in srgb, var(--ih-bg-soft) 86%, var(--ih-bg));
     color: var(--ink);
 }
 
@@ -450,7 +453,7 @@
     margin: 0;
     text-align: center;
     color: var(--surface-soft);
-    font-size: 0.78rem;
+    font-size: 0.84rem;
 }
 
 .mobile-shot {
@@ -538,7 +541,7 @@
     .mobile-feature-list .feature-row:focus-visible,
     .mobile-feature-list .feature-row.is-active {
         background: var(--ih-accent-soft);
-        border-color: var(--ih-accent-border-strong);
+        border-color: var(--ih-accent-border);
         outline: none;
     }
 
@@ -551,9 +554,10 @@
     }
 
     .mobile-footer a {
-        color: var(--surface-soft);
+        color: var(--surface);
         text-decoration: none;
-        font-size: 0.83rem;
+        font-size: 0.88rem;
+        font-weight: 500;
     }
 }
 

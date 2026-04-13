@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { ThemeService } from '../../core/theme/theme';
 import {
   heroArrowRightOnRectangle,
   heroSparkles,
   heroChartBarSquare,
-  heroClipboardDocumentList
+  heroClipboardDocumentList,
+  heroMoon,
+  heroSun
 } from '@ng-icons/heroicons/outline';
 
 @Component({
@@ -20,12 +23,17 @@ import {
       heroArrowRightOnRectangle,
       heroSparkles,
       heroChartBarSquare,
-      heroClipboardDocumentList
+      heroClipboardDocumentList,
+      heroMoon,
+      heroSun
     })
   ]
 })
 export class Navbar {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public themeService: ThemeService
+  ) {}
 
   navigateTo(path: string) {
     this.router.navigate([path]);

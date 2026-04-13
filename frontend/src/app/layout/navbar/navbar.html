@@ -3,6 +3,16 @@
     <div class="logo-section" (click)="navigateTo('/')">
       <span class="logo-accent">Career</span>Sign
     </div>
+    <div class="theme-button">
+      <label class="theme-switch" title="Przełącz motyw">
+        <input type="checkbox" [checked]="themeService.isDarkMode()" (change)="themeService.toggleTheme()" aria-label="Przełącz motyw" />
+        <span class="slider">
+          <ng-icon class="icon-left" name="heroMoon" size="14"></ng-icon>
+          <span class="thumb"></span>
+          <ng-icon class="icon-right" name="heroSun" size="14"></ng-icon>
+        </span>
+      </label>
+    </div>
 
     <div class="nav-grid">
       <div class="nav-tile" [class.is-active]="isActive('/')" (click)="navigateTo('/')" title="Logowanie">
