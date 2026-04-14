@@ -2,7 +2,7 @@
 
 :root {
 	--ih-bg: #f6f1e8;
-	--ih-bg-soft: #eee4d7;
+	--ih-bg-soft: #f1ebe0;
 	--ih-surface: #2b2620;
 	--ih-surface-soft: #6d6558;
 	--ih-ink: #2b2620;
@@ -56,13 +56,22 @@
 	--ih-overlay-50: rgba(0, 0, 0, 0.5);
 	--ih-overlay-inset: color-mix(in srgb, #171411 12%, transparent);
 	--ih-overlay-shadow: color-mix(in srgb, #171411 18%, transparent);
+	--ih-pattern-mark: color-mix(in srgb, var(--ih-surface) 6%, transparent);
+	--ih-pattern-mark-soft: color-mix(in srgb, var(--ih-surface) 3%, transparent);
+	--ih-bg-pattern:
+		radial-gradient(12px 9px at 16px 14px, var(--ih-pattern-mark) 0 56%, transparent 62%),
+		radial-gradient(5px 10px at 21px 27px, var(--ih-pattern-mark-soft) 0 54%, transparent 61%),
+		radial-gradient(11px 8px at 58px 50px, var(--ih-pattern-mark) 0 56%, transparent 62%),
+		radial-gradient(4px 9px at 63px 62px, var(--ih-pattern-mark-soft) 0 54%, transparent 61%);
+	--ih-bg-pattern-size: 84px 84px;
+	--ih-bg-pattern-position: 0 0;
 }
 
 :root[data-theme='dark'],
 html[data-theme='dark'],
 body[data-theme='dark'] {
 	--ih-bg: #161412;
-	--ih-bg-soft: #23201c;
+	--ih-bg-soft: #1d1a17;
 	--ih-surface: #f2ece3;
 	--ih-surface-soft: #c8c1b6;
 	--ih-ink: #f2ece3;
@@ -93,6 +102,8 @@ body[data-theme='dark'] {
 	--ih-success-strong: color-mix(in srgb, var(--ih-success) 78%, #f2ece3);
 	--ih-overlay-inset: color-mix(in srgb, #000 22%, transparent);
 	--ih-overlay-shadow: color-mix(in srgb, #000 34%, transparent);
+	--ih-pattern-mark: color-mix(in srgb, var(--ih-surface) 8%, transparent);
+	--ih-pattern-mark-soft: color-mix(in srgb, var(--ih-surface) 5%, transparent);
 }
 
 * {
@@ -104,7 +115,11 @@ body {
 	margin: 0;
 	min-height: 100%;
 	font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-	background: var(--ih-bg);
+	background-color: var(--ih-bg);
+	background-image: var(--ih-bg-pattern);
+	background-size: var(--ih-bg-pattern-size);
+	background-position: var(--ih-bg-pattern-position);
+	background-attachment: fixed;
 	color: var(--ih-surface);
 }
 
