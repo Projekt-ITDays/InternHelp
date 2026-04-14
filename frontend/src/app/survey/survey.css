@@ -3,13 +3,9 @@
 }
 
 .survey-shell {
-	min-height: 100vh;
+	min-height: calc(100dvh - var(--ih-nav-height));
 	padding: 1.1rem;
 	background-color: var(--ih-bg);
-	background-image: var(--ih-bg-pattern);
-	background-size: var(--ih-bg-pattern-size);
-	background-position: var(--ih-bg-pattern-position);
-	background-attachment: fixed;
 	color: var(--ih-surface);
 }
 
@@ -17,7 +13,7 @@
 	max-width: 900px;
 	margin: 2rem auto;
 	padding: 1.25rem 1.5rem 1.6rem;
-	background: var(--ih-bg-overlay-95);
+	background: var(--ih-bg-a94);
 	border: 1px solid var(--ih-border-dark);
 	border-radius: var(--ih-radius-lg);
 	box-shadow: var(--ih-shadow-md);
@@ -66,11 +62,11 @@
 }
 
 .form-section {
-	background: var(--ih-bg-overlay-84);
+	background: var(--ih-bg-a94);
 	border: 1px solid var(--ih-border-dark);
 	border-radius: 16px;
 	padding: 1.8rem;
-	box-shadow: inset 0 1px 0 var(--ih-surface-06);
+	box-shadow: inset 0 1px 0 var(--ih-surface-a14);
 }
 
 .section-title {
@@ -81,7 +77,7 @@
 	align-items: center;
 	gap: 10px;
 	padding-bottom: 0.85rem;
-	border-bottom: 1px dashed var(--ih-surface-12);
+	border-bottom: 1px dashed var(--ih-surface-a14);
 	font-weight: 600;
 }
 
@@ -103,14 +99,14 @@
 .form-group span {
 	font-size: 0.85rem;
 	font-weight: 600;
-	color: var(--ih-surface-85);
+	color: var(--ih-surface-a85);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
 	width: 100%;
-	border: 1px solid var(--ih-surface-12);
+	border: 1px solid var(--ih-surface-a14);
 	border-radius: 10px;
 	background: var(--ih-bg);
 	color: var(--ih-surface);
@@ -123,7 +119,7 @@
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-	color: var(--ih-surface-12);
+	color: var(--ih-surface-a14);
 }
 
 .form-group textarea {

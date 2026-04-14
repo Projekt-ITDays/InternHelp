@@ -19,7 +19,7 @@
   padding: 0 14px;
   border: 1px solid var(--ih-border-dark);
   border-radius: 12px;
-  background: var(--ih-bg-overlay-84);
+  background: var(--ih-bg-a94);
   cursor: pointer;
 }
 
@@ -29,7 +29,7 @@
 
 .menu-trigger:hover,
 .menu-trigger:focus-visible {
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
 }
 
 .trigger-line {
@@ -49,7 +49,7 @@
   overflow-y: auto;
   border: 1px solid var(--ih-border-dark);
   border-radius: 14px;
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
   box-shadow: var(--ih-shadow-md);
   opacity: 0;
   pointer-events: none;
@@ -173,7 +173,7 @@
   width: min(430px, 100%);
   border: 1px solid var(--ih-border-dark);
   border-radius: 14px;
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
   padding: 1rem;
   box-shadow: var(--ih-shadow-lg);
 }
@@ -220,7 +220,7 @@
 
 .danger-btn:hover,
 .danger-btn:focus-visible {
-  background: var(--ih-danger-soft-strong);
+  background: var(--ih-danger-soft);
 }
 
 .cancel-btn {

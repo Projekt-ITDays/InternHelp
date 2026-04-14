@@ -1,17 +1,18 @@
 :host {
   display: block;
+  height: 100%;
+  overflow: hidden;
 }
 
 .app-container {
   width: 100%;
   margin: 0 auto;
   background-color: var(--ih-bg);
-  background-image: var(--ih-bg-pattern);
-  background-size: var(--ih-bg-pattern-size);
-  background-position: var(--ih-bg-pattern-position);
-  background-attachment: fixed;
   color: var(--ih-surface);
-  min-height: 100vh;
+  height: calc(100dvh - var(--ih-nav-height));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
 }
 
@@ -37,7 +38,7 @@
 }
 
 .notification-btn {
-  background: var(--ih-surface-06);
+  background: var(--ih-surface-a14);
   border: 1px solid var(--ih-border-dark);
   border-radius: 10px;
   font-size: 1.05rem;
@@ -48,6 +49,9 @@
 }
 
 .main-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
   padding: 0 1.2rem;
 }
 
@@ -80,7 +84,7 @@
 
 .input-section,
 .results-section {
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
   border: 1px solid var(--ih-border-dark);
   border-radius: var(--ih-radius-lg);
   padding: 1.1rem;
@@ -94,7 +98,7 @@
 }
 
 .card {
-  background: var(--ih-bg-overlay-84);
+  background: var(--ih-bg-a94);
   border: 1px solid var(--ih-border-dark);
   border-radius: var(--ih-radius-md);
   padding: 1rem;
@@ -117,7 +121,7 @@
 }
 
 .card-icon {
-  background-color: var(--ih-surface-06);
+  background-color: var(--ih-surface-a14);
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -147,7 +151,7 @@
 }
 
 .tag {
-  background-color: var(--ih-surface-12);
+  background-color: var(--ih-surface-a14);
   color: var(--ih-surface);
   padding: 5px 10px;
   border-radius: 999px;
@@ -180,13 +184,13 @@
 .search-bar-wrapper {
   display: flex;
   flex-direction: row;
-  background: var(--ih-bg-overlay-60);
+  background: var(--ih-bg-a94);
   border: 1px solid var(--ih-border-dark);
   border-radius: 12px;
   padding: 12px 14px;
   align-items: flex-start;
   margin-bottom: 1.5rem;
-  box-shadow: inset 0 2px 4px var(--ih-overlay-inset);
+  box-shadow: inset 0 2px 4px var(--ih-ink-a15);
   width: 100%;
 }
 
@@ -212,7 +216,7 @@
 }
 
 .search-textarea::placeholder {
-  color: var(--ih-surface-12);
+  color: var(--ih-surface-a14);
 }
 
 .btn-search {
@@ -294,11 +298,11 @@
   display: flex;
   align-items: flex-start;
   background: var(--ih-bg-soft);
-  border: 1px solid var(--ih-surface-06);
+  border: 1px solid var(--ih-surface-a14);
   border-radius: 12px;
   padding: 1.2rem;
   margin-top: 1.5rem;
-  box-shadow: 0 10px 30px var(--ih-overlay-shadow);
+  box-shadow: 0 10px 30px var(--ih-ink-a15);
   position: relative;
   overflow: hidden;
 }
@@ -472,7 +476,7 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: 520px;
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
   display: flex;
   justify-content: space-around;
   padding: 0.65rem 0 1.05rem;
@@ -486,7 +490,7 @@
   align-items: center;
   gap: 4px;
   font-size: 0.68rem;
-  color: var(--ih-surface-58);
+  color: var(--ih-surface-a60);
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 12px;
@@ -510,7 +514,7 @@
     margin: 0;
     padding-bottom: 0;
     display: block;
-    min-height: 100vh;
+    min-height: 100%;
   }
 
   .main-content {
@@ -537,7 +541,7 @@
     padding: 1.4rem 0.7rem;
     border-right: 1px solid var(--ih-border-dark);
     border-top: 0;
-    background: var(--ih-bg-overlay-84);
+    background: var(--ih-bg-a94);
   }
 
   .nav-item {

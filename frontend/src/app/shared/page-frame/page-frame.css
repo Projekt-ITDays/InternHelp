@@ -1,17 +1,13 @@
 :host {
   --page-padding: clamp(0.95rem, 2.6vw, 1.3rem);
   display: block;
-  min-height: 100svh;
+  min-height: calc(100dvh - var(--ih-nav-height));
   color: var(--ih-surface);
   background-color: var(--ih-bg);
-  background-image: var(--ih-bg-pattern);
-  background-size: var(--ih-bg-pattern-size);
-  background-position: var(--ih-bg-pattern-position);
-  background-attachment: fixed;
 }
 
 .page-frame {
-  min-height: 100svh;
+  min-height: calc(100dvh - var(--ih-nav-height));
   padding: var(--page-padding);
 }
 
@@ -40,7 +36,7 @@
   padding: 0.45rem 0.9rem 0.5rem;
   margin-top: calc(-1 * var(--page-padding));
   margin-left: calc(-1 * var(--page-padding));
-  background: var(--ih-bg-overlay-84);
+  background: var(--ih-bg-a94);
   border: 1px solid var(--ih-border-dark);
   border-radius: 0 0 14px 0;
   backdrop-filter: blur(6px);
