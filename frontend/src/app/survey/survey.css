@@ -5,7 +5,11 @@
 .survey-shell {
 	min-height: 100vh;
 	padding: 1.1rem;
-	background: var(--ih-bg);
+	background-color: var(--ih-bg);
+	background-image: var(--ih-bg-pattern);
+	background-size: var(--ih-bg-pattern-size);
+	background-position: var(--ih-bg-pattern-position);
+	background-attachment: fixed;
 	color: var(--ih-surface);
 }
 
