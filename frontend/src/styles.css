@@ -5,66 +5,17 @@
 	--ih-bg-soft: #f1ebe0;
 	--ih-surface: #2b2620;
 	--ih-surface-soft: #6d6558;
-	--ih-ink: #2b2620;
-	--ih-ink-soft: #6d6558;
 	--ih-accent: #c87459;
 	--ih-accent-strong: #b45f48;
 	--ih-danger: #b35a48;
 	--ih-success: #b9cec5;
 	--ih-skill-blue: #cdc6dd;
 	--ih-skill-blue-text: #696080;
-
-	--ih-border-dark: color-mix(in srgb, #171411 20%, transparent);
-	--ih-border-light: color-mix(in srgb, #171411 14%, transparent);
-	--ih-radius-lg: 20px;
-	--ih-radius-md: 14px;
-	--ih-shadow-md: 0 10px 26px color-mix(in srgb, #171411 10%, transparent);
-	--ih-shadow-lg: 0 22px 50px color-mix(in srgb, #171411 14%, transparent);
 	--ih-button-bg: #28221c;
 	--ih-button-bg-hover: #3a3129;
 	--ih-button-text: #f6efe3;
-	--ih-nav-bg: #1c1814;
-	--ih-nav-fg: #f6efe3;
-	--ih-nav-tile-bg: color-mix(in srgb, var(--ih-nav-fg) 10%, transparent);
-	--ih-nav-tile-active-bg: var(--ih-accent);
-	--ih-nav-tile-active-fg: #1c1814;
-
-	--ih-accent-soft: color-mix(in srgb, var(--ih-accent) 16%, transparent);
-	--ih-accent-mid: color-mix(in srgb, var(--ih-accent) 28%, transparent);
-	--ih-accent-border: color-mix(in srgb, var(--ih-accent) 52%, transparent);
-
-	--ih-surface-06: color-mix(in srgb, var(--ih-ink) 9%, transparent);
-	--ih-surface-12: color-mix(in srgb, var(--ih-ink) 16%, transparent);
-	--ih-surface-58: color-mix(in srgb, var(--ih-surface) 58%, transparent);
-	--ih-surface-85: color-mix(in srgb, var(--ih-surface) 85%, transparent);
-
-	--ih-bg-overlay-50: color-mix(in srgb, var(--ih-bg-soft) 90%, transparent);
-	--ih-bg-overlay-60: color-mix(in srgb, var(--ih-bg-soft) 94%, transparent);
-	--ih-bg-overlay-84: color-mix(in srgb, var(--ih-bg-soft) 97%, transparent);
-	--ih-bg-overlay-95: color-mix(in srgb, var(--ih-bg-soft) 99%, transparent);
-
-	--ih-danger-dark: color-mix(in srgb, var(--ih-danger) 82%, #171411);
-	--ih-danger-border: color-mix(in srgb, var(--ih-danger) 48%, transparent);
-	--ih-danger-soft: color-mix(in srgb, var(--ih-danger) 18%, transparent);
-	--ih-danger-soft-strong: color-mix(in srgb, var(--ih-danger) 30%, transparent);
-	--ih-success-strong: color-mix(in srgb, var(--ih-success) 78%, #171411);
-	--ih-success-soft: color-mix(in srgb, var(--ih-success) 16%, transparent);
-	--ih-success-border: color-mix(in srgb, var(--ih-success) 34%, transparent);
-	--ih-success-shadow: color-mix(in srgb, var(--ih-success) 28%, transparent);
-	--ih-warning: var(--ih-accent);
-	--ih-warning-strong: var(--ih-accent-strong);
-	--ih-overlay-50: rgba(0, 0, 0, 0.5);
-	--ih-overlay-inset: color-mix(in srgb, #171411 12%, transparent);
-	--ih-overlay-shadow: color-mix(in srgb, #171411 18%, transparent);
-	--ih-pattern-mark: color-mix(in srgb, var(--ih-surface) 6%, transparent);
-	--ih-pattern-mark-soft: color-mix(in srgb, var(--ih-surface) 3%, transparent);
-	--ih-bg-pattern:
-		radial-gradient(12px 9px at 16px 14px, var(--ih-pattern-mark) 0 56%, transparent 62%),
-		radial-gradient(5px 10px at 21px 27px, var(--ih-pattern-mark-soft) 0 54%, transparent 61%),
-		radial-gradient(11px 8px at 58px 50px, var(--ih-pattern-mark) 0 56%, transparent 62%),
-		radial-gradient(4px 9px at 63px 62px, var(--ih-pattern-mark-soft) 0 54%, transparent 61%);
-	--ih-bg-pattern-size: 84px 84px;
-	--ih-bg-pattern-position: 0 0;
+	--ih-nav-bg: color-mix(in srgb, var(--ih-bg) 96%, var(--ih-accent) 4%);
+	--ih-nav-fg: var(--ih-surface);
 }
 
 :root[data-theme='dark'],
@@ -74,36 +25,43 @@ body[data-theme='dark'] {
 	--ih-bg-soft: #1d1a17;
 	--ih-surface: #f2ece3;
 	--ih-surface-soft: #c8c1b6;
-	--ih-ink: #f2ece3;
-	--ih-ink-soft: #c8c1b6;
 	--ih-accent: #d78c73;
 	--ih-accent-strong: #c67860;
 	--ih-button-bg: #d78c73;
 	--ih-button-bg-hover: #c67860;
 	--ih-button-text: #161412;
-	--ih-nav-bg: #f2ece3;
-	--ih-nav-fg: #161412;
-	--ih-nav-tile-bg: color-mix(in srgb, var(--ih-nav-fg) 16%, transparent);
-	--ih-nav-tile-active-bg: var(--ih-accent);
-	--ih-nav-tile-active-fg: #161412;
+	--ih-nav-bg: color-mix(in srgb, var(--ih-bg) 95%, var(--ih-accent) 5%);
+	--ih-nav-fg: var(--ih-surface);
+}
+
+:root,
+:root[data-theme='dark'],
+html[data-theme='dark'],
+body[data-theme='dark'] {
+	--ih-ink: var(--ih-surface);
+	--ih-ink-soft: var(--ih-surface-soft);
 	--ih-border-dark: color-mix(in srgb, var(--ih-surface) 18%, transparent);
 	--ih-border-light: color-mix(in srgb, var(--ih-surface) 14%, transparent);
-	--ih-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.24);
-	--ih-shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.36);
-	--ih-surface-06: color-mix(in srgb, var(--ih-surface) 9%, transparent);
-	--ih-surface-12: color-mix(in srgb, var(--ih-surface) 16%, transparent);
-	--ih-surface-58: color-mix(in srgb, var(--ih-surface) 58%, transparent);
-	--ih-surface-85: color-mix(in srgb, var(--ih-surface) 85%, transparent);
-	--ih-bg-overlay-50: color-mix(in srgb, var(--ih-bg-soft) 88%, transparent);
-	--ih-bg-overlay-60: color-mix(in srgb, var(--ih-bg-soft) 90%, transparent);
-	--ih-bg-overlay-84: color-mix(in srgb, var(--ih-bg-soft) 94%, transparent);
-	--ih-bg-overlay-95: color-mix(in srgb, var(--ih-bg-soft) 96%, transparent);
-	--ih-danger-dark: color-mix(in srgb, var(--ih-danger) 82%, #f2ece3);
-	--ih-success-strong: color-mix(in srgb, var(--ih-success) 78%, #f2ece3);
-	--ih-overlay-inset: color-mix(in srgb, #000 22%, transparent);
-	--ih-overlay-shadow: color-mix(in srgb, #000 34%, transparent);
-	--ih-pattern-mark: color-mix(in srgb, var(--ih-surface) 8%, transparent);
-	--ih-pattern-mark-soft: color-mix(in srgb, var(--ih-surface) 5%, transparent);
+	--ih-radius-lg: 20px;
+	--ih-radius-md: 14px;
+	--ih-nav-height: 56px;
+	--ih-shadow-md: 0 10px 26px color-mix(in srgb, #000 16%, transparent);
+	--ih-shadow-lg: 0 22px 50px color-mix(in srgb, #000 24%, transparent);
+	--ih-accent-soft: color-mix(in srgb, var(--ih-accent) 16%, transparent);
+	--ih-accent-mid: color-mix(in srgb, var(--ih-accent) 24%, transparent);
+	--ih-accent-border: color-mix(in srgb, var(--ih-accent) 52%, transparent);
+	--ih-surface-a14: color-mix(in srgb, var(--ih-ink) 14%, transparent);
+	--ih-surface-a60: color-mix(in srgb, var(--ih-surface) 60%, transparent);
+	--ih-surface-a85: color-mix(in srgb, var(--ih-surface) 85%, transparent);
+	--ih-bg-a94: color-mix(in srgb, var(--ih-bg-soft) 94%, transparent);
+	--ih-danger-dark: color-mix(in srgb, var(--ih-danger) 82%, var(--ih-bg));
+	--ih-danger-border: color-mix(in srgb, var(--ih-danger) 48%, transparent);
+	--ih-danger-soft: color-mix(in srgb, var(--ih-danger) 18%, transparent);
+	--ih-success-strong: color-mix(in srgb, var(--ih-success) 78%, var(--ih-bg));
+	--ih-success-soft: color-mix(in srgb, var(--ih-success) 16%, transparent);
+	--ih-success-border: color-mix(in srgb, var(--ih-success) 34%, transparent);
+	--ih-overlay-50: rgba(0, 0, 0, 0.5);
+	--ih-ink-a15: color-mix(in srgb, var(--ih-ink) 15%, transparent);
 }
 
 * {
@@ -113,13 +71,12 @@ body[data-theme='dark'] {
 html,
 body {
 	margin: 0;
+	height: 100%;
 	min-height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 	font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	background-color: var(--ih-bg);
-	background-image: var(--ih-bg-pattern);
-	background-size: var(--ih-bg-pattern-size);
-	background-position: var(--ih-bg-pattern-position);
-	background-attachment: fixed;
 	color: var(--ih-surface);
 }
 
@@ -132,4 +89,4 @@ textarea {
 a {
 	color: inherit;
 }
-
+	

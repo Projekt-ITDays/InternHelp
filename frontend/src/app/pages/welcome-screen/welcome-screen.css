@@ -17,9 +17,11 @@
     --radius-md: 14px;
     --rail-width: clamp(370px, 28vw, 500px);
     display: block;
-    min-height: 100svh;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
     color: var(--surface);
-    background: var(--bg-page);
+    background-color: var(--bg-page);
     font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     letter-spacing: 0;
 }
@@ -30,8 +32,9 @@
 
 .welcome-screen {
     position: relative;
-    min-height: 100svh;
+    height: calc(100dvh - var(--ih-nav-height));
     padding: 0;
+    overflow: hidden;
     isolation: isolate;
 }
 
@@ -47,7 +50,7 @@
     padding: 0.66rem 0.96rem;
     border-radius: 999px;
     border: 1px solid var(--ih-danger-border);
-    background: var(--ih-bg-overlay-95);
+    background: var(--ih-bg-a94);
     color: var(--ih-danger-dark);
     font-size: 0.84rem;
     box-shadow: var(--shadow-md);
@@ -67,13 +70,13 @@
 .layout-wide {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--rail-width);
-    min-height: 100svh;
+    height: 100%;
     gap: 0;
 }
 
 .stage-panel {
     position: relative;
-    min-height: 100svh;
+    height: 100%;
     overflow: hidden;
     animation: fade-up 500ms ease both;
     border-right: 1px solid var(--border-dark);
@@ -93,7 +96,7 @@
     top: 1rem;
     z-index: 4;
     padding: 0.45rem 0.88rem;
-    background: var(--ih-bg-overlay-60);
+    background: var(--ih-bg-a94);
     border: 1px solid var(--border-dark);
     border-radius: 12px;
     backdrop-filter: blur(8px);
@@ -116,8 +119,8 @@
 }
 
 .stage-shot {
-    min-height: 100svh;
-    background: var(--bg-page);
+    height: 100%;
+    background: transparent;
 }
 
 .shot-frame {
@@ -168,7 +171,7 @@
 .right-rail {
     display: flex;
     flex-direction: column;
-    min-height: 100svh;
+    height: 100%;
     background: var(--bg-rail);
     animation: fade-up 560ms 80ms ease both;
 }
@@ -198,7 +201,7 @@
     width: 100%;
     border: 1px solid var(--border-dark);
     border-radius: var(--radius-md);
-    background: var(--ih-surface-06);
+    background: var(--ih-surface-a14);
     padding: 1rem 1rem;
     text-align: left;
     color: var(--surface);
@@ -218,7 +221,7 @@
 .feature-row {
     width: 100%;
     border: 1px solid var(--border-dark);
-    background: var(--ih-surface-06);
+    background: var(--ih-surface-a14);
     border-radius: var(--radius-md);
     padding: 0.82rem 0.78rem;
     text-align: left;
@@ -327,7 +330,7 @@
     border-radius: 12px;
     text-align: center;
     color: var(--ink-soft);
-    background: var(--ih-bg-overlay-60);
+    background: var(--ih-bg-a94);
     padding: 0.86rem 0.58rem;
     font-size: 0.82rem;
 }
@@ -488,7 +491,7 @@
 
     .layout-mobile {
         display: block;
-        height: calc(100svh - 2rem);
+        height: calc(100dvh - var(--ih-nav-height) - 2rem);
         overflow-y: auto;
         padding-top: 1.8rem;
     }

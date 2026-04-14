@@ -17,7 +17,7 @@
         </button>
 
         <div
-          class="flex flex-1 flex-col justify-center gap-3 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-5 shadow-md">
+          class="flex flex-1 flex-col justify-center gap-3 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md">
           <div class="flex items-center justify-between">
             <div>
               <span class="text-sm text-[var(--ih-ink-soft)]">Mój Poziom Zaawansowania</span>
@@ -53,13 +53,13 @@
 
         @if (plansLoading()) {
         <div
-          class="flex items-center justify-center rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-10 shadow-md">
+          class="flex items-center justify-center rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-10 shadow-md">
           <div class="plan-loader"></div>
           <span class="ml-4 text-sm text-[var(--ih-ink-soft)]">Ładowanie planów…</span>
         </div>
         } @else if (sourcePlans().length === 0) {
         <div
-          class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-10 text-center shadow-md">
+          class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-10 text-center shadow-md">
           <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ih-bg-soft)]">
             <ng-icon name="heroClipboardDocumentList" size="28" class="text-[var(--ih-accent)]" />
           </div>
@@ -74,7 +74,7 @@
         <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           @for (plan of visiblePlans(); track plan._id) {
           <div
-            class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-5 shadow-md
+            class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md
                       transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg"
             (click)="openPlan(plan)">
 
@@ -128,7 +128,7 @@
       </section>
 
 
-      <section class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-6 shadow-md">
+      <section class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-6 shadow-md">
         <div class="mb-5 flex items-center gap-3">
           <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--ih-bg-soft)]">
             <ng-icon name="heroCube" size="20" class="text-[var(--ih-accent)]" />
@@ -240,7 +240,7 @@
             <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]" />
             Projekt portfolio
           </div>
-          <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-overlay-84)] p-3.5">
+          <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-3.5">
             <h4 class="text-sm font-semibold text-[var(--ih-surface)]">{{ stage.projekt_portfolio.nazwa }}</h4>
             <p class="mt-1 text-xs text-[var(--ih-ink-soft)]">{{ stage.projekt_portfolio.opis }}</p>
             @if (stage.projekt_portfolio.kryteria_akceptacji.length) {

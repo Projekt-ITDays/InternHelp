@@ -92,7 +92,7 @@
 .results-section {
   border: 1px solid var(--ih-border-dark);
   border-radius: var(--ih-radius-lg, 12px);
-  background: var(--ih-bg-overlay-84);
+  background: var(--ih-bg-a94);
   backdrop-filter: blur(12px);
   box-shadow: var(--ih-shadow-md);
   padding: 1.2rem;
@@ -110,7 +110,7 @@
 
 .error-box {
   margin-top: 0.8rem;
-  color: var(--ih-warning);
+  color: var(--ih-accent);
   flex-shrink: 0;
 }
 
@@ -194,7 +194,7 @@
 }
 
 .markdown-body code {
-  background: var(--ih-surface-12);
+  background: var(--ih-surface-a14);
   padding: 2px 5px;
   border-radius: 4px;
   font-family: ui-monospace, SFMono-Regular, monospace;
@@ -250,7 +250,7 @@
   margin: -46px 2.5px 0 2.5px;
   /* pull up by an exact offset to interlock vertically */
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
   position: relative;
   display: flex;
   align-items: center;
@@ -289,7 +289,7 @@
 
 /* Empty Cell Styling */
 .empty-cell {
-  background: var(--ih-bg-overlay-50);
+  background: var(--ih-bg-a94);
   /* Lekko widoczne transparentne tło */
   border: 1px solid var(--ih-border-dark);
   /* opcjonalny outline w css na przyszłosc, choć clip path go ucieło */
@@ -297,7 +297,7 @@
 }
 
 .empty-cell:hover {
-  background: var(--ih-bg-overlay-60);
+  background: var(--ih-bg-a94);
   /* lekki hover glow na pustych, by też 'żyły' */
   transform: scale(1.02);
   z-index: 1;
@@ -352,7 +352,7 @@
 
 .btn-complete:hover {
   transform: scale(1.08);
-  background: var(--ih-warning);
+  background: var(--ih-accent);
 }
 
 .complete-badge {
@@ -364,7 +364,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px var(--ih-success-shadow);
+  box-shadow: 0 0 10px var(--ih-success-soft);
 }
 
 .check-mark {
@@ -416,7 +416,7 @@
 }
 
 .difficulty-modal {
-  background: var(--ih-bg-overlay-95);
+  background: var(--ih-bg-a94);
   border: 1px solid var(--ih-accent-strong);
   border-radius: 12px;
   padding: 30px;
@@ -459,7 +459,7 @@
 }
 
 .btn-diff.medium {
-  background: var(--ih-warning-strong);
+  background: var(--ih-accent-strong);
   color: var(--ih-button-text);
 }
 
@@ -470,7 +470,7 @@
 
 .btn-close {
   background: transparent;
-  color: var(--ih-surface-58);
+  color: var(--ih-surface-a60);
   border: 1px solid var(--ih-border-dark);
   padding: 8px 16px;
   border-radius: 4px;
@@ -481,5 +481,5 @@
 
 .btn-close:hover {
   color: var(--ih-surface);
-  border-color: var(--ih-surface-58);
+  border-color: var(--ih-surface-a60);
 }

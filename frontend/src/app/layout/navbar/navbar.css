@@ -3,14 +3,17 @@
   top: 0;
   z-index: 1000;
   width: 100%;
+  height: var(--ih-nav-height);
+  box-sizing: border-box;
   background: var(--ih-nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--ih-border-dark);
-  padding: 0.6rem 0;
+  padding: 0;
 }
 
 .nav-container {
   max-width: 1600px;
+  height: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
@@ -38,7 +41,7 @@
 }
 
 .nav-tile {
-  background: var(--ih-nav-tile-bg);
+  background: color-mix(in srgb, var(--ih-nav-fg) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--ih-nav-fg) 22%, transparent);
   border-radius: 10px;
   padding: 8px 16px;
@@ -60,13 +63,13 @@
 }
 
 .nav-tile.is-active {
-  background: var(--ih-nav-tile-active-bg);
-  color: var(--ih-nav-tile-active-fg);
-  border-color: var(--ih-nav-tile-active-bg);
+  background: var(--ih-accent);
+  color: #1c1814;
+  border-color: var(--ih-accent);
 }
 
 .nav-tile.is-active ng-icon {
-  color: var(--ih-nav-tile-active-fg);
+  color: #1c1814;
 }
 
 .nav-tile ng-icon {
@@ -163,6 +166,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: color-mix(in srgb, var(--ih-nav-fg) 42%, transparent);
+  opacity: 0;
   transition: none;
   pointer-events: none;
   z-index: 1;
@@ -189,12 +193,12 @@ html[data-theme-ready='true'] .theme-switch .slider .icon-right {
   right: 8px;
 }
 
-.theme-switch input:not(:checked) + .slider .icon-right {
-  color: var(--ih-bg);
+.theme-switch input:not(:checked) + .slider .icon-left {
+  opacity: 1;
 }
 
-.theme-switch input:checked + .slider .icon-left {
-  color: var(--ih-bg);
+.theme-switch input:checked + .slider .icon-right {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {
