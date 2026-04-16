@@ -1,10 +1,11 @@
-import { Transform } from "class-transformer";
+import { Transform, Type } from "class-transformer";
 import { IsDate, IsInt, IsOptional, IsString, IsUUID, Min } from "class-validator";
 
 
 
 export class SurveyDto {
     @IsOptional()
+    @Type(() => Number)
     @IsInt()
     @Min(1)
     id?: number;
@@ -16,6 +17,7 @@ export class SurveyDto {
     @IsString()
     Major: string;
 
+    @Type(() => Number)
     @IsInt()
     @Min(1)
     YearOfStudy: number;
@@ -23,6 +25,7 @@ export class SurveyDto {
     @IsString()
     PreferredInternshipType: string;
 
+    @Type(() => Number)
     @IsInt()
     @Min(0)
     TimeLeft: number;
@@ -51,6 +54,7 @@ export class SurveyDto {
     @IsString()
     University: string;
 
+    @Type(() => Number)
     @IsInt()
     GraduationYear: number;
     

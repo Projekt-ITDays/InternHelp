@@ -12,7 +12,7 @@ export class SurveyService {
         private readonly http : HttpClient
     ) {}
     private readonly apiUrl = `${environment.apiUrl}/ai/survey`;
-    async postSurvey(payload : SurveyDto){
+    postSurvey(payload : SurveyDto){
         return this.http.post(this.apiUrl, payload);
     }
 }

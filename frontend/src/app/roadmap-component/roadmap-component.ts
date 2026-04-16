@@ -223,6 +223,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   }
 
   onCompleteTask(index: number, event: MouseEvent) {
+    
     event.stopPropagation();
 
     const cell = this.gridCells[index];

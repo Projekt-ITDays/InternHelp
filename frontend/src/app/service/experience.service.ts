@@ -35,4 +35,6 @@ export class ExperienceService {
       this.http.get<ProgressData>(`${this.apiUrl}/progress`, { withCredentials: true })
     );
   }
+
+
 }

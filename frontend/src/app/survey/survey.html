@@ -54,7 +54,7 @@
                         <span>Czas, który możesz poświęcić</span>
                         <select name="TimeLeft" [(ngModel)]="surveyModel.TimeLeft" required>
                             @for (range of timeRangestoChoose; track $index) {
-                            <option [value]="range">{{ range }}</option>
+                            <option [ngValue]="range">{{ range }}</option>
                             }
                         </select>
                     </label>
