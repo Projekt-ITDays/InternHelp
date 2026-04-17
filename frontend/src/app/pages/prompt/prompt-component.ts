@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { Ai } from '../service/ai';
+import { Ai } from '../../core/services/ai';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Navbar } from '../layout/navbar/navbar';
+import { Navbar } from '../../shared/navbar/navbar';
 
 @Component({
   selector: 'app-prompt-component',

@@ -26,9 +26,9 @@ import {
   heroClipboardDocumentList,
   heroWrenchScrewdriver,
 } from '@ng-icons/heroicons/outline';
-import { ExperienceService } from '../../service/experience.service';
-import { Ai } from '../../service/ai';
-import { Navbar } from '../../layout/navbar/navbar';
+import { ExperienceService } from '../../core/services/experience.service';
+import { Ai } from '../../core/services/ai';
+import { Navbar } from '../../shared/navbar/navbar';
 
 // ── Interfaces ──
 

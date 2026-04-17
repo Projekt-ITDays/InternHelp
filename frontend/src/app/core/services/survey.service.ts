@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { SurveyDto } from "../interfaces/survey";
-import { environment } from "../../environments/environment.development";
+import { SurveyDto } from "../models/survey";
+import { environment } from "../../../environments/environment";
 
 
 @Injectable({

@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
-import { LoggingDto } from "../interfaces/loggingDto";
-import { LoggingResponseDto } from "../interfaces/loggingResponseDto";
-import { environment } from '../../environments/environment';
+import { LoggingDto } from "../models/loggingDto";
+import { LoggingResponseDto } from "../models/loggingResponseDto";
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

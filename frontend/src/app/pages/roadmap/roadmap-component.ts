@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener } from '@
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Ai } from '../service/ai';
-import { RoadmapStorageService } from '../service/roadmap-storage.service';
+import { Ai } from '../../core/services/ai';
+import { RoadmapStorageService } from '../../core/services/roadmap-storage.service';
 import { marked } from 'marked';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {

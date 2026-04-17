@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SurveyDto } from '../interfaces/survey';
-import { SurveyService } from '../service/survey.service';
-import { Navbar } from '../layout/navbar/navbar';
+import { SurveyDto } from '../../core/models/survey';
+import { SurveyService } from '../../core/services/survey.service';
+import { Navbar } from '../../shared/navbar/navbar';
 
 @Component({
   selector: 'app-survey',

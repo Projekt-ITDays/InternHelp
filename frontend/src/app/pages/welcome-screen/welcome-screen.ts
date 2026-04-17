@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { AuthService } from '../../service/auth.service';
-import { LoggingDto } from '../../interfaces/loggingDto';
+import { AuthService } from '../../core/services/auth.service';
+import { LoggingDto } from '../../core/models/loggingDto';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { MainPage } from '../../main-page/main-page';
-import { Navbar } from '../../layout/navbar/navbar';
+import { MainPage } from '../../shared/main-page/main-page';
+import { Navbar } from '../../shared/navbar/navbar';
 
 type FeatureCard = {
   id: string;

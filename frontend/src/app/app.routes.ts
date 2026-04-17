@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
-import { PromptComponent } from './prompt-component/prompt-component';
+import { PromptComponent } from './pages/prompt/prompt-component';
 import { Dashboard } from './pages/dashboard/dashboard';
-import { RoadmapComponent } from './roadmap-component/roadmap-component';
+import { RoadmapComponent } from './pages/roadmap/roadmap-component';
 import { Settings } from './pages/settings/settings';
-import { authGuard } from './guards/auth.guard';
-import { Survey } from './survey/survey';
+import { authGuard } from './core/guards/auth.guard';
+import { Survey } from './pages/survey/survey';
 
 export const routes: Routes = [
 	{
