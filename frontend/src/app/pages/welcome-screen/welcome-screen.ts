@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { NgxCaptchaModule } from 'ngx-captcha';
 import { AuthService } from '../../service/auth.service';
 import { LoggingDto } from '../../interfaces/loggingDto';
 import { Router } from '@angular/router';
@@ -18,7 +19,7 @@ type FeatureCard = {
 @Component({
   selector: 'app-welcome-screen',
   standalone: true,
-  imports: [NgTemplateOutlet, MainPage, Navbar],
+  imports: [NgTemplateOutlet, MainPage, Navbar, NgxCaptchaModule],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })
@@ -60,12 +61,34 @@ export class WelcomeScreen {
   protected activeFeatureId = signal<string>(this.featureCards[0].id);
   protected username = signal<string>('');
   protected password = signal<string>('');
+  protected captchaToken = signal<string | null>(null);
   protected showErrorWidget = signal<boolean>(false);
   protected errorMessage = signal<string>('Wypełnij oba pola.');
+
+  protected readonly recaptchaSiteKey = '6LeRc7wsAAAAAGHJSrbmGlv4UqiO6C7ug812Lkcy';
+
+  protected handleCaptchaSuccess(token: string): void {
+    this.captchaToken.set(token);
+  }
+
+  protected handleCaptchaExpired(): void {
+    this.captchaToken.set(null);
+  }
+
   protected Login(): void {
+    if (!this.captchaToken()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Brak CAPTCHA',
+        text: 'Zaznacz pole "Nie jestem robotem".',
+      });
+      return;
+    }
+
     const LoginDto: LoggingDto = {
       username: this.username(),
       password: this.password(),
+      captchaToken: this.captchaToken() || '',
     };
     this.authService
       .login(LoginDto)

@@ -34,6 +34,7 @@
     "@ng-icons/core": "^33.2.0",
     "@ng-icons/heroicons": "^33.2.0",
     "marked": "^17.0.5",
+    "ngx-captcha": "^14.0.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.26.23",
     "tslib": "^2.3.0"

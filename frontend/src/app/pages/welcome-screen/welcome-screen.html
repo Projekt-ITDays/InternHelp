@@ -102,7 +102,16 @@
                         (input)="onPasswordInput($event)" autocomplete="current-password" placeholder="Hasło" />
                 </div>
 
-                <div class="captcha-box">[ Widzet Captcha ]</div>
+                <div class="captcha-box">
+                    <ngx-recaptcha2 #captchaElem
+                        [siteKey]="recaptchaSiteKey"
+                        [useGlobalDomain]="true"
+                        [useEnterprise]="true"
+                        [theme]="'dark'"
+                        (success)="handleCaptchaSuccess($event)"
+                        (expire)="handleCaptchaExpired()">
+                    </ngx-recaptcha2>
+                </div>
 
                 <button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
                     Nie pamiętam hasła

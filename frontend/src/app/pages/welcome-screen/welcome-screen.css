@@ -259,18 +259,18 @@
 }
 
 .auth-panel {
-    flex: 1;
-    min-height: 0;
-    padding: 1rem;
+    flex: 0 0 auto;
+    padding: 1.2rem 1rem;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
 }
 
 .login-card {
     width: 100%;
-    height: 100%;
-    padding: 1.1rem;
+    height: auto;
+    min-height: fit-content;
+    padding: 1.2rem;
     border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--ih-bg-soft) 82%, var(--ih-bg));
     color: var(--ink);
@@ -281,9 +281,8 @@
 .login-form {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    gap: 0.72rem;
-    justify-content: center;
+    height: auto;
+    gap: 0.82rem;
 }
 
 .credentials-group {
@@ -326,13 +325,28 @@
 }
 
 .captcha-box {
-    border: 1px dashed var(--border-light);
-    border-radius: 12px;
-    text-align: center;
-    color: var(--ink-soft);
-    background: var(--ih-bg-a94);
-    padding: 0.86rem 0.58rem;
-    font-size: 0.82rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.4rem 0;
+    margin: 0.2rem 0;
+}
+
+/* Skalowanie widgetu, jeśli ekran jest bardzo wąski */
+@media (max-width: 380px) {
+    .captcha-box ngx-recaptcha2 {
+        transform: scale(0.85);
+        transform-origin: center center;
+    }
+}
+
+@media (max-width: 320px) {
+    .captcha-box ngx-recaptcha2 {
+        transform: scale(0.75);
+    }
 }
 
 .forgot-button {

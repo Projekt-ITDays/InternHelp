@@ -41,6 +41,11 @@ export class AuthService {
     }
 
     async login(payload: LoginDto) {
+        const isRecaptchaValid = await this.validateRecaptcha(payload.captchaToken);
+        if (!isRecaptchaValid) {
+            throw new Error('Weryfikacja CAPTCHA nieudana');
+        }
+
         const user = await this.userRepository.findOne({ where: { username: payload.username } })
         if (!user) {
             throw new Error('User not found')
@@ -55,6 +60,44 @@ export class AuthService {
             userId: user.id,
             username: payload.username,
             role: user.role
+        }
+    }
+
+    private async validateRecaptcha(token: string): Promise<boolean> {
+        if (!token) return false;
+
+        const projectId = process.env.RECAPTCHA_PROJECT_ID;
+        const apiKey = process.env.RECAPTCHA_API_KEY;
+        const siteKey = process.env.RECAPTCHA_SITE_KEY;
+
+        const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event: {
+                        token: token,
+                        siteKey: siteKey,
+                        expectedAction: 'login'
+                    }
+                })
+            });
+
+            const data = await response.json() as any;
+
+            // Log assessment for debugging (optional)
+            console.log('reCAPTCHA Assessment:', data);
+
+            if (data.tokenProperties && data.tokenProperties.valid === true) {
+                return true;
+            }
+
+            return false;
+        } catch (error) {
+            console.error('reCAPTCHA Verification Error:', error);
+            return false;
         }
     }
 
