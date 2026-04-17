@@ -10,8 +10,10 @@ import { InjectModel } from "@nestjs/mongoose";
 import { AgentResponse } from "src/entities/AgentResposne.schema";
 import { Model } from "mongoose";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
+import { MongoClient } from "mongodb";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
+
 
 
 @Injectable()
@@ -32,7 +34,14 @@ export class AiAgentService {
             apiKey: process.env.GEMINI_API_KEY,
         }
     )
-    private vectorstore = new MemoryVectorStore(this.embeddingModel);
+    client = new MongoClient(process.env.MONGODB_URI!);
+    collection = this.client.db("career_planner").collection("knowledge_base"); x
+    vectorStore  = new MongoDBAtlasVectorSearch(this.embeddingModel , {
+        collection: this.collection,
+        indexName : "embeddings"
+        
+    })
+     
 
 
 prompt = `Jesteś elitarnym Architektem Kariery . Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
