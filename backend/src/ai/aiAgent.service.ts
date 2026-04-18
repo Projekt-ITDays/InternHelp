@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { ChatGoogle } from "@langchain/google";
-import { createReactAgent } from "@langchain/langgraph/prebuilt";
-import { tool, ToolRuntime } from "langchain";
+import { createAgent, createMiddleware, tool, ToolMessage, ToolRuntime } from "langchain";
 import { z } from "zod";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SurveysEntity } from "src/entities/Surveys.entity";
@@ -23,22 +22,49 @@ export class AiAgentService {
         @InjectModel("AgentResponse") private agentResponseModel: Model<AgentResponse>,
     ) { }
 
+    dynamicModelSelection = createMiddleware({
+        name : "dynamicModelSelection",
+        wrapModelCall: (request  , handler ) =>{ 
+            const messageCount  = request.messages ? request.messages.length : 0;
+            const modelName = messageCount > 5 ? "gemini-2.5-flash" : "gemini-3-flash-preview";
+            return handler({
+                ...request,
+                model : new ChatGoogle(modelName)
 
-    model = new ChatGoogle('gemini-2.5-flash', {
-        apiKey: process.env.GEMINI_API_KEY
+            })
+        }
     })
+    handleToolErros = createMiddleware({
+    name : "handleToolErrors",
+    wrapToolCall : async (request , handler) => {
+        try {
+            return await handler(request);
+        } catch (error) {
+            return new ToolMessage({
+                content: `The error "${error.message}" occurred while executing the tool . Please handle this error gracefully in your response.`,
+                tool_call_id: request.toolCall.id! || "",
+
+            })
+        
+        }
+    }})
+    model = new ChatGoogle('gemini-2.5-flash')
     private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    private mongoUri = process.env.MONGODB_URI || process.env.MANGO_URL || process.env.MONGO_URI;
     private embeddingModel = new GoogleGenerativeAIEmbeddings(
         {
             model: "models/gemini-embedding-001",
             apiKey: process.env.GEMINI_API_KEY,
         }
     )
-    client = new MongoClient(process.env.MONGODB_URI!);
-    collection = this.client.db("career_planner").collection("knowledge_base"); x
+    client = new MongoClient(this.mongoUri!);
+    collection = this.client.db("CarrierSign").collection("Advices");
     vectorStore  = new MongoDBAtlasVectorSearch(this.embeddingModel , {
         collection: this.collection,
-        indexName : "embeddings"
+        indexName : "vector_index",
+        textKey: "text",
+        embeddingKey: "embedding",
+
         
     })
      
@@ -178,23 +204,25 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         }
     )
     async getAgentResponse(userId: string, userPrompt: string) {
-        const agent = createReactAgent({
-            llm: this.model,
-            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool],
-            stateModifier: `${this.prompt}\n\n=================\nID AKTUALNEGO UŻYTKOWNIKA TO: ${userId}. Użyj tego ID jako parametru userId wywołując wszystkie cztery narzędzia przed zredagowaniem odpowiedzi.\n=================`,
+        const agent = createAgent({
+            model: this.model,
+            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve],
+            middleware: [this.dynamicModelSelection ,this.handleToolErros],
+            systemPrompt: `${this.prompt}\n\n=================\nID AKTUALNEGO UŻYTKOWNIKA TO: ${userId}. Użyj tego ID jako parametru userId wywołując wszystkie cztery narzędzia przed zredagowaniem odpowiedzi.\n=================`,
         });
 
-
+        console.log(this.model )    
         const result = await agent.invoke(
             {
                 messages: [{ role: "user", content: userPrompt }]
+
             }
         );
         return await this.extractAndSavePlan(userId, result);
     }
 
     getTools() {
-        return [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool];
+        return [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve];
     }
 
     async extractAndSavePlan(userId: string, response: any) {
@@ -270,8 +298,25 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         if (!plan) return null;
         return plan.gridState ?? null;
     }
+    retrieveSchema = z.object({ query: z.string() });
+    retrieve = tool (
+        async ({query}) => {
+            const retrivedocs = await this.vectorStore.similaritySearch(query , 5);
+            if (retrivedocs.length === 0) {
+                return "Brak danych w bazie wiedzy związanych z tym zapytaniem.";
+            }
+            const serialized = retrivedocs
+            .map(
+                (doc) => `Source: ${doc.metadata?.source ?? "unknown"}, Text: ${doc.pageContent}`
+            ).join("\n");
+            return [serialized , retrivedocs]
 
-    retrieve() {
-
-    }
+        },
+        {
+            name: "retrive",
+            description: "Retrive informacji z bazy wiedzy na podstawie zapytania użytkownika. Zwraca najbardziej podobne dokumenty z bazy.",
+            schema: this.retrieveSchema,
+            responseFormat : "content_and_artifact"
+        }
+    );
 }
