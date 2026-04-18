@@ -15,7 +15,7 @@ export class AuthService {
         private readonly http: HttpClient
     ) { }
 
-    private accesToken: string | null = null;
+    private accessToken: string | null = null;
     private isLogged : boolean | null = null;
     async login(payload: LoggingDto): Promise<LoggingResponseDto> {
         
@@ -54,7 +54,7 @@ export class AuthService {
     }
 
     setAccessToken(token: string) {
-        this.accesToken = token;
+        this.accessToken = token;
         this.isLogged = true;
     }
 

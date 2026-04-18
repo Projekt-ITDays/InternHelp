@@ -64,7 +64,6 @@ export class WelcomeScreen {
   protected username = signal<string>('');
   protected password = signal<string>('');
   protected showErrorWidget = signal<boolean>(false);
-  protected errorMessage = signal<string>('Wypełnij oba pola.');
   protected loginError = signal<string>('');
   protected Login() : void {
     const LoginDto : LoggingDto = {
@@ -132,6 +131,10 @@ export class WelcomeScreen {
   protected onForgotPasswordClick(): void {
     this.loginError.set('Opcja przypomnienia hasła będzie dostępna wkrótce.');
     this.showErrorWidget.set(true);
+  }
+
+  protected dismissErrorWidget(): void {
+    this.showErrorWidget.set(false);
   }
 
   private getInputValue(event: Event): string {

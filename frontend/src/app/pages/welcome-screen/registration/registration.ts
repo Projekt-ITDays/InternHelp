@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, signal, output, input, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '../../../service/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import Swal from 'sweetalert2';
-import { LoggingDto } from '../../../interfaces/loggingDto';
+import { LoggingDto } from '../../../core/models/loggingDto';
 
 @Component({
   selector: 'app-registration',
@@ -38,10 +38,10 @@ export class Registration {
       this.errorMessage.set('Musisz zaakceptować regulamin.');
       return;
     }
-    const payload : LoggingDto = {
+    const payload: LoggingDto = {
       username: this.email,
       password: this.password,
-    }
+    };
     this.authService.register(payload).subscribe({
       next: () => {
         Swal.fire({ 
@@ -52,10 +52,10 @@ export class Registration {
           this.closeRegistration();
         });
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Błąd rejestracji:', err);
         this.errorMessage.set(this.extractErrorMessage(err));
-      }
+      },
     });
   }
   close = output<void>();

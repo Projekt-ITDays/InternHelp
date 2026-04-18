@@ -3,7 +3,7 @@
 <div class="welcome-screen">
     @if (showErrorWidget()) {
     <section class="error-widget" role="status" aria-live="polite">
-        <span>{{ errorMessage() }}</span>
+        <span>{{ loginError() }}</span>
         <button type="button" (click)="dismissErrorWidget()" aria-label="Zamknij komunikat">Zamknij</button>
     </section>
     }

@@ -3,7 +3,6 @@ import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
 import { PromptComponent } from './pages/prompt/prompt-component';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { RoadmapComponent } from './pages/roadmap/roadmap-component';
-import { Settings } from './pages/settings/settings';
 import { authGuard } from './core/guards/auth.guard';
 import { Survey } from './pages/survey/survey';
 
