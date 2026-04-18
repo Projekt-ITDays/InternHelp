@@ -65,17 +65,27 @@
             <div class="form-section">
                 <h3 class="section-title"><span class="icon"></span> Twoje umiejętności i potencjał</h3>
                 <div class="form-grid">
-                    <label class="form-group">
+                    <div class="form-group">
                         <span>Mocne strony</span>
-                        <input type="text" name="Strengths" [(ngModel)]="surveyModel.Strengths"
-                            placeholder="np. Logiczne myślenie, Praca w zespole" required />
-                    </label>
+                        <app-skills-chips
+                            fieldType="Strengths"
+                            [selectedSkillsFromOtherField]="surveyModel.Weaknesses"
+                            [currentSelectedSkills]="surveyModel.Strengths"
+                            (selectedSkillsChange)="surveyModel.Strengths = $event">
+                        </app-skills-chips>
+                        <input type="hidden" name="Strengths" [(ngModel)]="surveyModel.Strengths" required />
+                    </div>
 
-                    <label class="form-group">
+                    <div class="form-group">
                         <span>Słabe strony</span>
-                        <input type="text" name="Weaknesses" [(ngModel)]="surveyModel.Weaknesses"
-                            placeholder="np. Brak komercyjnego expa" required />
-                    </label>
+                        <app-skills-chips
+                            fieldType="Weaknesses"
+                            [selectedSkillsFromOtherField]="surveyModel.Strengths"
+                            [currentSelectedSkills]="surveyModel.Weaknesses"
+                            (selectedSkillsChange)="surveyModel.Weaknesses = $event">
+                        </app-skills-chips>
+                        <input type="hidden" name="Weaknesses" [(ngModel)]="surveyModel.Weaknesses" required />
+                    </div>
 
                     <label class="form-group">
                         <span>Poziom umiejętności</span>

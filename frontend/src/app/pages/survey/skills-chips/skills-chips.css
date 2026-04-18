@@ -1,0 +1,203 @@
+::host {
+  display: block;
+}
+
+.skills-chips-container {
+  width: 100%;
+}
+
+.chips-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 8px;
+  row-gap: 8px;
+}
+
+.input-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 100%;
+  min-width: 0;
+}
+
+.input-chip-wrap {
+  position: relative;
+  display: inline-flex;
+  flex: 0 1 auto;
+  max-width: calc(100% - 42px);
+  min-width: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--ih-surface-a14);
+  background: var(--ih-bg);
+  color: var(--ih-surface-a85);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+button.chip {
+  padding: 0;
+  padding-inline: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button.chip:hover {
+  transform: translateY(-1px);
+}
+
+button.chip:focus-visible,
+.input-chip:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ih-accent-soft);
+}
+
+.selected-chip {
+  background: var(--ih-accent-soft);
+  color: var(--ih-accent);
+  border-color: var(--ih-accent-border);
+}
+
+.selected-chip:hover {
+  filter: brightness(0.98);
+}
+
+.suggestion-chip {
+  background: var(--ih-bg);
+  color: var(--ih-surface-a85);
+  border-color: var(--ih-surface-a14);
+}
+
+.suggestion-chip:hover {
+  background: var(--ih-bg-soft);
+  color: var(--ih-accent);
+  border-color: var(--ih-accent-border);
+}
+
+.input-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10px;
+  cursor: text;
+  transition: all 0.2s ease;
+}
+
+.input-chip.is-filled {
+  border-color: var(--ih-accent-border);
+}
+
+.input-chip.is-active {
+  border-color: var(--ih-accent-border);
+  background: var(--ih-bg-soft);
+  box-shadow: 0 0 0 3px var(--ih-accent-soft);
+  cursor: pointer;
+}
+
+.custom-chip-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ih-surface);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  min-width: 8ch;
+  max-width: 30ch;
+  width: 8ch;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: left;
+}
+
+.custom-chip-input::placeholder {
+  color: transparent;
+}
+
+.autocomplete-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  min-width: 240px;
+  max-width: min(420px, 82vw);
+  max-height: 270px;
+  overflow-y: auto;
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid var(--ih-surface-a14);
+  background: var(--ih-bg);
+  box-shadow: var(--ih-shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.autocomplete-item {
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ih-surface-a85);
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.25;
+  padding: 7px 8px;
+  cursor: pointer;
+}
+
+.autocomplete-item:hover {
+  background: var(--ih-bg-soft);
+  color: var(--ih-accent);
+}
+
+.refresh-chip {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-color: var(--ih-accent-border);
+  background: var(--ih-accent-soft);
+  background-image: none;
+  color: var(--ih-accent);
+}
+
+.refresh-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.refresh-chip:hover {
+  background: var(--ih-bg-soft);
+  background-image: none;
+  border-color: var(--ih-accent-border);
+  color: var(--ih-accent);
+}
+
+@media (max-width: 768px) {
+  .custom-chip-input {
+    max-width: 22ch;
+  }
+}

@@ -4,11 +4,12 @@ import { SurveyDto } from '../../core/models/survey';
 import { SurveyService } from '../../core/services/survey.service';
 import { Navbar } from '../../shared/navbar/navbar';
 import { UczelniaComponent } from './uczelnia/uczelnia';
+import { SkillsChipsComponent } from './skills-chips/skills-chips';
 
 @Component({
   selector: 'app-survey',
   standalone: true,
-  imports: [FormsModule, Navbar, UczelniaComponent],
+  imports: [FormsModule, Navbar, UczelniaComponent, SkillsChipsComponent],
   templateUrl: './survey.html',
   styleUrl: './survey.css',
 })

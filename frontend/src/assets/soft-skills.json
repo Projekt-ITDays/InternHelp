@@ -1,0 +1,522 @@
+[
+  {
+    "id": 1,
+    "name": "Elastyczność i adaptacyjność",
+    "group": "Adaptacyjność i odporność",
+    "general_popularity": 92,
+    "popularity_in_group": 99,
+    "group_popularity": 80
+  },
+  {
+    "id": 2,
+    "name": "Chęć uczenia się / nastawienie na rozwój",
+    "group": "Adaptacyjność i odporność",
+    "general_popularity": 88,
+    "popularity_in_group": 95,
+    "group_popularity": 80
+  },
+  {
+    "id": 3,
+    "name": "Odporność psychiczna (resilience)",
+    "group": "Adaptacyjność i odporność",
+    "general_popularity": 82,
+    "popularity_in_group": 89,
+    "group_popularity": 80
+  },
+  {
+    "id": 4,
+    "name": "Zarządzanie stresem",
+    "group": "Adaptacyjność i odporność",
+    "general_popularity": 80,
+    "popularity_in_group": 87,
+    "group_popularity": 80
+  },
+  {
+    "id": 5,
+    "name": "Wytrwałość / determinacja",
+    "group": "Adaptacyjność i odporność",
+    "general_popularity": 76,
+    "popularity_in_group": 83,
+    "group_popularity": 80
+  },
+  {
+    "id": 6,
+    "name": "Zarządzanie własną energią",
+    "group": "Adaptacyjność i odporność",
+    "general_popularity": 65,
+    "popularity_in_group": 72,
+    "group_popularity": 80
+  },
+  {
+    "id": 7,
+    "name": "Odpowiedzialność i rozliczalność",
+    "group": "Etyka i profesjonalizm",
+    "general_popularity": 88,
+    "popularity_in_group": 99,
+    "group_popularity": 86
+  },
+  {
+    "id": 8,
+    "name": "Profesjonalizm",
+    "group": "Etyka i profesjonalizm",
+    "general_popularity": 88,
+    "popularity_in_group": 99,
+    "group_popularity": 86
+  },
+  {
+    "id": 9,
+    "name": "Rzetelność / niezawodność",
+    "group": "Etyka i profesjonalizm",
+    "general_popularity": 88,
+    "popularity_in_group": 99,
+    "group_popularity": 86
+  },
+  {
+    "id": 10,
+    "name": "Godność zaufania",
+    "group": "Etyka i profesjonalizm",
+    "general_popularity": 86,
+    "popularity_in_group": 97,
+    "group_popularity": 86
+  },
+  {
+    "id": 11,
+    "name": "Inicjatywa i samodzielność",
+    "group": "Etyka i profesjonalizm",
+    "general_popularity": 82,
+    "popularity_in_group": 93,
+    "group_popularity": 86
+  },
+  {
+    "id": 12,
+    "name": "Inteligencja emocjonalna",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 88,
+    "popularity_in_group": 99,
+    "group_popularity": 80
+  },
+  {
+    "id": 13,
+    "name": "Empatia",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 86,
+    "popularity_in_group": 98,
+    "group_popularity": 80
+  },
+  {
+    "id": 14,
+    "name": "Budowanie relacji",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 84,
+    "popularity_in_group": 95,
+    "group_popularity": 80
+  },
+  {
+    "id": 15,
+    "name": "Aktywne słuchanie",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 82,
+    "popularity_in_group": 93,
+    "group_popularity": 80
+  },
+  {
+    "id": 16,
+    "name": "Rozwiązywanie konfliktów",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 82,
+    "popularity_in_group": 93,
+    "group_popularity": 80
+  },
+  {
+    "id": 17,
+    "name": "Asertywność",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 76,
+    "popularity_in_group": 87,
+    "group_popularity": 80
+  },
+  {
+    "id": 18,
+    "name": "Cierpliwość",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 74,
+    "popularity_in_group": 85,
+    "group_popularity": 80
+  },
+  {
+    "id": 19,
+    "name": "Dyplomacja",
+    "group": "Inteligencja emocjonalna i relacje interpersonalne",
+    "general_popularity": 68,
+    "popularity_in_group": 79,
+    "group_popularity": 80
+  },
+  {
+    "id": 20,
+    "name": "Komunikacja",
+    "group": "Komunikacja",
+    "general_popularity": 96,
+    "popularity_in_group": 99,
+    "group_popularity": 81
+  },
+  {
+    "id": 21,
+    "name": "Komunikacja werbalna",
+    "group": "Komunikacja",
+    "general_popularity": 88,
+    "popularity_in_group": 92,
+    "group_popularity": 81
+  },
+  {
+    "id": 22,
+    "name": "Negocjacje",
+    "group": "Komunikacja",
+    "general_popularity": 82,
+    "popularity_in_group": 86,
+    "group_popularity": 81
+  },
+  {
+    "id": 23,
+    "name": "Wystąpienia publiczne",
+    "group": "Komunikacja",
+    "general_popularity": 82,
+    "popularity_in_group": 86,
+    "group_popularity": 81
+  },
+  {
+    "id": 24,
+    "name": "Pisanie techniczne / dokumentacja",
+    "group": "Komunikacja",
+    "general_popularity": 76,
+    "popularity_in_group": 80,
+    "group_popularity": 81
+  },
+  {
+    "id": 25,
+    "name": "Storytelling",
+    "group": "Komunikacja",
+    "general_popularity": 72,
+    "popularity_in_group": 76,
+    "group_popularity": 81
+  },
+  {
+    "id": 26,
+    "name": "Klarowność wypowiedzi",
+    "group": "Komunikacja",
+    "general_popularity": 70,
+    "popularity_in_group": 74,
+    "group_popularity": 81
+  },
+  {
+    "id": 27,
+    "name": "Kreatywność",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 90,
+    "popularity_in_group": 99,
+    "group_popularity": 77
+  },
+  {
+    "id": 28,
+    "name": "Innowacyjność",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 85,
+    "popularity_in_group": 95,
+    "group_popularity": 77
+  },
+  {
+    "id": 29,
+    "name": "Planowanie stgeneral_popularitygiczne",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 78,
+    "popularity_in_group": 88,
+    "group_popularity": 77
+  },
+  {
+    "id": 30,
+    "name": "Burza mózgów / generowanie pomysłów",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 76,
+    "popularity_in_group": 86,
+    "group_popularity": 77
+  },
+  {
+    "id": 31,
+    "name": "Design thinking",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 74,
+    "popularity_in_group": 84,
+    "group_popularity": 77
+  },
+  {
+    "id": 32,
+    "name": "Przedsiębiorczość",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 72,
+    "popularity_in_group": 82,
+    "group_popularity": 77
+  },
+  {
+    "id": 33,
+    "name": "Liderstwo opiniotwórcze",
+    "group": "Kreatywność i innowacyjność",
+    "general_popularity": 62,
+    "popularity_in_group": 72,
+    "group_popularity": 77
+  },
+  {
+    "id": 34,
+    "name": "Rozwiązywanie problemów",
+    "group": "Myślenie krytyczne i rozwiązywanie problemów",
+    "general_popularity": 95,
+    "popularity_in_group": 99,
+    "group_popularity": 84
+  },
+  {
+    "id": 35,
+    "name": "Myślenie krytyczne",
+    "group": "Myślenie krytyczne i rozwiązywanie problemów",
+    "general_popularity": 92,
+    "popularity_in_group": 97,
+    "group_popularity": 84
+  },
+  {
+    "id": 36,
+    "name": "Myślenie analityczne",
+    "group": "Myślenie krytyczne i rozwiązywanie problemów",
+    "general_popularity": 90,
+    "popularity_in_group": 95,
+    "group_popularity": 84
+  },
+  {
+    "id": 37,
+    "name": "Diagnozowanie i rozwiązywanie problemów",
+    "group": "Myślenie krytyczne i rozwiązywanie problemów",
+    "general_popularity": 84,
+    "popularity_in_group": 89,
+    "group_popularity": 84
+  },
+  {
+    "id": 38,
+    "name": "Analiza przyczyn źródłowych",
+    "group": "Myślenie krytyczne i rozwiązywanie problemów",
+    "general_popularity": 74,
+    "popularity_in_group": 79,
+    "group_popularity": 84
+  },
+  {
+    "id": 39,
+    "name": "Myślenie systemowe",
+    "group": "Myślenie krytyczne i rozwiązywanie problemów",
+    "general_popularity": 72,
+    "popularity_in_group": 77,
+    "group_popularity": 84
+  },
+  {
+    "id": 40,
+    "name": "Obsługa klienta",
+    "group": "Orientacja na klienta i obsługa",
+    "general_popularity": 90,
+    "popularity_in_group": 99,
+    "group_popularity": 75
+  },
+  {
+    "id": 41,
+    "name": "Networking zawodowy",
+    "group": "Orientacja na klienta i obsługa",
+    "general_popularity": 72,
+    "popularity_in_group": 82,
+    "group_popularity": 75
+  },
+  {
+    "id": 42,
+    "name": "Ocena potrzeb klienta",
+    "group": "Orientacja na klienta i obsługa",
+    "general_popularity": 70,
+    "popularity_in_group": 80,
+    "group_popularity": 75
+  },
+  {
+    "id": 43,
+    "name": "Upselling / cross-selling",
+    "group": "Orientacja na klienta i obsługa",
+    "general_popularity": 68,
+    "popularity_in_group": 78,
+    "group_popularity": 75
+  },
+  {
+    "id": 44,
+    "name": "Praca zespołowa",
+    "group": "Praca zespołowa i współpraca",
+    "general_popularity": 94,
+    "popularity_in_group": 99,
+    "group_popularity": 84
+  },
+  {
+    "id": 45,
+    "name": "Współpraca",
+    "group": "Praca zespołowa i współpraca",
+    "general_popularity": 92,
+    "popularity_in_group": 98,
+    "group_popularity": 84
+  },
+  {
+    "id": 46,
+    "name": "Budowanie zespołu",
+    "group": "Praca zespołowa i współpraca",
+    "general_popularity": 76,
+    "popularity_in_group": 82,
+    "group_popularity": 84
+  },
+  {
+    "id": 47,
+    "name": "Współpraca zdalna / wirtualna",
+    "group": "Praca zespołowa i współpraca",
+    "general_popularity": 74,
+    "popularity_in_group": 80,
+    "group_popularity": 84
+  },
+  {
+    "id": 48,
+    "name": "Przywództwo",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 94,
+    "popularity_in_group": 99,
+    "group_popularity": 80
+  },
+  {
+    "id": 49,
+    "name": "Zarządzanie zespołem",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 88,
+    "popularity_in_group": 94,
+    "group_popularity": 80
+  },
+  {
+    "id": 50,
+    "name": "Podejmowanie decyzji",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 86,
+    "popularity_in_group": 92,
+    "group_popularity": 80
+  },
+  {
+    "id": 51,
+    "name": "Myślenie strategiczne",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 84,
+    "popularity_in_group": 90,
+    "group_popularity": 80
+  },
+  {
+    "id": 52,
+    "name": "Zarządzanie zmianą",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 78,
+    "popularity_in_group": 84,
+    "group_popularity": 80
+  },
+  {
+    "id": 53,
+    "name": "Coaching",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 76,
+    "popularity_in_group": 82,
+    "group_popularity": 80
+  },
+  {
+    "id": 54,
+    "name": "Zarządzanie konfliktami",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 74,
+    "popularity_in_group": 80,
+    "group_popularity": 80
+  },
+  {
+    "id": 55,
+    "name": "Przywództwo transformacyjne",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 70,
+    "popularity_in_group": 76,
+    "group_popularity": 80
+  },
+  {
+    "id": 56,
+    "name": "Myślenie wizjonerskie",
+    "group": "Przywództwo i zarządzanie ludźmi",
+    "general_popularity": 68,
+    "popularity_in_group": 74,
+    "group_popularity": 80
+  },
+  {
+    "id": 57,
+    "name": "Zarządzanie czasem",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 94,
+    "popularity_in_group": 99,
+    "group_popularity": 85
+  },
+  {
+    "id": 58,
+    "name": "Dotrzymywanie terminów",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 90,
+    "popularity_in_group": 96,
+    "group_popularity": 85
+  },
+  {
+    "id": 59,
+    "name": "Umiejętności organizacyjne",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 88,
+    "popularity_in_group": 94,
+    "group_popularity": 85
+  },
+  {
+    "id": 60,
+    "name": "Planowanie",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 88,
+    "popularity_in_group": 94,
+    "group_popularity": 85
+  },
+  {
+    "id": 61,
+    "name": "Priorytetyzacja",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 86,
+    "popularity_in_group": 92,
+    "group_popularity": 85
+  },
+  {
+    "id": 62,
+    "name": "Wielozadaniowość",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 82,
+    "popularity_in_group": 88,
+    "group_popularity": 85
+  },
+  {
+    "id": 63,
+    "name": "Proaktywność",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 82,
+    "popularity_in_group": 88,
+    "group_popularity": 85
+  },
+  {
+    "id": 64,
+    "name": "Wyznaczanie celów",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 80,
+    "popularity_in_group": 86,
+    "group_popularity": 85
+  },
+  {
+    "id": 65,
+    "name": "Nastawienie na cel",
+    "group": "Zarządzanie czasem i organizacja",
+    "general_popularity": 78,
+    "popularity_in_group": 84,
+    "group_popularity": 85
+  }
+]

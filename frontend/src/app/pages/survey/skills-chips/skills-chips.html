@@ -1,0 +1,63 @@
+<div class="skills-chips-container">
+  <div class="chips-flow">
+    @for (skillName of selectedSkills; track skillName) {
+    <button type="button" class="chip selected-chip" (click)="removeSelectedSkill(skillName)">
+      {{ skillName }}
+    </button>
+    }
+
+    @for (suggestion of suggestions; track suggestion.id) {
+    <button type="button" class="chip suggestion-chip" (click)="onSuggestionChipClick(suggestion)">
+      {{ suggestion.name }}
+    </button>
+    }
+
+    <div class="input-controls">
+      <div class="input-chip-wrap">
+        <div
+          class="chip input-chip"
+          [class.is-active]="canSubmitCustomSkill"
+          [class.is-filled]="userInputControl.value.length > 0"
+          (click)="onCustomChipContainerClick(customInput)"
+        >
+          <input
+            #customInput
+            type="text"
+            class="custom-chip-input"
+            [formControl]="userInputControl"
+            [attr.maxlength]="maxCustomSkillLength"
+            (click)="$event.stopPropagation()"
+            (focus)="onInputFocus()"
+            (blur)="onInputBlur()"
+            (keyup.enter)="onUserAddSkill()"
+          />
+        </div>
+
+        @if (isAutocompleteOpen && autocompleteSuggestions.length > 0) {
+        <div class="autocomplete-panel">
+          @for (item of autocompleteSuggestions; track item) {
+          <button
+            type="button"
+            class="autocomplete-item"
+            (mousedown)="$event.preventDefault()"
+            (click)="onAutocompleteSuggestionClick(item)"
+          >
+            {{ item }}
+          </button>
+          }
+        </div>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="chip refresh-chip"
+        (click)="onRefreshSuggestions()"
+        aria-label="Odśwież"
+        title="Odśwież"
+      >
+        <span class="refresh-glyph" aria-hidden="true">&#8635;</span>
+      </button>
+    </div>
+  </div>
+</div>
