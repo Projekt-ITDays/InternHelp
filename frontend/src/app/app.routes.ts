@@ -36,11 +36,6 @@ export const routes: Routes = [
 		canActivate: []
 	},
 	{
-		path: 'Settings',
-		component: Settings,
-		canActivate: []
-	},
-	{
 		path: '**',
 		redirectTo: '',
 	}

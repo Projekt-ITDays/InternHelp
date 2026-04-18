@@ -1,3 +1,4 @@
+/* Plan menu: kontener i trigger menu */
 :host {
   display: block;
 }
@@ -38,6 +39,7 @@
   background: var(--ih-surface);
 }
 
+/* Plan menu: panel listy planow */
 .menu-panel {
   position: absolute;
   top: 0;
@@ -90,6 +92,7 @@
   color: var(--ih-accent-soft);
 }
 
+/* Plan menu: wiersze planow i akcje */
 .plan-row {
   position: relative;
   display: flex;
@@ -158,6 +161,7 @@
   background: var(--ih-accent-mid);
 }
 
+/* Plan menu: modal potwierdzenia usuwania */
 .confirm-delete-overlay {
   position: fixed;
   inset: 0;
@@ -227,6 +231,7 @@
   color: var(--ih-surface-soft);
 }
 
+/* Plan menu: zachowanie responsywne */
 @media (min-width: 901px) and (max-width: 1500px) {
   .menu-panel {
     max-height: 90vh;

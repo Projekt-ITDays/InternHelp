@@ -1,3 +1,4 @@
+/* Welcome: globalny host i ustawienia strony */
 :host {
     --bg-page: var(--ih-bg);
     --bg-warm: var(--ih-bg-soft);
@@ -67,6 +68,7 @@
     cursor: pointer;
 }
 
+/* Welcome: szeroki uklad (desktop) */
 .layout-wide {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--rail-width);
@@ -139,6 +141,7 @@
     filter: saturate(0.92) contrast(1.03) brightness(0.86);
 }
 
+/* Welcome: linki i prawa kolumna funkcji */
 .stage-links {
     position: absolute;
     left: 1.3rem;
@@ -218,6 +221,7 @@
     outline: none;
 }
 
+/* Welcome: kafle cech i opisy */
 .feature-row {
     width: 100%;
     border: 1px solid var(--border-dark);
@@ -258,6 +262,7 @@
     margin-top: 0.44rem;
 }
 
+/* Welcome: panel logowania */
 .auth-panel {
     flex: 1;
     min-height: 0;
@@ -347,6 +352,22 @@
 }
 
 .forgot-button:hover {
+	color: var(--theme-contrast);
+}
+
+.error-message {
+	height: 1.3rem;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	color: var(--theme-error);
+	font-size: 0.75rem;
+	line-height: 1.3rem;
+	text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
     color: var(--ink);
 }
 
@@ -448,6 +469,7 @@
     color: var(--ink);
 }
 
+/* Welcome: wersja mobilna */
 .layout-mobile {
     display: none;
 }
@@ -469,6 +491,7 @@
     border: 1px solid var(--border-dark);
 }
 
+/* Welcome: breakpoint tablet */
 @media (max-width: 1180px) {
     :host {
         --rail-width: clamp(350px, 32vw, 460px);
@@ -480,6 +503,7 @@
     }
 }
 
+/* Welcome: breakpoint mobile */
 @media (max-width: 900px) {
     .welcome-screen {
         padding: 1rem;
@@ -523,6 +547,19 @@
         border-radius: var(--radius-lg);
     }
 
+	.layout-mobile .credentials-group {
+		border-radius: 10px;
+		border-color: var(--theme-secondary);
+		background: var(--theme-complement);
+	}
+
+	.layout-mobile .credentials-group input + input {
+		border-top-color: var(--theme-secondary);
+	}
+
+	.layout-mobile .captcha-box {
+		border-radius: 10px;
+	}
     .layout-mobile .credentials-group {
         border-radius: 12px;
     }
@@ -564,6 +601,7 @@
     }
 }
 
+/* Welcome: animacje wejscia */
 @keyframes shot-slide {
     from {
         opacity: 0;

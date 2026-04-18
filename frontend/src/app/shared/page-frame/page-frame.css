@@ -1,3 +1,4 @@
+/* Page frame: globalna rama strony */
 :host {
   --page-padding: clamp(0.95rem, 2.6vw, 1.3rem);
   display: block;
@@ -11,6 +12,7 @@
   padding: var(--page-padding);
 }
 
+/* Page frame: gorny pasek i branding */
 .top-bar {
   display: flex;
   justify-content: space-between;
@@ -54,10 +56,12 @@ h1 {
   margin-right: calc(-1 * var(--page-padding));
 }
 
+/* Page frame: glowna zawartosc */
 .page-content {
   margin-top: 1.2rem;
 }
 
+/* Page frame: ustawienia mobilne */
 @media (max-width: 900px) {
   :host {
     --page-padding: 1rem;

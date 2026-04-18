@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
 import { LoginDto } from 'src/dto/login.dto';
@@ -25,10 +25,10 @@ export class AuthService {
     async logout(userId: string) {
         await this.refreshTokenRepository.delete({ userId })
     }
-    async register(payload: LoggingCredentialsDto) {
-        const user = await this.userRepository.findOne({ where: { username: payload.username } })
-        if (user) {
-            throw new Error('User already exists')
+    async register(payload : LoggingCredentialsDto) {
+        const user = await this.userRepository.findOne({where: {username: payload.username}})
+        if(user) {
+            throw new ConflictException('Użytkownik już istnieje')
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -40,13 +40,13 @@ export class AuthService {
         await this.userRepository.save(newUser)
     }
 
-    async login(payload: LoginDto) {
-        const user = await this.userRepository.findOne({ where: { username: payload.username } })
-        if (!user) {
-            throw new Error('User not found')
+    async login(payload : LoggingCredentialsDto) {
+        const user = await this.userRepository.findOne({where: {username: payload.username}})
+        if(!user) {
+            throw new UnauthorizedException('Nieprawidłowa nazwa użytkownika lub hasło')
         }
-        if (!(await bcrypt.compare(payload.password, user.password))) {
-            throw new Error('Invalid password')
+        if(!(await bcrypt.compare(payload.password, user.password))) {
+            throw new UnauthorizedException('Nieprawidłowa nazwa użytkownika lub hasło')
         }
         const token = await this.generateToken(user.id)
         console.log(user.id)
@@ -81,13 +81,13 @@ export class AuthService {
     }
 
     async refreshToken(oldRefreshToken: string) {
-        const storedToken = await this.refreshTokenRepository.findOne({ where: { token: oldRefreshToken } })
-        if (!storedToken) {
-            throw new Error('Invalid refresh token')
+        const storedToken = await this.refreshTokenRepository.findOne({where: {token: oldRefreshToken}})
+        if(!storedToken) {
+            throw new UnauthorizedException('Nieprawidłowy refresh token')
         }
-        if (storedToken.expiresAt < new Date()) {
-
-            throw new Error('Refresh token expired')
+        if(storedToken.expiresAt < new Date()) {
+            
+            throw new UnauthorizedException('Refresh token wygasł')
         }
         await this.refreshTokenRepository.delete(storedToken.id)
         return this.generateToken(storedToken.userId)

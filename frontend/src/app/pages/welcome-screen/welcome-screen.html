@@ -95,22 +95,20 @@
     <ng-template #loginFormTemplate>
         <div class="login-card">
             <form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
+                <p class="error-message">{{ loginError() }}</p>
                 <div class="credentials-group">
                     <input type="text" name="username" class="username-input" [value]="username()"
                         (input)="onUsernameInput($event)" autocomplete="username" placeholder="Login" />
                     <input type="password" name="password" class="password-input" [value]="password()"
                         (input)="onPasswordInput($event)" autocomplete="current-password" placeholder="Hasło" />
                 </div>
-
-                <div class="captcha-box">[ Widzet Captcha ]</div>
-
                 <button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
                     Nie pamiętam hasła
                 </button>
 
                 <div class="login-actions">
-                    <button type="submit" class="login-button" (click)="Login()">Zaloguj</button>
-                    <button type="button" class="register-button" (click)="onRegisterClick()">
+                    <button type="submit" class="login-button">Zaloguj</button>
+                    <button type="button" class="register-button" (click)="openRegistration()">
                         Zarejestruj
                     </button>
                 </div>
@@ -121,14 +119,14 @@
                         <span>Zaloguj przez Google</span>
                     </button>
                 </div>
-
-                <small class="legal-note">
-                    Korzystamy z plików cookies.
-                    <span class="legal-acceptance">
-                        Rejestrując się, akceptujesz&nbsp;<a href="/" (click)="$event.preventDefault()">Regulamin</a>.
-                    </span>
-                </small>
             </form>
         </div>
     </ng-template>
 </div>
+@if (showRegistration()) {
+  <app-registration 
+    (close)="showRegistration.set(false)"
+    [initialEmail]="username()" 
+    [initialPassword]="password()"
+  />
+}

@@ -30,8 +30,8 @@ export class AuthService {
         return data;
     }
 
-    register(payload: LoggingDto) {
-        this.http.post(`${this.apiUrl}/register`, payload);
+    register(payload : LoggingDto) {
+         return this.http.post(`${this.apiUrl}/register`, payload);
     }
 
 
@@ -58,12 +58,13 @@ export class AuthService {
         this.isLogged = true;
     }
 
-    getAccessToken() {
-        return this.accesToken;
+    getAccessToken(): string | null {
+        return this.accessToken;
     }
 
     clearAccessToken() {
-        this.accesToken = null;
+        this.accessToken = null;
+        this.isLogged = null;
     }
     isLoggedIn(): boolean {
         if (this.isLogged === null) {

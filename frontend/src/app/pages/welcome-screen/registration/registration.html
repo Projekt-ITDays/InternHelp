@@ -1,0 +1,23 @@
+<div class="overlay">
+    <div class="registration-container">
+        <button type="button" class="close-button" (click)="closeRegistration()">X</button>
+        <input type="email" placeholder="Email" [(ngModel)]="email"/>
+        <input type="email" placeholder="Powtórz email" [(ngModel)]="confirmEmail"/>
+        <input type="password" placeholder="Hasło" [(ngModel)]="password"/>
+        <input type="password" placeholder="Powtórz hasło" [(ngModel)]="confirmPassword"/>
+        <label>
+            <input type="checkbox" [(ngModel)]="termsAccepted"/>                
+            <small class="legal-note">
+                Korzystamy z plików cookies.
+                <span class="legal-acceptance">
+                    Rejestrując się, akceptujesz&nbsp;<a href="/" (click)="$event.preventDefault()">Regulamin</a>
+                </span>
+            </small>
+        </label>
+        <div class="error-container">
+            <p class="error-text">{{ errorMessage() }}</p>
+        </div>
+        <div class="captcha-box">[ Widzet Captcha ]</div>
+        <button type="submit" class="register-button" (click)="register()">Zarejestruj</button>
+    </div>
+</div>

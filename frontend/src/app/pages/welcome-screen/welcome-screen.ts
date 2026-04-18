@@ -1,9 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
 import { LoggingDto } from '../../core/models/loggingDto';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Registration } from './registration/registration';
+
 import { MainPage } from '../../shared/main-page/main-page';
 import { Navbar } from '../../shared/navbar/navbar';
 
@@ -18,7 +21,7 @@ type FeatureCard = {
 @Component({
   selector: 'app-welcome-screen',
   standalone: true,
-  imports: [NgTemplateOutlet, MainPage, Navbar],
+  imports: [NgTemplateOutlet, Registration, MainPage, Navbar],
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })
@@ -62,8 +65,9 @@ export class WelcomeScreen {
   protected password = signal<string>('');
   protected showErrorWidget = signal<boolean>(false);
   protected errorMessage = signal<string>('Wypełnij oba pola.');
-  protected Login(): void {
-    const LoginDto: LoggingDto = {
+  protected loginError = signal<string>('');
+  protected Login() : void {
+    const LoginDto : LoggingDto = {
       username: this.username(),
       password: this.password(),
     };
@@ -74,17 +78,13 @@ export class WelcomeScreen {
         // this.router.navigate(['/ai/ask']);
         this.router.navigate(['/dashboard']);
       })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Błąd logowania',
-          text: 'Niepoprawny login lub hasło.',
-        });
-        // placeholder - > używać jeżeli nie chcemy korzystać z logowania i autoryzacji
-        // dalej tego używam btw
-        // this.router.navigate(['/ai/ask']);
-
-        this.showError('Niepoprawny login lub hasło.');
+      .catch((err: unknown) => {
+        if (this.username().trim() === '' || this.password().trim() === '') {
+          this.loginError.set('Wypełnij oba pola.');
+        } else {
+          this.loginError.set(this.extractErrorMessage(err, 'Nieprawidłowa nazwa użytkownika lub hasło.'));
+        }
+        this.showErrorWidget.set(true);
       });
   }
 
@@ -120,7 +120,8 @@ export class WelcomeScreen {
     const pass = this.password().trim();
 
     if (!user || !pass) {
-      this.showError('Wypełnij oba pola.');
+      this.loginError.set('Wypełnij oba pola.');
+      this.showErrorWidget.set(true);
       return;
     }
 
@@ -128,18 +129,8 @@ export class WelcomeScreen {
     this.Login();
   }
 
-  protected onRegisterClick(): void {}
-
   protected onForgotPasswordClick(): void {
-    this.showError('Opcja przypomnienia hasła będzie dostępna wkrótce.');
-  }
-
-  protected dismissErrorWidget(): void {
-    this.showErrorWidget.set(false);
-  }
-
-  private showError(message: string): void {
-    this.errorMessage.set(message);
+    this.loginError.set('Opcja przypomnienia hasła będzie dostępna wkrótce.');
     this.showErrorWidget.set(true);
   }
 
@@ -168,4 +159,32 @@ export class WelcomeScreen {
     window.history.replaceState({}, document.title, window.location.pathname);
     this.router.navigate(['/ai/ask']);
   }
+
+  protected showRegistration = signal(false);
+  protected openRegistration() {
+    this.showRegistration.set(true);
+  }
+
+  private extractErrorMessage(err: unknown, fallback: string): string {
+    if (!(err instanceof HttpErrorResponse)) {
+      return fallback;
+    }
+
+    const backendError = err.error;
+
+    if (typeof backendError === 'string' && backendError.trim()) {
+      return backendError;
+    }
+
+    if (Array.isArray(backendError?.message) && backendError.message.length > 0) {
+      return backendError.message[0];
+    }
+
+    if (typeof backendError?.message === 'string' && backendError.message.trim()) {
+      return backendError.message;
+    }
+
+    return fallback;
+  }
+
 }
