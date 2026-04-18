@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { SurveyDto } from '../../core/models/survey';
 import { SurveyService } from '../../core/services/survey.service';
 import { Navbar } from '../../shared/navbar/navbar';
+import { UczelniaComponent } from './uczelnia/uczelnia';
 
 @Component({
   selector: 'app-survey',
   standalone: true,
-  imports: [FormsModule, Navbar],
+  imports: [FormsModule, Navbar, UczelniaComponent],
   templateUrl: './survey.html',
   styleUrl: './survey.css',
 })

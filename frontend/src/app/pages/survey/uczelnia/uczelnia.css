@@ -1,0 +1,81 @@
+:host {
+  display: block;
+}
+
+.uczelnia-field {
+  width: 100%;
+  margin: 0;
+}
+
+:host ::ng-deep .uczelnia-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+:host ::ng-deep .uczelnia-field .mat-mdc-text-field-wrapper {
+  background: var(--ih-bg);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+:host ::ng-deep .uczelnia-field .mat-mdc-form-field-flex {
+  min-height: 0;
+}
+
+:host ::ng-deep .uczelnia-field .mat-mdc-form-field-infix {
+  min-height: 0;
+  padding: 0.8rem 1rem;
+}
+
+:host ::ng-deep .uczelnia-field input.mat-mdc-input-element {
+  color: var(--ih-surface);
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+:host ::ng-deep .uczelnia-field input.mat-mdc-input-element::placeholder {
+  color: var(--ih-surface-a14);
+  opacity: 1;
+}
+
+:host ::ng-deep .uczelnia-field .mdc-text-field--outlined {
+  border-radius: 10px;
+}
+
+:host ::ng-deep .uczelnia-field .mdc-notched-outline__leading,
+:host ::ng-deep .uczelnia-field .mdc-notched-outline__notch,
+:host ::ng-deep .uczelnia-field .mdc-notched-outline__trailing {
+  border-color: var(--ih-surface-a14) !important;
+}
+
+:host ::ng-deep .uczelnia-field.mat-focused .mat-mdc-text-field-wrapper {
+  background: var(--ih-bg-soft);
+  box-shadow: 0 0 0 3px var(--ih-accent-soft);
+}
+
+:host ::ng-deep .uczelnia-field.mat-focused .mdc-notched-outline__leading,
+:host ::ng-deep .uczelnia-field.mat-focused .mdc-notched-outline__notch,
+:host ::ng-deep .uczelnia-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--ih-accent-border) !important;
+}
+
+:host ::ng-deep .uczelnia-panel {
+  background: var(--ih-bg);
+  border: 1px solid var(--ih-surface-a14);
+  border-radius: 12px;
+  box-shadow: var(--ih-shadow-lg);
+  padding: 0.28rem;
+}
+
+:host ::ng-deep .uczelnia-panel .mat-mdc-option {
+  min-height: 42px;
+  border-radius: 9px;
+  color: var(--ih-surface);
+  font: inherit;
+}
+
+:host ::ng-deep .uczelnia-panel .mat-mdc-option:hover,
+:host ::ng-deep .uczelnia-panel .mat-mdc-option.mdc-list-item--selected,
+:host ::ng-deep .uczelnia-panel .mat-mdc-option.mat-mdc-option-active {
+  background: var(--ih-accent-soft);
+  color: var(--ih-accent);
+}

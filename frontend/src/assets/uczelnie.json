@@ -1,0 +1,3754 @@
+[
+    {
+        "id": 794,
+        "name": "Uniwersytet Warszawski",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 100
+    },
+    {
+        "id": 719,
+        "name": "Uniwersytet Jagielloński w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 99
+    },
+    {
+        "id": 24,
+        "name": "Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 95
+    },
+    {
+        "id": 546,
+        "name": "Politechnika Warszawska",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 95
+    },
+    {
+        "id": 718,
+        "name": "Uniwersytet im. Adama Mickiewicza w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 94
+    },
+    {
+        "id": 547,
+        "name": "Politechnika Wrocławska",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 93
+    },
+    {
+        "id": 527,
+        "name": "Politechnika Gdańska",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 90
+    },
+    {
+        "id": 544,
+        "name": "Politechnika Śląska",
+        "city": "Gliwice",
+        "province": "śląskie",
+        "popularity_score": 90
+    },
+    {
+        "id": 742,
+        "name": "Uniwersytet Kardynała Stefana Wyszyńskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 90
+    },
+    {
+        "id": 763,
+        "name": "Uniwersytet Muzyczny Fryderyka Chopina w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 90
+    },
+    {
+        "id": 531,
+        "name": "Politechnika Łódzka",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 89
+    },
+    {
+        "id": 541,
+        "name": "Politechnika Poznańska",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 88
+    },
+    {
+        "id": 796,
+        "name": "Uniwersytet Wrocławski",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 88
+    },
+    {
+        "id": 529,
+        "name": "Politechnika Krakowska im. Tadeusza Kościuszki",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 87
+    },
+    {
+        "id": 746,
+        "name": "Uniwersytet Łódzki",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 87
+    },
+    {
+        "id": 714,
+        "name": "Uniwersytet Gdański",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 86
+    },
+    {
+        "id": 587,
+        "name": "Szkoła Główna Handlowa w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 85
+    },
+    {
+        "id": 780,
+        "name": "Uniwersytet Śląski w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 85
+    },
+    {
+        "id": 865,
+        "name": "Warszawski Uniwersytet Medyczny",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 85
+    },
+    {
+        "id": 389,
+        "name": "Gdański Uniwersytet Medyczny",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 83
+    },
+    {
+        "id": 66,
+        "name": "Akademia Leona Koźmińskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 82
+    },
+    {
+        "id": 622,
+        "name": "Śląski Uniwersytet Medyczny w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 82
+    },
+    {
+        "id": 710,
+        "name": "Uniwersytet Ekonomiczny we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 82
+    },
+    {
+        "id": 749,
+        "name": "Uniwersytet Medyczny im. Piastów Śląskich we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 82
+    },
+    {
+        "id": 797,
+        "name": "Uniwersytet WSB Merito we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 82
+    },
+    {
+        "id": 799,
+        "name": "Uniwersytet WSB Merito w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 82
+    },
+    {
+        "id": 753,
+        "name": "Uniwersytet Medyczny w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 81
+    },
+    {
+        "id": 793,
+        "name": "Uniwersytet Warmińsko-Mazurski w Olsztynie",
+        "city": "Olsztyn",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 80
+    },
+    {
+        "id": 775,
+        "name": "Uniwersytet Rzeszowski",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 79
+    },
+    {
+        "id": 1548,
+        "name": "Zachodniopomorski Uniwersytet Technologiczny w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 78
+    },
+    {
+        "id": 543,
+        "name": "Politechnika Rzeszowska im. Ignacego Łukasiewicza",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 77
+    },
+    {
+        "id": 523,
+        "name": "Politechnika Białostocka",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 76
+    },
+    {
+        "id": 253,
+        "name": "Bydgoska Wyższa Szkoła Główna z siedzibą w Bydgoszczy w likwidacji",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 75
+    },
+    {
+        "id": 552,
+        "name": "Pomorski Uniwersytet Medyczny w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 75
+    },
+    {
+        "id": 588,
+        "name": "Szkoła Główna Krajowa z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 75
+    },
+    {
+        "id": 589,
+        "name": "Szkoła Główna Mikołaja Kopernika",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 75
+    },
+    {
+        "id": 590,
+        "name": "Szkoła Główna Politechniczna w likwidacji",
+        "city": "Wołomin",
+        "province": "mazowieckie",
+        "popularity_score": 75
+    },
+    {
+        "id": 600,
+        "name": "Szkoła Główna Turystyki i Hotelarstwa Vistula",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 75
+    },
+    {
+        "id": 748,
+        "name": "Uniwersytet Medyczny im. Karola Marcinkowskiego w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 75
+    },
+    {
+        "id": 751,
+        "name": "Uniwersytet Medyczny w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 75
+    },
+    {
+        "id": 752,
+        "name": "Uniwersytet Medyczny w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 75
+    },
+    {
+        "id": 764,
+        "name": "Uniwersytet Opolski",
+        "city": "Opole",
+        "province": "opolskie",
+        "popularity_score": 75
+    },
+    {
+        "id": 545,
+        "name": "Politechnika Świętokrzyska",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 74
+    },
+    {
+        "id": 795,
+        "name": "Uniwersytet w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 73
+    },
+    {
+        "id": 530,
+        "name": "Politechnika Lubelska",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 72
+    },
+    {
+        "id": 540,
+        "name": "Politechnika Opolska",
+        "city": "Opole",
+        "province": "opolskie",
+        "popularity_score": 72
+    },
+    {
+        "id": 779,
+        "name": "Uniwersytet Szczeciński",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 72
+    },
+    {
+        "id": 768,
+        "name": "Uniwersytet Przyrodniczy we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 71
+    },
+    {
+        "id": 586,
+        "name": "Szkoła Główna Gospodarstwa Wiejskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 70
+    },
+    {
+        "id": 524,
+        "name": "Politechnika Bydgoska im. Jana i Jędrzeja Śniadeckich",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 68
+    },
+    {
+        "id": 526,
+        "name": "Politechnika Częstochowska",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 68
+    },
+    {
+        "id": 528,
+        "name": "Politechnika Koszalińska",
+        "city": "Koszalin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 68
+    },
+    {
+        "id": 532,
+        "name": "Politechnika Morska w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 68
+    },
+    {
+        "id": 711,
+        "name": "Uniwersytet Ekonomiczny w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 65
+    },
+    {
+        "id": 712,
+        "name": "Uniwersytet Ekonomiczny w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 65
+    },
+    {
+        "id": 713,
+        "name": "Uniwersytet Ekonomiczny w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 65
+    },
+    {
+        "id": 769,
+        "name": "Uniwersytet Przyrodniczy w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 65
+    },
+    {
+        "id": 770,
+        "name": "Uniwersytet Przyrodniczy w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 65
+    },
+    {
+        "id": 774,
+        "name": "Uniwersytet Rolniczy im. Hugona Kołłątaja w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 65
+    },
+    {
+        "id": 227,
+        "name": "Akademia Wychowania Fizycznego Józefa Piłsudskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 60
+    },
+    {
+        "id": 412,
+        "name": "Katolicki Uniwersytet Lubelski Jana Pawła II",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 698,
+        "name": "Uniwersytet Andrzeja Frycza Modrzewskiego w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 700,
+        "name": "Uniwersytet Artystyczny im. Magdaleny Abakanowicz w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 703,
+        "name": "Uniwersytet Bielsko-Bialski",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 705,
+        "name": "Uniwersytet Civitas",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 60
+    },
+    {
+        "id": 707,
+        "name": "Uniwersytet DSW Ideis",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 716,
+        "name": "Uniwersytet Ignatianum w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 720,
+        "name": "Uniwersytet Jana Długosza w Częstochowie",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 723,
+        "name": "Uniwersytet Jana Kochanowskiego w Kielcach",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 724,
+        "name": "Uniwersytet Kaliski im. Prezydenta Stanisława Wojciechowskiego",
+        "city": "Kalisz",
+        "province": "wielkopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 743,
+        "name": "Uniwersytet Kazimierza Wielkiego w Bydgoszczy",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 744,
+        "name": "Uniwersytet Komisji Edukacji Narodowej w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 747,
+        "name": "Uniwersytet Marii Curie-Skłodowskiej w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 754,
+        "name": "Uniwersytet Mikołaja Kopernika w Toruniu",
+        "city": "Toruń",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 755,
+        "name": "Uniwersytet Morski w Gdyni",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 765,
+        "name": "Uniwersytet Papieski Jana Pawła II w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 766,
+        "name": "Uniwersytet Pomorski w Słupsku",
+        "city": "Słupsk",
+        "province": "pomorskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 771,
+        "name": "Uniwersytet Radomski im. Kazimierza Pułaskiego",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 60
+    },
+    {
+        "id": 776,
+        "name": "Uniwersytet SWPS",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 60
+    },
+    {
+        "id": 781,
+        "name": "Uniwersytet VIZJA",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 60
+    },
+    {
+        "id": 801,
+        "name": "Uniwersytet WSB Merito w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 803,
+        "name": "Uniwersytet WSB Merito w Toruniu",
+        "city": "Toruń",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 807,
+        "name": "Uniwersytet w Siedlcach",
+        "city": "Siedlce",
+        "province": "mazowieckie",
+        "popularity_score": 60
+    },
+    {
+        "id": 809,
+        "name": "Uniwersytet Zielonogórski w Zielonej Górze",
+        "city": "Zielona Góra",
+        "province": "lubuskie",
+        "popularity_score": 60
+    },
+    {
+        "id": 33,
+        "name": "Akademia Humanistyczno-Ekonomiczna w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 55
+    },
+    {
+        "id": 83,
+        "name": "Akademia Medyczna Nauk Stosowanych i Holistycznych",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 50
+    },
+    {
+        "id": 100,
+        "name": "Akademia Nauk Społecznych i Medycznych w Lublinie - Akademia Nauk Stosowanych",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 50
+    },
+    {
+        "id": 291,
+        "name": "Europejska Akademia Medycznych i Społecznych Nauk Stosowanych",
+        "city": "Olsztyn",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 50
+    },
+    {
+        "id": 370,
+        "name": "Gdańska Akademia Medyczna Nauk Stosowanych",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 50
+    },
+    {
+        "id": 557,
+        "name": "Poznańska Akademia Medyczna Nauk Stosowanych im. Księcia Mieszka I",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 50
+    },
+    {
+        "id": 811,
+        "name": "Warszawska Akademia Medyczna Nauk Stosowanych",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 50
+    },
+    {
+        "id": 977,
+        "name": "Wyższa Szkoła Bankowości i Finansów z siedzibą w Katowicach w likwidacji",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 50
+    },
+    {
+        "id": 1479,
+        "name": "Wyższa Szkoła Zarządzania i Bankowości w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 50
+    },
+    {
+        "id": 62,
+        "name": "Akademia Kultury Fizycznej im. Bronisława Czecha w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 48
+    },
+    {
+        "id": 222,
+        "name": "Akademia Wychowania Fizycznego im. Eugeniusza Piaseckiego w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 48
+    },
+    {
+        "id": 223,
+        "name": "Akademia Wychowania Fizycznego im. Jerzego Kukuczki w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 48
+    },
+    {
+        "id": 224,
+        "name": "Akademia Wychowania Fizycznego im. Polskich Olimpijczyków we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 48
+    },
+    {
+        "id": 226,
+        "name": "Akademia Wychowania Fizycznego i Sportu im. Jędrzeja Śniadeckiego w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 48
+    },
+    {
+        "id": 89,
+        "name": "Akademia Medycznych i Społecznych Nauk Stosowanych",
+        "city": "Elbląg",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 91,
+        "name": "Akademia Muzyczna im. Feliksa Nowowiejskiego w Bydgoszczy",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 93,
+        "name": "Akademia Muzyczna im. Grażyny i Kiejstuta Bacewiczów w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 45
+    },
+    {
+        "id": 94,
+        "name": "Akademia Muzyczna im. Ignacego Jana Paderewskiego w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 95,
+        "name": "Akademia Muzyczna im. Karola Lipińskiego we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 96,
+        "name": "Akademia Muzyczna im. Karola Szymanowskiego w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 97,
+        "name": "Akademia Muzyczna im. Krzysztofa Pendereckiego w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 99,
+        "name": "Akademia Muzyczna im. Stanisława Moniuszki w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 184,
+        "name": "Akademia Sztuk Pięknych im. Eugeniusza Gepperta we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 185,
+        "name": "Akademia Sztuk Pięknych im. Jana Matejki w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 186,
+        "name": "Akademia Sztuk Pięknych im. Władysława Strzemińskiego w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 45
+    },
+    {
+        "id": 187,
+        "name": "Akademia Sztuk Pięknych w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 188,
+        "name": "Akademia Sztuk Pięknych w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 189,
+        "name": "Akademia Sztuk Pięknych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 45
+    },
+    {
+        "id": 563,
+        "name": "Prywatna Wyższa Szkoła Informatyki i Zarządzania im. Józefa Tyszkiewicza w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 839,
+        "name": "Warszawska Wyższa Szkoła Informatyki w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1064,
+        "name": "Wyższa Szkoła Ekonomii i Informatyki w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1082,
+        "name": "Wyższa Szkoła Finansów i Informatyki im. prof. Janusza Chechlińskiego w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1147,
+        "name": "Wyższa Szkoła Informatyki i Ekonomii TWP w Olsztynie",
+        "city": "Olsztyn",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1149,
+        "name": "Wyższa Szkoła Informatyki i Umiejętności w likwidacji",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1153,
+        "name": "Wyższa Szkoła Informatyki i Zarządzania „COPERNICUS” we Wrocławiu w likwidacji",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1157,
+        "name": "Wyższa Szkoła Informatyki i Zarządzania im. Prof. Tadeusza Kotarbińskiego z siedzibą w Olsztynie",
+        "city": "Olsztyn",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1161,
+        "name": "Wyższa Szkoła Informatyki i Zarządzania w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1162,
+        "name": "Wyższa Szkoła Informatyki i Zarządzania z siedzibą w Rzeszowie",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1163,
+        "name": " Wyższa Szkoła Informatyki i Zdrowia",
+        "city": "Przemyśl",
+        "province": "podkarpackie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1232,
+        "name": "Wyższa Szkoła Matematyki i Informatyki Użytkowej w likwidacji z siedzibą w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 1425,
+        "name": "Wyższa Szkoła Telekomunikacji i Informatyki w Kielcach",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 45
+    },
+    {
+        "id": 58,
+        "name": "Akademia Kujawsko-Pomorska",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 44
+    },
+    {
+        "id": 249,
+        "name": "Bielska Wyższa Szkoła Biznesu z siedzibą w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 344,
+        "name": "Europejska Wyższa Szkoła Biznesu w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 347,
+        "name": "Europejska Wyższa Szkoła Biznesu w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 439,
+        "name": "Małopolska Wyższa Szkoła Ekonomiczna z siedzibą w Tarnowie",
+        "city": "Tarnów",
+        "province": "małopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 831,
+        "name": "Warszawska Wyższa Szkoła Biznesu z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 835,
+        "name": "Warszawska Wyższa Szkoła Ekonomiczna im. Edwarda Wiszniewskiego z siedzibą w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 874,
+        "name": "Wielkopolska Wyższa Szkoła Humanistyczno-Ekonomiczna w Jarocinie w likwidacji",
+        "city": "Jarocin",
+        "province": "wielkopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 942,
+        "name": "Wyższa Szkoła Administracji i Biznesu im. Eugeniusza Kwiatkowskiego w Gdyni",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 990,
+        "name": "Wyższa Szkoła Biznesu im. Biskupa Jana Chrapka w Radomiu w likwidacji",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 994,
+        "name": "Wyższa Szkoła Biznesu i Nauk o Zdrowiu w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 42
+    },
+    {
+        "id": 995,
+        "name": "Wyższa Szkoła Biznesu, Mediów i Reklamy",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 999,
+        "name": "Wyższa Szkoła Biznesu - National Louis University z siedzibą w Nowym Sączu",
+        "city": "Nowy Sącz",
+        "province": "małopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1001,
+        "name": "Wyższa Szkoła Biznesu - National Louis University z siedzibą w Nowym Sączu (wykreślona)",
+        "city": "Nowy Sącz",
+        "province": "małopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1003,
+        "name": "Wyższa Szkoła Biznesu w Gorzowie Wlkp.",
+        "city": "Gorzów Wielkopolski",
+        "province": "lubuskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1004,
+        "name": "Wyższa Szkoła Biznesu w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1019,
+        "name": "Wyższa Szkoła Biznesu z siedzibą w Tarnowie",
+        "city": "Tarnów",
+        "province": "małopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1036,
+        "name": "Wyższa Szkoła Ekonomiczna w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1037,
+        "name": "Wyższa Szkoła Ekonomiczna w Bochni",
+        "city": "Bochnia",
+        "province": "małopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1039,
+        "name": "Wyższa Szkoła Ekonomiczna z siedzibą w Stalowej Woli",
+        "city": "Stalowa Wola",
+        "province": "podkarpackie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1043,
+        "name": "Wyższa Szkoła Ekonomiczno - Humanistyczna im. prof. Szczepana A. Pieniążka w likwidacji",
+        "city": "Skierniewice",
+        "province": "łódzkie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1047,
+        "name": "Wyższa Szkoła Ekonomiczno-Humanistyczna w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1048,
+        "name": "Wyższa Szkoła Ekonomiczno-Społeczna w Bydgoszczy w likwidacji z siedzibą w Bydgoszczy",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1050,
+        "name": "Wyższa Szkoła Ekonomiczno-Społeczna w Ostrołęce w likwidacji",
+        "city": "Ostrołęka",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1056,
+        "name": "Wyższa Szkoła Ekonomiczno-Techniczna w Legionowie (wykreślona)",
+        "city": "Legionowo",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1058,
+        "name": "Wyższa Szkoła Ekonomiczno-Turystyczna w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1060,
+        "name": "Wyższa Szkoła Ekonomii i Administracji w likwidacji z siedzibą w Bytomiu",
+        "city": "Bytom",
+        "province": "śląskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1140,
+        "name": "Wyższa Szkoła Humanistyczno-Ekonomiczna im. J. Zamoyskiego w Zamościu",
+        "city": "Zamość",
+        "province": "lubelskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1141,
+        "name": "Wyższa Szkoła Humanistyczno-Ekonomiczna w Brzegu",
+        "city": "Brzeg",
+        "province": "opolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1142,
+        "name": "Wyższa Szkoła Humanistyczno-Ekonomiczna w Pabianicach",
+        "city": "Pabianice",
+        "province": "łódzkie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1144,
+        "name": "Wyższa Szkoła Humanistyczno-Ekonomiczna w Sieradzu",
+        "city": "Sieradz",
+        "province": "łódzkie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1180,
+        "name": "Wyższa Szkoła Inżynieryjno-Ekonomiczna z siedzibą w Ropczycach (przekształcona wykreślona)",
+        "city": "Ropczyce",
+        "province": "podkarpackie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1182,
+        "name": "Wyższa Szkoła Inżynieryjno-Ekonomiczna z siedzibą w Rzeszowie w likwidacji",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1225,
+        "name": "Wyższa Szkoła Marketingu i Biznesu w likwidacji z siedzibą w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1263,
+        "name": "Wyższa Szkoła Nauk Ekonomicznych i Społecznych w Kętach",
+        "city": "Kęty",
+        "province": "małopolskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1347,
+        "name": "Wyższa Szkoła Społeczno-Ekonomiczna w Gdańsku z siedzibą w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1349,
+        "name": "Wyższa Szkoła Społeczno-Ekonomiczna w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1404,
+        "name": "Wyższa Szkoła Techniczno-Ekonomiczna w Szczecinie w likwidacji z siedzibą w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1410,
+        "name": "Wyższa Szkoła Techniczno-Ekonomiczna w Świdnicy z siedzibą w Świdnicy",
+        "city": "Świdnica",
+        "province": "dolnośląskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1414,
+        "name": "Wyższa Szkoła Techniczno-Ekonomiczna w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1522,
+        "name": "Wyższa Szkoła Zawodowa „Oeconomicus” Polskiego Towarzystwa Ekonomicznego  w likwidacji",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 42
+    },
+    {
+        "id": 1,
+        "name": "Akademia Ateneum w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 7,
+        "name": "Akademia Bialska im. Jana Pawła II",
+        "city": "Biała Podlaska",
+        "province": "lubelskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 16,
+        "name": "Akademia Finansów i Biznesu Vistula",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 25,
+        "name": "Akademia Górnośląska im. Wojciecha Korfantego w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 27,
+        "name": "Akademia Handlowa Nauk Stosowanych w Radomiu",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 31,
+        "name": "Akademia Humanistyczna im. Aleksandra Gieysztora w Pułtusku",
+        "city": "Pułtusk",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 34,
+        "name": "Akademia Humanitas",
+        "city": "Sosnowiec",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 38,
+        "name": "Akademia im. Jakuba z Paradyża",
+        "city": "Gorzów Wielkopolski",
+        "province": "lubuskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 50,
+        "name": "Akademia Jagiellońska w Toruniu",
+        "city": "Toruń",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 56,
+        "name": "Akademia Katolicka w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 64,
+        "name": "Akademia Kultury Społecznej i Medialnej w Toruniu - Akademia Nauk Stosowanych",
+        "city": "Toruń",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 67,
+        "name": "Akademia Łomżyńska",
+        "city": "Łomża",
+        "province": "podlaskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 76,
+        "name": "Akademia Marynarki Wojennej im. Bohaterów Westerplatte",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 77,
+        "name": "Akademia Mazowiecka w Płocku",
+        "city": "Płock",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 103,
+        "name": "Akademia Nauk Stosowanych Angelusa Silesiusa",
+        "city": "Wałbrzych",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 106,
+        "name": "Akademia Nauk Stosowanych Gospodarki Krajowej w Kutnie",
+        "city": "Kutno",
+        "province": "łódzkie",
+        "popularity_score": 40
+    },
+    {
+        "id": 108,
+        "name": "Akademia Nauk Stosowanych im. Haliny Konopackiej w Pruszkowie",
+        "city": "Pruszków",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 114,
+        "name": "Akademia Nauk Stosowanych im. Hipolita Cegielskiego w Gnieźnie Uczelnia Państwowa",
+        "city": "Gniezno",
+        "province": "wielkopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 122,
+        "name": "Akademia Nauk Stosowanych im. Jana Amosa Komeńskiego w Lesznie",
+        "city": "Leszno",
+        "province": "wielkopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 124,
+        "name": "Akademia Nauk Stosowanych im. Józefa Gołuchowskiego",
+        "city": "Ostrowiec Świętokrzyski",
+        "province": "świętokrzyskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 126,
+        "name": "Akademia Nauk Stosowanych im. ks. Jerzego Popiełuszki w Grudziądzu",
+        "city": "Grudziądz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 129,
+        "name": "Akademia Nauk Stosowanych im. prof. Edwarda Lipińskiego w Kielcach",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 132,
+        "name": "Akademia Nauk Stosowanych im. Stanisława Staszica w Pile",
+        "city": "Piła",
+        "province": "wielkopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 135,
+        "name": "Akademia Nauk Stosowanych Mazovia",
+        "city": "Siedlce",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 137,
+        "name": "Akademia Nauk Stosowanych Stefana Batorego",
+        "city": "Skierniewice",
+        "province": "łódzkie",
+        "popularity_score": 40
+    },
+    {
+        "id": 140,
+        "name": "Akademia Nauk Stosowanych Towarzystwa Wiedzy Powszechnej w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 142,
+        "name": "Akademia Nauk Stosowanych w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 144,
+        "name": "Akademia Nauk Stosowanych w Elblągu",
+        "city": "Elbląg",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 146,
+        "name": "Akademia Nauk Stosowanych we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 152,
+        "name": "Akademia Nauk Stosowanych Wincentego Pola w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 154,
+        "name": "Akademia Nauk Stosowanych w Koninie",
+        "city": "Konin",
+        "province": "wielkopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 156,
+        "name": "Akademia Nauk Stosowanych w Nowym Sączu",
+        "city": "Nowy Sącz",
+        "province": "małopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 158,
+        "name": "Akademia Nauk Stosowanych w Nowym Targu",
+        "city": "Nowy Targ",
+        "province": "małopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 161,
+        "name": "Akademia Nauk Stosowanych w Raciborzu",
+        "city": "Racibórz",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 165,
+        "name": "Akademia Nauk Stosowanych WSGE im. A. De Gasperi w Józefowie",
+        "city": "Józefów",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 167,
+        "name": "Akademia Nauk Stosowanych w Wałczu",
+        "city": "Wałcz",
+        "province": "zachodniopomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 169,
+        "name": "Akademia Nauk Stosowanych - Wyższa Szkoła Zarządzania i Administracji w Opolu",
+        "city": "Opole",
+        "province": "opolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 171,
+        "name": "Akademia Pedagogiki Specjalnej im. Marii Grzegorzewskiej",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 173,
+        "name": "Akademia Piotrkowska",
+        "city": "Piotrków Trybunalski",
+        "province": "łódzkie",
+        "popularity_score": 40
+    },
+    {
+        "id": 174,
+        "name": "Akademia Podlaska w Białymstoku - Akademia Nauk Stosowanych",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 176,
+        "name": "Akademia Policji w Szczytnie",
+        "city": "Szczytno",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 178,
+        "name": "Akademia Polonijna w Częstochowie",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 179,
+        "name": "Akademia Pożarnicza",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 181,
+        "name": "Akademia Sztuki Wojennej",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 183,
+        "name": "Akademia Sztuki w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 190,
+        "name": "Akademia Sztuk Teatralnych im. Stanisława Wyspiańskiego w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 192,
+        "name": "Akademia Śląska",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 196,
+        "name": "Akademia Tarnowska",
+        "city": "Tarnów",
+        "province": "małopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 205,
+        "name": "Akademia Teatralna im. Aleksandra Zelwerowicza w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 206,
+        "name": "Akademia Techniczno-Artystyczna Nauk Stosowanych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 210,
+        "name": "Akademia Techniczno-Informatyczna w Naukach Stosowanych",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 214,
+        "name": "Akademia WIT w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 218,
+        "name": "Akademia Wojsk Lądowych imienia generała Tadeusza Kościuszki",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 220,
+        "name": "Akademia WSB",
+        "city": "Dąbrowa Górnicza",
+        "province": "śląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 228,
+        "name": "Akademia Wymiaru Sprawiedliwości",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 234,
+        "name": "Akademia Zamojska",
+        "city": "Zamość",
+        "province": "lubelskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 260,
+        "name": "Chrześcijańska Akademia Teologiczna w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 261,
+        "name": "Collegium Balticum - Akademia Nauk Stosowanych z siedzibą w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 315,
+        "name": "Europejska Akademia Sztuk w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 409,
+        "name": "Karkonoska Akademia Nauk Stosowanych w Jeleniej Górze",
+        "city": "Jelenia Góra",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 418,
+        "name": "Lotnicza Akademia Wojskowa",
+        "city": "Dęblin",
+        "province": "lubelskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 420,
+        "name": "Lubelska Akademia WSEI",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 456,
+        "name": "Menedżerska Akademia Nauk Stosowanych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 460,
+        "name": "Międzynarodowa Akademia Nauk Stosowanych w Łomży",
+        "city": "Łomża",
+        "province": "podlaskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 475,
+        "name": "Państwowa Akademia Nauk Stosowanych im. Ignacego Mościckiego w Ciechanowie",
+        "city": "Ciechanów",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 478,
+        "name": "Państwowa Akademia Nauk Stosowanych im. ks. Bronisława Markiewicza w Jarosławiu",
+        "city": "Jarosław",
+        "province": "podkarpackie",
+        "popularity_score": 40
+    },
+    {
+        "id": 480,
+        "name": "Państwowa Akademia Nauk Stosowanych im. prof. Stanisława Tarnowskiego w Tarnobrzegu",
+        "city": "Tarnobrzeg",
+        "province": "podkarpackie",
+        "popularity_score": 40
+    },
+    {
+        "id": 483,
+        "name": "Państwowa Akademia Nauk Stosowanych w Chełmie",
+        "city": "Chełm",
+        "province": "lubelskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 485,
+        "name": "Państwowa Akademia Nauk Stosowanych we Włocławku",
+        "city": "Włocławek",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 488,
+        "name": "Państwowa Akademia Nauk Stosowanych w Głogowie",
+        "city": "Głogów",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 490,
+        "name": "Państwowa Akademia Nauk Stosowanych w Koszalinie",
+        "city": "Koszalin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 492,
+        "name": "Państwowa Akademia Nauk Stosowanych w Krośnie",
+        "city": "Krosno",
+        "province": "podkarpackie",
+        "popularity_score": 40
+    },
+    {
+        "id": 496,
+        "name": "Państwowa Akademia Nauk Stosowanych w Nysie",
+        "city": "Nysa",
+        "province": "opolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 498,
+        "name": "Państwowa Akademia Nauk Stosowanych w Przemyślu",
+        "city": "Przemyśl",
+        "province": "podkarpackie",
+        "popularity_score": 40
+    },
+    {
+        "id": 548,
+        "name": "Polsko-Japońska Akademia Technik Komputerowych",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 553,
+        "name": "Powiślańska Akademia Nauk Stosowanych",
+        "city": "Kwidzyn",
+        "province": "pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 576,
+        "name": "Sopocka Akademia Nauk Stosowanych",
+        "city": "Sopot",
+        "province": "pomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 578,
+        "name": "Społeczna Akademia Nauk z siedzibą w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 40
+    },
+    {
+        "id": 581,
+        "name": "Staropolska Akademia Nauk Stosowanych w Kielcach",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 627,
+        "name": "Tarnowska Szkoła Wyższa Akademia Nauk Stosowanych",
+        "city": "Tarnów",
+        "province": "małopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 651,
+        "name": "Uczelnia Korczaka - Akademia Nauk Stosowanych",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 866,
+        "name": "Wielkopolska Akademia Społeczno - Ekonomiczna w Środzie Wielkopolskiej - Akademia Nauk Stosowanych",
+        "city": "Środa Wielkopolska",
+        "province": "wielkopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 890,
+        "name": "Wojskowa Akademia Techniczna im. Jarosława Dąbrowskiego",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 891,
+        "name": "Wrocławska Akademia Biznesu w Naukach Stosowanych",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 895,
+        "name": "Wschodnioeuropejska Akademia Nauk Stosowanych w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 899,
+        "name": "WSHIU Akademia Nauk Stosowanych",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 905,
+        "name": "Wszechnica Polska Akademia Nauk Stosowanych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 40
+    },
+    {
+        "id": 1546,
+        "name": "Zachodniopomorska Szkoła Biznesu - Akademia Nauk Stosowanych",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 40
+    },
+    {
+        "id": 241,
+        "name": "Bałtycka Wyższa Szkoła Bursztynu z siedzibą w Junoszynie",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 243,
+        "name": "Bałtycka Wyższa Szkoła Humanistyczna w Koszalinie",
+        "city": "Koszalin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 245,
+        "name": "Beskidzka Wyższa Szkoła Umiejętności w Żywcu w likwidacji",
+        "city": "Żywiec",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 251,
+        "name": "Bielska Wyższa Szkoła im. Józefa Tyszkiewicza w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 269,
+        "name": "Collegium Masoviense - Wyższa Szkoła Nauk o Zdrowiu",
+        "city": "Grodzisk Mazowiecki",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 273,
+        "name": "Collegium Medicum Wyższa Szkoła Służb Medycznych w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 287,
+        "name": "Dolnośląska Wyższa Szkoła Służb Publicznych \"Asesor\" we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 289,
+        "name": "Elbląska Wyższa Szkoła Humanistyczna - w likwidacji z siedzibą w Elblągu (wykreślona)",
+        "city": "Elbląg",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 363,
+        "name": "Europejska Wyższa Szkoła Prawa i Administracji w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 366,
+        "name": "Ewangelikalna Wyższa Szkoła Teologiczna",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 368,
+        "name": "Francusko-Polska Wyższa Szkoła Nowych Technik Informatyczno-Komunikacyjnych z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 375,
+        "name": "Gdańska Wyższa Szkoła Humanistyczna w likwidacji",
+        "city": "Koszalin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 387,
+        "name": "Gdańska Wyższa Szkoła Humanistyczna z siedzibą w Gdańsku (wykreślona)",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 390,
+        "name": "Gliwicka Wyższa Szkoła Przedsiębiorczości w likwidacji",
+        "city": "Gliwice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 396,
+        "name": "Górnośląska Wyższa Szkoła Pedagogiczna im. Kardynała Augusta Hlonda w likwidacji z siedzibą w Mysłowicach",
+        "city": "Mysłowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 402,
+        "name": "Górnośląska Wyższa Szkoła Przedsiębiorczości im. Karola Goduli",
+        "city": "Chorzów",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 413,
+        "name": "Koszalińska Wyższa Szkoła Nauk Humanistycznych w Koszalinie",
+        "city": "Koszalin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 414,
+        "name": "Krakowska Wyższa Szkoła Promocji Zdrowia w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 429,
+        "name": "Lubuska Wyższa Szkoła Zdrowia Publicznego w Zielonej Górze w likwidacji",
+        "city": "Zielona Góra",
+        "province": "lubuskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 440,
+        "name": "Małopolska Wyższa Szkoła im. Józefa Dietla w Krakowie w likwidacji",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 452,
+        "name": "Mazowiecka Wyższa Szkoła Humanistyczno-Pedagogiczna w Łowiczu",
+        "city": "Łowicz",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 467,
+        "name": "Międzynarodowa Wyższa Szkoła Logistyki i Transportu we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 471,
+        "name": "Niepubliczna Wyższa Szkoła Medyczna we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 501,
+        "name": "Państwowa Medyczna Wyższa Szkoła Zawodowa w Opolu",
+        "city": "Opole",
+        "province": "opolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 505,
+        "name": "Państwowa Wyższa Szkoła Filmowa, Telewizyjna i Teatralna im. Leona Schillera w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 506,
+        "name": "Państwowa Wyższa Szkoła Zawodowa w Sandomierzu",
+        "city": "Sandomierz",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 508,
+        "name": "Państwowa Wyższa Szkoła Zawodowa w Sulechowie",
+        "city": "Sulechów",
+        "province": "lubuskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 511,
+        "name": "Pedagogium Wyższa Szkoła Nauk Społecznych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 512,
+        "name": "Pedagogium - Wyższa Szkoła Pedagogiki Resocjalizacyjnej w Warszawie w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 515,
+        "name": "Podkowiańska Wyższa Szkoła Medyczna im. Zofii i Jonasza Łyko w likwidacji",
+        "city": "Podkowa Leśna",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 551,
+        "name": "Pomorska Wyższa Szkoła Nauk Stosowanych w Gdyni",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 556,
+        "name": "Powszechna Wyższa Szkoła Humanistyczna \"Pomerania\" w Chojnicach",
+        "city": "Chojnice",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 565,
+        "name": "Prywatna Wyższa Szkoła Ochrony Środowiska w Radomiu",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 573,
+        "name": "Schola Posnaniensis - Wyższa Szkoła Sztuki Stosowanej w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 584,
+        "name": "Sudecka Wyższa Szkoła w Kłodzku z siedzibą w Kłodzku",
+        "city": "Kłodzko",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 615,
+        "name": "Śląska Wyższa Szkoła Informatyczno-Medyczna z siedzibą w Chorzowie w likwidacji",
+        "city": "Chorzów",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 619,
+        "name": "Śląska Wyższa Szkoła Medyczna w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 620,
+        "name": "Śląska Wyższa Szkoła Zarządzania im. Gen. Jerzego Ziętka w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 841,
+        "name": "Warszawska Wyższa Szkoła Nauk Społecznych im. Rafała Lemkina w likwidacji",
+        "city": "Wołomin",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 878,
+        "name": "Wielkopolska Wyższa Szkoła Turystyki i Zarządzania w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 943,
+        "name": "Wyższa Szkoła Administracji i Zarządzania w Zawierciu w likwidacji",
+        "city": "Zawiercie",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 949,
+        "name": "Wyższa Szkoła Administracji Publicznej",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 955,
+        "name": "Wyższa Szkoła Administracji Publicznej imienia Stanisława Staszica w Białymstoku w likwidacji",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 961,
+        "name": "Wyższa Szkoła Administracji Publicznej w Kielcach",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 962,
+        "name": "Wyższa Szkoła Administracji Publicznej w likwidacji z siedzibą w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 965,
+        "name": "Wyższa Szkoła Administracji Publicznej w Ostrołęce",
+        "city": "Ostrołęka",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 966,
+        "name": "Wyższa Szkoła Administracji w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 970,
+        "name": "Wyższa Szkoła Administracyjno – Społeczna w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 976,
+        "name": "Wyższa Szkoła Artystyczna w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 983,
+        "name": "Wyższa Szkoła Bezpieczeństwa i Ochrony im. Marszałka Józefa Piłsudskiego z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 987,
+        "name": "Wyższa Szkoła Bezpieczeństwa Publicznego i Indywidualnego \"Apeiron\" w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 989,
+        "name": "Wyższa Szkoła Bezpieczeństwa w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1021,
+        "name": "Wyższa Szkoła Cła i Logistyki w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1023,
+        "name": "Wyższa Szkoła COSINUS w Łodzi z siedzibą w Łodzi w likwidacji",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1027,
+        "name": "Wyższa Szkoła Dziennikarska im. Melchiora Wańkowicza w Warszawie w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1033,
+        "name": "Wyższa Szkoła - Edukacja w Sporcie w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1034,
+        "name": "Wyższa Szkoła Edukacji i Terapii im. prof. Kazimiery Milanowskiej z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1066,
+        "name": "Wyższa Szkoła Europejska im. Ks. Józefa Tischnera w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1068,
+        "name": "Wyższa Szkoła Filologiczna we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1070,
+        "name": "Wyższa Szkoła Filologii Hebrajskiej w likwidacji w Toruniu",
+        "city": "Toruń",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1076,
+        "name": "Wyższa Szkoła Finansów i Administracji w likwidacji z siedzibą w Gdyni",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1083,
+        "name": "Wyższa Szkoła Finansów i Zarządzania w Warszawie z siedzibą w Warszawie (wykreślona)",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1085,
+        "name": "Wyższa Szkoła Fizjoterapii we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1086,
+        "name": "Wyższa Szkoła Fundacji Kultury Informatycznej w Nadarzynie",
+        "city": "Nadarzyn",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1088,
+        "name": "Wyższa Szkoła Gospodarki i Zarządzania",
+        "city": "Mielec",
+        "province": "podkarpackie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1092,
+        "name": "Wyższa Szkoła Gospodarki Narodowej w Tychach z siedzibą w Tychach (wykreślona)",
+        "city": "Tychy",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1094,
+        "name": "Wyższa Szkoła Gospodarki w Bydgoszczy",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1095,
+        "name": "Wyższa Szkoła Gospodarowania Nieruchomościami w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1099,
+        "name": "Wyższa Szkoła Handlowa im. Bolesława Markowskiego w Kielcach w likwidacji",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1103,
+        "name": "Wyższa Szkoła Handlowa im. Króla Stefana Batorego w Piotrkowie Trybunalskim  w likwidacji z siedzibą w Piotrkowie Trybunalskim",
+        "city": "Piotrków Trybunalski",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1109,
+        "name": "Wyższa Szkoła Handlowa w likwidacji z siedzibą w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1113,
+        "name": "Wyższa Szkoła Handlu i Finansów Międzynarodowych im. Fryderyka Skarbka w likwidacji w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1117,
+        "name": "Wyższa Szkoła Handlu i Rachunkowości z siedzibą w Poznaniu w likwidacji",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1121,
+        "name": "Wyższa Szkoła Hotelarstwa i Gastronomii w Poznaniu w restrukturyzacji",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1125,
+        "name": "Wyższa Szkoła Hotelarstwa i Turystyki z siedzibą w Częstochowie w likwidacji",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1131,
+        "name": "Wyższa Szkoła Humanistyczna im. Alojzego Szubartowskiego w Lublinie w likwidacji z siedzibą w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1134,
+        "name": "Wyższa Szkoła Humanistyczna im. Króla Stanisława Leszczyńskiego w Lesznie",
+        "city": "Leszno",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1135,
+        "name": "Wyższa Szkoła Humanistyczna we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1137,
+        "name": "Wyższa Szkoła Humanistyczna w Katowicach w likwidacji z siedzibą w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1146,
+        "name": "Wyższa Szkoła Humanistyczno-Przyrodnicza Studium Generale Sandomiriense w Sandomierzu",
+        "city": "Sandomierz",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1165,
+        "name": "Wyższa Szkoła Integracji Europejskiej w likwidacji",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1169,
+        "name": "Wyższa Szkoła Inżynierii Bezpieczeństwa i Ekologii w Sosnowcu w likwidacji ",
+        "city": "Sosnowiec",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1173,
+        "name": "Wyższa Szkoła Inżynierii Dentystycznej i Nauk Humanistycznych im prof. Meissnera w Ustroniu",
+        "city": "Ustroń",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1175,
+        "name": "Wyższa Szkoła Inżynierii Gospodarki w Słupsku",
+        "city": "Słupsk",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1176,
+        "name": "Wyższa Szkoła Inżynierii i Zdrowia w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1178,
+        "name": "Wyższa Szkoła Inżynierska w Ostrowie Wielkopolskim",
+        "city": "Ostrów Wielkopolski",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1188,
+        "name": "Wyższa Szkoła Języków Obcych im. Samuela Bogumiła Lindego z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1189,
+        "name": "Wyższa Szkoła Języków Obcych w Szczecinie w likwidacji z siedzibą w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1193,
+        "name": "Wyższa Szkoła Kadr Menedżerskich",
+        "city": "Konin",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1195,
+        "name": "Wyższa Szkoła Komunikacji i Zarządzania",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1201,
+        "name": "Wyższa Szkoła Komunikacji Społecznej w Gdyni",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1202,
+        "name": "Wyższa Szkoła Komunikowania i Mediów Społecznych im. Jerzego Giedroycia w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1206,
+        "name": "Wyższa Szkoła Kosmetologii i Promocji Zdrowia z siedzibą w Szczecinie w likwidacji",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1212,
+        "name": "Wyższa Szkoła Kosmetyki i Nauk o Zdrowiu w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1213,
+        "name": "Wyższa Szkoła Kształcenia Zawodowego",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1219,
+        "name": "Wyższa Szkoła Kupiecka w likwidacji z siedzibą w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1223,
+        "name": "Wyższa Szkoła Lingwistyczna w Częstochowie",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1224,
+        "name": "Wyższa Szkoła Logistyki w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1228,
+        "name": "Wyższa Szkoła Marketingu i Zarządzania w Lesznie w likwidacji",
+        "city": "Leszno",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1238,
+        "name": "Wyższa Szkoła Mechatroniki w Katowicach w likwidacji z siedzibą w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1242,
+        "name": "Wyższa Szkoła Medyczna w Kłodzku",
+        "city": "Kłodzko",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1244,
+        "name": "Wyższa Szkoła Medyczna w Legnicy z siedzibą w Legnicy",
+        "city": "Legnica",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1245,
+        "name": "Wyższa Szkoła Medyczna w Sosnowcu",
+        "city": "Sosnowiec",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1246,
+        "name": "Wyższa Szkoła Medyczna z siedzibą w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1247,
+        "name": "Wyższa Szkoła Menedżerska w Białymstoku w likwidacji",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1253,
+        "name": "Wyższa Szkoła Menedżerska w Legnicy w likwidacji z siedzibą w Legnicy",
+        "city": "Legnica",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1257,
+        "name": "Wyższa Szkoła Menedżerska w likwidacji z siedzibą w Świeciu",
+        "city": "Świecie",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1259,
+        "name": "Wyższa Szkoła Menedżerska z siedzibą w Jeleniej Górze w likwidacji",
+        "city": "Jelenia Góra",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1265,
+        "name": "Wyższa Szkoła Nauk Medycznych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1266,
+        "name": "Wyższa Szkoła Nauk o Zdrowiu w Bydgoszczy",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1267,
+        "name": "Wyższa Szkoła Nauk Pedagogicznych",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1271,
+        "name": "Wyższa Szkoła Nauk Prawnych  i Administracji im. Leona Petrażyckiego z siedzibą w Wołominie",
+        "city": "Wołomin",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1275,
+        "name": "Wyższa Szkoła Nauk Społecznych i Bezpieczeństwa",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1283,
+        "name": "Wyższa Szkoła Nauk Społecznych im. Ks. J. Majki w Mińsku Mazowieckim",
+        "city": "Mińsk Mazowiecki",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1285,
+        "name": "Wyższa Szkoła Nauk Stosowanych w Rudzie Śląskiej",
+        "city": "Ruda Śląska",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1286,
+        "name": "Wyższa Szkoła Nowa Edukacja w Łomiankach",
+        "city": "Łomianki",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1288,
+        "name": "Wyższa Szkoła Ochrony Środowiska, Turystyki i Rekreacji w Krakowie z siedzibą w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1297,
+        "name": "Wyższa Szkoła Organizacji Turystyki i Hotelarstwa w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1301,
+        "name": "Wyższa Szkoła Pedagogiczna w Łodzi w likwidacji",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1305,
+        "name": "Wyższa Szkoła Pedagogiczna Związku Nauczycielstwa Polskiego z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1311,
+        "name": "Wyższa Szkoła Pedagogiczno-Techniczna w Koninie",
+        "city": "Konin",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1312,
+        "name": "Wyższa Szkoła Planowania Strategicznego w Dąbrowie Górniczej",
+        "city": "Dąbrowa Górnicza",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1313,
+        "name": "Wyższa Szkoła Prawa i Administracji Rzeszowska Szkoła Wyższa z siedzibą w Rzeszowie",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1315,
+        "name": "Wyższa Szkoła Prawa we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1318,
+        "name": "Wyższa Szkoła Promocji, Mediów i Show Businessu z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1320,
+        "name": "Wyższa Szkoła Przedsiębiorczości i Administracji w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1321,
+        "name": "Wyższa Szkoła Przedsiębiorczości i Marketingu w likwidacji z siedzibą w Chrzanowie",
+        "city": "Chrzanów",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1325,
+        "name": "Wyższa Szkoła Przedsiębiorczości imienia Księcia Kazimierza Kujawskiego z siedzibą w Inowrocławiu",
+        "city": "Inowrocław",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1331,
+        "name": "Wyższa Szkoła Przedsiębiorczości i Rozwoju Regionalnego w likwidacji z siedzibą w Falentach",
+        "city": "Falenty",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1335,
+        "name": "Wyższa Szkoła Rozwoju Lokalnego w Żyrardowie",
+        "city": "Żyrardów",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1337,
+        "name": "Wyższa Szkoła Sanocka z siedzibą w Sanoku",
+        "city": "Sanok",
+        "province": "podkarpackie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1339,
+        "name": "Wyższa Szkoła Służb Lotniczych z siedzibą w Bydgoszczy w likwidacji",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1345,
+        "name": "Wyższa Szkoła Służby Społecznej im. Ks. Franciszka Blachnickiego w Suwałkach w likwidacji",
+        "city": "Suwałki",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1353,
+        "name": "Wyższa Szkoła Społeczno-Gospodarcza",
+        "city": "Przeworsk",
+        "province": "podkarpackie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1357,
+        "name": "Wyższa Szkoła Społeczno-Gospodarcza w Tyczynie",
+        "city": "Tyczyn",
+        "province": "podkarpackie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1359,
+        "name": "Wyższa Szkoła Sportu w likwidacji",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1365,
+        "name": "Wyższa Szkoła Stosunków Międzynarodowych i Amerykanistyki w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1366,
+        "name": "Wyższa Szkoła Straży Granicznej",
+        "city": "Koszalin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1367,
+        "name": "Wyższa Szkoła Studiów Międzynarodowych w likwidacji",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1379,
+        "name": "Wyższa Szkoła Suwalsko-Mazurska im. Papieża Jana Pawła II w likwidacji z siedzibą w Suwałkach",
+        "city": "Suwałki",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1383,
+        "name": "Wyższa Szkoła Sztuk Filmowych i Teatralnych w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1389,
+        "name": "Wyższa Szkoła Sztuki i Projektowania w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1390,
+        "name": "Wyższa Szkoła Sztuki Stosowanej \"OPUS-ART\" - w likwidacji z siedzibą w Sosnowcu",
+        "city": "Sosnowiec",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1393,
+        "name": "Wyższa Szkoła Sztuki Użytkowej w likwidacji z siedzibą w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1395,
+        "name": "Wyższa Szkoła Sztuk Wizualnych i Nowych Mediów w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1398,
+        "name": "Wyższa Szkoła Techniczna we Włocławku",
+        "city": "Włocławek",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1402,
+        "name": "Wyższa Szkoła Techniczna w likwidacji z siedzibą w Legnicy",
+        "city": "Legnica",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1418,
+        "name": "Wyższa Szkoła Techniczno-Przyrodnicza w Poznaniu z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1420,
+        "name": "Wyższa Szkoła Technik Komputerowych i Telekomunikacji w Kielcach",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1422,
+        "name": "Wyższa Szkoła Technologii Informatycznych w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1423,
+        "name": "Wyższa Szkoła Technologii Informatycznych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1427,
+        "name": "Wyższa Szkoła Teologiczno-Humanistyczna im. Michała Beliny-Czechowskiego w Podkowie Leśnej",
+        "city": "Podkowa Leśna",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1428,
+        "name": "Wyższa Szkoła Teologiczno–Społeczna w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1429,
+        "name": "Wyższa Szkoła Trenerów Sportu w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1431,
+        "name": "Wyższa Szkoła Turystyki i Ekologii w Suchej Beskidzkiej",
+        "city": "Sucha Beskidzka",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1432,
+        "name": "Wyższa Szkoła Turystyki i Hotelarstwa w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1433,
+        "name": "Wyższa Szkoła Turystyki i Hotelarstwa w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1435,
+        "name": "Wyższa Szkoła Turystyki i Hotelarstwa w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1437,
+        "name": "Wyższa Szkoła Turystyki i Języków Obcych w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1438,
+        "name": "Wyższa Szkoła Turystyki i Rekreacji im. Mieczysława Orłowicza w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1440,
+        "name": "Wyższa Szkoła Ubezpieczeń w Krakowie w likwidacji",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1448,
+        "name": "Wyższa Szkoła Umiejętności im. Stanisława Staszica w Kielcach w likwidacji",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1452,
+        "name": "Wyższa Szkoła Umiejętności Społecznych im. prof. Michała Iwaszkiewicza",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1458,
+        "name": "Wyższa Szkoła Umiejętności Zawodowych w Pińczowie",
+        "city": "Pińczów",
+        "province": "świętokrzyskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1459,
+        "name": "Wyższa Szkoła Uni-Terra z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1461,
+        "name": "Wyższa Szkoła Współpracy Międzynarodowej i Regionalnej im. Zygmunta Glogera z siedzibą w Wołominie w likwidacji",
+        "city": "Wołomin",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1469,
+        "name": "Wyższa Szkoła Wychowania Fizycznego i Turystyki w Białymstoku",
+        "city": "Białystok",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1471,
+        "name": "Wyższa Szkoła Zarządzania \"Edukacja\" we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1473,
+        "name": "Wyższa Szkoła Zarządzania i Administracji w likwidacji z siedzibą w Zamościu",
+        "city": "Zamość",
+        "province": "lubelskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1480,
+        "name": "Wyższa Szkoła Zarządzania i Finansów we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1482,
+        "name": "Wyższa Szkoła Zarządzania i Finansów - w likwidacji z siedzibą w Bydgoszczy (wykreślona)",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1484,
+        "name": "Wyższa Szkoła Zarządzania i Marketingu we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1486,
+        "name": "Wyższa Szkoła Zarządzania i Marketingu w Sochaczewie",
+        "city": "Sochaczew",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1488,
+        "name": "Wyższa Szkoła Zarządzania i Nauk Społecznych im. ks. Emila Szramka w Tychach w likwidacji z siedzibą w Tychach",
+        "city": "Tychy",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1492,
+        "name": "Wyższa Szkoła Zarządzania i Przedsiębiorczości z siedzibą w Wałbrzychu",
+        "city": "Wałbrzych",
+        "province": "dolnośląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1494,
+        "name": "Wyższa Szkoła Zarządzania i Psychologii w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1496,
+        "name": "Wyższa Szkoła Zarządzania Marketingowego i Języków Obcych w likwidacji z siedzibą w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1502,
+        "name": "Wyższa Szkoła Zarządzania Ochroną Pracy w Katowicach",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1503,
+        "name": "Wyższa Szkoła Zarządzania Środowiskiem w Tucholi",
+        "city": "Tuchola",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1504,
+        "name": "Wyższa Szkoła Zarządzania w Częstochowie",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1505,
+        "name": "Wyższa Szkoła Zarządzania w Rzeszowie w likwidacji",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1511,
+        "name": "Wyższa Szkoła Zarządzania w Szczecinie",
+        "city": "Szczecin",
+        "province": "zachodniopomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1513,
+        "name": "Wyższa Szkoła Zarządzania w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1515,
+        "name": "Wyższa Szkoła Zawodowa Kosmetyki i Pielęgnacji Zdrowia w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1517,
+        "name": "Wyższa Szkoła Zawodowa Łódzkiej Korporacji Oświatowej w Łodzi z siedzibą w Łodzi w likwidacji",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1521,
+        "name": "Wyższa Szkoła Zawodowa Ochrony Zdrowia TWP w Łomży z siedzibą w Łomży",
+        "city": "Łomża",
+        "province": "podlaskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1528,
+        "name": "Wyższa Szkoła Zawodowa w Gorzowie Wielkopolskim",
+        "city": "Gorzów Wielkopolski",
+        "province": "lubuskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1530,
+        "name": "Wyższa Szkoła Zdrowia i Turystyki w Pucku - w likwidacji z siedzibą w Pucku",
+        "city": "Puck",
+        "province": "pomorskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1533,
+        "name": "Wyższa Szkoła Zdrowia, Urody i Edukacji w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 1542,
+        "name": "Zachodnia Wyższa Szkoła Handlu i Finansów Międzynarodowych im. Jana Pawła  II z siedzibą w Zielonej Górze w likwidacji",
+        "city": "Zielona Góra",
+        "province": "lubuskie",
+        "popularity_score": 30
+    },
+    {
+        "id": 252,
+        "name": "Bydgoska Szkoła Wyższa w Bydgoszczy",
+        "city": "Bydgoszcz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 259,
+        "name": "Centrum Medycznego Kształcenia Podyplomowego",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 263,
+        "name": "Collegium Da Vinci z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 283,
+        "name": "Collegium Verum",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 285,
+        "name": "Collegium Witelona Uczelnia Państwowa",
+        "city": "Legnica",
+        "province": "dolnośląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 321,
+        "name": "Europejska Uczelnia Nauk Medycznych i Społecznych",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 330,
+        "name": "Europejska Uczelnia Społeczno-Techniczna im. Roberta Schumana",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 334,
+        "name": "Europejska Uczelnia w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 373,
+        "name": "Gdańska Szkoła Wyższa z siedzibą w Gdańsku",
+        "city": "Gdańsk",
+        "province": "pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 394,
+        "name": "Gnieźnieńska Szkoła Wyższa Milenium z siedzibą w Gnieźnie",
+        "city": "Gniezno",
+        "province": "wielkopolskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 406,
+        "name": "Instytut Teologiczny im. bł. Wincentego Kadłubka w Sandomierzu",
+        "city": "Sandomierz",
+        "province": "świętokrzyskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 408,
+        "name": "Instytut Teologiczny im. św. Jana Kantego w Bielsku-Białej",
+        "city": "Bielsko-Biała",
+        "province": "śląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 411,
+        "name": "Kaszubsko-Pomorska Szkoła Wyższa w Wejherowie",
+        "city": "Wejherowo",
+        "province": "pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 415,
+        "name": "Kujawska Szkoła Wyższa we Włocławku",
+        "city": "Włocławek",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 417,
+        "name": "Lingwistyczna Szkoła Wyższa w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 428,
+        "name": "Lubelska Szkoła Wyższa w Rykach",
+        "city": "Ryki",
+        "province": "lubelskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 435,
+        "name": "Łużycka Szkoła Wyższa im. Jana Benedykta Solfy z siedzibą w Żarach",
+        "city": "Żary",
+        "province": "lubuskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 437,
+        "name": "Małopolska Uczelnia Państwowa im. rotmistrza Witolda Pileckiego w Oświęcimiu",
+        "city": "Oświęcim",
+        "province": "małopolskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 454,
+        "name": "Mazurska Szkoła Wyższa w Ełku z siedzibą w Ełku",
+        "city": "Ełk",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 462,
+        "name": "Międzynarodowa Szkoła Wyższa \"Concordia\" w Lubartowie",
+        "city": "Lubartów",
+        "province": "lubelskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 464,
+        "name": "Międzynarodowa Uczelnia Nauk Społecznych Medycznych i Prawnych",
+        "city": "Łomża",
+        "province": "podlaskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 469,
+        "name": "Nadbużańska Szkoła Wyższa im. Marka J. Karpia w Siemiatyczach",
+        "city": "Siemiatycze",
+        "province": "podlaskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 503,
+        "name": "Państwowa Uczelnia Zawodowa im. prof. Edwarda F. Szczepanika w Suwałkach",
+        "city": "Suwałki",
+        "province": "podlaskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 510,
+        "name": "Papieski Wydział Teologiczny we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 514,
+        "name": "Podkarpacka Szkoła Wyższa im. bł. ks. Władysława Findysza w Jaśle",
+        "city": "Jasło",
+        "province": "podkarpackie",
+        "popularity_score": 25
+    },
+    {
+        "id": 550,
+        "name": "Pomorska Szkoła Wyższa w Starogardzie Gdańskim",
+        "city": "Starogard Gdański",
+        "province": "pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 567,
+        "name": "Publiczna Uczelnia Zawodowa w Grudziądzu",
+        "city": "Grudziądz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 572,
+        "name": "Radomska Szkoła Wyższa",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 579,
+        "name": "Stargardzka Szkoła Wyższa Stargardinum w Stargardzie Szczecińskim",
+        "city": "Stargard Szczeciński",
+        "province": "zachodniopomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 603,
+        "name": "Szkoła Nauk Ścisłych w  Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 605,
+        "name": "Szkoła Wyższa Ekonomii i Zarządzania w Łodzi",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 25
+    },
+    {
+        "id": 607,
+        "name": "Szkoła Wyższa im. Bogdana Jańskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 608,
+        "name": "Szkoła Wyższa im. Pawła Włodkowica w Płocku",
+        "city": "Płock",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 609,
+        "name": "Szkoła Wyższa Prawa i Dyplomacji w Gdyni",
+        "city": "Gdynia",
+        "province": "pomorskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 611,
+        "name": "Szkoła Wyższa Rzemiosł Artystycznych i Zarządzania we Wrocławiu",
+        "city": "Wrocław",
+        "province": "dolnośląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 623,
+        "name": "Świętokrzyska Szkoła Wyższa w Kielcach im. św. Jana Pawła II",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 630,
+        "name": "Uczelnia ASBIRO",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 25
+    },
+    {
+        "id": 634,
+        "name": "Uczelnia Biznesu i Nauk Stosowanych „Varsovia”",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 640,
+        "name": "Uczelnia Collegium Intermarium",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 649,
+        "name": "Uczelnia Jana Wyżykowskiego",
+        "city": "Polkowice",
+        "province": "dolnośląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 659,
+        "name": "Uczelnia Lingwistyczno-Techniczna w Przasnyszu",
+        "city": "Przasnysz",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 665,
+        "name": "Uczelnia Łazarskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 666,
+        "name": "Uczelnia Łukaszewski ",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 672,
+        "name": "Uczelnia Medyczna im. Marii Skłodowskiej - Curie w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 674,
+        "name": "Uczelnia Metropolitalna",
+        "city": "Katowice",
+        "province": "śląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 675,
+        "name": "Uczelnia Nauk Społecznych",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 25
+    },
+    {
+        "id": 676,
+        "name": "Uczelnia Państwowa im. Jana Grodka w Sanoku",
+        "city": "Sanok",
+        "province": "podkarpackie",
+        "popularity_score": 25
+    },
+    {
+        "id": 678,
+        "name": "Uczelnia Społeczno-Medyczna w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 686,
+        "name": "Uczelnia Techniczno-Handlowa im. Heleny Chodkowskiej",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 688,
+        "name": "Uczelnia Vistula z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 690,
+        "name": "Uczelnia WSB Merito w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 696,
+        "name": "Uczelnia Zawodowa Zagłębia Miedziowego w Lubinie",
+        "city": "Lubin",
+        "province": "dolnośląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 810,
+        "name": "VIAMODA Szkoła Wyższa z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 814,
+        "name": "Warszawska Szkoła Artystyczna",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 815,
+        "name": "Warszawska Szkoła Biznesu w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 817,
+        "name": "Warszawska Szkoła Filmowa z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 818,
+        "name": "Warszawska Szkoła Wyższa z siedzibą w Otwocku",
+        "city": "Otwock",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 822,
+        "name": "Warszawska Szkoła Zarządzania - Szkoła Wyższa w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 823,
+        "name": "Warszawska Uczelnia Ekonomiczna",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 828,
+        "name": "Warszawska Uczelnia Medyczna im. Tadeusza Koźluka",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 897,
+        "name": "Wschód-Zachód Szkoła Wyższa im. Henryka Jóźwiaka",
+        "city": "Łódź",
+        "province": "łódzkie",
+        "popularity_score": 25
+    },
+    {
+        "id": 928,
+        "name": "Wyższa Inżynierska Szkoła Bezpieczeństwa i Organizacji Pracy w Radomiu",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 940,
+        "name": "Wyższa Skoła Administracji i Nowych Technologii w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 25
+    },
+    {
+        "id": 1541,
+        "name": "Wyższy Instytut Teologiczny w Częstochowie",
+        "city": "Częstochowa",
+        "province": "śląskie",
+        "popularity_score": 25
+    },
+    {
+        "id": 560,
+        "name": "Prawosławne Seminarium Duchowne w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1534,
+        "name": "Wyższe Baptystyczne Seminarium Teologiczne w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1535,
+        "name": "Wyższe Seminarium Duchowne Diecezji Pelplińskiej",
+        "city": "Pelplin",
+        "province": "pomorskie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1536,
+        "name": "Wyższe Seminarium Duchowne Kościoła Polskokatolickiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1537,
+        "name": "Wyższe Seminarium Duchowne Towarzystwa Salezjańskiego w Lądzie",
+        "city": "Ląd",
+        "province": "wielkopolskie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1538,
+        "name": "Wyższe Seminarium Duchowne w Przemyślu",
+        "city": "Przemyśl",
+        "province": "podkarpackie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1539,
+        "name": "Wyższe Seminarium Duchowne w Rzeszowie",
+        "city": "Rzeszów",
+        "province": "podkarpackie",
+        "popularity_score": 15
+    },
+    {
+        "id": 1540,
+        "name": "Wyższe Seminarium Teologiczne imienia Jana Łaskiego w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 15
+    },
+    {
+        "id": 237,
+        "name": "ALMAMER Szkoła Wyższa z siedzibą w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    },
+    {
+        "id": 265,
+        "name": "Collegium Humanitatis z siedzibą w Świdnicy w likwidacji",
+        "city": "Świdnica",
+        "province": "dolnośląskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 279,
+        "name": "Collegium Varsoviense z siedzibą w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    },
+    {
+        "id": 317,
+        "name": "Europejska Szkoła Wyższa w Sopocie  w likwidacji",
+        "city": "Sopot",
+        "province": "pomorskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 424,
+        "name": "Lubelska Szkoła Wyższa im. Króla Władysława Jagiełły w likwidacji z siedzibą w Lublinie",
+        "city": "Lublin",
+        "province": "lubelskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 472,
+        "name": "OLYMPUS Szkoła Wyższa im. Romualda Kudlińskiego w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    },
+    {
+        "id": 561,
+        "name": "Profesjonalna Szkoła Biznesu-Szkoła Wyższa w likwidacji w Krakowie",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 568,
+        "name": "Puławska Szkoła Wyższa w likwidacji z siedzibą w Puławach",
+        "city": "Puławy",
+        "province": "lubelskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 612,
+        "name": "Szkoła Wyższa Rzemiosł Artystycznych w Warszawie w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    },
+    {
+        "id": 643,
+        "name": "Uczelnia im. Edwarda Herzberga w likwidacji",
+        "city": "Grudziądz",
+        "province": "kujawsko-pomorskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 868,
+        "name": "Wielkopolska Uczelnia Techniczna w likwidacji",
+        "city": "Złotniki",
+        "province": "wielkopolskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 880,
+        "name": "Wielkopolskie Collegium Kompetencji Zintegrowanych w likwidacji z siedzibą w Poznaniu",
+        "city": "Poznań",
+        "province": "wielkopolskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 901,
+        "name": "Wszechnica Mazurska w likwidacji z siedzibą w Olecku",
+        "city": "Olecko",
+        "province": "warmińsko-mazurskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 909,
+        "name": "Wszechnica Świętokrzyska w likwidacji",
+        "city": "Kielce",
+        "province": "świętokrzyskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 921,
+        "name": "Wyższa Hanzeatycka Szkoła Zarządzania w likwidacji z siedzibą w Słupsku",
+        "city": "Słupsk",
+        "province": "pomorskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 925,
+        "name": "Wyższa Informatyczna Szkoła Zawodowa w Gorzowie Wielkopolskim w likwidacji z siedzibą w Gorzowie Wielkopolskim",
+        "city": "Gorzów Wielkopolski",
+        "province": "lubuskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 929,
+        "name": "Wyższa Inżynierska Szkoła Przedsiębiorczości w likwidacji z siedzibą w Radomiu",
+        "city": "Radom",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    },
+    {
+        "id": 931,
+        "name": "Wyższa Międzynarodowa Szkoła Biznesu w Warszawie w likwidacji",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    },
+    {
+        "id": 935,
+        "name": "Wyższa Pedagogiczna Szkoła Zawodowa im. Świętej Rodziny z siedzibą w Krakowie (wykreślona)",
+        "city": "Kraków",
+        "province": "małopolskie",
+        "popularity_score": 5
+    },
+    {
+        "id": 937,
+        "name": "Wyższa Praska Szkoła Biznesu - w likwidacji z siedzibą w Warszawie",
+        "city": "Warszawa",
+        "province": "mazowieckie",
+        "popularity_score": 5
+    }
+]
