@@ -41,6 +41,8 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   isGenerating: boolean = true;
   errorMessage: string = '';
   private streamSub: any;
+  totalScore: number = 0;
+  pointsPerDifficulty: { [key: string]: number } = { 'Łatwy': 0, 'Średni': 0, 'Trudny': 0 };
 
   currentLevel: number = 1;
   topicStack: any[] = [];
@@ -93,18 +95,13 @@ export class RoadmapComponent implements OnInit, OnDestroy {
         return;
       }
 
+      this.selectedPlan = plan;
       this.careerPath = this.getPlanTitle(plan);
-      const savedState = await this.storage.getGridState(planId);
-      if (savedState) {
-        this.selectedPlan = plan;
-        this.currentLevel = savedState.currentLevel || 1;
-        this.gridCells = savedState.gridCells;
-        this.topicStack = savedState.topicStack || [];
-        this.isGenerating = false;
-        return;
+      
+      // Spróbuj wczytać z localStorage, jeśli nie ma - inicjalizuj
+      if (!this.loadFromLocalStorage()) {
+        await this.initializeGraph();
       }
-
-      this.renderPlan(plan);
 
     } catch (err) {
       console.error(err);
@@ -134,58 +131,49 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       : '';
   }
 
-  renderPlan(plan: any) {
-    this.selectedPlan = plan;
+  async initializeGraph() {
+    this.isGenerating = true;
     const totalCells = 150;
     this.gridCells = Array(totalCells).fill(null).map(() => ({ empty: true, data: null }));
+    this.topicStack = [];
+    this.currentLevel = 1;
 
-    const stages = plan.planData?.plan || [];
-    let allTopics: any[] = [];
+    try {
+      const res = await this.ai.getHexagonConcepts(this.careerPath, this.currentLevel).toPromise();
+      const concepts = res?.concepts || [];
 
-    stages.forEach((stage: any, sIdx: number) => {
-      allTopics.push({
-        title: `Etap ${sIdx + 1}`,
-        description: stage.etap + " - " + stage.cel_glowny,
+      let allTopics = concepts.map(c => ({
+        ...c,
         loading: false,
-        completed: false
-      });
-      if (stage.wskazniki_sukcesu_kpi) {
-        stage.wskazniki_sukcesu_kpi.forEach((kpi: string) => {
-          allTopics.push({
-            title: kpi.length > 30 ? kpi.substring(0, 30) + '...' : kpi,
-            description: kpi,
-            loading: false,
-            completed: false
-          });
-        });
-      }
-      if (stage.umiejetnosci?.twarde) {
-        stage.umiejetnosci.twarde.forEach((skill: string) => {
-          allTopics.push({
-            title: skill,
-            description: 'Wymagana umiejętność techniczna',
-            loading: false,
-            completed: false
-          });
-        });
-      }
-    });
+        completed: false,
+        tasksLoaded: false,
+        levelProgress: {
+          'Łatwy': { tasksLoaded: false, closedTasks: [], openTasks: [], closedTasksDone: [], openTasksDone: [], openTasksScores: [] },
+          'Średni': { tasksLoaded: false, closedTasks: [], openTasks: [], closedTasksDone: [], openTasksDone: [], openTasksScores: [] },
+          'Trudny': { tasksLoaded: false, closedTasks: [], openTasks: [], closedTasksDone: [], openTasksDone: [], openTasksScores: [] }
+        },
+        selectedDifficulty: ''
+      }));
 
-    if (allTopics.length > 0) {
-      this.gridCells[30] = {
-        empty: false,
-        data: allTopics[0]
-      };
-      this.topicStack = allTopics.slice(1);
+      if (allTopics.length > 0) {
+        this.gridCells[30] = {
+          empty: false,
+          data: allTopics[0]
+        };
+        this.topicStack = allTopics.slice(1);
+      }
+      this.isGenerating = false;
+      this.cdr.detectChanges();
+    } catch(err: any) {
+      console.error("Błąd generowania pierwszego poziomu:", err);
+      if (err.status === 503) {
+        this.errorMessage = "Serwery AI są aktualnie przeciążone (Błąd 503). Proszę odśwież za chwilę.";
+      } else {
+        this.errorMessage = "Nie udało się wygenerować zadań. Spróbuj ponownie później.";
+      }
+      this.isGenerating = false;
+      this.cdr.detectChanges();
     }
-
-    this.isGenerating = false;
-    this.cdr.detectChanges();
-    this.saveCurrentState();
-  }
-
-  generatePlanMarkdown(plan: any): string {
-    return '';
   }
 
   getNeighborIndices(index: number): number[] {
@@ -208,7 +196,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     }
     return indices;
   }
-  // ostra matematyka
+
   coordsToIndex(r: number, c: number): number {
     if (r < 0 || c < 0) return -1;
     const rowPair = Math.floor(r / 2);
@@ -222,19 +210,9 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCompleteTask(index: number, event: MouseEvent) {
-    
-    event.stopPropagation();
-
-    const cell = this.gridCells[index];
-    if (!cell || cell.empty || cell.data.completed) return;
-
-    cell.data.completed = true;
-
+  unlockNeighbors(index: number) {
     const neighbors = this.getNeighborIndices(index);
     for (const nIdx of neighbors) {
-      // w sumie tego drugiego warunku nie trzeba bo zawsze dobieramy tematy
-      // jak jest ich mniej niż 6.
       if (this.gridCells[nIdx].empty && this.topicStack.length > 0) {
         const nextTopic = this.topicStack.shift();
         this.gridCells[nIdx] = {
@@ -244,18 +222,79 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.checkAndFetchMoreTopics();
     this.cdr.detectChanges();
-    this.saveCurrentState();
+  }
+
+  async checkAndFetchMoreTopics() {
+    if (this.topicStack.length < 6 && !this.isFetchingExtra && this.currentLevel < 10) {
+      this.isFetchingExtra = true;
+      this.currentLevel++;
+      try {
+        const usedTopics = this.gridCells.filter(c => !c.empty).map(c => c.data.title);
+        const res = await this.ai.getHexagonConcepts(this.careerPath, this.currentLevel, usedTopics).toPromise();
+        const concepts = res?.concepts || [];
+        
+        const newTopics = concepts.map(c => ({
+          ...c,
+          loading: false,
+          completed: false,
+          tasksLoaded: false,
+          levelProgress: {
+            'Łatwy': { tasksLoaded: false, closedTasks: [], openTasks: [], closedTasksDone: [], openTasksDone: [], openTasksScores: [] },
+            'Średni': { tasksLoaded: false, closedTasks: [], openTasks: [], closedTasksDone: [], openTasksDone: [], openTasksScores: [] },
+            'Trudny': { tasksLoaded: false, closedTasks: [], openTasks: [], closedTasksDone: [], openTasksDone: [], openTasksScores: [] }
+          },
+          selectedDifficulty: ''
+        }));
+
+        this.topicStack.push(...newTopics);
+      } catch (err: any) {
+        console.error("Błąd uzupełniania topicStack:", err);
+        if (err.status === 503) {
+           alert("Serwery AI są przeciążone, doczytywanie kolejnych hexów nie powiodło się.");
+        }
+        this.currentLevel--; // revert
+      } finally {
+        this.isFetchingExtra = false;
+      }
+    }
+  }
+
+  saveToLocalStorage() {
+    const state = {
+      gridCells: this.gridCells,
+      totalScore: this.totalScore,
+      pointsPerDifficulty: this.pointsPerDifficulty,
+      topicStack: this.topicStack,
+      currentLevel: this.currentLevel,
+      careerPath: this.careerPath
+    };
+    localStorage.setItem(`roadmap_state_${this.careerPath}`, JSON.stringify(state));
+  }
+
+  loadFromLocalStorage(): boolean {
+    const saved = localStorage.getItem(`roadmap_state_${this.careerPath}`);
+    if (saved) {
+      try {
+        const state = JSON.parse(saved);
+        this.gridCells = state.gridCells;
+        this.totalScore = state.totalScore || 0;
+        this.pointsPerDifficulty = state.pointsPerDifficulty || { 'Łatwy': 0, 'Średni': 0, 'Trudny': 0 };
+        this.topicStack = state.topicStack || [];
+        this.currentLevel = state.currentLevel || 1;
+        this.isGenerating = false;
+        this.cdr.detectChanges();
+        return true;
+      } catch (e) {
+        console.error("Błąd wczytywania stanu:", e);
+      }
+    }
+    return false;
   }
 
   saveCurrentState() {
-    if (!this.selectedPlan || !this.selectedPlan._id) return;
-    // Zapisujemy asynchronicznie w tle - nie blokujemy UI
-    this.storage.saveGridState(this.selectedPlan._id, {
-      gridCells: this.gridCells,
-      topicStack: this.topicStack,
-      currentLevel: this.currentLevel
-    });
+    this.saveToLocalStorage();
   }
 
   // Dragowanie myszki
@@ -296,19 +335,177 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   }
 
 
-  openCellModal(cell: any) {
+  selectedCellIndex: number = -1;
+  isSelectingDifficulty: boolean = false;
+  isLoadingTasks: boolean = false;
+  
+  openTaskAnswers: string[] = [];
+  openTaskFeedbacks: string[] = [];
+  isVerifyingOpenTask: boolean[] = [];
+  closedTasksError: boolean[] = [];
+
+  openCellModal(cell: any, index: number) {
     if (cell.empty || cell.data.loading) return;
 
     this.selectedCell = cell;
+    this.selectedCellIndex = index;
+    
+    // Zawsze startujemy od wyboru trudności, chyba że już jakąś wybraliśmy w tej sesji modalu
+    this.isSelectingDifficulty = !cell.data.selectedDifficulty;
+    this.isLoadingTasks = false;
+
+    if (cell.data.selectedDifficulty) {
+      this.setupModalForDifficulty(cell.data.selectedDifficulty);
+    }
+  }
+
+  setupModalForDifficulty(diff: string) {
+    const progress = this.selectedCell.data.levelProgress[diff];
+    this.openTaskAnswers = (progress.openTasks || []).map(() => '');
+    this.openTaskFeedbacks = (progress.openTasks || []).map(() => '');
+    this.isVerifyingOpenTask = (progress.openTasks || []).map(() => false);
+    this.closedTasksError = (progress.closedTasks || []).map(() => false);
+  }
+
+  goBackToDifficultySelection() {
+    if (this.selectedCell) {
+      this.selectedCell.data.selectedDifficulty = '';
+      this.isSelectingDifficulty = true;
+    }
   }
 
   closeCellModal() {
     this.selectedCell = null;
+    this.selectedCellIndex = -1;
   }
 
-  onDifficultyClick(difficulty: string) {
-    console.log(`Wybrano stopień trudności [${difficulty}] dla modułu:`, this.selectedCell?.data?.title);
-    alert(`W przyszłości AI wygeneruje tutaj zagadnienia o poziomie: ${difficulty}`);
+  async onDifficultyClick(difficulty: string) {
+    if (!this.selectedCell) return;
+    
+    this.isSelectingDifficulty = false; 
+    
+    // Jeśli zadania dla tej trudności są już w pamięci - nie strzelaj do AI
+    if (this.selectedCell.data.levelProgress[difficulty].tasksLoaded) {
+      this.selectedCell.data.selectedDifficulty = difficulty;
+      this.setupModalForDifficulty(difficulty);
+      this.isLoadingTasks = false;
+      return;
+    }
+
+    try {
+      const topicTitle = this.selectedCell.data.title;
+      const res = await this.ai.generateTasksForTopic(topicTitle, difficulty).toPromise();
+      
+      if (res) {
+        const progress = this.selectedCell.data.levelProgress[difficulty];
+        progress.closedTasks = res.closedTasks || [];
+        progress.openTasks = res.openTasks || [];
+        progress.tasksLoaded = true;
+        
+        this.selectedCell.data.selectedDifficulty = difficulty;
+        
+        // Inicjalizacja stanów wykonania dla tej trudności
+        progress.closedTasksDone = progress.closedTasks.map(() => false);
+        progress.openTasksDone = progress.openTasks.map(() => false);
+        progress.openTasksScores = progress.openTasks.map(() => 0);
+        
+        this.setupModalForDifficulty(difficulty);
+        this.saveToLocalStorage();
+      }
+    } catch(err) {
+      console.error(err);
+      alert('Nie udało się wygenerować zadań, spróbuj ponownie');
+      this.isSelectingDifficulty = true; 
+    } finally {
+      this.isLoadingTasks = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  onClosedTaskSubmit(taskIdx: number, selectedIndex: number) {
+    const diff = this.selectedCell.data.selectedDifficulty;
+    const progress = this.selectedCell.data.levelProgress[diff];
+
+    if (!this.selectedCell || progress.closedTasksDone[taskIdx]) return;
+    const correct = progress.closedTasks[taskIdx]?.correctAnswer;
+    
+    if (selectedIndex === correct) {
+      progress.closedTasksDone[taskIdx] = true;
+      this.closedTasksError[taskIdx] = false;
+      
+      // Punktacja: +1 za quiz
+      this.totalScore += 1;
+      this.pointsPerDifficulty[diff] += 1;
+      
+      this.checkCellCompletion();
+      this.saveToLocalStorage();
+    } else {
+      this.closedTasksError[taskIdx] = true;
+    }
+  }
+
+  async onOpenTaskSubmit(taskIdx: number) {
+    const diff = this.selectedCell.data.selectedDifficulty;
+    const progress = this.selectedCell.data.levelProgress[diff];
+
+    if (!this.selectedCell || !this.openTaskAnswers[taskIdx]?.trim() || progress.openTasksDone[taskIdx]) return;
+
+    this.isVerifyingOpenTask[taskIdx] = true;
+    this.openTaskFeedbacks[taskIdx] = '';
+
+    try {
+      const challenge = progress.openTasks[taskIdx]?.challenge;
+      const res = await this.ai.verifyOpenTask(challenge, this.openTaskAnswers[taskIdx]).toPromise();
+      
+      const score = res?.score ?? 0;
+      progress.openTasksScores[taskIdx] = score;
+      
+      if (score > 0) {
+        progress.openTasksDone[taskIdx] = true;
+        this.openTaskFeedbacks[taskIdx] = `Wynik: ${score}/2 pkt. ${res?.feedback}`;
+        
+        // Aktualizacja globalnych punktów
+        this.totalScore += score;
+        this.pointsPerDifficulty[diff] = (this.pointsPerDifficulty[diff] || 0) + score;
+
+        this.checkCellCompletion();
+        this.saveToLocalStorage();
+      } else {
+        this.openTaskFeedbacks[taskIdx] = `Wynik: 0/2 pkt. Spróbuj ponownie: ${res?.feedback}`;
+      }
+    } catch (e) {
+      console.error(e);
+      this.openTaskFeedbacks[taskIdx] = 'Błąd weryfikacji. Spróbuj później.';
+    } finally {
+      this.isVerifyingOpenTask[taskIdx] = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  checkCellCompletion() {
+    const diff = this.selectedCell.data.selectedDifficulty;
+    const progress = this.selectedCell.data.levelProgress[diff];
+
+    const closedAllDone = progress.closedTasksDone.every((c: boolean) => c === true);
+    const openAllDone = progress.openTasksDone.every((c: boolean) => c === true);
+
+    if (closedAllDone && openAllDone) {
+      // Heks jest "zaliczone" jeśli ukończono JAKIKOLWIEK poziom trudności chociaż raz
+      if (!this.selectedCell.data.completed) {
+        this.selectedCell.data.completed = true;
+        setTimeout(() => {
+          alert(`Poziom ${diff} ukończony! Zdobyto punkty. Heks zaliczony!`);
+          this.unlockNeighbors(this.selectedCellIndex);
+          this.saveToLocalStorage();
+        }, 500);
+      } else {
+        // Heks był już zaliczony, po prostu informujemy o kolejnym poziomie
+        setTimeout(() => {
+          alert(`Poziom ${diff} ukończony! Punkty dodane.`);
+          this.saveToLocalStorage();
+        }, 500);
+      }
+    }
   }
 
   ngOnDestroy() {
@@ -316,7 +513,6 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       this.streamSub.unsubscribe();
     }
 
-    // Ostatni zapis stanu przed zniszczeniem komponentu
     this.saveCurrentState();
   }
 }

@@ -34,6 +34,24 @@ export class AiController {
     return { concepts };
   }
 
+  @Post('verify-task')
+  async verifyOpenTask(@Body() data: { challenge: string; userAnswer: string }) {
+    if (!data.challenge || !data.userAnswer) {
+      throw new HttpException('Brak wyzwania lub odpowiedzi.', HttpStatus.BAD_REQUEST);
+    }
+    return this.aiService.verifyOpenTask(data.challenge, data.userAnswer);
+  }
+
+  @Get('generate-tasks')
+  async generateTasksForTopic(
+    @Query('topic') topic: string,
+    @Query('difficulty') difficulty: string
+  ) {
+    if (!topic || !difficulty) {
+      throw new HttpException('Brak tematu lub trudności.', HttpStatus.BAD_REQUEST);
+    }
+    return this.aiService.generateTasksForTopic(topic, difficulty);
+  }
   @Post('survey')
   async submitSurvey(@Body() surveyData: SurveyDto) {
     console.log('Received survey data:', surveyData);

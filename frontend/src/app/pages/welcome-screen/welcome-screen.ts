@@ -78,7 +78,7 @@ export class WelcomeScreen {
   protected Login(): void {
     if (!this.captchaToken()) {
       Swal.fire({
-        icon: 'warning',
+        icon: 'error',
         title: 'Brak CAPTCHA',
         text: 'Zaznacz pole "Nie jestem robotem".',
       });

@@ -2,6 +2,17 @@
   <header class="top-header">
     <button class="btn-primary" (click)="goBack()">← Wróć</button>
     <div class="logo">Roadmapa: {{ careerPath }}</div>
+    <div class="scoreboard" *ngIf="!isGenerating">
+      <div class="score-main">
+        <span class="score-label">Suma:</span>
+        <span class="score-value">{{ totalScore }} pkt</span>
+      </div>
+      <div class="score-details">
+        <span class="diff-badge easy">Ł: {{ pointsPerDifficulty['Łatwy'] }}</span>
+        <span class="diff-badge medium">Ś: {{ pointsPerDifficulty['Średni'] }}</span>
+        <span class="diff-badge hard">T: {{ pointsPerDifficulty['Trudny'] }}</span>
+      </div>
+    </div>
   </header>
 
   <main class="main-content">
@@ -114,15 +125,9 @@
     <div class="honeycomb-container" (mousedown)="onMouseDown($event)" [class.dragging]="isDragging">
       <ul class="honeycomb" [style.transform]="'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px)'">
         <li class="honeycomb-cell" *ngFor="let cell of gridCells; let i = index" [ngClass]="{'empty-cell': cell.empty}">
-          <div class="honeycomb-content" *ngIf="!cell.empty" (click)="openCellModal(cell)"
+          <div class="honeycomb-content" *ngIf="!cell.empty" (click)="openCellModal(cell, i)"
             [class.skeleton-loader]="cell.data.loading" [class.is-completed]="cell.data.completed">
             <span class="cell-title">{{ cell.data.title }}</span>
-
-            <!-- Przycisk ukończenia -->
-            <button class="btn-complete" *ngIf="!cell.data.completed && !cell.data.loading"
-              (click)="onCompleteTask(i, $event)">
-              Ukończ
-            </button>
 
             <!-- Ikona ukończenia -->
             <div class="complete-badge" *ngIf="cell.data.completed">
@@ -136,15 +141,86 @@
 
 
   <div class="difficulty-overlay" *ngIf="selectedCell" (click)="closeCellModal()">
-    <div class="difficulty-modal" (click)="$event.stopPropagation()">
-      <h3>{{ selectedCell.data.title }}</h3>
-      <p>{{ selectedCell.data.description }}</p>
-      <div class="difficulty-actions">
-        <button class="btn-diff easy" (click)="onDifficultyClick('Łatwy')">Łatwy</button>
-        <button class="btn-diff medium" (click)="onDifficultyClick('Średni')">Średni</button>
-        <button class="btn-diff hard" (click)="onDifficultyClick('Trudny')">Trudny</button>
+    <div class="quest-modal" (click)="$event.stopPropagation()">
+      <div class="quest-header">
+        <div class="modal-title-group">
+          <button class="btn-back-modal" *ngIf="selectedCell.data.selectedDifficulty" (click)="goBackToDifficultySelection()">
+            ← Zmień poziom
+          </button>
+          <h3>{{ selectedCell.data.title }}</h3>
+        </div>
+        <button class="btn-close" (click)="closeCellModal()"><ng-icon name="heroXMark"></ng-icon></button>
       </div>
-      <button class="btn-close" (click)="closeCellModal()">Zamknij</button>
+      
+      <div class="quest-body">
+        <div class="hex-difficulty-tag" *ngIf="selectedCell.data.selectedDifficulty">
+           Wybrany poziom: <strong>{{ selectedCell.data.selectedDifficulty }}</strong>
+        </div>
+        <p class="quest-desc">{{ selectedCell.data.description }}</p>
+
+        <!-- Faza 1: Wybór poziomu trudności -->
+        <div class="difficulty-actions" *ngIf="isSelectingDifficulty">
+          <h4>Wybierz poziom wyzwania:</h4>
+          <button class="btn-diff easy" (click)="onDifficultyClick('Łatwy')">Łatwy</button>
+          <button class="btn-diff medium" (click)="onDifficultyClick('Średni')">Średni</button>
+          <button class="btn-diff hard" (click)="onDifficultyClick('Trudny')">Trudny</button>
+        </div>
+
+        <!-- Faza Loading -->
+        <div class="loading-tasks-view" *ngIf="isLoadingTasks">
+          <div class="spinner-border"></div>
+          <p>Generowanie spersonalizowanych zadań...</p>
+        </div>
+
+        <!-- Faza 2: Tasks Loaded -->
+        <ng-container *ngIf="selectedCell.data.selectedDifficulty && !isLoadingTasks && !isSelectingDifficulty">
+          
+          <!-- Zadania Zamknięte -->
+          <div class="task-section" *ngFor="let closedTask of selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasks; let taskIdx = index">
+            <h4>📌 Teoria - Pytanie {{ taskIdx + 1 }}</h4>
+            <p class="question-text">{{ closedTask?.question }}</p>
+            <div class="options-grid">
+              <button 
+                *ngFor="let opt of closedTask?.options; let optIdx = index" 
+                class="btn-option" 
+                [class.locked]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasksDone[taskIdx] && closedTask?.correctAnswer !== optIdx"
+                [class.correct]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasksDone[taskIdx] && closedTask?.correctAnswer === optIdx"
+                (click)="onClosedTaskSubmit(taskIdx, optIdx)">
+                {{ opt }}
+              </button>
+            </div>
+            <p class="error-text" *ngIf="closedTasksError[taskIdx]">Błędna odpowiedź, spróbuj ponownie.</p>
+            <p class="success-text" *ngIf="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasksDone[taskIdx]">Zaliczone! (+1 pkt)</p>
+          </div>
+
+          <!-- Zadania Otwarte -->
+          <div class="task-section" *ngFor="let openTask of selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasks; let taskIdx = index">
+            <h4>💡 Zadanie Praktyczne {{ selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasks.length > 1 ? (taskIdx + 1) : '' }}</h4>
+            <p class="question-text">{{ openTask?.challenge }}</p>
+            <textarea 
+              class="open-task-input" 
+              placeholder="Opisz swoje rozwiązanie lub wklej kawałek kodu..."
+              [value]="openTaskAnswers[taskIdx]"
+              (input)="openTaskAnswers[taskIdx] = $any($event.target).value"
+              rows="4"
+              [disabled]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx] || isVerifyingOpenTask[taskIdx]"></textarea>
+              
+            <button class="btn-verify" (click)="onOpenTaskSubmit(taskIdx)" 
+              [disabled]="!openTaskAnswers[taskIdx] || selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx] || isVerifyingOpenTask[taskIdx]">
+              {{ isVerifyingOpenTask[taskIdx] ? 'AI Sprawdza...' : (selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx] ? 'Zaliczone' : 'Sprawdź rozwiązanie') }}
+            </button>
+            <p class="feedback-text" 
+               *ngIf="openTaskFeedbacks[taskIdx]" 
+               [class.success]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx]"
+               [class.score-1]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksScores[taskIdx] === 1"
+               [class.score-2]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksScores[taskIdx] === 2">
+               {{ openTaskFeedbacks[taskIdx] }}
+            </p>
+          </div>
+
+        </ng-container>
+
+      </div>
     </div>
   </div>
 </div>

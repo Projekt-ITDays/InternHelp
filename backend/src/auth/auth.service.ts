@@ -42,6 +42,7 @@ export class AuthService {
 
     async login(payload: LoginDto) {
         const isRecaptchaValid = await this.validateRecaptcha(payload.captchaToken);
+        //jak wam nie działa captcha to to wyłączcie
         if (!isRecaptchaValid) {
             throw new Error('Weryfikacja CAPTCHA nieudana');
         }
@@ -87,8 +88,7 @@ export class AuthService {
 
             const data = await response.json() as any;
 
-            // Log assessment for debugging (optional)
-            console.log('reCAPTCHA Assessment:', data);
+            // console.log('reCAPTCHA Assessment:', data);
 
             if (data.tokenProperties && data.tokenProperties.valid === true) {
                 return true;
