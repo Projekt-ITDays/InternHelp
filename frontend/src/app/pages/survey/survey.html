@@ -28,8 +28,8 @@
 
                     <label class="form-group">
                         <span>Uczelnia</span>
-                        <app-uczelnia [value]="surveyModel.University"
-                            (valueChange)="surveyModel.University = $event"></app-uczelnia>
+                        <app-university-picker [value]="surveyModel.University"
+                            (valueChange)="surveyModel.University = $event"></app-university-picker>
                         <input type="hidden" name="University" [(ngModel)]="surveyModel.University" required />
                     </label>
 
@@ -51,14 +51,14 @@
                             required />
                     </label>
 
-                    <label class="form-group">
-                        <span>Czas, który możesz poświęcić</span>
-                        <select name="TimeLeft" [(ngModel)]="surveyModel.TimeLeft" required>
-                            @for (range of timeRangestoChoose; track $index) {
-                            <option [ngValue]="range">{{ range }}</option>
-                            }
-                        </select>
-                    </label>
+                    <div class="form-group">
+                        <span>Liczba miesięcy przewidziana na naukę:</span>
+                        <app-time-left-picker
+                            [value]="surveyModel.TimeLeft"
+                            (valueChange)="surveyModel.TimeLeft = $event">
+                        </app-time-left-picker>
+                        <input type="hidden" name="TimeLeft" [(ngModel)]="surveyModel.TimeLeft" required />
+                    </div>
                 </div>
             </div>
 

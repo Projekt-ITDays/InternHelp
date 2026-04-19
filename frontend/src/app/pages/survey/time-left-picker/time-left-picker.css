@@ -1,0 +1,131 @@
+:host {
+  display: block;
+}
+
+.time-left-picker {
+  display: grid;
+  gap: 0.55rem;
+  justify-items: center;
+}
+
+.clock-face {
+  width: min(230px, 72vw);
+  aspect-ratio: 1;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid var(--ih-surface-a14);
+  background:
+    radial-gradient(circle at 50% 44%, var(--ih-bg-soft) 0%, transparent 48%),
+    radial-gradient(circle at 50% 50%, var(--ih-bg) 56%, var(--ih-bg-a94) 100%);
+  box-shadow: inset 0 0 0 6px var(--ih-surface-a08), var(--ih-shadow-md);
+  user-select: none;
+}
+
+.hour-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ih-surface-a85);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  z-index: 3;
+}
+
+.hour-marker:hover,
+.hour-marker:focus-visible,
+.hour-marker.is-preview {
+  background: var(--ih-accent-soft);
+  color: var(--ih-accent);
+  outline: none;
+}
+
+.hour-marker.is-selected {
+  background: var(--ih-accent);
+  color: #fff;
+}
+
+.hour-marker.is-key .hour-label {
+  font-weight: 800;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.hour-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.clock-hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 29%;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ih-accent) 90%, #fff 10%) 0%,
+    var(--ih-accent) 68%,
+    var(--ih-accent-border) 100%
+  );
+  transform-origin: 50% 100%;
+  transition: transform 0.13s ease-out;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ih-bg) 55%, transparent),
+    0 2px 6px color-mix(in srgb, var(--ih-accent) 25%, transparent);
+}
+
+.clock-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid var(--ih-surface-a14);
+  background: var(--ih-bg);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.clock-core strong {
+  display: block;
+  color: var(--ih-surface);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.clock-core span {
+  margin-top: 0.08rem;
+  color: var(--ih-surface-a85);
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 900px) {
+  .clock-face {
+    width: min(220px, 74vw);
+  }
+}
+
+@media (max-width: 520px) {
+  .clock-face {
+    width: min(200px, 78vw);
+  }
+}

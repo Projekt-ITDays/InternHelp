@@ -14,54 +14,67 @@ type UniversityEntry = {
 };
 
 @Component({
-  selector: 'app-uczelnia',
+  selector: 'app-university-picker',
   standalone: true,
   templateUrl: './uczelnia.html',
   styleUrl: './uczelnia.css',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatAutocompleteModule],
 })
-export class UczelniaComponent implements OnInit {
+export class UniversityPickerComponent implements OnInit {
   private readonly http = inject(HttpClient);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly value = input<string>('');
   readonly valueChange = output<string>();
 
-  protected readonly uczelniaControl = new FormControl('', { nonNullable: true });
+  protected readonly universityControl = new FormControl('', { nonNullable: true });
   protected filteredUniversityNames: string[] = [];
 
   private universityNames: string[] = [];
-  private readonly maxSuggestionCount = 4;
+  private readonly maxSuggestionCount = 6;
+  private readonly universitiesAssetPath = 'assets/universities.json';
 
   constructor() {
     effect(() => {
       const incomingValue = this.value();
-      if (incomingValue !== this.uczelniaControl.value) {
-        this.uczelniaControl.setValue(incomingValue, { emitEvent: false });
+      if (incomingValue !== this.universityControl.value) {
+        this.universityControl.setValue(incomingValue, { emitEvent: false });
         this.filteredUniversityNames = this.filterUniversityNames(incomingValue);
       }
     });
   }
 
   ngOnInit(): void {
-    this.uczelniaControl.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
+    this.universityControl.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
       this.filteredUniversityNames = this.filterUniversityNames(value);
       this.valueChange.emit(value);
     });
 
+    this.loadUniversities();
+  }
+
+  private loadUniversities(): void {
     this.http
-      .get<UniversityEntry[]>('assets/uczelnie.json')
+      .get<UniversityEntry[]>(this.universitiesAssetPath)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (universities) => {
-          this.universityNames = universities.map((university) => university.name);
-          this.filteredUniversityNames = this.filterUniversityNames(this.uczelniaControl.value);
-        },
+        next: (universities) => this.handleUniversitiesLoaded(universities),
         error: () => {
           this.universityNames = [];
           this.filteredUniversityNames = [];
         },
       });
+  }
+
+  private handleUniversitiesLoaded(universities: UniversityEntry[]): void {
+    const uniqueNames = Array.from(
+      new Set(universities.map((university) => university.name.trim()).filter((name) => name.length > 0))
+    );
+
+    this.universityNames = uniqueNames.sort((left, right) =>
+      left.localeCompare(right, 'pl', { sensitivity: 'base' })
+    );
+    this.filteredUniversityNames = this.filterUniversityNames(this.universityControl.value);
   }
 
   private filterUniversityNames(query: string): string[] {

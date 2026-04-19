@@ -1,15 +1,15 @@
-<mat-form-field class="uczelnia-field" appearance="outline" subscriptSizing="dynamic">
+<mat-form-field class="university-field" appearance="outline" subscriptSizing="dynamic">
   <input
     type="text"
     matInput
-    [formControl]="uczelniaControl"
-    placeholder="Wybierz uczelnie"
+    [formControl]="universityControl"
+    placeholder="Wybierz uczelnię"
     aria-label="Uczelnia"
     autocomplete="off"
-    [matAutocomplete]="uczelniaAutocomplete"
+    [matAutocomplete]="universityAutocomplete"
   />
 
-  <mat-autocomplete #uczelniaAutocomplete="matAutocomplete" autoActiveFirstOption class="uczelnia-panel">
+  <mat-autocomplete #universityAutocomplete="matAutocomplete" autoActiveFirstOption class="university-panel">
     @for (name of filteredUniversityNames; track name) {
       <mat-option [value]="name">{{ name }}</mat-option>
     }

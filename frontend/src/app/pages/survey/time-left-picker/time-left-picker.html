@@ -1,0 +1,42 @@
+<div class="time-left-picker">
+  <div
+    class="clock-face"
+    aria-label="Zegar wyboru miesięcy od 1 do 12"
+    (mousemove)="onDialHover($event)"
+    (mouseleave)="clearPreview()"
+    (click)="onDialClick($event)"
+  >
+    @for (month of allowedValues; track month) {
+      <button
+        type="button"
+        class="hour-marker"
+        [class.is-key]="isKeyClockValue(month)"
+        [class.is-selected]="value === month"
+        [class.is-preview]="previewValue === month && value !== month"
+        [style.left]="getMarkerLeft(month)"
+        [style.top]="getMarkerTop(month)"
+        [attr.aria-label]="'Wybierz ' + month + ' miesięcy'"
+        (mouseenter)="setPreview(month)"
+        (focus)="setPreview(month)"
+        (blur)="clearPreview()"
+        (click)="onMarkerClick(month, $event)"
+      >
+        @if (isKeyClockValue(month)) {
+          <span class="hour-label">{{ month }}</span>
+        } @else {
+          <span class="hour-dot" aria-hidden="true"></span>
+        }
+      </button>
+    }
+
+    @if (showHand) {
+      <div class="clock-hand" [style.transform]="'translate(-50%, -100%) rotate(' + handAngle + 'deg)'"></div>
+    }
+
+    <div class="clock-core" aria-live="polite">
+      <strong>{{ displayValue }}</strong>
+      <span>mies.</span>
+    </div>
+  </div>
+
+</div>

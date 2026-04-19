@@ -3,9 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { SurveyDto } from '../../core/models/survey';
 import { SurveyService } from '../../core/services/survey.service';
 import { Navbar } from '../../shared/navbar/navbar';
-import { UczelniaComponent } from './uczelnia/uczelnia';
+import { UniversityPickerComponent } from './uczelnia/uczelnia';
 import { SkillsChipsComponent } from './skills-chips/skills-chips';
 import { HardSkillsChipsComponent } from './hard-skills-chips/hard-skills-chips';
+import { TimeLeftPickerComponent } from './time-left-picker/time-left-picker';
 
 @Component({
   selector: 'app-survey',
@@ -13,16 +14,16 @@ import { HardSkillsChipsComponent } from './hard-skills-chips/hard-skills-chips'
     imports: [
         FormsModule,
         Navbar,
-        UczelniaComponent,
+        UniversityPickerComponent,
         SkillsChipsComponent,
         HardSkillsChipsComponent,
+        TimeLeftPickerComponent,
     ],
   templateUrl: './survey.html',
   styleUrl: './survey.css',
 })
 export class Survey {
     constructor(private readonly surveyService: SurveyService){}
-    timeRangestoChoose = [3, 6, 9, 12, 24];
     abilityLevels = ['Beginner', 'Junior', 'Mid', 'Advanced'];
 
     surveyModel: SurveyDto = {
@@ -30,7 +31,7 @@ export class Survey {
       Major: '',
       YearOfStudy: 1,
       PreferredInternshipType: '',
-      TimeLeft: 3,
+      TimeLeft: 6,
       Inrest: '',
       Expierience: '',
       skills: '',
@@ -44,7 +45,7 @@ export class Survey {
 
     onSubmit(): void {
         this.surveyModel.userId = localStorage.getItem('userId') || '';
-        this.surveyModel.TimeLeft = Number(this.surveyModel.TimeLeft);
+      this.surveyModel.TimeLeft = this.clampTimeLeft(Number(this.surveyModel.TimeLeft));
         this.surveyModel.YearOfStudy = Number(this.surveyModel.YearOfStudy);
         this.surveyModel.GraduationYear = Number(this.surveyModel.GraduationYear);
 
@@ -62,4 +63,12 @@ export class Survey {
         })
         ;
     }
+
+      private clampTimeLeft(candidate: number): number {
+        if (!Number.isFinite(candidate)) {
+          return 6;
+        }
+
+        return Math.min(12, Math.max(1, Math.round(candidate)));
+      }
 }
