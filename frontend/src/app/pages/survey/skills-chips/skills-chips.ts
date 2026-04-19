@@ -89,8 +89,7 @@ export class SkillsChipsComponent implements OnInit {
   private _selectedSkillsFromOtherField = '';
   private _currentSelectedSkills = '';
   private recentlyShownSkillIds: number[] = [];
-  private readonly minSuggestionsCount = 1;
-  private readonly maxSuggestionsCount = 4;
+  private readonly targetSuggestionsCount = 4;
   private readonly recentWindowSize = 18;
   private readonly autocompleteLimit = 10;
   private readonly primarySkillsAssetPath = 'assets/soft-skills.json';
@@ -233,20 +232,8 @@ export class SkillsChipsComponent implements OnInit {
     return new Set(values.map((value) => value.toLowerCase()));
   }
 
-  private calculateSuggestionsCount(selected: string[]): number {
-    if (selected.length === 0) {
-      return this.maxSuggestionsCount;
-    }
-
-    const totalLength = selected.reduce((sum, skill) => sum + skill.length, 0);
-    const countPenalty = Math.ceil(selected.length / 2);
-    const lengthPenalty = Math.floor(totalLength / 55);
-    const targetCount = this.maxSuggestionsCount - countPenalty - lengthPenalty;
-
-    return Math.max(
-      this.minSuggestionsCount,
-      Math.min(this.maxSuggestionsCount, targetCount)
-    );
+  private calculateSuggestionsCount(): number {
+    return this.targetSuggestionsCount;
   }
 
   private resolveBlockedGroups(selectedSkillNames: Set<string>): Set<string> {
@@ -279,7 +266,7 @@ export class SkillsChipsComponent implements OnInit {
 
     const selectedInCurrentField = [...this.selectedSkills];
     const selectedInOtherField = this.getOtherFieldSelectedSkills();
-    const targetCount = this.calculateSuggestionsCount(selectedInCurrentField);
+    const targetCount = this.calculateSuggestionsCount();
     const selectedInCurrentLower = this.toLowerSet(selectedInCurrentField);
 
     const excludedSkillNames = new Set<string>([

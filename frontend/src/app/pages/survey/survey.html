@@ -97,11 +97,14 @@
                     </label>
                     <div class="empty-spacer hidden-mobile"></div>
 
-                    <label class="form-group full-width">
+                    <div class="form-group full-width">
                         <span>Umiejętności (Twarde)</span>
-                        <textarea name="skills" rows="2" [(ngModel)]="surveyModel.skills"
-                            placeholder="np. JavaScript, Python, Docker..." required></textarea>
-                    </label>
+                        <app-hard-skills-chips
+                            [currentSelectedSkills]="surveyModel.skills"
+                            (selectedSkillsChange)="surveyModel.skills = $event">
+                        </app-hard-skills-chips>
+                        <input type="hidden" name="skills" [(ngModel)]="surveyModel.skills" required />
+                    </div>
 
                     <label class="form-group full-width">
                         <span>Doświadczenie (nawet to z projektów)</span>

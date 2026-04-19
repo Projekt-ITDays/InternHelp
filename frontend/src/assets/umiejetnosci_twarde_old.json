@@ -1,0 +1,2850 @@
+[
+  {
+    "nr": 1,
+    "umiejetnosc": "Analiza danych",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 95,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 2,
+    "umiejetnosc": "Microsoft Excel",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 92,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 3,
+    "umiejetnosc": "Data science",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 4,
+    "umiejetnosc": "Statystyka",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 5,
+    "umiejetnosc": "Microsoft Office",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 86,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 6,
+    "umiejetnosc": "Wizualizacja danych",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 7,
+    "umiejetnosc": "Power BI",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 8,
+    "umiejetnosc": "Analiza statystyczna",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 9,
+    "umiejetnosc": "Business intelligence (BI)",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 83,
+    "popularnosc_w_grupie": 88,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 10,
+    "umiejetnosc": "Google Analytics",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 11,
+    "umiejetnosc": "Big data",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 12,
+    "umiejetnosc": "Microsoft Word",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 13,
+    "umiejetnosc": "Testy A/B",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 14,
+    "umiejetnosc": "Analityka predykcyjna",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 15,
+    "umiejetnosc": "Analiza trendów",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 16,
+    "umiejetnosc": "Microsoft PowerPoint",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 17,
+    "umiejetnosc": "Google Workspace (G Suite)",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 18,
+    "umiejetnosc": "Prognozowanie",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 19,
+    "umiejetnosc": "Analityka webowa",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 20,
+    "umiejetnosc": "Badania rynku",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 21,
+    "umiejetnosc": "Analiza odchyleń",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 22,
+    "umiejetnosc": "Alteryx",
+    "grupa": "Analityka danych i BI",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 67,
+    "popularnosc_grupy": 81
+  },
+  {
+    "nr": 23,
+    "umiejetnosc": "MySQL",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 24,
+    "umiejetnosc": "PostgreSQL",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 86,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 25,
+    "umiejetnosc": "Projektowanie baz danych",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 26,
+    "umiejetnosc": "MongoDB",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 27,
+    "umiejetnosc": "NoSQL",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 28,
+    "umiejetnosc": "Modelowanie danych",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 29,
+    "umiejetnosc": "Administracja bazami danych",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 30,
+    "umiejetnosc": "Hurtownie danych",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 31,
+    "umiejetnosc": "Elasticsearch",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 32,
+    "umiejetnosc": "T-SQL",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 33,
+    "umiejetnosc": "Apache Cassandra",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 67,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 34,
+    "umiejetnosc": "Teradata",
+    "grupa": "Bazy danych",
+    "popularnosc_ogolna": 56,
+    "popularnosc_w_grupie": 61,
+    "popularnosc_grupy": 76
+  },
+  {
+    "nr": 35,
+    "umiejetnosc": "Pierwsza pomoc",
+    "grupa": "Bezpieczeństwo i BHP",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 36,
+    "umiejetnosc": "Bezpieczeństwo w miejscu pracy",
+    "grupa": "Bezpieczeństwo i BHP",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 37,
+    "umiejetnosc": "Reagowanie w sytuacjach awaryjnych",
+    "grupa": "Bezpieczeństwo i BHP",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 38,
+    "umiejetnosc": "Ochrona przeciwpożarowa",
+    "grupa": "Bezpieczeństwo i BHP",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 39,
+    "umiejetnosc": "Zarządzanie bezpieczeństwem",
+    "grupa": "Bezpieczeństwo i BHP",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 40,
+    "umiejetnosc": "Ochrona fizyczna",
+    "grupa": "Bezpieczeństwo i BHP",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 41,
+    "umiejetnosc": "Inżynieria lądowa (budownictwo)",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 42,
+    "umiejetnosc": "Projektowanie architektoniczne",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 43,
+    "umiejetnosc": "Inżynieria konstrukcyjna",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 44,
+    "umiejetnosc": "BIM (modelowanie informacji o budynku)",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 45,
+    "umiejetnosc": "Zarządzanie budową",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 46,
+    "umiejetnosc": "Autodesk Revit",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 47,
+    "umiejetnosc": "Prawo budowlane i normy",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 48,
+    "umiejetnosc": "Kosztorysowanie",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 49,
+    "umiejetnosc": "AutoCAD Civil 3D",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 50,
+    "umiejetnosc": "Urbanistyka i planowanie przestrzenne",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 51,
+    "umiejetnosc": "Instalacje HVAC",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 52,
+    "umiejetnosc": "Geodezja",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 53,
+    "umiejetnosc": "ArcGIS",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 54,
+    "umiejetnosc": "Geotechnika",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 56,
+    "popularnosc_w_grupie": 75,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 55,
+    "umiejetnosc": "Architektura krajobrazu",
+    "grupa": "Budownictwo i architektura",
+    "popularnosc_ogolna": 56,
+    "popularnosc_w_grupie": 75,
+    "popularnosc_grupy": 66
+  },
+  {
+    "nr": 56,
+    "umiejetnosc": "Amazon Web Services (AWS)",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 95,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 57,
+    "umiejetnosc": "Przetwarzanie w chmurze",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 92,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 58,
+    "umiejetnosc": "DevOps",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 59,
+    "umiejetnosc": "Microsoft Azure",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 60,
+    "umiejetnosc": "Kubernetes",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 61,
+    "umiejetnosc": "Linux",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 62,
+    "umiejetnosc": "CI/CD (ciągłe dostarczanie)",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 63,
+    "umiejetnosc": "Konteneryzacja",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 84,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 64,
+    "umiejetnosc": "AWS EC2",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 65,
+    "umiejetnosc": "AWS S3",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 66,
+    "umiejetnosc": "Azure DevOps",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 67,
+    "umiejetnosc": "Terraform",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 68,
+    "umiejetnosc": "Jenkins",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 69,
+    "umiejetnosc": "Serwery Windows",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 70,
+    "umiejetnosc": "Apache Spark",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 71,
+    "umiejetnosc": "Azure Active Directory",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 72,
+    "umiejetnosc": "Ansible",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 75,
+    "popularnosc_w_grupie": 80,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 73,
+    "umiejetnosc": "AWS Redshift",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 74,
+    "umiejetnosc": "Apache Kafka",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 75,
+    "umiejetnosc": "Apache Hadoop",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 76,
+    "umiejetnosc": "Confluence",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 77,
+    "umiejetnosc": "Site Reliability Engineering (SRE)",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 78,
+    "umiejetnosc": "Unix",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 79,
+    "umiejetnosc": "Apache Airflow",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 80,
+    "umiejetnosc": "Zarządzanie konfiguracją",
+    "grupa": "Chmura i DevOps",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 69,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 81,
+    "umiejetnosc": "Bezpieczeństwo sieci",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 92,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 82,
+    "umiejetnosc": "Bezpieczeństwo chmury",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 83,
+    "umiejetnosc": "Testy penetracyjne",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 84,
+    "umiejetnosc": "Bezpieczeństwo aplikacji",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 85,
+    "umiejetnosc": "Analiza podatności",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 86,
+    "umiejetnosc": "Zarządzanie tożsamością i dostępem (IAM)",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 87,
+    "umiejetnosc": "Reagowanie na incydenty bezpieczeństwa",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 88,
+    "umiejetnosc": "Systemy wykrywania włamań (IDS)",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 89,
+    "umiejetnosc": "Szyfrowanie AES",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 75,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 90,
+    "umiejetnosc": "Kryminalistyka cyfrowa",
+    "grupa": "Cyberbezpieczeństwo",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 69,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 91,
+    "umiejetnosc": "Nauczanie",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 92,
+    "umiejetnosc": "Szkolenia i rozwój",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 93,
+    "umiejetnosc": "Tworzenie programów nauczania",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 94,
+    "umiejetnosc": "Projektowanie instrukcy / e-learning",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 95,
+    "umiejetnosc": "Pisanie naukowe",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 82,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 96,
+    "umiejetnosc": "Edukacja specjalna",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 82,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 97,
+    "umiejetnosc": "Zarządzanie klasą",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 98,
+    "umiejetnosc": "Blended learning (nauczanie hybrydowe)",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 99,
+    "umiejetnosc": "Train the Trainer (szkolenie trenerów)",
+    "grupa": "Edukacja i szkolenia",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 100,
+    "umiejetnosc": "Rachunkowość",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 101,
+    "umiejetnosc": "Analiza finansowa",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 102,
+    "umiejetnosc": "Księgowość",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 103,
+    "umiejetnosc": "Audyt",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 104,
+    "umiejetnosc": "Modelowanie finansowe",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 105,
+    "umiejetnosc": "Planowanie finansowe",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 106,
+    "umiejetnosc": "Oprogramowanie księgowe",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 107,
+    "umiejetnosc": "Bilans",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 108,
+    "umiejetnosc": "Zarządzanie przepływami pieniężnymi",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 109,
+    "umiejetnosc": "Zarządzanie inwestycjami",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 110,
+    "umiejetnosc": "Przygotowanie zeznań podatkowych",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 111,
+    "umiejetnosc": "Zobowiązania (Accounts Payable)",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 112,
+    "umiejetnosc": "Należności (Accounts Receivable)",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 113,
+    "umiejetnosc": "Finanse korporacyjne",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 114,
+    "umiejetnosc": "Zarządzanie portfelem inwestycyjnym",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 115,
+    "umiejetnosc": "Zgodność podatkowa",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 116,
+    "umiejetnosc": "Uzgodnienia bankowe",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 117,
+    "umiejetnosc": "Fuzje i przejęcia (M&A)",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 75,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 118,
+    "umiejetnosc": "Zarządzanie majątkiem",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 119,
+    "umiejetnosc": "Zarządzanie skarbem",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 71,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 120,
+    "umiejetnosc": "Venture capital",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 69,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 121,
+    "umiejetnosc": "Zarządzanie nieruchomościami",
+    "grupa": "Finanse i rachunkowość",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 69,
+    "popularnosc_grupy": 73
+  },
+  {
+    "nr": 122,
+    "umiejetnosc": "Inżynieria elektryczna",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 123,
+    "umiejetnosc": "Elektronika",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 124,
+    "umiejetnosc": "Automatyka przemysłowa",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 125,
+    "umiejetnosc": "Automatyzacja przemysłowa",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 126,
+    "umiejetnosc": "Systemy wbudowane",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 127,
+    "umiejetnosc": "Sterowniki PLC",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 128,
+    "umiejetnosc": "Projektowanie układów elektronicznych",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 129,
+    "umiejetnosc": "Elektronika energetyczna",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 130,
+    "umiejetnosc": "Przetwarzanie sygnałów",
+    "grupa": "Inżynieria elektryczna i automatyka",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 131,
+    "umiejetnosc": "AutoCAD",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 132,
+    "umiejetnosc": "Inżynieria mechaniczna",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 133,
+    "umiejetnosc": "Zapewnienie jakości (QA)",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 134,
+    "umiejetnosc": "Kontrola jakości (QC)",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 135,
+    "umiejetnosc": "Lean manufacturing",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 136,
+    "umiejetnosc": "Doskonalenie procesów",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 137,
+    "umiejetnosc": "Obróbka CNC",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 138,
+    "umiejetnosc": "Termodynamika",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 139,
+    "umiejetnosc": "Wytwarzanie addytywne (druk 3D)",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 140,
+    "umiejetnosc": "Utrzymanie predykcyjne",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 141,
+    "umiejetnosc": "Kompleksowe zarządzanie jakością (TQM)",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 142,
+    "umiejetnosc": "Dynamika płynów",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 143,
+    "umiejetnosc": "Mapowanie strumienia wartości (VSM)",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 144,
+    "umiejetnosc": "Spawalnictwo",
+    "grupa": "Inżynieria mechaniczna i produkcja",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 68
+  },
+  {
+    "nr": 145,
+    "umiejetnosc": "Język angielski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 95,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 146,
+    "umiejetnosc": "Język niemiecki",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 147,
+    "umiejetnosc": "Język hiszpański",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 75,
+    "popularnosc_w_grupie": 80,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 148,
+    "umiejetnosc": "Język francuski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 149,
+    "umiejetnosc": "Język włoski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 70,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 150,
+    "umiejetnosc": "Język rosyjski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 70,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 151,
+    "umiejetnosc": "Język ukraiński",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 70,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 152,
+    "umiejetnosc": "Język portugalski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 67,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 153,
+    "umiejetnosc": "Język japoński",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 65,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 154,
+    "umiejetnosc": "Język arabski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 63,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 155,
+    "umiejetnosc": "Język czeski",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 55,
+    "popularnosc_w_grupie": 60,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 156,
+    "umiejetnosc": "Język koreański",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 55,
+    "popularnosc_w_grupie": 60,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 157,
+    "umiejetnosc": "Język szwedzki",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 54,
+    "popularnosc_w_grupie": 59,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 158,
+    "umiejetnosc": "Język turecki",
+    "grupa": "Języki obce",
+    "popularnosc_ogolna": 52,
+    "popularnosc_w_grupie": 57,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 159,
+    "umiejetnosc": "Zarządzanie łańcuchem dostaw",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 160,
+    "umiejetnosc": "Logistyka",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 161,
+    "umiejetnosc": "Zarządzanie zapasami",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 162,
+    "umiejetnosc": "Zakupy / zaopatrzenie",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 163,
+    "umiejetnosc": "Zarządzanie magazynem",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 164,
+    "umiejetnosc": "Zarządzanie transportem",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 165,
+    "umiejetnosc": "Planowanie popytu",
+    "grupa": "Logistyka i łańcuch dostaw",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 166,
+    "umiejetnosc": "Marketing cyfrowy",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 167,
+    "umiejetnosc": "Marketing w mediach społecznościowych",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 168,
+    "umiejetnosc": "Content marketing",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 169,
+    "umiejetnosc": "E-commerce",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 170,
+    "umiejetnosc": "Generowanie leadów",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 171,
+    "umiejetnosc": "E-mail marketing",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 172,
+    "umiejetnosc": "Zarządzanie sprzedażą",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 173,
+    "umiejetnosc": "Salesforce",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 174,
+    "umiejetnosc": "Analiza rynku",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 175,
+    "umiejetnosc": "Zarządzanie klientami (Account Management)",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 75,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 176,
+    "umiejetnosc": "Zarządzanie marką",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 75,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 177,
+    "umiejetnosc": "Automatyzacja marketingu",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 178,
+    "umiejetnosc": "Marketing produktu",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 179,
+    "umiejetnosc": "Strategia marki",
+    "grupa": "Marketing i sprzedaż",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 180,
+    "umiejetnosc": "Zarządzanie mediami społecznościowymi",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 181,
+    "umiejetnosc": "Tworzenie treści (content creation)",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 182,
+    "umiejetnosc": "Produkcja wideo",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 183,
+    "umiejetnosc": "Copywriting",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 184,
+    "umiejetnosc": "Montaż wideo",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 185,
+    "umiejetnosc": "Fotografia",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 186,
+    "umiejetnosc": "WordPress",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 187,
+    "umiejetnosc": "Dziennikarstwo",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 188,
+    "umiejetnosc": "Realizacja wideo / kamerzysta",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 189,
+    "umiejetnosc": "Nadawanie / broadcasting",
+    "grupa": "Media, audio i wideo",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 70
+  },
+  {
+    "nr": 190,
+    "umiejetnosc": "Pielęgniarstwo",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 191,
+    "umiejetnosc": "Dokumentacja medyczna",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 192,
+    "umiejetnosc": "Zdrowie psychiczne / psychiatria",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 193,
+    "umiejetnosc": "Psychologia kliniczna",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 194,
+    "umiejetnosc": "Medycyna ratunkowa",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 195,
+    "umiejetnosc": "Fizjoterapia",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 196,
+    "umiejetnosc": "Kontrola zakażeń",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 197,
+    "umiejetnosc": "Zdrowie publiczne",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 198,
+    "umiejetnosc": "Chirurgia",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 199,
+    "umiejetnosc": "Radiologia",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 200,
+    "umiejetnosc": "Badania kliniczne",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 201,
+    "umiejetnosc": "Telemedycyna",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 202,
+    "umiejetnosc": "Opieka nad ranami",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 203,
+    "umiejetnosc": "Kodowanie medyczne (ICD)",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 204,
+    "umiejetnosc": "Diagnostyka laboratoryjna",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 205,
+    "umiejetnosc": "Anestezjologia",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 206,
+    "umiejetnosc": "Terapia zajęciowa",
+    "grupa": "Medycyna i opieka zdrowotna",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 207,
+    "umiejetnosc": "Biologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 208,
+    "umiejetnosc": "Chemia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 209,
+    "umiejetnosc": "Fizyka",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 92,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 210,
+    "umiejetnosc": "Biochemia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 88,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 211,
+    "umiejetnosc": "Biotechnologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 86,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 212,
+    "umiejetnosc": "Mikrobiologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 86,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 213,
+    "umiejetnosc": "Biologia molekularna",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 214,
+    "umiejetnosc": "Farmakologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 215,
+    "umiejetnosc": "Nauki o środowisku",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 216,
+    "umiejetnosc": "Genetyka",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 217,
+    "umiejetnosc": "Chemia analityczna",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 82,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 218,
+    "umiejetnosc": "Ekologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 82,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 219,
+    "umiejetnosc": "Biostatystyka",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 80,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 220,
+    "umiejetnosc": "Materiałoznawstwo",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 80,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 221,
+    "umiejetnosc": "Geologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 78,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 222,
+    "umiejetnosc": "Toksykologia",
+    "grupa": "Nauki przyrodnicze i laboratorium",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 78,
+    "popularnosc_grupy": 65
+  },
+  {
+    "nr": 223,
+    "umiejetnosc": "Prawo umów / prawo kontraktowe",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 224,
+    "umiejetnosc": "Prawo pracy",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 225,
+    "umiejetnosc": "Zgodność regulacyjna",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 226,
+    "umiejetnosc": "Badania prawne",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 227,
+    "umiejetnosc": "Przeciwdziałanie praniu pieniędzy (AML)",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 228,
+    "umiejetnosc": "Prawo cywilne",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 229,
+    "umiejetnosc": "Prawo handlowe",
+    "grupa": "Prawo i regulacje",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 67
+  },
+  {
+    "nr": 230,
+    "umiejetnosc": "Python",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 97,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 231,
+    "umiejetnosc": "Inżynieria oprogramowania",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 95,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 232,
+    "umiejetnosc": "Tworzenie aplikacji",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 233,
+    "umiejetnosc": "API (interfejs programistyczny)",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 234,
+    "umiejetnosc": "C#",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 235,
+    "umiejetnosc": "Systemy kontroli wersji",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 90,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 236,
+    "umiejetnosc": "C++",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 89,
+    "popularnosc_w_grupie": 94,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 237,
+    "umiejetnosc": "Zwinne wytwarzanie oprogramowania (Agile)",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 238,
+    "umiejetnosc": "Programowanie back-end",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 239,
+    "umiejetnosc": "Struktury danych",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 240,
+    "umiejetnosc": "TypeScript",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 241,
+    "umiejetnosc": "Algorytmy",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 87,
+    "popularnosc_w_grupie": 92,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 242,
+    "umiejetnosc": "Programowanie full-stack",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 243,
+    "umiejetnosc": "Testowanie oprogramowania",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 244,
+    "umiejetnosc": "Debugowanie",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 83,
+    "popularnosc_w_grupie": 88,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 245,
+    "umiejetnosc": "Angular",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 246,
+    "umiejetnosc": "R",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 247,
+    "umiejetnosc": "Testy jednostkowe",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 248,
+    "umiejetnosc": "Projektowanie algorytmów",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 249,
+    "umiejetnosc": "Code review",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 250,
+    "umiejetnosc": "Go",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 251,
+    "umiejetnosc": "Mikroserwisy",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 252,
+    "umiejetnosc": ".NET Framework",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 253,
+    "umiejetnosc": "Tworzenie aplikacji Android",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 254,
+    "umiejetnosc": "Bash / skryptowanie powłoki",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 255,
+    "umiejetnosc": "Swift",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 256,
+    "umiejetnosc": "Vue.js",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 257,
+    "umiejetnosc": "Tworzenie aplikacji iOS",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 258,
+    "umiejetnosc": "Spring Framework",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 259,
+    "umiejetnosc": "Bootstrap",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 260,
+    "umiejetnosc": "MATLAB",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 261,
+    "umiejetnosc": "Programowanie sterowane testami (TDD)",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 262,
+    "umiejetnosc": "ASP.NET",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 263,
+    "umiejetnosc": "Unity (silnik gier)",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 264,
+    "umiejetnosc": "Bitbucket",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 265,
+    "umiejetnosc": "Tworzenie gier wideo",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 266,
+    "umiejetnosc": "VBA (Visual Basic for Applications)",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 267,
+    "umiejetnosc": "Testowanie manualne",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 268,
+    "umiejetnosc": "Firmware",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 67,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 269,
+    "umiejetnosc": "Visual Basic",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 48,
+    "popularnosc_w_grupie": 53,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 270,
+    "umiejetnosc": "VBScript",
+    "grupa": "Programowanie",
+    "popularnosc_ogolna": 40,
+    "popularnosc_w_grupie": 45,
+    "popularnosc_grupy": 79
+  },
+  {
+    "nr": 271,
+    "umiejetnosc": "User Experience (UX)",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 272,
+    "umiejetnosc": "Adobe Photoshop",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 96,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 273,
+    "umiejetnosc": "Projektowanie graficzne",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 96,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 274,
+    "umiejetnosc": "Projektowanie interfejsów (UI Design)",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 85,
+    "popularnosc_w_grupie": 96,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 275,
+    "umiejetnosc": "Adobe Creative Suite",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 276,
+    "umiejetnosc": "Adobe Illustrator",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 277,
+    "umiejetnosc": "Prototypowanie",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 278,
+    "umiejetnosc": "Projektowanie wizualne",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 279,
+    "umiejetnosc": "Wireframing / makietowanie",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 280,
+    "umiejetnosc": "Branding",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 75,
+    "popularnosc_w_grupie": 86,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 281,
+    "umiejetnosc": "Adobe InDesign",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 282,
+    "umiejetnosc": "Adobe Premiere Pro",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 283,
+    "umiejetnosc": "Adobe After Effects",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 284,
+    "umiejetnosc": "Modelowanie 3D",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 285,
+    "umiejetnosc": "Typografia",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 286,
+    "umiejetnosc": "Animacje",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 76,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 287,
+    "umiejetnosc": "Oprogramowanie do modelowania 3D",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 73,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 288,
+    "umiejetnosc": "Autodesk Maya",
+    "grupa": "Projektowanie graficzne i UX/UI",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 69,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 289,
+    "umiejetnosc": "Rolnictwo",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 290,
+    "umiejetnosc": "Agronomia",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 64,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 291,
+    "umiejetnosc": "Technologia żywności",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 292,
+    "umiejetnosc": "Hodowla zwierząt",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 293,
+    "umiejetnosc": "Ogrodnictwo",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 294,
+    "umiejetnosc": "Leśnictwo",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 56,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 295,
+    "umiejetnosc": "Gleboznawstwo",
+    "grupa": "Rolnictwo i leśnictwo",
+    "popularnosc_ogolna": 54,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 61
+  },
+  {
+    "nr": 296,
+    "umiejetnosc": "Infrastruktura IT",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 297,
+    "umiejetnosc": "TCP/IP",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 93,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 298,
+    "umiejetnosc": "Wsparcie techniczne (helpdesk)",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 299,
+    "umiejetnosc": "Administracja serwerami",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 300,
+    "umiejetnosc": "Protokół TCP",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 301,
+    "umiejetnosc": "Wirtualne sieci prywatne (VPN)",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 302,
+    "umiejetnosc": "Wirtualizacja",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 303,
+    "umiejetnosc": "Active Directory",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 304,
+    "umiejetnosc": "Sieci bezprzewodowe (WiFi)",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 305,
+    "umiejetnosc": "Telekomunikacja",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 75,
+    "popularnosc_w_grupie": 86,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 306,
+    "umiejetnosc": "Tworzenie kopii zapasowych i przywracanie danych",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 307,
+    "umiejetnosc": "Sieci lokalne (LAN)",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 308,
+    "umiejetnosc": "Technologia 5G",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 309,
+    "umiejetnosc": "Sieci rozległe (WAN)",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 310,
+    "umiejetnosc": "Szerokopasmowy dostęp do internetu",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 311,
+    "umiejetnosc": "Równoważenie obciążenia",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 312,
+    "umiejetnosc": "VLAN",
+    "grupa": "Sieci i infrastruktura",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 313,
+    "umiejetnosc": "Sztuczna inteligencja (AI)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 95,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 314,
+    "umiejetnosc": "Uczenie maszynowe (ML)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 92,
+    "popularnosc_w_grupie": 97,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 315,
+    "umiejetnosc": "Głębokie uczenie (Deep Learning)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 86,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 316,
+    "umiejetnosc": "Przetwarzanie języka naturalnego (NLP)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 84,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 317,
+    "umiejetnosc": "Sieci neuronowe",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 318,
+    "umiejetnosc": "TensorFlow",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 80,
+    "popularnosc_w_grupie": 85,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 319,
+    "umiejetnosc": "Widzenie komputerowe (Computer Vision)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 320,
+    "umiejetnosc": "Prompt engineering",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 321,
+    "umiejetnosc": "Robotyka",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 75,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 322,
+    "umiejetnosc": "Rozszerzona rzeczywistość (AR)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 70,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 323,
+    "umiejetnosc": "Wirtualna rzeczywistość (VR)",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 70,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 324,
+    "umiejetnosc": "Pojazdy autonomiczne",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 67,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 325,
+    "umiejetnosc": "Blockchain",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 67,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 326,
+    "umiejetnosc": "Bioinformatyka",
+    "grupa": "Sztuczna inteligencja i ML",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 63,
+    "popularnosc_grupy": 75
+  },
+  {
+    "nr": 327,
+    "umiejetnosc": "Zarządzanie projektami",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 92,
+    "popularnosc_w_grupie": 99,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 328,
+    "umiejetnosc": "Metodologia Agile",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 88,
+    "popularnosc_w_grupie": 95,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 329,
+    "umiejetnosc": "Zwinne zarządzanie projektami",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 84,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 330,
+    "umiejetnosc": "Zarządzanie produktem",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 82,
+    "popularnosc_w_grupie": 89,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 331,
+    "umiejetnosc": "Zarządzanie ryzykiem projektowym",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 332,
+    "umiejetnosc": "Microsoft Teams",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 333,
+    "umiejetnosc": "Budżetowanie projektów",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 74,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 334,
+    "umiejetnosc": "Asana",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 335,
+    "umiejetnosc": "Zarządzanie interesariuszami",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 336,
+    "umiejetnosc": "Slack",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 337,
+    "umiejetnosc": "Analiza wymagań",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 338,
+    "umiejetnosc": "Microsoft Project",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 339,
+    "umiejetnosc": "Trello",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 340,
+    "umiejetnosc": "Zoom",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 77,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 341,
+    "umiejetnosc": "Metodologia Waterfall",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 72,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 342,
+    "umiejetnosc": "Notion",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 65,
+    "popularnosc_w_grupie": 72,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 343,
+    "umiejetnosc": "Struktura podziału pracy (WBS)",
+    "grupa": "Zarządzanie projektami",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 69,
+    "popularnosc_grupy": 74
+  },
+  {
+    "nr": 344,
+    "umiejetnosc": "Pozyskiwanie talentów",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 78,
+    "popularnosc_w_grupie": 90,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 345,
+    "umiejetnosc": "Zarządzanie wynikami (performance management)",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 76,
+    "popularnosc_w_grupie": 88,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 346,
+    "umiejetnosc": "Relacje pracownicze",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 72,
+    "popularnosc_w_grupie": 84,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 347,
+    "umiejetnosc": "Administrowanie świadczeniami pracowniczymi",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 80,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 348,
+    "umiejetnosc": "Rozwój organizacji",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 68,
+    "popularnosc_w_grupie": 80,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 349,
+    "umiejetnosc": "Systemy ATS (śledzenie kandydatów)",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 78,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 350,
+    "umiejetnosc": "Planowanie zatrudnienia",
+    "grupa": "Zarządzanie zasobami ludzkimi",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 78,
+    "popularnosc_grupy": 71
+  },
+  {
+    "nr": 351,
+    "umiejetnosc": "Odnawialne źródła energii",
+    "grupa": "Środowisko i zrównoważony rozwój",
+    "popularnosc_ogolna": 70,
+    "popularnosc_w_grupie": 91,
+    "popularnosc_grupy": 62
+  },
+  {
+    "nr": 352,
+    "umiejetnosc": "Gospodarka odpadami",
+    "grupa": "Środowisko i zrównoważony rozwój",
+    "popularnosc_ogolna": 66,
+    "popularnosc_w_grupie": 87,
+    "popularnosc_grupy": 62
+  },
+  {
+    "nr": 353,
+    "umiejetnosc": "Zgodność z przepisami środowiskowymi",
+    "grupa": "Środowisko i zrównoważony rozwój",
+    "popularnosc_ogolna": 62,
+    "popularnosc_w_grupie": 83,
+    "popularnosc_grupy": 62
+  },
+  {
+    "nr": 354,
+    "umiejetnosc": "Energetyka wiatrowa",
+    "grupa": "Środowisko i zrównoważony rozwój",
+    "popularnosc_ogolna": 60,
+    "popularnosc_w_grupie": 81,
+    "popularnosc_grupy": 62
+  },
+  {
+    "nr": 355,
+    "umiejetnosc": "Budownictwo zrównoważone (zielone budownictwo)",
+    "grupa": "Środowisko i zrównoważony rozwój",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 62
+  },
+  {
+    "nr": 356,
+    "umiejetnosc": "Gospodarka o obiegu zamkniętym",
+    "grupa": "Środowisko i zrównoważony rozwój",
+    "popularnosc_ogolna": 58,
+    "popularnosc_w_grupie": 79,
+    "popularnosc_grupy": 62
+  }
+]
