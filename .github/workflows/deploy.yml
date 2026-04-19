@@ -80,7 +80,7 @@ jobs:
             PORT=3000
             MANGO_URL=${{ secrets.MANGO_URL }}
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            GOOGLE_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}
             RECAPTCHA_PROJECT_ID=${{ secrets.RECAPTCHA_PROJECT_ID }}
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             RECAPTCHA_SITE_KEY=${{ secrets.RECAPTCHA_SITE_KEY }}
