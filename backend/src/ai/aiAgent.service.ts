@@ -31,10 +31,10 @@ export class AiAgentService  implements OnModuleInit  , OnModuleDestroy{
     async onModuleInit() {
         await this.client.connect();
         console.log("Połączono z MongoDB Atlas");
-        this.collection = this.client.db("CarrierSign").collection("Advices");
+        this.collection = this.client.db("carriersign").collection("Advices");
         this.vectorStore  = new MongoDBAtlasVectorSearch(this.embeddingModel , {
         collection: this.collection,
-        indexName : "advices_vector_index",
+        indexName : "vector_index",
         textKey: "text",
         embeddingKey: "embedding",
 
@@ -82,7 +82,7 @@ export class AiAgentService  implements OnModuleInit  , OnModuleDestroy{
     )
     
     
-    promptTest = new SystemMessage("Podaj mi dane z bazy danych uzywajac narzedzia retrive , korzystjac jedynie z danych z bazy wiedzy , nie halucynuj danych i nie wymyslaj ich. Odpowiedz na pytanie: Co zrobic w dobie Ai i jak dac sobie rade z zwonlniemai ?")
+    promptTest = new SystemMessage("Podaj mi dane z bazy danych uzywajac narzedzia retrive , korzystjac jedynie z danych z bazy wiedzy , nie halucynuj danych i nie wymyslaj ich. Podaj mi cos ciekawego z bazy")
 testprompt(){
     const agent = createAgent({
         model: this.model,
@@ -93,7 +93,7 @@ testprompt(){
         {
             messages : [{
                 role : "user",
-                content : "Co zrobic w dobie Ai i jak dac sobie rade z zwolnieniami ?"
+                content : "Coś ciekawego z bazy mi podaj "
             }]
         }
     )
@@ -375,7 +375,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         async ({query}) => {
             const retrivedocs = await this.vectorStore.similaritySearch(query , 5);
             if (retrivedocs.length === 0) {
-                return "Brak danych w bazie wiedzy związanych z tym zapytaniem.";
+                return ["Brak danych w bazie wiedzy związanych z tym zapytaniem.",[]];
             }
             const serialized = retrivedocs
             .map(

@@ -19,6 +19,7 @@ describe('ExperienceHandlerService', () => {
     save : jest.fn(),
     create : jest.fn(),
   }
+  // mocowanie kazdeej bazy mega wazne podepnij pozniej pod before eacha
   const mockDataSource = {
     createQueryRunner: jest.fn().mockReturnValue({
       connect: jest.fn(),
@@ -47,6 +48,8 @@ describe('ExperienceHandlerService', () => {
     }).compile();
     
     service = module.get<ExperienceHandlerService>(ExperienceHandlerService);
+    userRepository = module.get<Repository<userEntity>>(getRepositoryToken(userEntity));
+    AchievementRepository = module.get<Repository<achievementEntity>>(getRepositoryToken(achievementEntity));
   });
 
   it('should be defined', () => {
@@ -58,5 +61,34 @@ describe('ExperienceHandlerService', () => {
     expect(service.calculateLevel(100)).toBe(2);
     expect(service.calculateLevel(300)).toBe(3);
     expect(service.calculateLevel(600)).toBe(4);
+  })
+
+  it("should return xp required for level" , () => {
+    expect(service.getXpRequiredForLevel(1)).toBe(0);
+    expect(service.getXpRequiredForLevel(2)).toBe(100);
+    expect(service.getXpRequiredForLevel(3)).toBe(300);
+    expect(service.getXpRequiredForLevel(4)).toBe(600);
+  })
+  describe('createAchievement', () => {
+    it('should create an achievement', async () => {
+        const userId = 'test-user-id';
+        const dto = {
+            title: 'Test Achievement',
+            description : "Buchała",
+            xpReward : 100,
+        }
+        const expectedAchievement = { userId, ...dto };
+        
+      mockUserRepository.findOne.mockResolvedValue({ id: userId, name: 'Test User' });
+      achievementRepository.create.mockReturnValue(expectedAchievement);
+      achievementRepository.save.mockResolvedValue(expectedAchievement);
+
+      await service.createAchievement(userId, dto);
+
+      expect(mockUserRepository.findOne).toHaveBeenCalledWith({ where: { id: userId } });
+      expect(achievementRepository.create).toHaveBeenCalledWith(expectedAchievement); 
+      expect(achievementRepository.save).toHaveBeenCalledWith(expectedAchievement);
+
+    });
   })
 });
