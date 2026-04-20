@@ -22,11 +22,14 @@ export class AiAgentService {
     ) { }
 
 
-    model = new ChatGoogle('gemini-2.5-flash')
+    model = new ChatGoogle('gemini-2.5-flash', {
+        apiKey: process.env.GEMINI_API_KEY
+    })
     private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
     private embeddingModel = new GoogleGenerativeAIEmbeddings(
         {
             model: "models/gemini-embedding-001",
+            apiKey: process.env.GEMINI_API_KEY,
         }
     )
     private vectorstore = new MemoryVectorStore(this.embeddingModel);
