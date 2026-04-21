@@ -297,6 +297,56 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         return [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve];
     }
 
+    private sanitizeForStorage(value: any, seen = new WeakSet<object>()): any {
+        if (value === null || value === undefined) return value;
+
+        const primitiveType = typeof value;
+        if (primitiveType === "string" || primitiveType === "number" || primitiveType === "boolean") {
+            return value;
+        }
+
+        if (value instanceof Date) return value;
+        if (Buffer.isBuffer(value)) return value.toString("base64");
+
+        if (Array.isArray(value)) {
+            return value.map((item) => this.sanitizeForStorage(item, seen));
+        }
+
+        if (primitiveType === "object") {
+            const objectValue = value as Record<string, any>;
+
+            if (seen.has(objectValue)) return "[Circular]";
+            seen.add(objectValue);
+
+            const bsonType = objectValue?._bsontype;
+            if (typeof bsonType === "string") {
+                if (typeof objectValue.toHexString === "function") {
+                    return objectValue.toHexString();
+                }
+                if (typeof objectValue.toString === "function") {
+                    return objectValue.toString();
+                }
+                return `[${bsonType}]`;
+            }
+
+            if (typeof objectValue.toJSON === "function") {
+                try {
+                    return this.sanitizeForStorage(objectValue.toJSON(), seen);
+                } catch {
+                   
+                }
+            }
+
+            const sanitized: Record<string, any> = {};
+            for (const [key, nestedValue] of Object.entries(objectValue)) {
+                sanitized[key] = this.sanitizeForStorage(nestedValue, seen);
+            }
+            return sanitized;
+        }
+
+        return String(value);
+    }
+
     async extractAndSavePlan(userId: string, response: any) {
         try {
             const messages = response.messages;
@@ -330,11 +380,12 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
             const hasRoadmapShape = Array.isArray(planObject.plan) || Array.isArray(planObject.kamienie_milowe);
 
             if (hasRoadmapShape) {
+                const sanitizedHistory = this.sanitizeForStorage(response);
                 const newSavedPlan = new this.agentResponseModel({
                     userId: userId,
                     status: 'active',
                     planData: planObject,
-                    fullHistory: response
+                    fullHistory: sanitizedHistory
                 });
                 await newSavedPlan.save();
                 console.log(`Zapisano plan dla użytkownika ${userId}`);
