@@ -135,6 +135,62 @@
 	background: var(--ih-bg-soft);
 }
 
+.graduation-year-picker {
+	display: grid;
+	gap: 0.5rem;
+}
+
+.year-chips {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.45rem;
+}
+
+.year-chip {
+	border: 1px solid var(--ih-surface-a14);
+	border-radius: 10px;
+	background: var(--ih-bg);
+	color: var(--ih-surface-a85);
+	font: inherit;
+	font-size: 0.88rem;
+	font-weight: 700;
+	padding: 0.42rem 0.35rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	text-align: center;
+}
+
+.year-chip:hover {
+	border-color: var(--ih-accent-border);
+	color: var(--ih-accent);
+	background: var(--ih-bg-soft);
+}
+
+.year-chip.is-active {
+	border-color: var(--ih-accent-border);
+	background: var(--ih-accent-soft);
+	color: var(--ih-accent);
+}
+
+.year-slider {
+	width: 100%;
+	accent-color: var(--ih-accent);
+	cursor: pointer;
+}
+
+.year-scale {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: var(--ih-surface-a85);
+	font-size: 0.76rem;
+}
+
+.year-scale strong {
+	color: var(--ih-surface);
+	font-size: 0.86rem;
+}
+
 .full-width {
 	grid-column: 1 / -1;
 }
@@ -173,5 +229,11 @@
 @media (max-width: 860px) {
 	.form-grid {
 		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 520px) {
+	.year-chips {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }

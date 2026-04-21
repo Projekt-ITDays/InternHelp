@@ -1,5 +1,15 @@
 <div class="skills-chips-container">
   <div class="chips-flow">
+    <button
+      type="button"
+      class="chip refresh-chip"
+      (click)="onRefreshSuggestions()"
+      aria-label="Odśwież"
+      title="Odśwież"
+    >
+      <span class="refresh-glyph" aria-hidden="true">&#8635;</span>
+    </button>
+
     @for (skillName of selectedSkills; track skillName) {
     <button type="button" class="chip selected-chip" (click)="removeSelectedSkill(skillName)">
       {{ skillName }}
@@ -15,7 +25,7 @@
     <div class="input-chip-wrap">
       <div
         class="chip input-chip"
-        [class.is-active]="canSubmitCustomSkill"
+        [class.is-active]="userInputControl.value.trim().length > 0"
         [class.is-filled]="userInputControl.value.length > 0"
         (click)="onCustomChipContainerClick(customInput)"
       >
@@ -23,7 +33,9 @@
           #customInput
           type="text"
           class="custom-chip-input"
+          [attr.size]="userInputControl.value?.length || 17"
           [formControl]="userInputControl"
+          placeholder="Własna umiejętność"
           [attr.maxlength]="maxCustomSkillLength"
           (click)="$event.stopPropagation()"
           (focus)="onInputFocus()"
@@ -47,15 +59,5 @@
       </div>
       }
     </div>
-
-    <button
-      type="button"
-      class="chip refresh-chip"
-      (click)="onRefreshSuggestions()"
-      aria-label="Odśwież"
-      title="Odśwież"
-    >
-      <span class="refresh-glyph" aria-hidden="true">&#8635;</span>
-    </button>
   </div>
 </div>

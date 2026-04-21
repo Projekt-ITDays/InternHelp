@@ -6,7 +6,7 @@
             <div class="survey-kicker badge-style">Profil kandydata</div>
             <h1>Zbudujmy Twój profil</h1>
             <p>Podziel się z nami swoimi planami i doświadczeniem, a nasz agent AI przygotuje dla Ciebie
-                spersonalizowaną ścieżkę rozwoju oraz interaktywną roadmapę kariery.</p>
+                spersonalizowaną ścieżkę rozwoju oraz interaktywną mapę kariery.</p>
         </header>
 
         <form class="survey-form" #surveyForm="ngForm" (ngSubmit)="onSubmit()">
@@ -15,7 +15,7 @@
                 <h3 class="section-title"><span class="icon"></span> Edukacja i zaplecze</h3>
                 <div class="form-grid">
                     <label class="form-group">
-                        <span>Kierunek (Major)</span>
+                        <span>Kierunek</span>
                         <input type="text" name="Major" [(ngModel)]="surveyModel.Major" placeholder="np. Informatyka"
                             required />
                     </label>
@@ -33,11 +33,40 @@
                         <input type="hidden" name="University" [(ngModel)]="surveyModel.University" required />
                     </label>
 
-                    <label class="form-group">
+                    <div class="form-group">
                         <span>Rok ukończenia</span>
-                        <input type="number" min="2000" name="GraduationYear" [(ngModel)]="surveyModel.GraduationYear"
-                            placeholder="np. 2025" required />
-                    </label>
+                        <div class="graduation-year-picker">
+                            <div class="year-chips" role="group" aria-label="Sugerowane lata ukończenia">
+                                @for (year of suggestedGraduationYears; track year) {
+                                <button
+                                    type="button"
+                                    class="year-chip"
+                                    [class.is-active]="surveyModel.GraduationYear === year"
+                                    [attr.aria-label]="'Sugerowany rok: ' + year"
+                                    (click)="setGraduationYear(year)">
+                                    {{ year }}
+                                </button>
+                                }
+                            </div>
+
+                            <input
+                                type="range"
+                                class="year-slider"
+                                [min]="minGraduationYear"
+                                [max]="maxGraduationYear"
+                                [step]="1"
+                                [value]="surveyModel.GraduationYear"
+                                (input)="onGraduationYearSliderInput($event)"
+                                aria-label="Suwak roku ukończenia" />
+
+                            <div class="year-scale" aria-hidden="true">
+                                <span>{{ minGraduationYear }}</span>
+                                <strong>{{ surveyModel.GraduationYear }}</strong>
+                                <span>{{ maxGraduationYear }}</span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="GraduationYear" [(ngModel)]="surveyModel.GraduationYear" required />
+                    </div>
                 </div>
             </div>
 
@@ -69,7 +98,6 @@
                         <span>Mocne strony</span>
                         <app-skills-chips
                             fieldType="Strengths"
-                            [selectedSkillsFromOtherField]="surveyModel.Weaknesses"
                             [currentSelectedSkills]="surveyModel.Strengths"
                             (selectedSkillsChange)="surveyModel.Strengths = $event">
                         </app-skills-chips>
@@ -80,7 +108,6 @@
                         <span>Słabe strony</span>
                         <app-skills-chips
                             fieldType="Weaknesses"
-                            [selectedSkillsFromOtherField]="surveyModel.Strengths"
                             [currentSelectedSkills]="surveyModel.Weaknesses"
                             (selectedSkillsChange)="surveyModel.Weaknesses = $event">
                         </app-skills-chips>
@@ -90,8 +117,8 @@
                     <label class="form-group">
                         <span>Poziom umiejętności</span>
                         <select name="AbilitiesLevel" [(ngModel)]="surveyModel.AbilitiesLevel" required>
-                            @for (level of abilityLevels; track $index) {
-                            <option [value]="level">{{ level }}</option>
+                            @for (option of abilityLevels; track option) {
+                            <option [value]="option">{{ option }}</option>
                             }
                         </select>
                     </label>

@@ -1,7 +1,9 @@
 import {
   Component,
   DestroyRef,
+  ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnInit,
   Output,
@@ -38,7 +40,14 @@ export class HardSkillsChipsComponent implements OnInit {
   @Input()
   set currentSelectedSkills(value: string | null | undefined) {
     this._currentSelectedSkills = this.normalizeInputValue(value);
-    this.selectedSkills = this.parseSkills(this._currentSelectedSkills);
+    const parsedIncoming = this.parseSkills(this._currentSelectedSkills);
+    const hasSelectionChanged = !this.areSkillListsEqual(parsedIncoming, this.selectedSkills);
+    this.selectedSkills = parsedIncoming;
+
+    if (!hasSelectionChanged) {
+      return;
+    }
+
     this.synchronizeIfReady();
   }
 
@@ -77,9 +86,25 @@ export class HardSkillsChipsComponent implements OnInit {
   private readonly skillsAssetPath = 'assets/hard-skills.json';
   private closeAutocompleteTimeout: ReturnType<typeof setTimeout> | null = null;
   private readonly destroyRef: DestroyRef;
+  private readonly hostElement: ElementRef<HTMLElement>;
 
-  constructor(private http: HttpClient, destroyRef: DestroyRef) {
+  constructor(
+    private http: HttpClient,
+    destroyRef: DestroyRef,
+    hostElement: ElementRef<HTMLElement>
+  ) {
     this.destroyRef = destroyRef;
+    this.hostElement = hostElement;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as Node | null;
+    if (target && this.hostElement.nativeElement.contains(target)) {
+      return;
+    }
+
+    this.closeAutocomplete();
   }
 
   ngOnInit(): void {
@@ -184,6 +209,20 @@ export class HardSkillsChipsComponent implements OnInit {
       seen.add(normalized);
       return true;
     });
+  }
+
+  private areSkillListsEqual(left: string[], right: string[]): boolean {
+    if (left.length !== right.length) {
+      return false;
+    }
+
+    for (let index = 0; index < left.length; index += 1) {
+      if (left[index].toLowerCase() !== right[index].toLowerCase()) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   private toLowerSet(values: string[]): Set<string> {
@@ -472,9 +511,16 @@ export class HardSkillsChipsComponent implements OnInit {
 
   onInputBlur(): void {
     this.closeAutocompleteTimeout = setTimeout(() => {
+      if (this.canSubmitCustomSkill) {
+        this.onUserAddSkill();
+      }
       this.isAutocompleteOpen = false;
       this.closeAutocompleteTimeout = null;
     }, 120);
+  }
+
+  private closeAutocomplete(): void {
+    this.isAutocompleteOpen = false;
   }
 
   onAutocompleteSuggestionClick(skillName: string): void {
@@ -488,7 +534,7 @@ export class HardSkillsChipsComponent implements OnInit {
       return;
     }
 
-    this.finalizeAddedSkill();
+    this.finalizeAddedSkill(skillName);
   }
 
   private refreshAutocompleteSuggestions(): void {
@@ -531,7 +577,7 @@ export class HardSkillsChipsComponent implements OnInit {
       return;
     }
 
-    this.finalizeAddedSkill();
+    this.finalizeAddedSkill(suggestion.name);
   }
 
   removeSelectedSkill(skillToRemove: string): void {
@@ -545,7 +591,8 @@ export class HardSkillsChipsComponent implements OnInit {
     }
 
     this.selectedSkillsChange.emit(this.selectedSkills.join(', '));
-    this.synchronizeSuggestions();
+    this.keepSuggestionsStableAfterRemove();
+    this.refreshAutocompleteSuggestions();
   }
 
   onCustomChipContainerClick(inputElement: HTMLInputElement): void {
@@ -564,14 +611,59 @@ export class HardSkillsChipsComponent implements OnInit {
       return;
     }
 
-    this.finalizeAddedSkill();
+    this.finalizeAddedSkill(normalizedValue);
   }
 
-  private finalizeAddedSkill(): void {
+  private finalizeAddedSkill(addedSkillName: string): void {
     this.userInputControl.setValue('');
     this.selectedSkillsChange.emit(this.selectedSkills.join(', '));
-    this.synchronizeSuggestions();
+    this.keepSuggestionsStableAfterAdd(addedSkillName);
     this.refreshAutocompleteSuggestions();
+  }
+
+  private keepSuggestionsStableAfterAdd(addedSkillName: string): void {
+    const normalizedAdded = addedSkillName.toLowerCase();
+
+    this.suggestions = this.suggestions.filter(
+      (skill) => skill.name.toLowerCase() !== normalizedAdded
+    );
+
+    this.fillSuggestionsDeterministically();
+  }
+
+  private keepSuggestionsStableAfterRemove(): void {
+    this.fillSuggestionsDeterministically();
+  }
+
+  private fillSuggestionsDeterministically(): void {
+
+    if (this.suggestions.length >= this.targetSuggestionsCount || this.allSkills.length === 0) {
+      return;
+    }
+
+    const excludedNames = new Set<string>([
+      ...this.selectedSkills.map((skill) => skill.toLowerCase()),
+      ...this.suggestions.map((skill) => skill.name.toLowerCase()),
+    ]);
+    const usedIds = new Set<number>(this.suggestions.map((skill) => skill.id));
+
+    const replacements = this.allSkills
+      .filter((skill) => !excludedNames.has(skill.name.toLowerCase()) && !usedIds.has(skill.id))
+      .sort(
+        (left, right) =>
+          right.general_popularity + right.popularity_in_group
+          - (left.general_popularity + left.popularity_in_group)
+      );
+
+    for (const replacement of replacements) {
+      if (this.suggestions.length >= this.targetSuggestionsCount) {
+        break;
+      }
+
+      this.suggestions = [...this.suggestions, replacement];
+      excludedNames.add(replacement.name.toLowerCase());
+      usedIds.add(replacement.id);
+    }
   }
 
   onRefreshSuggestions(): void {

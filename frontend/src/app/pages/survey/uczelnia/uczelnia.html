@@ -1,17 +1,32 @@
-<mat-form-field class="university-field" appearance="outline" subscriptSizing="dynamic">
+<div class="university-picker">
   <input
     type="text"
-    matInput
+    class="university-input"
     [formControl]="universityControl"
     placeholder="Wybierz uczelnię"
     aria-label="Uczelnia"
+    aria-autocomplete="list"
+    [attr.aria-expanded]="isDropdownOpen"
     autocomplete="off"
-    [matAutocomplete]="universityAutocomplete"
+    (click)="$event.stopPropagation()"
+    (focus)="onInputFocus()"
+    (blur)="onInputBlur()"
   />
 
-  <mat-autocomplete #universityAutocomplete="matAutocomplete" autoActiveFirstOption class="university-panel">
-    @for (name of filteredUniversityNames; track name) {
-      <mat-option [value]="name">{{ name }}</mat-option>
-    }
-  </mat-autocomplete>
-</mat-form-field>
+  @if (isDropdownOpen && filteredUniversityNames.length > 0) {
+    <div class="university-panel" role="listbox" aria-label="Lista uczelni">
+      @for (name of filteredUniversityNames; track name) {
+        <button
+          type="button"
+          class="university-option"
+          role="option"
+          [title]="name"
+          (mousedown)="$event.preventDefault()"
+          (click)="onOptionClick(name)"
+        >
+          {{ name }}
+        </button>
+      }
+    </div>
+  }
+</div>

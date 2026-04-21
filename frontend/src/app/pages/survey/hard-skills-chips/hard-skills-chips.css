@@ -49,7 +49,7 @@ button.chip {
 }
 
 button.chip:hover {
-  transform: translateY(-1px);
+  filter: brightness(0.99);
 }
 
 button.chip:focus-visible,
@@ -87,6 +87,7 @@ button.chip:focus-visible,
   padding: 0 10px;
   cursor: text;
   transition: all 0.2s ease;
+  min-width: 7em;
 }
 
 .input-chip.is-filled {
@@ -108,17 +109,18 @@ button.chip:focus-visible,
   font-family: inherit;
   font-size: 0.88rem;
   font-weight: 600;
-  min-width: 8ch;
-  max-width: 30ch;
-  width: 8ch;
+  min-width: 11em;
+  max-width: 100%;
+  width: auto;
   padding: 0;
   margin: 0;
-  line-height: 1;
+  line-height: 1.2;
   text-align: left;
 }
 
 .custom-chip-input::placeholder {
-  color: transparent;
+  color: var(--ih-surface-a14);
+  opacity: 1;
 }
 
 .autocomplete-panel {

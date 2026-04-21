@@ -1,4 +1,4 @@
-::host {
+:host {
   display: block;
 }
 
@@ -9,24 +9,22 @@
 .chips-flow {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  /* center: prevents sub-pixel misalignment between buttons and divs in the same row */
+  align-items: center;
   column-gap: 8px;
   row-gap: 8px;
 }
 
-.input-chip-wrap {
-  position: relative;
-  display: inline-flex;
-  flex: 0 0 auto;
-  max-width: 100%;
-  min-width: 0;
-}
+/* ─── Base chip ─────────────────────────────────────────────────────────────── */
 
 .chip {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
+  /* Fixed height (not min-height) so every chip occupies exactly the same space,
+     regardless of element type (button vs div). */
+  height: 34px;
   border-radius: 999px;
   border: 1px solid var(--ih-surface-a14);
   background: var(--ih-bg);
@@ -34,14 +32,18 @@
   font-family: inherit;
   font-size: 0.88rem;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.2px;
   white-space: nowrap;
   max-width: 100%;
 }
 
 button.chip {
-  padding: 0;
-  padding-inline: 12px;
+  /* Browsers apply different default padding/margin to <button>; reset them all. */
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 12px;
+  margin: 0;
   cursor: pointer;
   transition: all 0.2s ease;
   overflow: hidden;
@@ -49,7 +51,7 @@ button.chip {
 }
 
 button.chip:hover {
-  transform: translateY(-1px);
+  filter: brightness(0.99);
 }
 
 button.chip:focus-visible,
@@ -57,6 +59,8 @@ button.chip:focus-visible,
   outline: none;
   box-shadow: 0 0 0 3px var(--ih-accent-soft);
 }
+
+/* ─── Chip variants ─────────────────────────────────────────────────────────── */
 
 .selected-chip {
   background: var(--ih-accent-soft);
@@ -80,11 +84,25 @@ button.chip:focus-visible,
   border-color: var(--ih-accent-border);
 }
 
-.input-chip {
+/* ─── Input chip ────────────────────────────────────────────────────────────── */
+
+.input-chip-wrap {
+  position: relative;
   display: inline-flex;
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+/*
+  Key technique: display:inline-grid lets the ghost span and the real input
+  share the same grid cell (both get grid-area: 1/1). The span's rendered
+  text width defines the cell width; the input then fills 100% of it.
+  This gives pixel-perfect auto-sizing without JavaScript measurement.
+*/
+.input-chip {
+  display: inline-grid;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0 10px;
+  padding: 0 12px;
   cursor: text;
   transition: all 0.2s ease;
 }
@@ -97,10 +115,24 @@ button.chip:focus-visible,
   border-color: var(--ih-accent-border);
   background: var(--ih-bg-soft);
   box-shadow: 0 0 0 3px var(--ih-accent-soft);
-  cursor: pointer;
 }
 
+/* Ghost span — invisible but determines grid cell width */
+.input-sizer {
+  grid-area: 1 / 1;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: pre;   /* preserve spaces so width is always accurate */
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Real input sits on top of the ghost span in the same grid cell */
 .custom-chip-input {
+  grid-area: 1 / 1;
+  width: 100%;
   border: none;
   outline: none;
   background: transparent;
@@ -108,18 +140,17 @@ button.chip:focus-visible,
   font-family: inherit;
   font-size: 0.88rem;
   font-weight: 600;
-  min-width: 8ch;
-  max-width: 30ch;
-  width: 8ch;
+  line-height: 1;
   padding: 0;
   margin: 0;
-  line-height: 1;
-  text-align: left;
 }
 
 .custom-chip-input::placeholder {
-  color: transparent;
+  color: var(--ih-surface-a14);
+  opacity: 1;
 }
+
+/* ─── Autocomplete ──────────────────────────────────────────────────────────── */
 
 .autocomplete-panel {
   position: absolute;
@@ -141,6 +172,8 @@ button.chip:focus-visible,
 }
 
 .autocomplete-item {
+  appearance: none;
+  -webkit-appearance: none;
   border: none;
   border-radius: 8px;
   background: transparent;
@@ -159,14 +192,14 @@ button.chip:focus-visible,
   color: var(--ih-accent);
 }
 
+/* ─── Refresh chip ──────────────────────────────────────────────────────────── */
+
 .refresh-chip {
-  flex: 0 0 auto;
+  flex: 0 0 34px;
   width: 34px;
-  height: 34px;
   padding: 0;
   border-color: var(--ih-accent-border);
   background: var(--ih-accent-soft);
-  background-image: none;
   color: var(--ih-accent);
 }
 
@@ -176,19 +209,21 @@ button.chip:focus-visible,
   justify-content: center;
   width: 18px;
   height: 18px;
-  line-height: 1;
   font-size: 16px;
   font-weight: 700;
+  line-height: 1;
 }
 
 .refresh-chip:hover {
   background: var(--ih-bg-soft);
-  background-image: none;
   border-color: var(--ih-accent-border);
   color: var(--ih-accent);
 }
 
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+
 @media (max-width: 768px) {
+  .input-sizer,
   .custom-chip-input {
     max-width: 22ch;
   }

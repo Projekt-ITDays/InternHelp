@@ -1,53 +1,5 @@
 <div class="skills-chips-container">
   <div class="chips-flow">
-    @for (skillName of selectedSkills; track skillName) {
-    <button type="button" class="chip selected-chip" (click)="removeSelectedSkill(skillName)">
-      {{ skillName }}
-    </button>
-    }
-
-    @for (suggestion of suggestions; track suggestion.id) {
-    <button type="button" class="chip suggestion-chip" (click)="onSuggestionChipClick(suggestion)">
-      {{ suggestion.name }}
-    </button>
-    }
-
-    <div class="input-chip-wrap">
-      <div
-        class="chip input-chip"
-        [class.is-active]="canSubmitCustomSkill"
-        [class.is-filled]="userInputControl.value.length > 0"
-        (click)="onCustomChipContainerClick(customInput)"
-      >
-        <input
-          #customInput
-          type="text"
-          class="custom-chip-input"
-          [formControl]="userInputControl"
-          [attr.maxlength]="maxCustomSkillLength"
-          (click)="$event.stopPropagation()"
-          (focus)="onInputFocus()"
-          (blur)="onInputBlur()"
-          (keyup.enter)="onUserAddSkill()"
-        />
-      </div>
-
-      @if (isAutocompleteOpen && autocompleteSuggestions.length > 0) {
-      <div class="autocomplete-panel">
-        @for (item of autocompleteSuggestions; track item) {
-        <button
-          type="button"
-          class="autocomplete-item"
-          (mousedown)="$event.preventDefault()"
-          (click)="onAutocompleteSuggestionClick(item)"
-        >
-          {{ item }}
-        </button>
-        }
-      </div>
-      }
-    </div>
-
     <button
       type="button"
       class="chip refresh-chip"
@@ -57,5 +9,68 @@
     >
       <span class="refresh-glyph" aria-hidden="true">&#8635;</span>
     </button>
+
+    @for (skillName of selectedSkills; track skillName) {
+      <button type="button" class="chip selected-chip" (click)="removeSelectedSkill(skillName)">
+        {{ skillName }}
+      </button>
+    }
+
+    @for (suggestion of suggestions; track suggestion.id) {
+      <button
+        type="button"
+        class="chip suggestion-chip"
+        (click)="onSuggestionChipClick(suggestion)"
+      >
+        {{ suggestion.name }}
+      </button>
+    }
+
+    <div class="input-chip-wrap">
+      <!--
+        .input-chip uses display:inline-grid.
+        Both the ghost span and the real input sit in the same grid cell (1/1).
+        The span's text drives the container width; the input stretches to fill it.
+        This is the only reliable cross-browser way to auto-size an input to its content —
+        the `size` attribute is font-dependent and breaks with proportional fonts.
+      -->
+      <div
+        class="chip input-chip"
+        [class.is-active]="userInputControl.value.trim().length > 0"
+        [class.is-filled]="userInputControl.value.length > 0"
+        (click)="onCustomChipContainerClick(customInput)"
+      >
+        <span class="input-sizer" aria-hidden="true">{{
+          userInputControl.value || placeholderText
+        }}</span>
+        <input
+          #customInput
+          type="text"
+          class="custom-chip-input"
+          [formControl]="userInputControl"
+          [placeholder]="placeholderText"
+          [attr.maxlength]="maxCustomSkillLength"
+          (click)="$event.stopPropagation()"
+          (focus)="onInputFocus()"
+          (blur)="onInputBlur()"
+          (keyup.enter)="onUserAddSkill()"
+        />
+      </div>
+
+      @if (isAutocompleteOpen && autocompleteSuggestions.length > 0) {
+        <div class="autocomplete-panel">
+          @for (item of autocompleteSuggestions; track item) {
+            <button
+              type="button"
+              class="autocomplete-item"
+              (mousedown)="$event.preventDefault()"
+              (click)="onAutocompleteSuggestionClick(item)"
+            >
+              {{ item }}
+            </button>
+          }
+        </div>
+      }
+    </div>
   </div>
 </div>

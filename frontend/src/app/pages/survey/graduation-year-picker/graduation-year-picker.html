@@ -1,0 +1,32 @@
+<div class="graduation-year-picker">
+  <div class="year-chips" role="group" aria-label="Sugerowane lata ukończenia">
+    @for (year of suggestedYears; track year) {
+      <button
+        type="button"
+        class="year-chip"
+        [class.is-active]="value === year"
+        [attr.aria-label]="'Sugerowany rok: ' + year"
+        (click)="selectYear(year)"
+      >
+        {{ year }}
+      </button>
+    }
+  </div>
+
+  <input
+    type="range"
+    class="year-slider"
+    [min]="minYear"
+    [max]="maxYear"
+    [step]="1"
+    [value]="value"
+    (input)="onSliderInput($event)"
+    aria-label="Suwak roku ukończenia"
+  />
+
+  <div class="year-scale" aria-hidden="true">
+    <span>{{ minYear }}</span>
+    <strong>{{ value }}</strong>
+    <span>{{ maxYear }}</span>
+  </div>
+</div>

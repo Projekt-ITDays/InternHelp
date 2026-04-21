@@ -2,80 +2,72 @@
   display: block;
 }
 
-.university-field {
+.university-picker {
+  position: relative;
   width: 100%;
-  margin: 0;
 }
 
-:host ::ng-deep .university-field .mat-mdc-form-field-subscript-wrapper {
-  display: none;
-}
-
-:host ::ng-deep .university-field .mat-mdc-text-field-wrapper {
-  background: var(--ih-bg);
+.university-input {
+  width: 100%;
+  border: 1px solid var(--ih-surface-a14);
   border-radius: 10px;
+  background: var(--ih-bg);
+  color: var(--ih-surface);
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
   transition: all 0.2s ease;
 }
 
-:host ::ng-deep .university-field .mat-mdc-form-field-flex {
-  min-height: 0;
-}
-
-:host ::ng-deep .university-field .mat-mdc-form-field-infix {
-  min-height: 0;
-  padding: 0.8rem 1rem;
-}
-
-:host ::ng-deep .university-field input.mat-mdc-input-element {
-  color: var(--ih-surface);
-  font-size: 0.95rem;
-  font-family: inherit;
-}
-
-:host ::ng-deep .university-field input.mat-mdc-input-element::placeholder {
+.university-input::placeholder {
   color: var(--ih-surface-a14);
   opacity: 1;
 }
 
-:host ::ng-deep .university-field .mdc-text-field--outlined {
-  border-radius: 10px;
-}
-
-:host ::ng-deep .university-field .mdc-notched-outline__leading,
-:host ::ng-deep .university-field .mdc-notched-outline__notch,
-:host ::ng-deep .university-field .mdc-notched-outline__trailing {
-  border-color: var(--ih-surface-a14) !important;
-}
-
-:host ::ng-deep .university-field.mat-focused .mat-mdc-text-field-wrapper {
+.university-input:focus {
+  border-color: var(--ih-accent-border);
   background: var(--ih-bg-soft);
   box-shadow: 0 0 0 3px var(--ih-accent-soft);
 }
 
-:host ::ng-deep .university-field.mat-focused .mdc-notched-outline__leading,
-:host ::ng-deep .university-field.mat-focused .mdc-notched-outline__notch,
-:host ::ng-deep .university-field.mat-focused .mdc-notched-outline__trailing {
-  border-color: var(--ih-accent-border) !important;
-}
-
-:host ::ng-deep .university-panel {
+.university-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 320px;
+  overflow-y: auto;
   background: var(--ih-bg);
   border: 1px solid var(--ih-surface-a14);
   border-radius: 12px;
   box-shadow: var(--ih-shadow-lg);
   padding: 0.28rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-:host ::ng-deep .university-panel .mat-mdc-option {
-  min-height: 42px;
+.university-option {
+  border: none;
+  background: transparent;
+  text-align: left;
+  min-height: 40px;
+  width: 100%;
   border-radius: 9px;
   color: var(--ih-surface);
   font: inherit;
+  padding: 0.48rem 0.7rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-:host ::ng-deep .university-panel .mat-mdc-option:hover,
-:host ::ng-deep .university-panel .mat-mdc-option.mdc-list-item--selected,
-:host ::ng-deep .university-panel .mat-mdc-option.mat-mdc-option-active {
+.university-option:hover,
+.university-option:focus-visible {
+  outline: none;
   background: var(--ih-accent-soft);
   color: var(--ih-accent);
 }
