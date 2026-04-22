@@ -9,17 +9,10 @@ import {
   inject,
   input,
   output,
+  ChangeDetectorRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-
-type UniversityEntry = {
-  id: number;
-  name: string;
-  city: string;
-  province: string;
-  popularity_score?: number;
-};
 
 @Component({
   selector: 'app-university-picker',
@@ -31,7 +24,8 @@ type UniversityEntry = {
 export class UniversityPickerComponent implements OnInit {
   private readonly http = inject(HttpClient);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly hostElement = inject(ElementRef);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   readonly value = input<string>('');
   readonly valueChange = output<string>();
@@ -41,41 +35,40 @@ export class UniversityPickerComponent implements OnInit {
   protected isDropdownOpen = false;
 
   private universityNames: string[] = [];
-  private readonly maxSuggestionCount = 10;
-  private readonly universitiesAssetPath = 'assets/universities.json';
-  private closeDropdownTimeout: ReturnType<typeof setTimeout> | null = null;
+  private closeDropdownTimeout: any = null;
 
   constructor() {
     effect(() => {
-      const incomingValue = this.value();
-      if (incomingValue !== this.universityControl.value) {
-        this.universityControl.setValue(incomingValue, { emitEvent: false });
-        this.filteredUniversityNames = this.filterUniversityNames(incomingValue);
+      if (this.value() !== this.universityControl.value) {
+        this.universityControl.setValue(this.value(), { emitEvent: false });
       }
     });
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    const target = event.target as Node | null;
-    if (target && this.hostElement.nativeElement.contains(target)) {
-      return;
+    if (!this.hostElement.nativeElement.contains(event.target)) {
+      this.isDropdownOpen = false;
     }
-
-    this.closeDropdown();
   }
 
   ngOnInit(): void {
-    this.universityControl.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
-      this.filteredUniversityNames = this.filterUniversityNames(value);
-      this.valueChange.emit(value);
+    this.universityControl.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(val => {
+      this.filteredUniversityNames = this.filterUniversityNames(val);
+      this.valueChange.emit(val);
+      this.cdr.detectChanges();
     });
 
-    this.loadUniversities();
+    this.http.get<any[]>('assets/universities.json').pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (universities) => {
+        this.universityNames = Array.from(new Set(universities.map(u => u.name.trim()))).filter(Boolean);
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   onInputFocus(): void {
-    this.clearCloseDropdownTimeout();
+    clearTimeout(this.closeDropdownTimeout);
     this.isDropdownOpen = true;
     this.filteredUniversityNames = this.filterUniversityNames(this.universityControl.value);
   }
@@ -83,84 +76,17 @@ export class UniversityPickerComponent implements OnInit {
   onInputBlur(): void {
     this.closeDropdownTimeout = setTimeout(() => {
       this.isDropdownOpen = false;
-      this.closeDropdownTimeout = null;
+      this.cdr.detectChanges();
     }, 120);
   }
 
   onOptionClick(name: string): void {
-    this.clearCloseDropdownTimeout();
     this.universityControl.setValue(name);
     this.isDropdownOpen = false;
   }
 
-  private loadUniversities(): void {
-    this.http
-      .get<UniversityEntry[]>(this.universitiesAssetPath)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (universities) => this.handleUniversitiesLoaded(universities),
-        error: () => {
-          this.universityNames = [];
-          this.filteredUniversityNames = [];
-        },
-      });
-  }
-
-  private handleUniversitiesLoaded(universities: UniversityEntry[]): void {
-    const uniqueByName = new Map<string, { name: string; popularity: number }>();
-
-    for (const university of universities) {
-      const trimmedName = university.name.trim();
-      if (trimmedName.length === 0) {
-        continue;
-      }
-
-      const normalizedName = trimmedName.toLowerCase();
-      const rawPopularity = Number(university.popularity_score);
-      const popularity = Number.isFinite(rawPopularity) ? rawPopularity : 0;
-      const existing = uniqueByName.get(normalizedName);
-
-      if (!existing || popularity > existing.popularity) {
-        uniqueByName.set(normalizedName, { name: trimmedName, popularity });
-      }
-    }
-
-    this.universityNames = [...uniqueByName.values()]
-      .sort((left, right) => {
-        if (right.popularity !== left.popularity) {
-          return right.popularity - left.popularity;
-        }
-
-        return left.name.localeCompare(right.name, 'pl', { sensitivity: 'base' });
-      })
-      .map((item) => item.name);
-
-    this.filteredUniversityNames = this.filterUniversityNames(this.universityControl.value);
-  }
-
   private filterUniversityNames(query: string): string[] {
-    const normalizedQuery = query.trim().toLowerCase();
-
-    if (!normalizedQuery) {
-      return this.universityNames.slice(0, this.maxSuggestionCount);
-    }
-
-    return this.universityNames
-      .filter((name) => name.toLowerCase().includes(normalizedQuery))
-      .slice(0, this.maxSuggestionCount);
-  }
-
-  private closeDropdown(): void {
-    this.clearCloseDropdownTimeout();
-    this.isDropdownOpen = false;
-  }
-
-  private clearCloseDropdownTimeout(): void {
-    if (!this.closeDropdownTimeout) {
-      return;
-    }
-
-    clearTimeout(this.closeDropdownTimeout);
-    this.closeDropdownTimeout = null;
+    const q = query.toLowerCase();
+    return this.universityNames.filter(name => name.toLowerCase().includes(q)).slice(0, 10);
   }
 }
