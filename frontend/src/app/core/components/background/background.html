@@ -1,0 +1,22 @@
+<section class="layout-shell">
+  <div class="hex-layer" aria-hidden="true">
+    @for (hex of hexagons; track hex.id) {
+    <span
+      class="hex"
+      [style.left.px]="hex.leftPx"
+      [style.top.px]="hex.topPx"
+      [style.width.px]="hex.size"
+      [style.opacity]="hex.opacity"
+      [style.--hex-rotate]="hex.rotate + 'deg'"
+      [style.--hex-tint]="hex.tint"
+      [style.--hex-blur.px]="hex.blur"
+      [style.--hex-duration]="hex.animDuration"
+      [style.--hex-delay]="hex.animDelay"
+    ></span>
+    }
+  </div>
+
+  <div class="route-layer">
+    <router-outlet></router-outlet>
+  </div>
+</section>

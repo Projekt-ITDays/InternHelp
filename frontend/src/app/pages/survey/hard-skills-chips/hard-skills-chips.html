@@ -33,7 +33,7 @@
           #customInput
           type="text"
           class="custom-chip-input"
-          [attr.size]="userInputControl.value?.length || 17"
+          [attr.size]="userInputControl.value.length || 17"
           [formControl]="userInputControl"
           placeholder="Własna umiejętność"
           [attr.maxlength]="maxCustomSkillLength"

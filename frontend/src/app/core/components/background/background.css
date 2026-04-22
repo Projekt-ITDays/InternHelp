@@ -1,0 +1,94 @@
+:host {
+  --layout-accent-wash: 11%;
+  --layout-success-wash: 12%;
+  --layout-skill-wash: 12%;
+  --hex-layer-opacity: 1;
+  --hex-bg-base: 74%;
+  --hex-bg-lift: 26%;
+  --hex-tint-strength: 30%;
+  --hex-border-strength: 46%;
+  --hex-shadow-strength: 14%;
+  --hex-mobile-layer-opacity: 0.94;
+  --hex-mobile-max-width: 58vw;
+  --hex-blend-mode: multiply;
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+}
+
+:host-context([data-theme='dark']) {
+  --layout-accent-wash: 6%;
+  --layout-success-wash: 7%;
+  --layout-skill-wash: 7%;
+  --hex-layer-opacity: 0.62;
+  --hex-bg-base: 86%;
+  --hex-bg-lift: 14%;
+  --hex-tint-strength: 16%;
+  --hex-border-strength: 24%;
+  --hex-shadow-strength: 8%;
+  --hex-mobile-layer-opacity: 0.56;
+  --hex-mobile-max-width: 54vw;
+  --hex-blend-mode: normal;
+}
+
+.layout-shell {
+  min-height: 100vh;
+  position: relative;
+  background:
+    radial-gradient(circle at 12% 16%, color-mix(in srgb, var(--ih-accent) var(--layout-accent-wash), transparent), transparent 42%),
+    radial-gradient(circle at 86% 20%, color-mix(in srgb, var(--ih-success) var(--layout-success-wash), transparent), transparent 36%),
+    radial-gradient(circle at 70% 84%, color-mix(in srgb, var(--ih-skill-blue) var(--layout-skill-wash), transparent), transparent 40%),
+    var(--ih-bg);
+}
+
+.hex-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+  opacity: var(--hex-layer-opacity);
+}
+
+.hex {
+  position: absolute;
+  display: block;
+  aspect-ratio: 1.1547;
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+  background-color: color-mix(in srgb, var(--hex-tint, var(--ih-accent)) var(--hex-tint-strength), transparent);
+  border: 1px solid color-mix(in srgb, var(--hex-tint, var(--ih-accent)) var(--hex-border-strength), transparent);
+  box-shadow: 0 14px 30px color-mix(in srgb, #000 var(--hex-shadow-strength), transparent);
+  mix-blend-mode: var(--hex-blend-mode);
+  filter: blur(var(--hex-blur, 0px));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  will-change: transform, opacity;
+  animation: floatHex var(--hex-duration, 20s) ease-in-out infinite alternate;
+  animation-delay: var(--hex-delay, 0s);
+}
+
+@keyframes floatHex {
+  0% {
+    transform: translateY(0px) rotate(var(--hex-rotate, 0deg)) scale(1);
+  }
+  100% {
+    transform: translateY(-30px) rotate(calc(var(--hex-rotate, 0deg) + 10deg)) scale(1.05);
+  }
+}
+
+.route-layer {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .hex-layer {
+    opacity: var(--hex-mobile-layer-opacity);
+  }
+
+  .hex {
+    max-width: var(--hex-mobile-max-width);
+  }
+}
