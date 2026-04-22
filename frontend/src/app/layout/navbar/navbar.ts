@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ThemeService } from '../../core/theme/theme';
+import { AuthService } from '../../service/auth.service';
 import {
   heroArrowRightOnRectangle,
   heroSparkles,
@@ -32,7 +33,8 @@ import {
 export class Navbar {
   constructor(
     private router: Router,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private authService: AuthService
   ) {}
 
   navigateTo(path: string) {
@@ -44,5 +46,10 @@ export class Navbar {
       return this.router.url === '/';
     }
     return this.router.url.startsWith(path);
+  }
+
+  async logout(): Promise<void> {
+    await this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

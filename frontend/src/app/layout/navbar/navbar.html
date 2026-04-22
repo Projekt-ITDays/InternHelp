@@ -34,7 +34,17 @@
     </div>
 
     <div class="user-section">
-      <div class="user-avatar">JD</div>
+      <div class="user-menu">
+        <button class="user-avatar" type="button" aria-haspopup="true" aria-label="Menu użytkownika">
+          JD
+        </button>
+        <div class="user-dropdown">
+          <button class="dropdown-item" type="button" (click)="logout()">
+            <ng-icon name="heroArrowRightOnRectangle" size="16"></ng-icon>
+            <span>Wyloguj</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </header>

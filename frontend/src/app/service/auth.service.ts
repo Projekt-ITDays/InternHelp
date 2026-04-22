@@ -57,7 +57,15 @@ export class AuthService {
         this.accesToken = token;
         this.isLogged = true;
     }
-
+    async logout(): Promise<void> {
+        await firstValueFrom(
+            this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true })
+        );
+        this.clearAccessToken();
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        this.isLogged = false;
+    }
     getAccessToken() {
         return this.accesToken;
     }
