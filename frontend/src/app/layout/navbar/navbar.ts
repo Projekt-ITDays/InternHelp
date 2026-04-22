@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -30,12 +30,43 @@ import {
     })
   ]
 })
-export class Navbar {
+export class Navbar implements OnInit {
   constructor(
     private router: Router,
     public themeService: ThemeService,
     private authService: AuthService
   ) {}
+
+  username = '';
+  userAbrivation = 'U';
+
+  ngOnInit(): void {
+    this.username = this.getStoredUsername();
+    this.userAbrivation = this.createAbrivation(this.username);
+  }
+
+  private getStoredUsername(): string {
+    const raw = localStorage.getItem('username') ?? '';
+    return raw.trim();
+  }
+
+  private createAbrivation(username: string): string {
+    if (!username) {
+      return 'U';
+    }
+
+    const parts = username
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((part) => part[0]?.toUpperCase())
+      .filter(Boolean);
+
+    if (parts.length >= 2) {
+      return `${parts[0]}${parts[1]}`;
+    }
+
+    return username.slice(0, 2).toUpperCase();
+  }
 
   navigateTo(path: string) {
     this.router.navigate([path]);
@@ -50,6 +81,12 @@ export class Navbar {
 
   async logout(): Promise<void> {
     await this.authService.logout();
+    this.username = '';
+    this.userAbrivation = 'U';
     this.router.navigate(['/']);
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

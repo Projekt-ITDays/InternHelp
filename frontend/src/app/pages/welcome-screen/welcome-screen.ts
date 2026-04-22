@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { AuthService } from '../../service/auth.service';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MainPage } from '../../main-page/main-page';
 import { Navbar } from '../../layout/navbar/navbar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 type FeatureCard = {
   id: string;
@@ -23,7 +24,10 @@ type FeatureCard = {
   templateUrl: './welcome-screen.html',
   styleUrl: './welcome-screen.css',
 })
-export class WelcomeScreen {
+export class WelcomeScreen implements OnInit, OnDestroy {
+  @ViewChild('captchaElem') private captchaElem?: any;
+  private onResize?: () => void;
+
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
@@ -64,18 +68,35 @@ export class WelcomeScreen {
   protected captchaToken = signal<string | null>(null);
   protected showErrorWidget = signal<boolean>(false);
   protected errorMessage = signal<string>('Wypełnij oba pola.');
+  protected isMobileViewport = signal<boolean>(false);
 
   protected readonly recaptchaSiteKey = '6LeRc7wsAAAAAGHJSrbmGlv4UqiO6C7ug812Lkcy';
 
-  protected handleCaptchaSuccess(token: string): void {
-    this.captchaToken.set(token);
+  ngOnInit(): void {
+    this.updateViewportMode();
+
+    if (typeof window !== 'undefined') {
+      this.onResize = () => this.updateViewportMode();
+      window.addEventListener('resize', this.onResize);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (typeof window !== 'undefined' && this.onResize) {
+      window.removeEventListener('resize', this.onResize);
+    }
+  }
+
+  protected handleCaptchaSuccess(token: string | Event): void {
+    const resolvedToken = typeof token === 'string' ? token : '';
+    this.captchaToken.set(resolvedToken || null);
   }
 
   protected handleCaptchaExpired(): void {
     this.captchaToken.set(null);
   }
 
-  protected Login(): void {
+  protected async Login(): Promise<void> {
     if (!this.captchaToken()) {
       Swal.fire({
         icon: 'warning',
@@ -90,25 +111,25 @@ export class WelcomeScreen {
       password: this.password(),
       captchaToken: this.captchaToken() || '',
     };
-    this.authService
-      .login(LoginDto)
-      .then(() => {
-        // Zmiana aiapi -> ai/ask
-        // this.router.navigate(['/ai/ask']);
-        this.router.navigate(['/dashboard']);
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Błąd logowania',
-          text: 'Niepoprawny login lub hasło.',
-        });
-        // placeholder - > używać jeżeli nie chcemy korzystać z logowania i autoryzacji
-        // dalej tego używam btw
-        // this.router.navigate(['/ai/ask']);
+    try {
+      await this.authService.login(LoginDto);
+    } catch (error: unknown) {
+      const baseMessage = this.extractLoginErrorMessage(error);
+      const message = this.normalizeCaptchaMessage(baseMessage);
 
-        this.showError('Niepoprawny login lub hasło.');
+      this.resetCaptchaState();
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Błąd logowania',
+        text: message,
       });
+      console.log('Błąd logowania:', error);
+      this.showError(message);
+      return;
+    }
+
+    await this.router.navigate(['/dashboard']);
   }
 
   protected loginWithGoogle(): void {
@@ -136,7 +157,7 @@ export class WelcomeScreen {
     this.password.set(this.getInputValue(event));
   }
 
-  protected onLoginSubmit(event: Event): void {
+  protected async onLoginSubmit(event: Event): Promise<void> {
     event.preventDefault();
 
     const user = this.username().trim();
@@ -148,7 +169,7 @@ export class WelcomeScreen {
     }
 
     this.showErrorWidget.set(false);
-    this.Login();
+    await this.Login();
   }
 
   protected onRegisterClick(): void {}
@@ -168,6 +189,50 @@ export class WelcomeScreen {
 
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
+  }
+
+  private extractLoginErrorMessage(error: unknown): string {
+    if (error instanceof HttpErrorResponse) {
+      const apiError = error.error;
+
+      if (typeof apiError === 'string' && apiError.trim()) {
+        return apiError;
+      }
+
+      if (apiError && typeof apiError.message === 'string' && apiError.message.trim()) {
+        return apiError.message;
+      }
+
+      if (Array.isArray(apiError?.message) && apiError.message.length > 0) {
+        return apiError.message[0];
+      }
+
+      if (error.status === 0) {
+        return 'Brak połączenia z serwerem.';
+      }
+    }
+
+    return 'Niepoprawny login lub hasło.';
+  }
+
+  private normalizeCaptchaMessage(message: string): string {
+    const lower = message.toLowerCase();
+    if (lower.includes('captcha')) {
+      return 'Weryfikacja CAPTCHA nieudana. Zaznacz CAPTCHA ponownie i spróbuj jeszcze raz.';
+    }
+    return message;
+  }
+
+  private resetCaptchaState(): void {
+    this.captchaToken.set(null);
+    this.captchaElem?.resetCaptcha?.();
+  }
+
+  private updateViewportMode(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    this.isMobileViewport.set(window.innerWidth <= 900);
   }
 
   private handleGoogleOAuthCallback(): void {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
 import { LoginDto } from 'src/dto/login.dto';
@@ -43,15 +43,15 @@ export class AuthService {
     async login(payload: LoginDto) {
         const isRecaptchaValid = await this.validateRecaptcha(payload.captchaToken);
         if (!isRecaptchaValid) {
-            throw new Error('Weryfikacja CAPTCHA nieudana');
+            throw new BadRequestException('Weryfikacja CAPTCHA nieudana');
         }
 
         const user = await this.userRepository.findOne({ where: { username: payload.username } })
         if (!user) {
-            throw new Error('User not found')
+            throw new UnauthorizedException('Niepoprawny login lub hasło')
         }
         if (!(await bcrypt.compare(payload.password, user.password))) {
-            throw new Error('Invalid password')
+            throw new UnauthorizedException('Niepoprawny login lub hasło')
         }
         const token = await this.generateToken(user.id)
         console.log(user.id)
@@ -70,6 +70,15 @@ export class AuthService {
         const apiKey = process.env.RECAPTCHA_API_KEY;
         const siteKey = process.env.RECAPTCHA_SITE_KEY;
 
+        if (!projectId || !apiKey || !siteKey) {
+            const isProduction = process.env.NODE_ENV === 'production';
+            if (!isProduction) {
+                console.warn('reCAPTCHA config missing. CAPTCHA validation skipped in non-production environment.');
+                return true;
+            }
+            return false;
+        }
+
         const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
 
         try {
@@ -79,8 +88,7 @@ export class AuthService {
                 body: JSON.stringify({
                     event: {
                         token: token,
-                        siteKey: siteKey,
-                        expectedAction: 'login'
+                        siteKey: siteKey
                     }
                 })
             });
