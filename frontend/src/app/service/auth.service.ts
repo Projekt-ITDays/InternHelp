@@ -16,7 +16,7 @@ export class AuthService {
     ) { }
 
     private accesToken: string | null = null;
-    private isLogged : boolean | null = null;
+    private isLogged = typeof window !== 'undefined' && !!localStorage.getItem('userId');
     async login(payload: LoggingDto): Promise<LoggingResponseDto> {
         
         const data = await firstValueFrom(
@@ -57,7 +57,18 @@ export class AuthService {
         this.accesToken = token;
         this.isLogged = true;
     }
-
+    async logout(): Promise<void> {
+        try {
+            await firstValueFrom(
+                this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true })
+            );
+        } finally {
+            this.clearAccessToken();
+            localStorage.removeItem('username');
+            localStorage.removeItem('userId');
+            this.isLogged = false;
+        }
+    }
     getAccessToken() {
         return this.accesToken;
     }
@@ -66,9 +77,6 @@ export class AuthService {
         this.accesToken = null;
     }
     isLoggedIn(): boolean {
-        if (this.isLogged === null) {
-            return false;
-        }
-        return true;
+        return this.isLogged;
     }
 }
