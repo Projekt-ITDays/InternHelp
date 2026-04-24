@@ -41,7 +41,9 @@
             </section>
 
             <section class="auth-panel">
-                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                @if (!isMobileViewport()) {
+                    <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                }
             </section>
         </aside>
     </section>
@@ -50,7 +52,9 @@
         <article class="mobile-login-screen">
             <div class="mobile-login-inner">
                 <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" /> -->
-                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                @if (isMobileViewport()) {
+                    <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                }
             </div>
         </article>
 
@@ -118,7 +122,7 @@
                 </button>
 
                 <div class="login-actions">
-                    <button type="submit" class="login-button" (click)="Login()">Zaloguj</button>
+                    <button type="submit" class="login-button">Zaloguj</button>
                     <button type="button" class="register-button" (click)="onRegisterClick()">
                         Zarejestruj
                     </button>

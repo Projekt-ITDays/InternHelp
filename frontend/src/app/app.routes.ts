@@ -1,43 +1,41 @@
 import { Routes } from '@angular/router';
 import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
-import { PromptComponent } from './prompt-component/prompt-component';
-import { Dashboard } from './pages/dashboard/dashboard';
-import { RoadmapComponent } from './roadmap-component/roadmap-component';
+
 import { Settings } from './pages/settings/settings';
-import { authGuard } from './guards/auth.guard';
-import { Survey } from './survey/survey';
+
+
 
 export const routes: Routes = [
 	{
 		path: '',
-		component: WelcomeScreen,
+		loadComponent: () => import('./pages/welcome-screen/welcome-screen').then(m => m.WelcomeScreen),
 		pathMatch: 'full',
 	},
 	{
 		path: 'survey',
-		component: Survey,
+		loadComponent : () => import('./survey/survey').then(m => m.Survey),
 		canActivate: []
 	},
 	{
 		// Zmiana aiapi -> ai/ask
 		path: 'ai/ask',
-		component: PromptComponent,
+		loadComponent : () => import('./prompt-component/prompt-component').then(m => m.PromptComponent),
 		canActivate: []
 
 	},
 	{
 		path: 'ai/roadmap/:careerPath',
-		component: RoadmapComponent,
+		loadComponent : () => import('./roadmap-component/roadmap-component').then(m => m.RoadmapComponent),
 		canActivate: []
 	},
 	{
 		path: 'dashboard',
-		component: Dashboard,
+		loadComponent : () => import('./pages/dashboard/dashboard').then(m => m.Dashboard),
 		canActivate: []
 	},
 	{
 		path: 'Settings',
-		component: Settings,
+		loadComponent :	() => import('./pages/settings/settings').then(m => m.Settings),
 		canActivate: []
 	},
 	{
