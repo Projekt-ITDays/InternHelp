@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ThemeService } from '../../core/theme/theme';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import {
   heroArrowRightOnRectangle,
   heroSparkles,

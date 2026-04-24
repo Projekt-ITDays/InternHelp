@@ -79,6 +79,6 @@ export class AuthService {
         this.isLogged = null;
     }
     isLoggedIn(): boolean {
-        return this.isLogged;
+        return !!this.isLogged;
     }
 }

@@ -48,6 +48,21 @@ export class TimeLeftPickerComponent {
     this.previewValue = null;
   }
 
+  onDialHover(event: MouseEvent): void {
+    const dial = event.currentTarget as HTMLElement;
+    const rect = dial.getBoundingClientRect();
+    const offsetX = event.clientX - (rect.left + rect.width / 2);
+    const offsetY = event.clientY - (rect.top + rect.height / 2);
+    
+    const angle = (Math.atan2(offsetX, -offsetY) * 180) / Math.PI;
+    const normalizedAngle = (angle + 360) % 360;
+    
+    let snapped = Math.round(normalizedAngle / 30) % 12;
+    if (snapped === 0) snapped = 12;
+
+    this.setPreview(snapped);
+  }
+
   onMarkerClick(candidate: number, event: MouseEvent): void {
     event.stopPropagation();
     this._value = candidate;
