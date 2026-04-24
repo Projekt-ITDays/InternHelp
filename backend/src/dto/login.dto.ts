@@ -8,4 +8,7 @@ export class LoginDto {
   @IsString()
   @IsNotEmpty({ message: 'Hasło jest wymagane' })
   password: string;
+
+  @IsString()
+  captchaToken: string;
 }

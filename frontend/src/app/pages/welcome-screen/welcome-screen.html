@@ -41,7 +41,9 @@
             </section>
 
             <section class="auth-panel">
-                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                @if (!isMobileViewport()) {
+                    <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                }
             </section>
         </aside>
     </section>
@@ -50,7 +52,9 @@
         <article class="mobile-login-screen">
             <div class="mobile-login-inner">
                 <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png" alt="Google" class="brand-logo" /> -->
-                <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                @if (isMobileViewport()) {
+                    <ng-container *ngTemplateOutlet="loginFormTemplate"></ng-container>
+                }
             </div>
         </article>
 
@@ -101,6 +105,16 @@
                         (input)="onUsernameInput($event)" autocomplete="username" placeholder="Login" />
                     <input type="password" name="password" class="password-input" [value]="password()"
                         (input)="onPasswordInput($event)" autocomplete="current-password" placeholder="Hasło" />
+                </div>
+                <div class="captcha-box">
+                    <ngx-recaptcha2 #captchaElem
+                        [siteKey]="recaptchaSiteKey"
+                        [useGlobalDomain]="true"
+                        [useEnterprise]="true"
+                        [theme]="'dark'"
+                        (success)="handleCaptchaSuccess($event)"
+                        (expire)="handleCaptchaExpired()">
+                    </ngx-recaptcha2>
                 </div>
                 <button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
                     Nie pamiętam hasła

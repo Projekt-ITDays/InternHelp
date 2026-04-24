@@ -3,6 +3,19 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
+export interface AiConcept {
+  title: string;
+  description: string;
+  closedTasks?: {
+    question: string;
+    options: string[];
+    correctAnswer: number;
+  }[];
+  openTasks?: {
+    challenge: string;
+  }[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -27,7 +40,7 @@ export class Ai {
   }
 
   // Pobieranie konceptów JSON z uwzględnieniem poziomu i wykluczeń
-  getHexagonConcepts(careerPath: string, level: number = 1, exclude: string[] = []): Observable<{ concepts: { title: string, description: string }[] }> {
+  getHexagonConcepts(careerPath: string, level: number = 1, exclude: string[] = []): Observable<{ concepts: AiConcept[] }> {
     let params = new HttpParams()
       .set('careerPath', careerPath)
       .set('level', level.toString());
@@ -36,7 +49,18 @@ export class Ai {
       params = params.append('exclude', topic);
     });
 
-    return this.http.get<{ concepts: { title: string, description: string }[] }>(`${environment.apiUrl}/ai/roadmap-concepts`, { params });
+    return this.http.get<{ concepts: AiConcept[] }>(`${environment.apiUrl}/ai/roadmap-concepts`, { params });
+  }
+
+  // Weryfikacja otwartego zadania
+  verifyOpenTask(challenge: string, userAnswer: string): Observable<{ score: number, feedback: string }> {
+    return this.http.post<{ score: number, feedback: string }>(`${environment.apiUrl}/ai/verify-task`, { challenge, userAnswer });
+  }
+
+  // Generowanie szczegółowych zadań na żądanie
+  generateTasksForTopic(topic: string, difficulty: string): Observable<{ closedTasks: any[], openTasks: any[] }> {
+    const params = new HttpParams().set('topic', topic).set('difficulty', difficulty);
+    return this.http.get<{ closedTasks: any[], openTasks: any[] }>(`${environment.apiUrl}/ai/generate-tasks`, { params });
   }
 
   // Strumień SSE

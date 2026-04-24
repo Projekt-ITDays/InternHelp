@@ -5,146 +5,264 @@
   </header>
 
   <main class="main-content">
-    <div class="fixed-overlay">
+    <div class="fixed-overlay" [class.collapsed]="isSidebarCollapsed">
+      <button class="toggle-sidebar-btn" (click)="isSidebarCollapsed = !isSidebarCollapsed">
+        <ng-icon [name]="isSidebarCollapsed ? 'heroChevronRight' : 'heroChevronLeft'" size="18"></ng-icon>
+      </button>
+
       <div class="results-section">
         <div class="title-section">
-          <h1>Szczegóły Ścieżki</h1>
+          <h1 class="sidebar-title">Szczegóły Ścieżki</h1>
         </div>
 
         <div class="error-box" *ngIf="errorMessage">
-          🚨 {{ errorMessage }}
+          {{ errorMessage }}
+        </div>
+
+        <!-- Loader Generowania -->
+        <div class="flex flex-col items-center justify-center p-8 text-center" *ngIf="isGenerating && !errorMessage">
+          <div class="plan-loader mb-4"></div>
+          <p class="text-sm text-[var(--ih-ink-soft)]">AI projektuje Twoją mapę heksagonalną...<br>To może potrwać kilka sekund.</p>
         </div>
 
         <div class="roadmap-box">
           <ng-container *ngIf="selectedPlan">
             <div class="flex flex-col gap-6 w-full text-left">
 
-              <div *ngIf="selectedPlan.planData?.podsumowanie_profilu"
-                class="mb-2 flex gap-3 rounded-xl bg-[var(--ih-bg-soft)] p-4 text-left border border-[var(--ih-border-dark)]">
-                <ng-icon name="heroInformationCircle" size="18"
-                  class="mt-0.5 shrink-0 text-[var(--ih-accent)]"></ng-icon>
-                <p class="text-sm leading-relaxed text-[var(--ih-ink-soft)]">{{ selectedPlan.planData.podsumowanie_profilu }}</p>
+              <div class="profile-brief" *ngIf="selectedPlan.planData?.podsumowanie_profilu">
+                <p>{{ selectedPlan.planData.podsumowanie_profilu }}</p>
               </div>
 
-              <div *ngFor="let stage of selectedPlan.planData?.plan; let i = index"
-                class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-soft)] p-5 text-left mb-6">
-                <div class="mb-4 flex items-start gap-4 border-b border-[var(--ih-border-dark)] pb-3">
-                  <div
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ih-accent)] text-sm font-bold text-white">
-                    {{ i + 1 }}
+              <!-- Timeline of Stages (Accordion style) -->
+              <div class="timeline-container">
+                <div *ngFor="let stage of selectedPlan.planData?.plan; let i = index" 
+                     class="timeline-item" 
+                     [class.expanded]="expandedStages.has(i)">
+                  
+                  <div class="timeline-marker">
+                    <div class="marker-line" *ngIf="i < (selectedPlan.planData?.plan.length - 1)"></div>
+                    <div class="marker-dot">{{ i + 1 }}</div>
                   </div>
-                  <div class="flex-1">
-                    <h3 class="font-semibold text-[var(--ih-surface)] m-0 leading-tight">{{ stage.etap }}</h3>
-                    <p class="mt-1 text-sm text-[var(--ih-ink-soft)]">{{ stage.cel_glowny }}</p>
-                  </div>
-                </div>
 
-                <div class="mt-3">
-                  <div
-                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
-                    <ng-icon name="heroWrenchScrewdriver" size="14" class="text-[var(--ih-accent)]"></ng-icon>
-                    Umiejętności
-                  </div>
-                  <div class="flex flex-wrap gap-1.5">
-                    <span *ngFor="let skill of stage.umiejetnosci?.twarde"
-                      class="inline-flex items-center rounded-md border border-[var(--ih-accent)]/25 bg-[var(--ih-accent)]/15 px-2 py-1 text-xs font-medium text-[var(--ih-accent)]">
-                      {{ skill }}
-                    </span>
-                    <span *ngFor="let skill of stage.umiejetnosci?.miekkie"
-                      class="inline-flex items-center rounded-md border border-[var(--ih-skill-blue)]/20 bg-[var(--ih-skill-blue)]/10 px-2 py-1 text-xs font-medium text-[var(--ih-skill-blue-text)]">
-                      {{ skill }}
-                    </span>
-                  </div>
-                </div>
-
-                <div *ngIf="stage.zasoby_edukacyjne?.length" class="mt-4">
-                  <div
-                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
-                    <ng-icon name="heroAcademicCap" size="14" class="text-[var(--ih-accent)]"></ng-icon>
-                    Zasoby edukacyjne
-                  </div>
-                  <ul class="flex flex-col gap-1.5 pl-0 m-0 list-none">
-                    <li *ngFor="let res of stage.zasoby_edukacyjne" class="text-[13px] text-[var(--ih-ink-soft)]">
-                      <span style="display:inline-block; margin-right:6px; color:var(--ih-accent)">•</span>{{ res }}
-                    </li>
-                  </ul>
-                </div>
-
-                <div *ngIf="stage.projekt_portfolio" class="mt-4">
-                  <div
-                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
-                    <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]"></ng-icon>
-                    Projekt portfolio
-                  </div>
-                  <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-3.5">
-                    <h4 class="text-sm font-semibold text-[var(--ih-surface)] m-0 leading-tight mb-1">{{
-                      stage.projekt_portfolio.nazwa }}</h4>
-                    <p class="mt-1 mb-0 text-xs text-[var(--ih-ink-soft)]">{{ stage.projekt_portfolio.opis }}</p>
-                    <div *ngIf="stage.projekt_portfolio.kryteria_akceptacji?.length" class="mt-3 flex flex-col gap-1.5">
-                      <div *ngFor="let criteria of stage.projekt_portfolio.kryteria_akceptacji"
-                        class="flex items-start gap-2 text-xs text-[var(--ih-ink-soft)]">
-                        <ng-icon name="heroCheck" size="14" class="mt-0.5 shrink-0 text-[var(--ih-accent)]"></ng-icon>
-                        <span style="flex:1; line-height: 1.4;">{{ criteria }}</span>
+                  <div class="timeline-content">
+                    <!-- Header: Always visible -->
+                    <div class="stage-header" (click)="toggleStage(i)">
+                      <div class="flex-1">
+                        <h3 class="stage-title">{{ stage.etap }}</h3>
+                        <p class="stage-desc" *ngIf="!expandedStages.has(i)">{{ stage.cel_glowny | slice:0:60 }}...</p>
                       </div>
+                      <ng-icon [name]="expandedStages.has(i) ? 'heroChevronUp' : 'heroChevronDown'" size="16" class="text-[var(--ih-ink-soft)]"></ng-icon>
                     </div>
-                  </div>
-                </div>
 
-                <div *ngIf="stage.wskazniki_sukcesu_kpi?.length" class="mt-4">
-                  <div
-                    class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
-                    <ng-icon name="heroClipboardDocumentList" size="14" class="text-[var(--ih-accent)]"></ng-icon>
-                    Wskaźniki sukcesu / Zadania
-                  </div>
-                  <div class="flex flex-col gap-2.5">
-                    <div *ngFor="let kpi of stage.wskazniki_sukcesu_kpi" class="flex items-start gap-2.5">
-                      <div class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--ih-accent)]"></div>
-                      <span class="text-sm text-[var(--ih-surface)] leading-snug">{{ kpi }}</span>
-                    </div>
-                  </div>
-                </div>
+                    <!-- Details: Expandable -->
+                    <div class="stage-details" *ngIf="expandedStages.has(i)">
+                      <p class="stage-desc-full">{{ stage.cel_glowny }}</p>
 
-              </div>
-            </div>
+                      <!-- Umiejętności -->
+                      <div class="mt-3">
+                        <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+                          <ng-icon name="heroWrenchScrewdriver" size="14" class="text-[var(--ih-accent)]"></ng-icon>
+                          Umiejętności
+                        </div>
+                        <div class="flex flex-wrap gap-1.5">
+                          <span *ngFor="let skill of stage.umiejetnosci?.twarde"
+                            class="inline-flex items-center rounded-md border border-[var(--ih-accent)]/25 bg-[var(--ih-accent)]/15 px-2 py-1 text-xs font-medium text-[var(--ih-accent)]">
+                            {{ skill }}
+                          </span>
+                          <span *ngFor="let skill of stage.umiejetnosci?.miekkie"
+                            class="inline-flex items-center rounded-md border border-[var(--ih-skill-blue)]/20 bg-[var(--ih-skill-blue)]/10 px-2 py-1 text-xs font-medium text-[var(--ih-skill-blue-text)]">
+                            {{ skill }}
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- Zasoby -->
+                      <div *ngIf="stage.zasoby_edukacyjne?.length" class="mt-4">
+                        <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+                          <ng-icon name="heroAcademicCap" size="14" class="text-[var(--ih-accent)]"></ng-icon>
+                          Zasoby edukacyjne
+                        </div>
+                        <ul class="flex flex-col gap-1.5 pl-0 m-0 list-none">
+                          <li *ngFor="let res of stage.zasoby_edukacyjne" class="text-[13px] text-[var(--ih-ink-soft)]">
+                            <span style="display:inline-block; margin-right:6px; color:var(--ih-accent)">•</span>{{ res }}
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- Projekt Portfolio -->
+                      <div *ngIf="stage.projekt_portfolio" class="mt-4">
+                        <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+                          <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]"></ng-icon>
+                          Projekt portfolio
+                        </div>
+                        <div class="rounded-xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-3.5">
+                          <h4 class="text-sm font-semibold text-[var(--ih-surface)] m-0 leading-tight mb-1">{{ stage.projekt_portfolio.nazwa }}</h4>
+                          <p class="mt-1 mb-0 text-xs text-[var(--ih-ink-soft)]">{{ stage.projekt_portfolio.opis }}</p>
+                        </div>
+                      </div>
+
+                    </div> <!-- End of stage-details -->
+                  </div> <!-- End of timeline-content -->
+                </div> <!-- End of timeline-item -->
+              </div> <!-- End of timeline-container -->
+
+            </div> <!-- End of flex flex-col gap-6 -->
           </ng-container>
-        </div>
-      </div>
-    </div>
+        </div> <!-- End of roadmap-box -->
+      </div> <!-- End of results-section -->
+    </div> <!-- End of fixed-overlay -->
 
-    <div class="honeycomb-container" (mousedown)="onMouseDown($event)" [class.dragging]="isDragging">
+    <div class="honeycomb-container" (mousedown)="onMouseDown($event)" (touchstart)="onTouchStart($event)" [class.dragging]="isDragging">
       <ul class="honeycomb" [style.transform]="'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px)'">
-        <li class="honeycomb-cell" *ngFor="let cell of gridCells; let i = index" [ngClass]="{'empty-cell': cell.empty}">
-          <div class="honeycomb-content" *ngIf="!cell.empty" (click)="openCellModal(cell)"
+        <ng-container *ngFor="let cell of gridCells; let i = index">
+          <li class="honeycomb-cell" 
+              [class.is-hidden]="!isCellVisible(i)"
+              [ngClass]="{'empty-cell': cell.empty}">
+          <div class="honeycomb-content" *ngIf="!cell.empty" (click)="openCellModal(cell, i)"
             [class.skeleton-loader]="cell.data.loading" [class.is-completed]="cell.data.completed">
             <span class="cell-title">{{ cell.data.title }}</span>
-
-            <!-- Przycisk ukończenia -->
-            <button class="btn-complete" *ngIf="!cell.data.completed && !cell.data.loading"
-              (click)="onCompleteTask(i, $event)">
-              Ukończ
-            </button>
 
             <!-- Ikona ukończenia -->
             <div class="complete-badge" *ngIf="cell.data.completed">
               <span class="check-mark">✔</span>
             </div>
           </div>
-        </li>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </main>
 
 
   <div class="difficulty-overlay" *ngIf="selectedCell" (click)="closeCellModal()">
-    <div class="difficulty-modal" (click)="$event.stopPropagation()">
-      <h3>{{ selectedCell.data.title }}</h3>
-      <p>{{ selectedCell.data.description }}</p>
-      <div class="difficulty-actions">
-        <button class="btn-diff easy" (click)="onDifficultyClick('Łatwy')">Łatwy</button>
-        <button class="btn-diff medium" (click)="onDifficultyClick('Średni')">Średni</button>
-        <button class="btn-diff hard" (click)="onDifficultyClick('Trudny')">Trudny</button>
+    <div class="quest-modal" (click)="$event.stopPropagation()">
+      <div class="quest-header">
+        <div class="modal-title-group">
+          <button class="btn-back-modal"
+            *ngIf="activeModalTab === 'zadania' && selectedCell.data.selectedDifficulty && !isSelectingDifficulty"
+            (click)="goBackToDifficultySelection()">
+            ← Zmień poziom
+          </button>
+          <h3>{{ selectedCell.data.title }}</h3>
+        </div>
+        <button class="btn-close" (click)="closeCellModal()"><ng-icon name="heroXMark"></ng-icon></button>
       </div>
-      <button class="btn-close" (click)="closeCellModal()">Zamknij</button>
+
+      <div class="quest-tabs">
+        <button class="tab-btn" [class.active]="activeModalTab === 'cele'" (click)="activeModalTab = 'cele'">Cele
+          (placeholder)</button>
+        <button class="tab-btn" [class.active]="activeModalTab === 'zadania'"
+          (click)="activeModalTab = 'zadania'">Zadania</button>
+      </div>
+
+      <div class="quest-body">
+        <div *ngIf="activeModalTab === 'cele'" class="animate-fade-in">
+          <p class="quest-desc">{{ selectedCell.data.description }}</p>
+          <div class="cele-info">
+            <div class="cele-card">
+              <h5>Co osiągniesz w tym temacie?</h5>
+              <ul class="m-0 pl-4">
+                <li>Zrozumienie kluczowych pojęć: {{ selectedCell.data.title }}</li>
+                <li>Umiejętność praktycznego zastosowania wiedzy</li>
+                <li>Zdobycie punktów doświadczenia (XP)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeModalTab === 'zadania'" class="animate-fade-in">
+          <div class="hex-difficulty-tag" *ngIf="selectedCell.data.selectedDifficulty">
+            Wybrany poziom: <strong>{{ selectedCell.data.selectedDifficulty }}</strong>
+          </div>
+
+          <div class="difficulty-actions" *ngIf="isSelectingDifficulty">
+            <h4>Wybierz poziom wyzwania:</h4>
+            <div class="flex flex-col sm:flex-row gap-3 mt-4">
+              <button class="btn-diff easy flex-1 flex flex-col items-center gap-1"
+                [class.is-full]="isDifficultyFull('Łatwy')" (click)="onDifficultyClick('Łatwy')">
+                <span class="btn-label">Łatwy</span>
+                <span class="btn-stats" *ngIf="getDifficultyStats('Łatwy').max > 0">
+                  {{ getDifficultyStats('Łatwy').current }}/{{ getDifficultyStats('Łatwy').max }} pkt
+                </span>
+              </button>
+              <button class="btn-diff medium flex-1 flex flex-col items-center gap-1"
+                [class.is-full]="isDifficultyFull('Średni')" (click)="onDifficultyClick('Średni')">
+                <span class="btn-label">Średni</span>
+                <span class="btn-stats" *ngIf="getDifficultyStats('Średni').max > 0">
+                  {{ getDifficultyStats('Średni').current }}/{{ getDifficultyStats('Średni').max }} pkt
+                </span>
+              </button>
+              <button class="btn-diff hard flex-1 flex flex-col items-center gap-1"
+                [class.is-full]="isDifficultyFull('Trudny')" (click)="onDifficultyClick('Trudny')">
+                <span class="btn-label">Trudny</span>
+                <span class="btn-stats" *ngIf="getDifficultyStats('Trudny').max > 0">
+                  {{ getDifficultyStats('Trudny').current }}/{{ getDifficultyStats('Trudny').max }} pkt
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="loading-tasks-view" *ngIf="isLoadingTasks">
+            <div class="spinner-border"></div>
+            <p>Generowanie spersonalizowanych zadań...</p>
+          </div>
+
+          <ng-container *ngIf="selectedCell.data.selectedDifficulty && !isLoadingTasks && !isSelectingDifficulty">
+            <div class="task-section"
+              *ngFor="let closedTask of selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasks; let taskIdx = index">
+              <h4>Teoria - Pytanie {{ taskIdx + 1 }}</h4>
+              <p class="question-text">{{ closedTask?.question }}</p>
+              <div class="options-grid">
+                <button *ngFor="let opt of closedTask?.options; let optIdx = index" class="btn-option"
+                  [class.locked]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasksDone[taskIdx] && closedTask?.correctAnswer !== optIdx"
+                  [class.correct]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasksDone[taskIdx] && closedTask?.correctAnswer === optIdx"
+                  (click)="onClosedTaskSubmit(taskIdx, optIdx)">
+                  {{ opt }}
+                </button>
+              </div>
+              <div class="task-status-row mt-3"
+                *ngIf="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].closedTasksDone[taskIdx]">
+                <span class="points-badge">+1 pkt</span>
+                <span class="success-text">Zaliczone!</span>
+              </div>
+            </div>
+
+            <div class="task-section"
+              *ngFor="let openTask of selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasks; let taskIdx = index">
+              <h4>Zadanie Praktyczne {{
+                selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasks.length > 1 ? (taskIdx +
+                1) : '' }}</h4>
+              <p class="question-text">{{ openTask?.challenge }}</p>
+
+              <div class="points-summary-row mb-3"
+                *ngIf="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx]">
+                <span class="points-badge">{{
+                  selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksScores[taskIdx] }}/2
+                  pkt</span>
+                <span class="success-text">Zaliczone!</span>
+              </div>
+
+              <textarea class="open-task-input" placeholder="Opisz swoje rozwiązanie lub wklej kawałek kodu..."
+                [value]="openTaskAnswers[taskIdx]" (input)="openTaskAnswers[taskIdx] = $any($event.target).value"
+                rows="4"
+                [disabled]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx] || isVerifyingOpenTask[taskIdx]"></textarea>
+
+              <button class="btn-verify" (click)="onOpenTaskSubmit(taskIdx)"
+                [disabled]="!openTaskAnswers[taskIdx] || selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx] || isVerifyingOpenTask[taskIdx]">
+                {{ isVerifyingOpenTask[taskIdx] ? 'AI Sprawdza...' :
+                (selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx] ?
+                'Zaliczone' : 'Sprawdź rozwiązanie') }}
+              </button>
+
+              <div class="feedback-text mt-3" *ngIf="openTaskFeedbacks[taskIdx]"
+                [class.success-text]="selectedCell.data.levelProgress[selectedCell.data.selectedDifficulty].openTasksDone[taskIdx]">
+                {{ openTaskFeedbacks[taskIdx] }}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
