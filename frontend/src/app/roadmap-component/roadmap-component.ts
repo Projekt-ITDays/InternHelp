@@ -13,7 +13,11 @@ import {
   heroRocketLaunch,
   heroCheck,
   heroClipboardDocumentList,
-  heroXMark
+  heroXMark,
+  heroChevronUp,
+  heroChevronDown,
+  heroChevronLeft,
+  heroChevronRight
 } from '@ng-icons/heroicons/outline';
 
 @Component({
@@ -30,7 +34,11 @@ import {
       heroRocketLaunch,
       heroCheck,
       heroClipboardDocumentList,
-      heroXMark
+      heroXMark,
+      heroChevronUp,
+      heroChevronDown,
+      heroChevronLeft,
+      heroChevronRight
     })
   ]
 })
@@ -50,19 +58,37 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
   // Interaction Modal state
   selectedCell: any | null = null;
+  isSelectingDifficulty: boolean = false;
 
   // Panning state
   isDragging = false;
   startX = 0;
   startY = 0;
   panX = 0;
-  panY = 0;
+  panY = 100;
   currentPanX = 0;
-  currentPanY = 0;
+  currentPanY = 100;
+
+  // Panning Boundaries
+  readonly MIN_PAN_X = -2000;
+  readonly MAX_PAN_X = 2000;
+  readonly MIN_PAN_Y = -2000;
+  readonly MAX_PAN_Y = 2000;
 
   // Pełna siatka komórek
   gridCells: any[] = [];
   selectedPlan: any | null = null;
+  activeModalTab: 'cele' | 'zadania' = 'cele';
+  isSidebarCollapsed: boolean = false;
+  expandedStages = new Set<number>();
+
+  toggleStage(index: number) {
+    if (this.expandedStages.has(index)) {
+      this.expandedStages.delete(index);
+    } else {
+      this.expandedStages.add(index);
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -97,16 +123,54 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
       this.selectedPlan = plan;
       this.careerPath = this.getPlanTitle(plan);
-      
+
       // Spróbuj wczytać z localStorage, jeśli nie ma - inicjalizuj
       if (!this.loadFromLocalStorage()) {
         await this.initializeGraph();
       }
 
+      // Obsługa parametrów z dashboardu (otwieranie konkretnego zadania)
+      this.route.queryParams.subscribe(params => {
+        if (params['topic']) {
+          this.handleAutoOpenTask(params['topic'], params['diff'], params['tab']);
+        }
+      });
+
     } catch (err) {
       console.error(err);
       this.errorMessage = 'Błąd pobierania danych planu z bazy.';
       this.isGenerating = false;
+    }
+  }
+
+  private handleAutoOpenTask(topic: string, diff?: string, tab?: string) {
+    // Szukamy komórki o danym tytule
+    const cellIndex = this.gridCells.findIndex(c => !c.empty && c.data && c.data.title === topic);
+    if (cellIndex !== -1) {
+      const cell = this.gridCells[cellIndex];
+      this.openCellModal(cell, cellIndex);
+
+      if (tab === 'cele' || tab === 'zadania') {
+        this.activeModalTab = tab as 'cele' | 'zadania';
+      } else {
+        this.activeModalTab = 'zadania';
+      }
+
+      // Jeśli wchodzimy w zadania bez podanego diff, wymuszamy widok wyboru trudności
+      if (this.activeModalTab === 'zadania' && !diff) {
+        this.isSelectingDifficulty = true;
+      }
+
+      if (diff) {
+        // Mapujemy polskie nazwy trudności jeśli przyszły z dashboardu
+        const diffMap: { [key: string]: string } = {
+          'Łatwy': 'Łatwy',
+          'Średni': 'Średni',
+          'Trudny': 'Trudny'
+        };
+        const targetDiff = diffMap[diff] || diff;
+        this.onDifficultyClick(targetDiff);
+      }
     }
   }
 
@@ -164,7 +228,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       }
       this.isGenerating = false;
       this.cdr.detectChanges();
-    } catch(err: any) {
+    } catch (err: any) {
       console.error("Błąd generowania pierwszego poziomu:", err);
       if (err.status === 503) {
         this.errorMessage = "Serwery AI są aktualnie przeciążone (Błąd 503). Proszę odśwież za chwilę.";
@@ -195,6 +259,25 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       }
     }
     return indices;
+  }
+
+  isCellVisible(index: number): boolean {
+    const cell = this.gridCells[index];
+    if (!cell) return false;
+
+    // Widoczna, jeśli ma przypisany temat
+    if (cell.empty === false) return true;
+
+    // Widoczna, jeśli sąsiaduje z dowolnym tematem (miejsce na nowy temat)
+    const neighbors = this.getNeighborIndices(index);
+    for (const nIdx of neighbors) {
+      const nCell = this.gridCells[nIdx];
+      if (nCell && nCell.empty === false) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   coordsToIndex(r: number, c: number): number {
@@ -234,7 +317,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
         const usedTopics = this.gridCells.filter(c => !c.empty).map(c => c.data.title);
         const res = await this.ai.getHexagonConcepts(this.careerPath, this.currentLevel, usedTopics).toPromise();
         const concepts = res?.concepts || [];
-        
+
         const newTopics = concepts.map(c => ({
           ...c,
           loading: false,
@@ -252,7 +335,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       } catch (err: any) {
         console.error("Błąd uzupełniania topicStack:", err);
         if (err.status === 503) {
-           alert("Serwery AI są przeciążone, doczytywanie kolejnych hexów nie powiodło się.");
+          alert("Serwery AI są przeciążone, doczytywanie kolejnych hexów nie powiodło się.");
         }
         this.currentLevel--; // revert
       } finally {
@@ -262,6 +345,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   }
 
   saveToLocalStorage() {
+    if (!this.selectedPlan?._id) return;
     const state = {
       gridCells: this.gridCells,
       totalScore: this.totalScore,
@@ -270,14 +354,21 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       currentLevel: this.currentLevel,
       careerPath: this.careerPath
     };
-    localStorage.setItem(`roadmap_state_${this.careerPath}`, JSON.stringify(state));
+    localStorage.setItem(`roadmap_state_${this.selectedPlan._id}`, JSON.stringify(state));
   }
 
   loadFromLocalStorage(): boolean {
-    const saved = localStorage.getItem(`roadmap_state_${this.careerPath}`);
+    if (!this.selectedPlan?._id) return false;
+    const saved = localStorage.getItem(`roadmap_state_${this.selectedPlan._id}`);
     if (saved) {
       try {
         const state = JSON.parse(saved);
+
+        // Zabezpieczenie przed starym formatem (jeśli został)
+        if (!state.gridCells || state.gridCells.length !== 150) {
+          return false;
+        }
+
         this.gridCells = state.gridCells;
         this.totalScore = state.totalScore || 0;
         this.pointsPerDifficulty = state.pointsPerDifficulty || { 'Łatwy': 0, 'Średni': 0, 'Trudny': 0 };
@@ -326,8 +417,48 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     if (!this.isDragging) return;
 
     e.preventDefault();
-    this.panX = this.currentPanX + dx;
-    this.panY = this.currentPanY + dy;
+    this.applyPan(this.currentPanX + dx, this.currentPanY + dy);
+  }
+
+  // Obsługa Touch (Mobile)
+  onTouchStart(e: TouchEvent) {
+    if (e.touches.length !== 1) return;
+    this.startX = e.touches[0].clientX;
+    this.startY = e.touches[0].clientY;
+    this.currentPanX = this.panX;
+    this.currentPanY = this.panY;
+  }
+
+  @HostListener('window:touchend', ['$event'])
+  onTouchEnd(e: TouchEvent) {
+    this.isDragging = false;
+    this.startX = 0;
+    this.startY = 0;
+  }
+
+  @HostListener('window:touchmove', ['$event'])
+  onTouchMove(e: TouchEvent) {
+    if (this.startX === 0 && this.startY === 0 || e.touches.length !== 1) return;
+
+    const dx = e.touches[0].clientX - this.startX;
+    const dy = e.touches[0].clientY - this.startY;
+
+    if (!this.isDragging && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      this.isDragging = true;
+    }
+
+    if (!this.isDragging) return;
+
+    // Przesuwamy tylko jeśli to drag, a nie scroll strony
+    if (e.cancelable) e.preventDefault();
+    this.applyPan(this.currentPanX + dx, this.currentPanY + dy);
+  }
+
+  private applyPan(newX: number, newY: number) {
+    // Clamp X
+    this.panX = Math.max(this.MIN_PAN_X, Math.min(this.MAX_PAN_X, newX));
+    // Clamp Y
+    this.panY = Math.max(this.MIN_PAN_Y, Math.min(this.MAX_PAN_Y, newY));
   }
 
   goBack() {
@@ -336,9 +467,8 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
 
   selectedCellIndex: number = -1;
-  isSelectingDifficulty: boolean = false;
   isLoadingTasks: boolean = false;
-  
+
   openTaskAnswers: string[] = [];
   openTaskFeedbacks: string[] = [];
   isVerifyingOpenTask: boolean[] = [];
@@ -349,8 +479,10 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
     this.selectedCell = cell;
     this.selectedCellIndex = index;
-    
-    // Zawsze startujemy od wyboru trudności, chyba że już jakąś wybraliśmy w tej sesji modalu
+
+    // Zawsze startujemy od zakładki Cele, chyba że przyszliśmy z dashboardu z konkretnym poziomem
+    this.activeModalTab = 'cele';
+
     this.isSelectingDifficulty = !cell.data.selectedDifficulty;
     this.isLoadingTasks = false;
 
@@ -379,11 +511,35 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     this.selectedCellIndex = -1;
   }
 
+  getDifficultyStats(diff: string) {
+    if (!this.selectedCell || !this.selectedCell.data.levelProgress[diff]) return { current: 0, max: 0 };
+    const progress = this.selectedCell.data.levelProgress[diff];
+    if (!progress.tasksLoaded) return { current: 0, max: 0 };
+
+    let current = 0;
+    // Punkty za zamknięte
+    (progress.closedTasksDone || []).forEach((done: boolean) => {
+      if (done) current += 1;
+    });
+    // Punkty za otwarte
+    (progress.openTasksScores || []).forEach((score: number) => {
+      current += score;
+    });
+
+    const max = (progress.closedTasks?.length || 0) * 1 + (progress.openTasks?.length || 0) * 2;
+    return { current, max };
+  }
+
+  isDifficultyFull(diff: string) {
+    const stats = this.getDifficultyStats(diff);
+    return stats.max > 0 && stats.current === stats.max;
+  }
+
   async onDifficultyClick(difficulty: string) {
     if (!this.selectedCell) return;
-    
-    this.isSelectingDifficulty = false; 
-    
+
+    this.isSelectingDifficulty = false;
+
     // Jeśli zadania dla tej trudności są już w pamięci - nie strzelaj do AI
     if (this.selectedCell.data.levelProgress[difficulty].tasksLoaded) {
       this.selectedCell.data.selectedDifficulty = difficulty;
@@ -395,27 +551,27 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     try {
       const topicTitle = this.selectedCell.data.title;
       const res = await this.ai.generateTasksForTopic(topicTitle, difficulty).toPromise();
-      
+
       if (res) {
         const progress = this.selectedCell.data.levelProgress[difficulty];
         progress.closedTasks = res.closedTasks || [];
         progress.openTasks = res.openTasks || [];
         progress.tasksLoaded = true;
-        
+
         this.selectedCell.data.selectedDifficulty = difficulty;
-        
+
         // Inicjalizacja stanów wykonania dla tej trudności
         progress.closedTasksDone = progress.closedTasks.map(() => false);
         progress.openTasksDone = progress.openTasks.map(() => false);
         progress.openTasksScores = progress.openTasks.map(() => 0);
-        
+
         this.setupModalForDifficulty(difficulty);
         this.saveToLocalStorage();
       }
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       alert('Nie udało się wygenerować zadań, spróbuj ponownie');
-      this.isSelectingDifficulty = true; 
+      this.isSelectingDifficulty = true;
     } finally {
       this.isLoadingTasks = false;
       this.cdr.detectChanges();
@@ -428,15 +584,15 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
     if (!this.selectedCell || progress.closedTasksDone[taskIdx]) return;
     const correct = progress.closedTasks[taskIdx]?.correctAnswer;
-    
+
     if (selectedIndex === correct) {
       progress.closedTasksDone[taskIdx] = true;
       this.closedTasksError[taskIdx] = false;
-      
+
       // Punktacja: +1 za quiz
       this.totalScore += 1;
       this.pointsPerDifficulty[diff] += 1;
-      
+
       this.checkCellCompletion();
       this.saveToLocalStorage();
     } else {
@@ -456,14 +612,14 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     try {
       const challenge = progress.openTasks[taskIdx]?.challenge;
       const res = await this.ai.verifyOpenTask(challenge, this.openTaskAnswers[taskIdx]).toPromise();
-      
+
       const score = res?.score ?? 0;
       progress.openTasksScores[taskIdx] = score;
-      
+
       if (score > 0) {
         progress.openTasksDone[taskIdx] = true;
         this.openTaskFeedbacks[taskIdx] = `Wynik: ${score}/2 pkt. ${res?.feedback}`;
-        
+
         // Aktualizacja globalnych punktów
         this.totalScore += score;
         this.pointsPerDifficulty[diff] = (this.pointsPerDifficulty[diff] || 0) + score;

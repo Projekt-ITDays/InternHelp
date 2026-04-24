@@ -7,3 +7,8 @@ a pozniej zeby nie miec bledow w vs
 cd backend && npm install
 cd ../frontend && npm install
 
+## Info ##
+
+Wygenerowałem pare jakis md plikow zeby ogarnac co jest do zrobienia 
+
+

@@ -25,6 +25,7 @@ import {
   heroChevronRight,
   heroClipboardDocumentList,
   heroWrenchScrewdriver,
+  heroMap,
 } from '@ng-icons/heroicons/outline';
 import { ExperienceService } from '../../service/experience.service';
 import { Ai } from '../../service/ai';
@@ -93,6 +94,7 @@ interface UserPlan {
       heroChevronRight,
       heroClipboardDocumentList,
       heroWrenchScrewdriver,
+      heroMap,
     }),
   ],
 })
@@ -118,6 +120,11 @@ export class Dashboard implements OnInit {
   selectedPlan = signal<UserPlan | null>(null);
   plansLoading = signal(true);
   showAllPlans = signal(false);
+
+  planTasks = signal<any[]>([]);
+  openedTaskCell = signal<any | null>(null);
+  openedTaskDiff = signal<string | null>(null);
+  isLoadingTasks = signal(false);
 
   visiblePlans = computed(() => {
     const plans = this.sourcePlans();
@@ -152,6 +159,7 @@ export class Dashboard implements OnInit {
       if (userPlans && userPlans.length > 0) {
         this.sourcePlans.set(userPlans);
         this.plansGenerated.set(userPlans.length);
+        this.loadDashboardTasks(userPlans);
       }
     } catch (error) {
       console.error('Błąd podczas pobierania planów:', error);
@@ -166,6 +174,82 @@ export class Dashboard implements OnInit {
 
   openPlan(plan: UserPlan): void {
     this.selectedPlan.set(plan);
+  }
+
+  loadDashboardTasks(plans: UserPlan[]): void {
+    let allTasks: any[] = [];
+    for (const plan of plans) {
+       const title = this.getPlanTitle(plan);
+       const saved = localStorage.getItem(`roadmap_state_${title}`);
+       if (saved) {
+         try {
+           const state = JSON.parse(saved);
+           const gridCells = state.gridCells || [];
+           const cells = gridCells.filter((c: any) => {
+             if (c.empty || !c.data) return false;
+             const isFullySolved = this.isDifficultySolved(c, 'Łatwy') && 
+                                   this.isDifficultySolved(c, 'Średni') && 
+                                   this.isDifficultySolved(c, 'Trudny');
+             return !isFullySolved;
+           });
+           const tasksWithPlan = cells.map((c: any) => ({ ...c, _planTitle: title, _planId: plan._id }));
+           allTasks = allTasks.concat(tasksWithPlan);
+         } catch (e) {
+           console.error("Błąd wczytywania zadań:", e);
+         }
+       }
+    }
+    this.planTasks.set(allTasks.slice(0, 6)); // Limit to 6 tasks for now
+    this.openedTaskCell.set(null);
+    this.openedTaskDiff.set(null);
+  }
+
+  isDifficultySolved(cell: any, diff: string): boolean {
+    if (!cell?.data?.levelProgress?.[diff]?.tasksLoaded) return false;
+    const p = cell.data.levelProgress[diff];
+    if ((p.closedTasksDone?.length || 0) === 0 && (p.openTasksDone?.length || 0) === 0) return false;
+    const closedCompleted = p.closedTasksDone.every((x: boolean) => x === true);
+    const openCompleted = p.openTasksDone.every((x: boolean) => x === true);
+    return closedCompleted && openCompleted;
+  }
+
+  switchTaskTab(cell: any, tab: 'cele' | 'zadania') {
+    if (!cell._planId) return;
+    this.router.navigate(['/ai/roadmap', cell._planId], { 
+      queryParams: { 
+        topic: cell.data.title, 
+        tab: tab 
+      } 
+    });
+  }
+
+  async toggleDashboardTasks(cell: any, difficulty: string) {
+    if (!cell._planId) return;
+
+    // Przenosimy użytkownika do roadmapy z parametrami, aby otworzyć konkretny temat
+    this.router.navigate(['/ai/roadmap', cell._planId], { 
+      queryParams: { 
+        topic: cell.data.title, 
+        diff: difficulty 
+      } 
+    });
+  }
+
+  savePlanTasks(cell: any) {
+     const title = cell._planTitle;
+     if (!title) return;
+     const saved = localStorage.getItem(`roadmap_state_${title}`);
+     if (saved) {
+       try {
+          const state = JSON.parse(saved);
+          state.gridCells.forEach((c: any) => {
+             if (!c.empty && c.data && c.data.title === cell.data.title) {
+                c.data = cell.data;
+             }
+          });
+          localStorage.setItem(`roadmap_state_${title}`, JSON.stringify(state));
+       } catch(e) {}
+     }
   }
 
   closePlan(): void {

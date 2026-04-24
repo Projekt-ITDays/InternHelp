@@ -32,8 +32,7 @@
           </div>
 
           <div class="relative h-3 overflow-hidden rounded-full bg-[var(--ih-bg-soft)]">
-            <div
-              class="absolute inset-y-0 left-0 rounded-full bg-[var(--ih-accent)] transition-all duration-700"
+            <div class="absolute inset-y-0 left-0 rounded-full bg-[var(--ih-accent)] transition-all duration-700"
               [style.width.%]="levelProgress()">
             </div>
           </div>
@@ -75,10 +74,11 @@
           @for (plan of visiblePlans(); track plan._id) {
           <div
             class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md
-                      transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg"
+                      transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg
+                      flex flex-col h-full"
             (click)="openPlan(plan)">
 
-            <div class="mb-3 flex items-center justify-between">
+            <div class="mb-3 flex items-center justify-between shrink-0">
               <span
                 class="inline-flex items-center gap-1.5 rounded-full bg-[var(--ih-bg-soft)] px-3 py-1 text-xs font-medium text-[var(--ih-accent)]">
                 <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--ih-accent)]"></span>
@@ -87,7 +87,7 @@
               <ng-icon name="heroChevronRight" size="16" class="text-[var(--ih-ink-soft)]" />
             </div>
 
-            <h3 class="mb-1 font-semibold text-[var(--ih-surface)]">{{ getPlanTitle(plan) }}</h3>
+            <h3 class="mb-1 font-semibold text-[var(--ih-surface)] leading-tight">{{ getPlanTitle(plan) }}</h3>
             <p class="mb-3 line-clamp-2 text-xs text-[var(--ih-ink-soft)]">
               {{ plan.planData.podsumowanie_profilu || 'Twój wygenerowany plan rozwoju' }}
             </p>
@@ -103,17 +103,28 @@
               </span>
             </div>
 
-            <div class="flex flex-wrap gap-1.5">
-              @for (stage of plan.planData.plan.slice(0, 3); track $index) {
-              <span class="rounded-md bg-[var(--ih-bg-soft)] px-2 py-0.5 text-[11px] text-[var(--ih-ink-soft)]">
-                Etap {{ $index + 1 }}
-              </span>
-              }
-              @if ((plan.planData.plan.length || 0) > 3) {
-              <span class="rounded-md bg-[var(--ih-bg-soft)] px-2 py-0.5 text-[11px] text-[var(--ih-accent)]">
-                +{{ (plan.planData.plan.length || 0) - 3 }}
-              </span>
-              }
+            <!-- Footer: Always pushed to bottom -->
+            <div class="mt-auto pt-4 border-t border-[var(--ih-border-dark)]/30 flex items-end justify-between">
+              <div class="flex items-center flex-wrap gap-1.5">
+                @for (stage of plan.planData.plan.slice(0, 3); track $index) {
+                <span class="inline-flex items-center rounded-md bg-[var(--ih-bg-soft)] px-2.5 py-1 text-[10px] font-medium text-[var(--ih-ink-soft)] border border-[var(--ih-border-dark)]/50 leading-none mb-0">
+                  Etap {{ $index + 1 }}
+                </span>
+                }
+                @if ((plan.planData.plan.length || 0) > 3) {
+                <span class="inline-flex items-center rounded-md bg-[var(--ih-bg-soft)] px-2 py-1 text-[10px] font-medium text-[var(--ih-accent)] border border-[var(--ih-accent)]/20 leading-none mb-0">
+                  +{{ (plan.planData.plan.length || 0) - 3 }}
+                </span>
+                }
+              </div>
+              
+              <button 
+                class="shrink-0 px-3 py-1.5 text-[11px] font-bold rounded-lg border border-[var(--ih-border-dark)] 
+                       text-[var(--ih-ink-soft)] bg-[var(--ih-bg-soft)] transition-all 
+                       hover:bg-[var(--ih-accent)] hover:text-white hover:border-[var(--ih-accent)] active:scale-95 shadow-sm mb-0"
+                (click)="openRoadmapGraph(plan._id); $event.stopPropagation()">
+                Wyświetl zadania
+              </button>
             </div>
           </div>
           }
@@ -126,6 +137,52 @@
         }
         }
       </section>
+
+      @if (planTasks().length > 0) {
+      <section>
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-bold text-[var(--ih-surface)]">Zadania</h2>
+          <span class="text-sm text-[var(--ih-ink-soft)]">{{ planTasks().length }} najnowszych zadań</span>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          @for (cell of planTasks(); track cell.data.title) {
+          <div
+            class="flex flex-col gap-3 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md">
+            <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <h4 class="font-bold text-[var(--ih-surface)]">{{ cell.data.title }}</h4>
+                  <span
+                    class="text-[10px] uppercase font-bold text-[var(--ih-accent)] bg-[var(--ih-accent)]/10 px-2 py-0.5 rounded-full border border-[var(--ih-accent)]/20">
+                    {{ cell._planTitle }}
+                  </span>
+                </div>
+                <p class="text-xs text-[var(--ih-ink-soft)] mt-1 line-clamp-2">{{ cell.data.description }}</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 shrink-0">
+              <button
+                class="px-5 py-2 text-xs font-bold rounded-xl border border-[var(--ih-border-dark)] 
+                               text-[var(--ih-ink-soft)] bg-[var(--ih-bg-soft)] transition-all 
+                               hover:bg-[var(--ih-accent)] hover:text-white hover:border-[var(--ih-accent)] hover:scale-105 active:scale-95"
+                (click)="switchTaskTab(cell, 'cele')">
+                Cele
+              </button>
+              <button
+                class="px-5 py-2 text-xs font-bold rounded-xl border border-[var(--ih-border-dark)] 
+                               text-[var(--ih-ink-soft)] bg-[var(--ih-bg-soft)] transition-all 
+                               hover:bg-[var(--ih-accent)] hover:text-white hover:border-[var(--ih-accent)] hover:scale-105 active:scale-95"
+                (click)="switchTaskTab(cell, 'zadania')">
+                Zadania
+              </button>
+            </div>
+          </div>
+          }
+        </div>
+      </section>
+      }
 
 
       <section class="rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-6 shadow-md">
@@ -168,7 +225,7 @@
       </div>
       <div class="flex items-center gap-4">
         <button (click)="openRoadmapGraph(selectedPlan()!._id)"
-           class="rounded-xl border border-[var(--ih-accent)]/40 px-4 py-2 text-sm font-medium text-[var(--ih-accent)] transition-colors hover:bg-[var(--ih-accent)]/10">
+          class="rounded-xl border border-[var(--ih-accent)]/40 px-4 py-2 text-sm font-medium text-[var(--ih-accent)] transition-colors hover:bg-[var(--ih-accent)]/10">
           Zobacz graf 🗺️
         </button>
         <button (click)="closePlan()"
@@ -181,7 +238,8 @@
     @if (selectedPlan()!.planData.podsumowanie_profilu) {
     <div class="mb-6 flex gap-3 rounded-xl bg-[var(--ih-bg-soft)] p-4">
       <ng-icon name="heroInformationCircle" size="18" class="mt-0.5 shrink-0 text-[var(--ih-accent)]" />
-      <p class="text-sm leading-relaxed text-[var(--ih-ink-soft)]">{{ selectedPlan()!.planData.podsumowanie_profilu }}</p>
+      <p class="text-sm leading-relaxed text-[var(--ih-ink-soft)]">{{ selectedPlan()!.planData.podsumowanie_profilu }}
+      </p>
     </div>
     }
 
@@ -200,7 +258,8 @@
         </div>
 
         <div class="mt-3">
-          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+          <div
+            class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
             <ng-icon name="heroWrenchScrewdriver" size="14" class="text-[var(--ih-accent)]" />
             Umiejętności
           </div>
@@ -222,7 +281,8 @@
 
         @if (stage.zasoby_edukacyjne.length) {
         <div class="mt-4">
-          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+          <div
+            class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
             <ng-icon name="heroAcademicCap" size="14" class="text-[var(--ih-accent)]" />
             Zasoby edukacyjne
           </div>
@@ -236,7 +296,8 @@
 
         @if (stage.projekt_portfolio) {
         <div class="mt-4">
-          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+          <div
+            class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
             <ng-icon name="heroRocketLaunch" size="14" class="text-[var(--ih-accent)]" />
             Projekt portfolio
           </div>
@@ -259,7 +320,8 @@
 
         @if (stage.wskazniki_sukcesu_kpi.length) {
         <div class="mt-4">
-          <div class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
+          <div
+            class="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ih-ink-soft)]">
             <ng-icon name="heroClipboardDocumentList" size="14" class="text-[var(--ih-accent)]" />
             Wskaźniki sukcesu / Zadania
           </div>
@@ -277,6 +339,9 @@
       </div>
       }
     </div>
+
+
+
   </div>
 </div>
 }

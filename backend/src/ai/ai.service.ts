@@ -202,8 +202,16 @@ export class AiService {
       Nie generuj żadnych zadań zamkniętych.`;
     }
 
-    const prompt = `Jesteś mentorem. Wygeneruj zadania dla tematu "${topic}" o poziomie trudności "${difficulty}".
+    const prompt = `Jesteś mentorem w dziedzinie IT. 
+    Twoim zadaniem jest wygenerować zadania ŚCIŚLE związane z tematem: "${topic}". 
+    Poziom trudności zadania (Łatwy/Średni/Trudny): ${difficulty}.
+    
+    Wymagania dla poziomu ${difficulty}:
     ${specificRequirements}
+    
+    WAŻNE ZASADY:
+    1. Zadanie MUSI dotyczyć tylko i wyłącznie tematu "${topic}". Jeśli temat to np. "Git", nie generuj zadań z algorytmiki C++.
+    2. Jeśli poziom jest "Trudny", wymyśl zaawansowany problem wewnątrz tematu "${topic}" (np. skomplikowany merge conflict lub optymalizacja workflow), a nie losowe zadanie programistyczne.
     
     ZWRÓĆ TYLKO I WYŁĄCZNIE STRUKTURĘ JSON PODANĄ NIŻEJ BEZ ŻADNYCH INNYCH SŁÓW:
     {
@@ -211,7 +219,7 @@ export class AiService {
         { "question": "?", "options": ["Odp A", "Odp B", "Odp C", "Odp D"], "correctAnswer": 0 }
       ],
       "openTasks": [
-        { "challenge": "Praktyczne polecenie" }
+        { "challenge": "Praktyczne polecenie związane z ${topic}" }
       ]
     }
     
