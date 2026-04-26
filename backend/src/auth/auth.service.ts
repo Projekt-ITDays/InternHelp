@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
 import { LoginDto } from 'src/dto/login.dto';
@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { v4 as uuidv4 } from 'uuid'
+import { NotFoundError } from 'rxjs';
 
 type GoogleProfileData = {
     email: string
@@ -43,12 +44,12 @@ export class AuthService {
     async login(payload: LoginDto) {
         const isRecaptchaValid = await this.validateRecaptcha(payload.captchaToken);
         if (!isRecaptchaValid) {
-            throw new Error('Weryfikacja CAPTCHA nieudana');
+            throw new UnauthorizedException('Weryfikacja CAPTCHA nieudana');
         }
 
         const user = await this.userRepository.findOne({ where: { username: payload.username } })
         if (!user) {
-            throw new Error('User not found')
+            throw new NotFoundException('User not found')
         }
         if(!(await bcrypt.compare(payload.password, user.password))) {
             throw new UnauthorizedException('Nieprawidłowa nazwa użytkownika lub hasło')
