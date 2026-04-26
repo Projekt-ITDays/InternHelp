@@ -126,4 +126,11 @@ export class AiController {
       throw new HttpException(e.message || 'Błąd aktualizacji tytułu.', HttpStatus.BAD_REQUEST);
     }
   }
+  @Post('explain-part')
+  async explainPartofPlan(@Body('content') content: string): Promise<any> {
+    if (!content) {
+      throw new HttpException('Brak treści do wyjaśnienia.', HttpStatus.BAD_REQUEST);
+    }
+    return await  this.aiAgentService.explainPlan(content);
+  }
 }

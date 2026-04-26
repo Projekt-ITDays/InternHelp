@@ -107,4 +107,8 @@ export class Ai {
   async updatePlanTitle(planId: string, title: string): Promise<any> {
     return firstValueFrom(this.http.patch<any>(`${environment.apiUrl}/ai/plans/${planId}/title`, { title }, { withCredentials: true }));
   }
+
+  async explainPartofPlan(content : string) : Promise<any> {
+    return firstValueFrom(this.http.post<any>(`${environment.apiUrl}/ai/explain-part`, { content }, { withCredentials: true }));
+  }
 }
