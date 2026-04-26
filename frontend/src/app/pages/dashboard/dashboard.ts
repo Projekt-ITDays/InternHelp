@@ -1,5 +1,7 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroStarSolid } from '@ng-icons/heroicons/solid';
@@ -26,6 +28,7 @@ import {
   heroClipboardDocumentList,
   heroWrenchScrewdriver,
   heroMap,
+  heroTrash,
 } from '@ng-icons/heroicons/outline';
 import { ExperienceService } from '../../core/services/experience.service';
 import { Ai } from '../../core/services/ai';
@@ -60,6 +63,7 @@ interface UserPlan {
   _id: string;
   userId: string;
   status: string;
+  customTitle?: string;
   planData: PlanData;
   createdAt: string;
 }
@@ -69,7 +73,7 @@ interface UserPlan {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NgIconComponent, Navbar],
+  imports: [CommonModule, NgIconComponent, Navbar, DragDropModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   providers: [
@@ -97,6 +101,7 @@ interface UserPlan {
       heroClipboardDocumentList,
       heroWrenchScrewdriver,
       heroMap,
+      heroTrash,
     }),
   ],
 })
@@ -167,6 +172,22 @@ export class Dashboard implements OnInit {
 
       const userPlans = await this.aiService.getUserPlans();
       if (userPlans && userPlans.length > 0) {
+        // Apply saved order if exists
+        const savedOrder = localStorage.getItem('dashboard_plans_order');
+        if (savedOrder) {
+          try {
+            const orderedIds = JSON.parse(savedOrder);
+            userPlans.sort((a, b) => {
+              const idxA = orderedIds.indexOf(a._id);
+              const idxB = orderedIds.indexOf(b._id);
+              if (idxA === -1 && idxB === -1) return 0;
+              if (idxA === -1) return 1;
+              if (idxB === -1) return -1;
+              return idxA - idxB;
+            });
+          } catch (e) { }
+        }
+
         this.sourcePlans.set(userPlans);
         this.plansGenerated.set(userPlans.length);
         this.loadDashboardTasks(userPlans);
@@ -190,25 +211,25 @@ export class Dashboard implements OnInit {
   loadDashboardTasks(plans: UserPlan[]): void {
     let allTasks: any[] = [];
     for (const plan of plans) {
-       const title = this.getPlanTitle(plan);
-       const saved = localStorage.getItem(`roadmap_state_${title}`);
-       if (saved) {
-         try {
-           const state = JSON.parse(saved);
-           const gridCells = state.gridCells || [];
-           const cells = gridCells.filter((c: any) => {
-             if (c.empty || !c.data) return false;
-             const isFullySolved = this.isDifficultySolved(c, 'Łatwy') && 
-                                   this.isDifficultySolved(c, 'Średni') && 
-                                   this.isDifficultySolved(c, 'Trudny');
-             return !isFullySolved;
-           });
-           const tasksWithPlan = cells.map((c: any) => ({ ...c, _planTitle: title, _planId: plan._id }));
-           allTasks = allTasks.concat(tasksWithPlan);
-         } catch (e) {
-           console.error("Błąd wczytywania zadań:", e);
-         }
-       }
+      const title = this.getPlanTitle(plan);
+      const saved = localStorage.getItem(`roadmap_state_${title}`);
+      if (saved) {
+        try {
+          const state = JSON.parse(saved);
+          const gridCells = state.gridCells || [];
+          const cells = gridCells.filter((c: any) => {
+            if (c.empty || !c.data) return false;
+            const isFullySolved = this.isDifficultySolved(c, 'Łatwy') &&
+              this.isDifficultySolved(c, 'Średni') &&
+              this.isDifficultySolved(c, 'Trudny');
+            return !isFullySolved;
+          });
+          const tasksWithPlan = cells.map((c: any) => ({ ...c, _planTitle: title, _planId: plan._id }));
+          allTasks = allTasks.concat(tasksWithPlan);
+        } catch (e) {
+          console.error("Błąd wczytywania zadań:", e);
+        }
+      }
     }
     this.planTasks.set(allTasks.slice(0, 6)); // Limit to 6 tasks for now
     this.openedTaskCell.set(null);
@@ -226,11 +247,11 @@ export class Dashboard implements OnInit {
 
   switchTaskTab(cell: any, tab: 'cele' | 'zadania') {
     if (!cell._planId) return;
-    this.router.navigate(['/ai/roadmap', cell._planId], { 
-      queryParams: { 
-        topic: cell.data.title, 
-        tab: tab 
-      } 
+    this.router.navigate(['/ai/roadmap', cell._planId], {
+      queryParams: {
+        topic: cell.data.title,
+        tab: tab
+      }
     });
   }
 
@@ -238,29 +259,29 @@ export class Dashboard implements OnInit {
     if (!cell._planId) return;
 
     // Przenosimy użytkownika do roadmapy z parametrami, aby otworzyć konkretny temat
-    this.router.navigate(['/ai/roadmap', cell._planId], { 
-      queryParams: { 
-        topic: cell.data.title, 
-        diff: difficulty 
-      } 
+    this.router.navigate(['/ai/roadmap', cell._planId], {
+      queryParams: {
+        topic: cell.data.title,
+        diff: difficulty
+      }
     });
   }
 
   savePlanTasks(cell: any) {
-     const title = cell._planTitle;
-     if (!title) return;
-     const saved = localStorage.getItem(`roadmap_state_${title}`);
-     if (saved) {
-       try {
-          const state = JSON.parse(saved);
-          state.gridCells.forEach((c: any) => {
-             if (!c.empty && c.data && c.data.title === cell.data.title) {
-                c.data = cell.data;
-             }
-          });
-          localStorage.setItem(`roadmap_state_${title}`, JSON.stringify(state));
-       } catch(e) {}
-     }
+    const title = cell._planTitle;
+    if (!title) return;
+    const saved = localStorage.getItem(`roadmap_state_${title}`);
+    if (saved) {
+      try {
+        const state = JSON.parse(saved);
+        state.gridCells.forEach((c: any) => {
+          if (!c.empty && c.data && c.data.title === cell.data.title) {
+            c.data = cell.data;
+          }
+        });
+        localStorage.setItem(`roadmap_state_${title}`, JSON.stringify(state));
+      } catch (e) { }
+    }
   }
 
   closePlan(): void {
@@ -274,6 +295,9 @@ export class Dashboard implements OnInit {
   }
 
   getPlanTitle(plan: UserPlan): string {
+    if (plan.customTitle) {
+      return plan.customTitle;
+    }
     const stages = plan.planData?.plan;
     if (stages && stages.length > 0) {
       const firstStage = stages[0].etap;
@@ -297,5 +321,120 @@ export class Dashboard implements OnInit {
 
   showMorePlans(): void {
     this.showAllPlans.set(true);
+  }
+
+  onDropPlan(event: CdkDragDrop<UserPlan[]>): void {
+    const plans = [...this.sourcePlans()];
+    moveItemInArray(plans, event.previousIndex, event.currentIndex);
+    this.sourcePlans.set(plans);
+
+    // Save order to localStorage
+    const orderedIds = plans.map(p => p._id);
+    localStorage.setItem('dashboard_plans_order', JSON.stringify(orderedIds));
+  }
+
+  async deletePlan(event: Event, planId: string): Promise<void> {
+    event.stopPropagation(); // Zapobiega otwarciu planu przy kliknięciu w ikonę usuwania
+
+    const result = await Swal.fire({
+      title: 'Czy na pewno?',
+      text: 'Ten plan zostanie trwale usunięty z bazy danych.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--ih-accent)',
+      cancelButtonColor: 'var(--ih-border-dark)',
+      confirmButtonText: 'Tak, usuń!',
+      cancelButtonText: 'Anuluj',
+      background: 'var(--ih-bg-soft)',
+      color: 'var(--ih-surface)'
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await this.aiService.deleteUserPlan(planId);
+
+        // Aktualizacja lokalnego stanu
+        const updatedPlans = this.sourcePlans().filter(p => p._id !== planId);
+        this.sourcePlans.set(updatedPlans);
+        this.plansGenerated.set(updatedPlans.length);
+
+        // Przeładowanie zadań na dashboardzie
+        this.loadDashboardTasks(updatedPlans);
+
+        Swal.fire({
+          title: 'Usunięto!',
+          text: 'Twój plan został pomyślnie usunięty.',
+          icon: 'success',
+          confirmButtonColor: 'var(--ih-accent)',
+          background: 'var(--ih-bg-soft)',
+          color: 'var(--ih-surface)'
+        });
+      } catch (error) {
+        console.error('Błąd podczas usuwania planu:', error);
+        Swal.fire({
+          title: 'Błąd!',
+          text: 'Nie udało się usunąć planu. Spróbuj ponownie.',
+          icon: 'error',
+          confirmButtonColor: 'var(--ih-accent)',
+          background: 'var(--ih-bg-soft)',
+          color: 'var(--ih-surface)'
+        });
+      }
+    }
+  }
+  // edytowanie planów nazw
+  async editPlanTitle(event: Event, plan: UserPlan): Promise<void> {
+    event.stopPropagation();
+
+    const { value: newTitle } = await Swal.fire({
+      title: 'Zmień nazwę planu',
+      input: 'text',
+      inputValue: this.getPlanTitle(plan),
+      showCancelButton: true,
+      confirmButtonText: 'Zapisz',
+      cancelButtonText: 'Anuluj',
+      confirmButtonColor: 'var(--ih-accent)',
+      background: 'var(--ih-bg-soft)',
+      color: 'var(--ih-surface)',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Nazwa nie może być pusta!';
+        }
+        return null;
+      }
+    });
+
+    if (newTitle) {
+      try {
+        await this.aiService.updatePlanTitle(plan._id, newTitle);
+        const updatedPlans = this.sourcePlans().map(p => {
+          if (p._id === plan._id) {
+            return { ...p, customTitle: newTitle };
+          }
+          return p;
+        });
+        this.sourcePlans.set(updatedPlans);
+
+        Swal.fire({
+          title: 'Zaktualizowano!',
+          text: 'Nazwa planu została zmieniona.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false,
+          background: 'var(--ih-bg-soft)',
+          color: 'var(--ih-surface)'
+        });
+      } catch (error) {
+        console.error('Błąd podczas zmiany nazwy:', error);
+        Swal.fire({
+          title: 'Błąd!',
+          text: 'Nie udało się zmienić nazwy.',
+          icon: 'error',
+          confirmButtonColor: 'var(--ih-accent)',
+          background: 'var(--ih-bg-soft)',
+          color: 'var(--ih-surface)'
+        });
+      }
+    }
   }
 }

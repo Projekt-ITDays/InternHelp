@@ -6,6 +6,9 @@ export class AgentResponse {
     userId: string;
 
     @Prop({ required: false })
+    customTitle: string;
+
+    @Prop({ required: false })
     status: string;
 
     @Prop({ type: Object, required: false })

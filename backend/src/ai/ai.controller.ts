@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Sse, Query, MessageEvent, Req, Get, UseGuards, Param, Patch, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Sse, Query, MessageEvent, Req, Get, UseGuards, Param, Patch, HttpException, HttpStatus, Delete } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { AiService } from './ai.service';
 import { map, Observable } from 'rxjs';
@@ -100,10 +100,30 @@ export class AiController {
     return { gridState: state };
   }
 
-  //stary approach
-  //@Post('ask') 
-  //async askGemini(@Body('prompt') prompt: string) {
-  //  const text = await this.aiService.getGeminiResponse(prompt);
-  //  return { answer: text };
-  //}
+  @UseGuards(AuthGuard)
+  @Delete('plans/:id')
+  async deleteUserPlan(
+    @Param('id') planId: string,
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    try {
+      return await this.aiAgentService.deleteUserPlan(planId, req.user.sub);
+    } catch (e: any) {
+      throw new HttpException(e.message || 'Błąd usuwania planu.', HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('plans/:id/title')
+  async updatePlanTitle(
+    @Param('id') planId: string,
+    @Body('title') title: string,
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    try {
+      return await this.aiAgentService.updatePlanTitle(planId, req.user.sub, title);
+    } catch (e: any) {
+      throw new HttpException(e.message || 'Błąd aktualizacji tytułu.', HttpStatus.BAD_REQUEST);
+    }
+  }
 }

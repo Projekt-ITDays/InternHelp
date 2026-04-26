@@ -81,13 +81,30 @@
           </button>
         </div>
         } @else {
-        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" 
+             cdkDropList 
+             cdkDropListOrientation="mixed"
+             (cdkDropListDropped)="onDropPlan($event)">
           @for (plan of visiblePlans(); track plan._id) {
           <div
+            cdkDrag
             class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md
-                      transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg
-                      flex flex-col h-full"
+                      transition-[transform,border-color,box-shadow,background-color] duration-200 
+                      hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg
+                      flex flex-col h-full relative group"
             (click)="openPlan(plan)">
+
+            <!-- Custom Placeholder while dragging -->
+            <div *cdkDragPlaceholder class="cdk-drag-placeholder"></div>
+
+            <!-- Drag Handle Hint -->
+            <div class="absolute top-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-40 transition-opacity">
+              <div class="flex gap-1">
+                <div class="w-1 h-1 rounded-full bg-[var(--ih-surface)]"></div>
+                <div class="w-1 h-1 rounded-full bg-[var(--ih-surface)]"></div>
+                <div class="w-1 h-1 rounded-full bg-[var(--ih-surface)]"></div>
+              </div>
+            </div>
 
             <div class="mb-3 flex items-center justify-between shrink-0">
               <span
@@ -95,10 +112,24 @@
                 <span class="inline-block h-1.5 w-1.5 rounded-full bg-[var(--ih-accent)]"></span>
                 {{ plan.status || 'active' }}
               </span>
-              <ng-icon name="heroChevronRight" size="16" class="text-[var(--ih-ink-soft)]" />
+              <div class="flex items-center gap-2">
+                <button (click)="deletePlan($event, plan._id)" 
+                        class="p-1.5 rounded-lg hover:bg-red-500/10 text-[var(--ih-ink-soft)] hover:text-red-400 transition-all opacity-0 group-hover:opacity-100"
+                        title="Usuń plan">
+                  <ng-icon name="heroTrash" size="16" />
+                </button>
+                <ng-icon name="heroChevronRight" size="16" class="text-[var(--ih-ink-soft)]" />
+              </div>
             </div>
 
-            <h3 class="mb-1 font-semibold text-[var(--ih-surface)] leading-tight">{{ getPlanTitle(plan) }}</h3>
+            <div class="mb-1 flex items-center gap-2 group/title">
+              <h3 class="font-semibold text-[var(--ih-surface)] leading-tight">{{ getPlanTitle(plan) }}</h3>
+              <button (click)="editPlanTitle($event, plan)" 
+                      class="p-1 rounded-md hover:bg-[var(--ih-bg-soft)] text-[var(--ih-ink-soft)] hover:text-[var(--ih-accent)] transition-all opacity-0 group-hover:opacity-100"
+                      title="Zmień nazwę">
+                <ng-icon name="heroPencilSquare" size="14" />
+              </button>
+            </div>
             <p class="mb-3 line-clamp-2 text-xs text-[var(--ih-ink-soft)]">
               {{ plan.planData.podsumowanie_profilu || 'Twój wygenerowany plan rozwoju' }}
             </p>

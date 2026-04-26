@@ -123,7 +123,56 @@
   }
 }
 
-/* Resource list item — pseudo-element bullet */
+.cdk-drag {
+  will-change: transform;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 1.25rem;
+  box-shadow: var(--ih-shadow-lg);
+  background: var(--ih-bg-soft) !important;
+  border: 1px solid var(--ih-accent);
+  opacity: 0.98;
+  z-index: 1000;
+  cursor: grabbing;
+  width: 320px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: none !important;
+  transition: none !important;
+}
+
+.cdk-drag-preview * {
+  pointer-events: none !important;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  background: var(--ih-bg-soft);
+  border: 2px dashed var(--ih-accent-border) !important;
+  border-radius: 1.25rem;
+  box-shadow: none;
+}
+
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.grid.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .group:hover {
+  transform: none !important;
+  border-color: var(--ih-border-dark) !important;
+}
+
+.cdk-drag-dragging {
+  transition: none !important;
+}
+
 .resource-item {
   position: relative;
   padding-left: 1rem;

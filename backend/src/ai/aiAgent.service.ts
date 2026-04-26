@@ -7,22 +7,22 @@ import { SurveysEntity } from "src/entities/Surveys.entity";
 import { Repository } from "typeorm";
 import { InjectConnection, InjectModel } from "@nestjs/mongoose";
 import { AgentResponse } from "src/entities/AgentResposne.schema";
-import { Connection, Model } from "mongoose";
+import { Connection, Model, Types } from "mongoose";
 import { GoogleGenerativeAI, TaskType } from "@google/generative-ai";
 import { MongoClient } from "mongodb";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
+import { MongoDBAtlasVectorSearch } from "@langchain/mongodb";
 import { MemorySaver } from "@langchain/langgraph";
 
 
 
 @Injectable()
-export class AiAgentService  implements OnModuleInit  , OnModuleDestroy{
+export class AiAgentService implements OnModuleInit, OnModuleDestroy {
     constructor(
         @InjectRepository(SurveysEntity) private surveysRepository: Repository<SurveysEntity>,
         @InjectModel("AgentResponse") private agentResponseModel: Model<AgentResponse>,
 
-    ) { 
+    ) {
 
     }
     private readonly MAX_PROMPT_LENGTH = 2000;
@@ -37,81 +37,82 @@ export class AiAgentService  implements OnModuleInit  , OnModuleDestroy{
 
     checkpointer = new MemorySaver();
     private mongoUri = process.env.MONGODB_URI || process.env.MANGO_URL || process.env.MONGO_URI;
-    vectorStore : MongoDBAtlasVectorSearch;
-    collection : any;
+    vectorStore: MongoDBAtlasVectorSearch;
+    collection: any;
     client = new MongoClient(this.mongoUri!);
     async onModuleInit() {
         await this.client.connect();
         console.log("Połączono z MongoDB Atlas");
         this.collection = this.client.db("carriersign").collection("Advices");
-        this.vectorStore  = new MongoDBAtlasVectorSearch(this.embeddingModel , {
-        collection: this.collection,
-        indexName : "vector_index",
-        textKey: "text",
-        embeddingKey: "embedding",
+        this.vectorStore = new MongoDBAtlasVectorSearch(this.embeddingModel, {
+            collection: this.collection,
+            indexName: "vector_index",
+            textKey: "text",
+            embeddingKey: "embedding",
 
-        
-    })
+
+        })
     }
     async onModuleDestroy() {
         await this.client.close();
         console.log("Rozłączono z MongoDB Atlas");
     }
     dynamicModelSelection = createMiddleware({
-        name : "dynamicModelSelection",
-        wrapModelCall: (request  , handler ) =>{ 
-            const messageCount  = request.messages ? request.messages.length : 0;
+        name: "dynamicModelSelection",
+        wrapModelCall: (request, handler) => {
+            const messageCount = request.messages ? request.messages.length : 0;
             const modelName = messageCount > 5 ? "gemini-2.5-flash" : "gemini-3-flash-preview";
             return handler({
                 ...request,
-                model : new ChatGoogle(modelName)
+                model: new ChatGoogle(modelName)
 
             })
         }
     })
     handleToolErros = createMiddleware({
-    name : "handleToolErrors",
-    wrapToolCall : async (request , handler) => {
-        try {
-            return await handler(request);
-        } catch (error) {
-            return new ToolMessage({
-                content: `The error "${error.message}" occurred while executing the tool . Please handle this error gracefully in your response.`,
-                tool_call_id: request.toolCall.id! || "",
+        name: "handleToolErrors",
+        wrapToolCall: async (request, handler) => {
+            try {
+                return await handler(request);
+            } catch (error) {
+                return new ToolMessage({
+                    content: `The error "${error.message}" occurred while executing the tool . Please handle this error gracefully in your response.`,
+                    tool_call_id: request.toolCall.id! || "",
 
-            })
-        
+                })
+
+            }
         }
-    }})
+    })
     model = new ChatGoogle('gemini-2.5-flash')
     private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
     private embeddingModel = new GoogleGenerativeAIEmbeddings(
         {
-             model: "models/gemini-embedding-001",
+            model: "models/gemini-embedding-001",
             taskType: TaskType.RETRIEVAL_DOCUMENT,
-            
-        }
-    )
-    
-    
-    promptTest = new SystemMessage("Podaj mi dane z bazy danych uzywajac narzedzia retrive , korzystjac jedynie z danych z bazy wiedzy , nie halucynuj danych i nie wymyslaj ich. Podaj mi cos ciekawego z bazy")
-testprompt(){
-    const agent = createAgent({
-        model: this.model,
-        tools: [this.retrieve],
-        systemPrompt: this.promptTest,
-    })
-    return agent.invoke(
-        {
-            messages : [{
-                role : "user",
-                content : "Coś ciekawego z bazy mi podaj "
-            }]
-        }
-    )
-}
 
-prompt = `Jesteś elitarnym Architektem Kariery . Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
+        }
+    )
+
+
+    promptTest = new SystemMessage("Podaj mi dane z bazy danych uzywajac narzedzia retrive , korzystjac jedynie z danych z bazy wiedzy , nie halucynuj danych i nie wymyslaj ich. Podaj mi cos ciekawego z bazy")
+    testprompt() {
+        const agent = createAgent({
+            model: this.model,
+            tools: [this.retrieve],
+            systemPrompt: this.promptTest,
+        })
+        return agent.invoke(
+            {
+                messages: [{
+                    role: "user",
+                    content: "Coś ciekawego z bazy mi podaj "
+                }]
+            }
+        )
+    }
+
+    prompt = `Jesteś elitarnym Architektem Kariery . Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
 
 ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
 1) Użyj ID użytkownika przekazanego na końcu tego promptu, aby wywołać narzędzie get_profile_snapshot({ userId }) jako pierwsze źródło danych (zawiera pełny profil). Jeśli któraś sekcja profilu jest pusta, dopytaj narzędziami szczegółowymi.
@@ -232,7 +233,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
             }
             const major = surveyData.Major;
             const yearOfStudy = surveyData.YearOfStudy;
-            
+
             const University = surveyData.University;
             const GraduationYear = surveyData.GraduationYear;
             return `Edukacja użytkownika: kierunek ${major}, rok studiów ${yearOfStudy}. Studiuje na ${University} i planuje ukończyć studia w ${GraduationYear}.`;
@@ -292,7 +293,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
             const surveyData = await this.getLatestSurveyData(userId);
             if (!surveyData) {
                 return "Brak danych o umiejętnościach dla tego użytkownika.";
-            
+
             }
             const strengths = surveyData.Strengths;
             const weaknesses = surveyData.Weaknesses;
@@ -308,7 +309,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     )
 
     getTimeleftTool = tool(
-        async ({userID}) => {
+        async ({ userID }) => {
             const surveyData = await this.getLatestSurveyData(userID);
             if (!surveyData) {
                 return "Brak danych o czasie pozostałym do dyspozycji dla tego użytkownika.";
@@ -316,13 +317,13 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
             const timeLeft = surveyData.TimeLeft;
             return `Czas pozostały do dyspozycji użytkownika: ${timeLeft} miesięcy.`;
 
-        },{
-            name: "get_time_left",
-            description: "Zwraca informacje o czasie pozostałym do dyspozycji użytkownika.",
-            schema: z.object({
-                userID: z.string().uuid().describe("Id użytkownika (UUID)"),
-            }),
-        }
+        }, {
+        name: "get_time_left",
+        description: "Zwraca informacje o czasie pozostałym do dyspozycji użytkownika.",
+        schema: z.object({
+            userID: z.string().uuid().describe("Id użytkownika (UUID)"),
+        }),
+    }
     )
     getGoalTool = tool(
         async ({ userId }) => {
@@ -331,7 +332,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
                 return "Brak danych o celach zawodowych dla tego użytkownika.";
             }
             const goal = surveyData.PreferredInternshipType;
-            console.log(`Pobieranie danych o celach zawodowych użytkownika o id ${userId}...` , goal);
+            console.log(`Pobieranie danych o celach zawodowych użytkownika o id ${userId}...`, goal);
             return `Cele zawodowe użytkownika: ${goal}.`;
         },
         {
@@ -386,8 +387,8 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
 
         const agent = createAgent({
             model: this.model,
-            tools: [this.getProfileSnapshotTool, this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve , this.getAbilitiesTool,this.getTimeleftTool],
-            middleware: [this.dynamicModelSelection ,this.handleToolErros],
+            tools: [this.getProfileSnapshotTool, this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve, this.getAbilitiesTool, this.getTimeleftTool],
+            middleware: [this.dynamicModelSelection, this.handleToolErros],
             systemPrompt: `${this.prompt}\n\n=================\nID AKTUALNEGO UŻYTKOWNIKA TO: ${userId}. Użyj tego ID jako parametru userId wywołując wszystkie cztery narzędzia przed zredagowaniem odpowiedzi.\n=================`,
         });
 
@@ -450,7 +451,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
                 try {
                     return this.sanitizeForStorage(objectValue.toJSON(), seen);
                 } catch {
-                   
+
                 }
             }
 
@@ -497,15 +498,28 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
             const hasRoadmapShape = Array.isArray(planObject.plan) || Array.isArray(planObject.kamienie_milowe);
 
             if (hasRoadmapShape) {
+                let extractedTitle = 'Plan rozwoju';
+                const stages = planObject.plan;
+                if (stages && stages.length > 0) {
+                    const firstStage = stages[0].etap || '';
+                    const colonIdx = firstStage.indexOf(':');
+                    if (colonIdx !== -1) {
+                        const rest = firstStage.substring(colonIdx + 1).trim();
+                        const commaIdx = rest.indexOf(',');
+                        extractedTitle = commaIdx !== -1 ? rest.substring(0, commaIdx).trim() : rest;
+                    }
+                }
+
                 const sanitizedHistory = this.sanitizeForStorage(response);
                 const newSavedPlan = new this.agentResponseModel({
                     userId: userId,
                     status: 'active',
+                    customTitle: extractedTitle,
                     planData: planObject,
                     fullHistory: sanitizedHistory
                 });
                 await newSavedPlan.save();
-                console.log(`Zapisano plan dla użytkownika ${userId}`);
+                console.log(`Zapisano plan dla użytkownika ${userId} z tytułem: ${extractedTitle}`);
             }
 
             return planObject;
@@ -538,25 +552,57 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         if (!plan) return null;
         return plan.gridState ?? null;
     }
+
+    async deleteUserPlan(planId: string, userId: string) {
+        console.log(`[DELETE] Próba usunięcia planu: ${planId} dla użytkownika: ${userId}`);
+
+        try {
+            const result = await this.agentResponseModel.deleteOne({
+                _id: new Types.ObjectId(planId),
+                userId: userId
+            }).exec();
+
+            if (result.deletedCount === 0) {
+                console.warn(`[DELETE] Nie znaleziono planu do usunięcia lub brak uprawnień. ID: ${planId}`);
+                throw new Error(`Plan nie istnieje lub nie należy do Ciebie.`);
+            }
+
+            console.log(`[DELETE] Sukces! Plan ${planId} został usunięty.`);
+            return { success: true };
+        } catch (error: any) {
+            console.error(`[DELETE] Błąd podczas usuwania:`, error.message);
+            throw error;
+        }
+    }
+
+    async updatePlanTitle(planId: string, userId: string, newTitle: string) {
+        const plan = await this.agentResponseModel.findOne({ _id: new Types.ObjectId(planId), userId });
+        if (!plan) {
+            throw new Error(`Plan ${planId} nie istnieje lub nie należy do użytkownika.`);
+        }
+        plan.customTitle = newTitle;
+        await plan.save();
+        return { success: true };
+    }
     retrieveSchema = z.object({ query: z.string() });
-    retrieve = tool (
-        async ({query}) => {
-            const retrivedocs = await this.vectorStore.similaritySearch(query , 5);
+    retrieve = tool(
+        async ({ query }) => {
+            const retrivedocs = await this.vectorStore.similaritySearch(query, 5);
             if (retrivedocs.length === 0) {
-                return ["Brak danych w bazie wiedzy związanych z tym zapytaniem.",[]];
+                return ["Brak danych w bazie wiedzy związanych z tym zapytaniem.", []];
             }
             const serialized = retrivedocs
-            .map(
-                (doc) => `Source: ${doc.metadata?.source ?? "unknown"}, Text: ${doc.pageContent}`
-            ).join("\n");
-            return [serialized , retrivedocs]
+                .map(
+                    (doc) => `Source: ${doc.metadata?.source ?? "unknown"}, Text: ${doc.pageContent}`
+                ).join("\n");
+            return [serialized, retrivedocs]
 
         },
         {
             name: "retrive",
             description: "Retrive informacji z bazy wiedzy na podstawie zapytania użytkownika. Zwraca najbardziej podobne dokumenty z bazy.",
             schema: this.retrieveSchema,
-            responseFormat : "content_and_artifact"
+            responseFormat: "content_and_artifact"
         }
     );
 }
