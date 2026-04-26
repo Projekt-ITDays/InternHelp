@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Ai } from '../../core/services/ai';
 import { RoadmapStorageService } from '../../core/services/roadmap-storage.service';
+import { AuthService } from '../../core/services/auth.service';
 import { marked } from 'marked';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
@@ -94,6 +95,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private ai: Ai,
+    private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private storage: RoadmapStorageService,
     private sanitizer: DomSanitizer
@@ -112,6 +114,13 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     if (!planId) return;
 
     try {
+      const hasToken = await this.authService.ensureAccessToken();
+      if (!hasToken) {
+        this.errorMessage = 'Sesja wygasła. Zaloguj się ponownie.';
+        this.isGenerating = false;
+        return;
+      }
+
       const userPlans = await this.ai.getUserPlans();
       const plan = userPlans.find((p: any) => p._id === planId);
 

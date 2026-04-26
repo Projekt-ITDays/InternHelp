@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Navbar } from '../../shared/navbar/navbar';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-prompt-component',
@@ -30,11 +31,12 @@ export class PromptComponent {
 
   constructor(
     private ai: Ai,
+    private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router
   ) { }
 
-  sendRequest() {
+  async sendRequest() {
     if (!this.prompt.trim()) return;
 
     this.loading = true;
@@ -44,14 +46,14 @@ export class PromptComponent {
     const currentPrompt = this.prompt;
     this.prompt = '';
 
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-      this.errorMessage = 'Brak identyfikatora użytkownika. Zaloguj się ponownie.';
+    const hasToken = await this.authService.ensureAccessToken();
+    if (!hasToken) {
+      this.errorMessage = 'Sesja wygasła. Zaloguj się ponownie.';
       this.loading = false;
       return;
     }
 
-    this.ai.submitSurveyPrompt(currentPrompt, userId).subscribe({
+    this.ai.submitSurveyPrompt(currentPrompt).subscribe({
       next: (data: any) => {
         if (data.plan) {
           this.planGenerated = true;

@@ -74,6 +74,28 @@ export class AuthService {
         return this.accessToken;
     }
 
+    async ensureAccessToken(): Promise<boolean> {
+        if (this.accessToken) {
+            return true;
+        }
+
+        const hasLocalUser = typeof window !== 'undefined' && !!localStorage.getItem('userId');
+        if (!hasLocalUser) {
+            return false;
+        }
+
+        try {
+            await this.refreshToken();
+            return !!this.accessToken;
+        } catch {
+            this.clearAccessToken();
+            localStorage.removeItem('username');
+            localStorage.removeItem('userId');
+            this.isLogged = false;
+            return false;
+        }
+    }
+
     clearAccessToken() {
         this.accessToken = null;
         this.isLogged = null;
