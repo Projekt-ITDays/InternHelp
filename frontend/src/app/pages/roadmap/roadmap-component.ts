@@ -477,6 +477,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
   selectedCellIndex: number = -1;
   isLoadingTasks: boolean = false;
+  loadingDifficulty: string = '';
 
   openTaskAnswers: string[] = [];
   openTaskFeedbacks: string[] = [];
@@ -494,6 +495,7 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
     this.isSelectingDifficulty = !cell.data.selectedDifficulty;
     this.isLoadingTasks = false;
+    this.loadingDifficulty = '';
 
     if (cell.data.selectedDifficulty) {
       this.setupModalForDifficulty(cell.data.selectedDifficulty);
@@ -558,6 +560,8 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     }
 
     try {
+      this.isLoadingTasks = true;
+      this.loadingDifficulty = difficulty;
       const topicTitle = this.selectedCell.data.title;
       const res = await this.ai.generateTasksForTopic(topicTitle, difficulty).toPromise();
 

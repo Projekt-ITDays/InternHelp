@@ -13,7 +13,7 @@ import { LoggingDto } from '../../../core/models/loggingDto';
   templateUrl: './registration.html',
   styleUrl: './registration.css',
 })
-export class Registration {
+export class Registration implements OnInit {
   authService = inject(AuthService);
   initialEmail = input<string>('');
   email = '';

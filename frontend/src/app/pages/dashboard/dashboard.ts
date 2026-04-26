@@ -139,6 +139,7 @@ export class Dashboard implements OnInit {
 
   plansGenerated = signal(0);
   async ngOnInit() {
+    this.isLoadingTasks.set(true);
     try {
       const progress = await this.experienceService.getProgress();
       this.level.set(progress.level);
@@ -174,6 +175,7 @@ export class Dashboard implements OnInit {
       console.error('Błąd podczas pobierania planów:', error);
     } finally {
       this.plansLoading.set(false);
+      this.isLoadingTasks.set(false);
     }
   }
 

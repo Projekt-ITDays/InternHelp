@@ -26,10 +26,54 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* ── Plan Detail Modal ── */
+
+.skeleton-plan-card {
+  height: 180px;
+  border-radius: 1rem;
+  border: 1px solid var(--ih-border-dark);
+  background: var(--ih-bg-a94);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-line {
+  height: 16px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.skeleton-line.title {
+  height: 24px;
+  width: 60%;
+}
+
+.skeleton-line.short {
+  width: 30%;
+}
+
+.skeleton-line.tag {
+  width: 50px;
+  height: 14px;
+  border-radius: 10px;
+}
+
+.skeleton-task-card {
+  height: 100px;
+  border-radius: 1rem;
+  border: 1px solid var(--ih-border-dark);
+  background: var(--ih-bg-a94);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .plan-overlay {
   position: fixed;
@@ -44,8 +88,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .plan-detail {
@@ -63,8 +112,15 @@
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Resource list item — pseudo-element bullet */
@@ -121,7 +177,7 @@
 .btn-diff:hover {
   transform: translateY(-2px);
   filter: brightness(1.15);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-diff:active {
@@ -130,17 +186,17 @@
 
 .btn-diff.easy {
   background: #2e7d32;
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-diff.medium {
   background: #eab308;
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-diff.hard {
   background: #d32f2f;
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-diff.active {
@@ -191,6 +247,13 @@
 }
 
 @keyframes fadeInTask {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

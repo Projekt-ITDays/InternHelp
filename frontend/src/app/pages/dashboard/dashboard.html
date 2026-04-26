@@ -51,12 +51,23 @@
         </div>
 
         @if (plansLoading()) {
-        <div
-          class="flex items-center justify-center rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-10 shadow-md">
-          <div class="plan-loader"></div>
-          <span class="ml-4 text-sm text-[var(--ih-ink-soft)]">Ładowanie planów…</span>
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div *ngFor="let i of [1,2,3]" class="skeleton-plan-card">
+            <div class="shimmer skeleton-line short"></div>
+            <div class="shimmer skeleton-line title mt-2"></div>
+            <div class="shimmer skeleton-line mt-4"></div>
+            <div class="shimmer skeleton-line"></div>
+            <div class="mt-auto pt-4 flex justify-between items-center border-t border-[var(--ih-border-dark)]/30">
+              <div class="flex gap-2">
+                <div class="shimmer skeleton-line" style="width: 40px; height: 12px;"></div>
+                <div class="shimmer skeleton-line" style="width: 40px; height: 12px;"></div>
+              </div>
+              <div class="shimmer skeleton-line" style="width: 60px; height: 24px; border-radius: 8px;"></div>
+            </div>
+          </div>
         </div>
-        } @else if (sourcePlans().length === 0) {
+        }
+ @else if (sourcePlans().length === 0) {
         <div
           class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-10 text-center shadow-md">
           <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ih-bg-soft)]">
@@ -138,7 +149,27 @@
         }
       </section>
 
-      @if (planTasks().length > 0) {
+      @if (isLoadingTasks()) {
+      <section>
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-bold text-[var(--ih-surface)]">Zadania</h2>
+          <span class="text-sm text-[var(--ih-ink-soft)] shimmer skeleton-line" style="width: 100px;"></span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div *ngFor="let i of [1,2,3]" class="skeleton-task-card">
+            <div class="flex items-center gap-2">
+              <div class="shimmer skeleton-line title" style="width: 30%;"></div>
+              <div class="shimmer skeleton-line tag"></div>
+            </div>
+            <div class="shimmer skeleton-line" style="width: 80%;"></div>
+            <div class="flex gap-3 mt-1">
+              <div class="shimmer skeleton-line" style="width: 60px; height: 28px; border-radius: 8px;"></div>
+              <div class="shimmer skeleton-line" style="width: 60px; height: 28px; border-radius: 8px;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      } @else if (planTasks().length > 0) {
       <section>
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-xl font-bold text-[var(--ih-surface)]">Zadania</h2>

@@ -64,6 +64,25 @@ body[data-theme='dark'] {
 	--ih-ink-a15: color-mix(in srgb, var(--ih-ink) 15%, transparent);
 }
 
+.shimmer {
+	background: linear-gradient(90deg,
+			rgba(255, 255, 255, 0.03) 25%,
+			rgba(255, 255, 255, 0.08) 50%,
+			rgba(255, 255, 255, 0.03) 75%);
+	background-size: 200% 100%;
+	animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -90,4 +109,3 @@ textarea {
 a {
 	color: inherit;
 }
-	

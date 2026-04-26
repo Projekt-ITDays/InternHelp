@@ -8,14 +8,14 @@ const THEME_STORAGE_KEY = 'theme';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  private followSystemTheme = localStorage.getItem(THEME_STORAGE_KEY) === null;
+  private readonly systemThemeQuery = typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  private followSystemTheme = typeof localStorage !== 'undefined' ? localStorage.getItem(THEME_STORAGE_KEY) === null : true;
   private themeReadyMarked = false;
 
   isDarkMode = signal<boolean>(this.getInitialTheme() === 'dark');
 
   constructor() {
-    if (this.followSystemTheme) {
+    if (this.followSystemTheme && this.systemThemeQuery) {
       this.systemThemeQuery.addEventListener('change', this.handleSystemThemeChange);
     }
 
@@ -26,18 +26,22 @@ export class ThemeService {
 
   toggleTheme() {
     this.followSystemTheme = false;
-    this.systemThemeQuery.removeEventListener('change', this.handleSystemThemeChange);
+    if (this.systemThemeQuery) {
+      this.systemThemeQuery.removeEventListener('change', this.handleSystemThemeChange);
+    }
 
     const nextMode: ThemeMode = this.isDarkMode() ? 'light' : 'dark';
 
-    localStorage.setItem(THEME_STORAGE_KEY, nextMode);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(THEME_STORAGE_KEY, nextMode);
+    }
     this.isDarkMode.set(nextMode === 'dark');
   }
 
   private syncTheme() {
     const mode = this.isDarkMode() ? 'dark' : 'light';
 
-    if (this.followSystemTheme) {
+    if (this.followSystemTheme && typeof localStorage !== 'undefined') {
       localStorage.removeItem(THEME_STORAGE_KEY);
     }
 
@@ -50,13 +54,13 @@ export class ThemeService {
   }
 
   private getInitialTheme(): ThemeMode {
-    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem(THEME_STORAGE_KEY) : null;
 
     if (storedTheme === 'dark' || storedTheme === 'light') {
       return storedTheme;
     }
 
-    return this.systemThemeQuery.matches ? 'dark' : 'light';
+    return this.systemThemeQuery?.matches ? 'dark' : 'light';
   }
 
   private handleSystemThemeChange = (event: MediaQueryListEvent) => {

@@ -82,14 +82,16 @@
   position: fixed;
   top: 90px;
   left: 20px;
-  width: 380px; /* Slimmer */
+  width: 380px;
+  /* Slimmer */
   max-width: calc(100vw - 40px);
   z-index: 100;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fixed-overlay.collapsed {
-  transform: translateX(-390px); /* Hide to the left */
+  transform: translateX(-390px);
+  /* Hide to the left */
 }
 
 .toggle-sidebar-btn {
@@ -151,7 +153,6 @@
   margin: 0;
 }
 
-/* Timeline Aesthetics */
 .timeline-container {
   display: flex;
   flex-direction: column;
@@ -179,7 +180,7 @@
   bottom: 0;
   left: 11px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--ih-accent) 0%, rgba(255,255,255,0.05) 100%);
+  background: linear-gradient(to bottom, var(--ih-accent) 0%, rgba(255, 255, 255, 0.05) 100%);
   opacity: 0.3;
 }
 
@@ -245,11 +246,17 @@
 }
 
 @keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Scrollable content area */
 .roadmap-box {
   margin-top: 1rem;
   flex: 1;
@@ -259,7 +266,6 @@
   position: relative;
 }
 
-/* Custom scrollbar */
 .roadmap-box::-webkit-scrollbar {
   width: 5px;
 }
@@ -278,7 +284,6 @@
   background: var(--ih-accent-border);
 }
 
-/* Firefox scrollbar */
 .roadmap-box {
   scrollbar-width: thin;
   scrollbar-color: var(--ih-accent-mid) transparent;
@@ -290,10 +295,8 @@
   line-height: 1.55;
   font-size: 0.9rem;
   max-height: 400px;
-  /* still enable scrolling */
   overflow-y: auto;
   font-family: inherit;
-  /* use regular font instead of monospace */
   padding-right: 8px;
 }
 
@@ -335,7 +338,6 @@
   color: var(--ih-accent-strong);
 }
 
-/* Honeycomb Grid Layout */
 .honeycomb-container {
   position: absolute;
   top: 0;
@@ -347,15 +349,12 @@
   cursor: grab;
   user-select: none;
 
-  /* Ambient Background */
   background: radial-gradient(circle at 50% 50%, var(--ih-bg-soft) 0%, var(--ih-bg-dark) 100%);
 
-  /* Fog/Fade effect at edges */
   mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
   -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
 }
 
-/* Subtle background particles/noise for texture */
 .honeycomb-container::before {
   content: "";
   position: absolute;
@@ -379,7 +378,6 @@
 
 .honeycomb-container.dragging .honeycomb-cell {
   pointer-events: none;
-  /* disables hover bugs while quickly panning */
 }
 
 .honeycomb {
@@ -390,9 +388,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 1620px;
-  /* force exactly 9 hexagons per row (9 * 180px) */
   min-width: 1620px;
-  /* prevent flexbox shrinking */
   padding: 0;
   margin: 0;
   list-style: none;
@@ -401,9 +397,7 @@
 .honeycomb-cell {
   width: 160px;
   height: 184px;
-  /* width * 1.1547 for perfect hex */
   margin: -30px 10px 0 10px;
-  /* Reduced negative margin for vertical gap, increased side margin for horizontal gap */
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: var(--ih-bg-a94);
   backdrop-filter: blur(4px);
@@ -427,13 +421,11 @@
   cursor: wait;
 }
 
-/* 9-8-9-8 Pattern. Total cycle = 17 elements */
 .honeycomb-cell:nth-child(17n+10) {
   margin-left: 100px;
-  /* (160 + 20)/2 + 10 = 100px to maintain perfect staggered alignment */
+
 }
 
-/* 1st row does not need negative margin top */
 .honeycomb-cell:nth-child(-n+9) {
   margin-top: 0;
 }
@@ -442,32 +434,25 @@
   transform: scale(1.1);
   z-index: 10;
   background: var(--ih-accent);
-  /* Accent color from design */
 }
 
-/* Empty Cell Styling */
 .empty-cell {
   background: var(--ih-bg-a94);
-  /* Lekko widoczne transparentne tło */
   border: 1px solid var(--ih-border-dark);
-  /* opcjonalny outline w css na przyszłosc, choć clip path go ucieło */
   cursor: default;
 }
 
 .is-hidden {
   opacity: 0;
   pointer-events: none;
-  /* preserve layout space but hide visually */
 }
 
 .empty-cell:hover {
   background: var(--ih-bg-a94);
-  /* lekki hover glow na pustych, by też 'żyły' */
   transform: scale(1.02);
   z-index: 1;
 }
 
-/* Text Content within Hexagon */
 .honeycomb-content {
   display: flex;
   flex-direction: column;
@@ -536,7 +521,6 @@
   font-size: 12px;
 }
 
-/* Successfully completed state for hexagon content */
 .honeycomb-content.is-completed {
   background: var(--ih-success-soft);
 }
@@ -545,7 +529,6 @@
   border: 1px solid var(--ih-success-border);
 }
 
-/* Skeletons */
 .skeleton-loader {
   animation: pulse 1.5s infinite ease-in-out;
 }
@@ -564,7 +547,51 @@
   }
 }
 
-/* Modal Overlay -Centered */
+/* skeleton loadery */
+.skeleton-title {
+  height: 20px;
+  width: 40%;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  height: 14px;
+  width: 100%;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+.skeleton-option {
+  height: 44px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.skeleton-textarea {
+  height: 100px;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-stage {
+  height: 60px;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.skeleton-marker {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
 .difficulty-overlay {
   position: fixed;
   top: 0;
@@ -860,33 +887,7 @@
 }
 
 
-.loading-tasks-view {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 0;
-  gap: 15px;
-}
 
-.spinner-border {
-  width: 40px;
-  height: 40px;
-  border: 4px solid var(--ih-border-dark);
-  border-top: 4px solid var(--ih-accent-strong);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 .difficulty-actions {
   display: flex;
