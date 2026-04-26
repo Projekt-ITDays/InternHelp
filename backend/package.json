@@ -27,6 +27,7 @@
     "@langchain/google": "^0.1.8",
     "@langchain/google-genai": "^2.1.26",
     "@langchain/langgraph": "^1.2.5",
+    "@langchain/mongodb": "^1.1.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
@@ -95,6 +96,10 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
+    
   }
 }

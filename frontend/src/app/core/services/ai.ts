@@ -34,9 +34,9 @@ export class Ai {
     return this.http.post<{ answer: any }>(this.apiUrl, { prompt });
   }
 
-  submitSurveyPrompt(prompt: string, userId: string): Observable<any> {
+  submitSurveyPrompt(prompt: string): Observable<any> {
     const url = `${environment.apiUrl}/ai/survey-results`;
-    return this.http.post<any>(url, { prompt, userId });
+    return this.http.post<any>(url, { prompt });
   }
 
   // Pobieranie konceptów JSON z uwzględnieniem poziomu i wykluczeń

@@ -1,4 +1,4 @@
-import { Component, signal, computed, OnInit, inject } from '@angular/core';
+import { Component, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -30,6 +30,7 @@ import {
 import { ExperienceService } from '../../core/services/experience.service';
 import { Ai } from '../../core/services/ai';
 import { Navbar } from '../../shared/navbar/navbar';
+import { AuthService } from '../../core/services/auth.service';
 
 // ── Interfaces ──
 
@@ -67,6 +68,7 @@ interface UserPlan {
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [CommonModule, NgIconComponent, Navbar],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -103,7 +105,8 @@ export class Dashboard implements OnInit {
   constructor(
     private router: Router,
     private experienceService: ExperienceService,
-    private aiService: Ai
+    private aiService: Ai,
+    private authService: AuthService
   ) { }
 
 
@@ -155,6 +158,12 @@ export class Dashboard implements OnInit {
     }
 
     try {
+      const hasToken = await this.authService.ensureAccessToken();
+      if (!hasToken) {
+        this.plansLoading.set(false);
+        return;
+      }
+
       const userPlans = await this.aiService.getUserPlans();
       if (userPlans && userPlans.length > 0) {
         this.sourcePlans.set(userPlans);

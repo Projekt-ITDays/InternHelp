@@ -59,9 +59,13 @@ export class AiController {
     this.aiService.sendSurveyData(surveyData);
     return { message: 'Survey data received' };
   }
+  @UseGuards(AuthGuard)
   @Post('survey-results')
-  async streamSurveyResults(@Body() data: AgentPayloadDto) {
-    const userId = data.userId;
+  async streamSurveyResults(
+    @Body() data: AgentPayloadDto,
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    const userId = req.user.sub;
     const userprompt = data.prompt;
     return this.aiAgentService.getAgentResponse(userId, userprompt);
   }
