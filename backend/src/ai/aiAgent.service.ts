@@ -12,6 +12,7 @@ import { GoogleGenerativeAI, TaskType } from "@google/generative-ai";
 import { MongoClient } from "mongodb";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { MongoDBAtlasVectorSearch } from "@langchain/mongodb"
+import { MemorySaver } from "@langchain/langgraph";
 
 
 
@@ -24,6 +25,7 @@ export class AiAgentService  implements OnModuleInit  , OnModuleDestroy{
     ) { 
 
     }
+    checkpointer = new MemorySaver();
     private mongoUri = process.env.MONGODB_URI || process.env.MANGO_URL || process.env.MONGO_URI;
     vectorStore : MongoDBAtlasVectorSearch;
     collection : any;
