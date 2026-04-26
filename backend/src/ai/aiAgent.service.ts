@@ -1,4 +1,4 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
+import { BadRequestException, HttpException, HttpStatus, Injectable, OnModuleDestroy, OnModuleInit, ServiceUnavailableException } from "@nestjs/common";
 import { ChatGoogle } from "@langchain/google";
 import { createAgent, createMiddleware, SystemMessage, tool, ToolMessage, ToolRuntime } from "langchain";
 import { z } from "zod";
@@ -25,6 +25,16 @@ export class AiAgentService  implements OnModuleInit  , OnModuleDestroy{
     ) { 
 
     }
+    private readonly MAX_PROMPT_LENGTH = 2000;
+    private readonly RATE_LIMIT_WINDOW_MS = 60_000;
+    private readonly MAX_REQUESTS_PER_WINDOW = 5;
+    private readonly MAX_IN_FLIGHT_PER_USER = 1;
+    private readonly SURVEY_CACHE_TTL_MS = 60_000;
+
+    private readonly requestCounters = new Map<string, number[]>();
+    private readonly inFlightByUser = new Map<string, number>();
+    private readonly surveyCache = new Map<string, { data: SurveysEntity | null; expiresAt: number }>();
+
     checkpointer = new MemorySaver();
     private mongoUri = process.env.MONGODB_URI || process.env.MANGO_URL || process.env.MONGO_URI;
     vectorStore : MongoDBAtlasVectorSearch;
@@ -104,7 +114,8 @@ testprompt(){
 prompt = `Jesteś elitarnym Architektem Kariery . Twoim zadaniem jest tworzenie wysoce spersonalizowanych, realistycznych i bogatych w detale planów rozwoju (roadmap) dla użytkowników, opartych na ich rzeczywistym doświadczeniu i celach.
 
 ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
-1) Użyj ID użytkownika przekazanego na końcu tego promptu, aby wywołać WSZYSTKIE poniższe narzędzia i zebrać o nim pełne informacje:
+1) Użyj ID użytkownika przekazanego na końcu tego promptu, aby wywołać narzędzie get_profile_snapshot({ userId }) jako pierwsze źródło danych (zawiera pełny profil). Jeśli któraś sekcja profilu jest pusta, dopytaj narzędziami szczegółowymi.
+2) Dostępne narzędzia szczegółowe:
 - get_education({ userId })
 - get_experience({ userId })
 - get_intrest({ userId })
@@ -112,9 +123,9 @@ ZASADY OBOWIĄZKOWE (KRYTYCZNE DLA DZIAŁANIA SYSTEMU):
 - retrive({ query: userPrompt }) - to narzędzie pozwoli Ci pobrać dodatkowe informacje z bazy wiedzy na temat kariery i rozwoju zawodowego, które mogą być istotne dla użytkownika.
 - get_abilities({ userId })
 - get_time_left({userID})
-2) Na podstawie danych zwróconych przez powyższe narzędzia, stwórz spersonalizowany plan rozwoju kariery, który będzie realistyczny i dostosowany do unikalnej sytuacji użytkownika. Uwzględnij jego edukację, doświadczenie, zainteresowania, cele zawodowe, umiejętności oraz czas, jaki ma do dyspozycji. Wykorzystaj również informacje z bazy wiedzy, jeśli są dostępne.
-3) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
-4) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user". Nie halucynuj danych o użytkowniku.
+3) Na podstawie danych zwróconych przez powyższe narzędzia, stwórz spersonalizowany plan rozwoju kariery, który będzie realistyczny i dostosowany do unikalnej sytuacji użytkownika. Uwzględnij jego edukację, doświadczenie, zainteresowania, cele zawodowe, umiejętności oraz czas, jaki ma do dyspozycji. Wykorzystaj również informacje z bazy wiedzy, jeśli są dostępne.
+4) Dopiero po pomyślnym zebraniu wszystkich powyższych danych przygotuj finalną odpowiedź.
+5) Nigdy nie wymyślaj userId i nie używaj wartości testowych typu "test_user". Nie halucynuj danych o użytkowniku.
 
 WYTYCZNE DLA TWORZENIA PLANU (Jeśli użytkownik prosi o plan/roadmapę):
 - Zwróć wynik WYŁĄCZNIE jako poprawny obiekt JSON, bez żadnego dodatkowego tekstu przed lub po.
@@ -157,9 +168,65 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
 - Jeśli nie masz danych, aby odpowiedzieć na pytanie, przyznaj to wprost.
 `
 
+    private async getLatestSurveyData(userId: string): Promise<SurveysEntity | null> {
+        const now = Date.now();
+        const cached = this.surveyCache.get(userId);
+        if (cached && cached.expiresAt > now) {
+            return cached.data;
+        }
+
+        const surveyData = await this.surveysRepository.findOne({ where: { userId }, order: { createdAt: "DESC" } });
+        this.surveyCache.set(userId, { data: surveyData, expiresAt: now + this.SURVEY_CACHE_TTL_MS });
+        return surveyData;
+    }
+
+    private enforceUsageLimits(userId: string, userPrompt: string): void {
+        if (!userPrompt?.trim()) {
+            throw new BadRequestException("Prompt nie może być pusty.");
+        }
+
+        if (userPrompt.length > this.MAX_PROMPT_LENGTH) {
+            throw new BadRequestException(`Prompt jest za długi. Maksymalna długość to ${this.MAX_PROMPT_LENGTH} znaków.`);
+        }
+
+        const now = Date.now();
+        const windowStart = now - this.RATE_LIMIT_WINDOW_MS;
+
+        const existingCalls = this.requestCounters.get(userId) ?? [];
+        const validCalls = existingCalls.filter((timestamp) => timestamp >= windowStart);
+
+        if (validCalls.length >= this.MAX_REQUESTS_PER_WINDOW) {
+            throw new HttpException("Za dużo zapytań do agenta. Odczekaj chwilę i spróbuj ponownie.", HttpStatus.TOO_MANY_REQUESTS);
+        }
+
+        validCalls.push(now);
+        this.requestCounters.set(userId, validCalls);
+
+        const inFlight = this.inFlightByUser.get(userId) ?? 0;
+        if (inFlight >= this.MAX_IN_FLIGHT_PER_USER) {
+            throw new HttpException("Poprzednie zapytanie jest jeszcze przetwarzane. Poczekaj na zakończenie.", HttpStatus.TOO_MANY_REQUESTS);
+        }
+        this.inFlightByUser.set(userId, inFlight + 1);
+    }
+
+    private releaseInFlight(userId: string): void {
+        const inFlight = this.inFlightByUser.get(userId) ?? 0;
+        if (inFlight <= 1) {
+            this.inFlightByUser.delete(userId);
+            return;
+        }
+        this.inFlightByUser.set(userId, inFlight - 1);
+    }
+
+    private isModelUnavailable(error: any): boolean {
+        const status = error?.status ?? error?.response?.status ?? error?.code;
+        const text = String(error?.message ?? error ?? "").toLowerCase();
+        return status === 429 || status === 503 || text.includes("429") || text.includes("503") || text.includes("quota") || text.includes("rate") || text.includes("overload") || text.includes("unavailable");
+    }
+
     getEducationTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } ,order : { createdAt : "DESC"}} );
+            const surveyData = await this.getLatestSurveyData(userId);
             if (!surveyData) {
                 return "Brak danych edukacyjnych dla tego użytkownika.";
             }
@@ -180,7 +247,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     );
     getExperienceTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId }  ,order : { createdAt : "DESC"}} );
+            const surveyData = await this.getLatestSurveyData(userId);
             if (!surveyData) {
                 return "Brak danych o doświadczeniu dla tego użytkownika.";
             }
@@ -199,7 +266,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     getInterestTool = tool(
         async ({ userId }, config: ToolRuntime) => {
             const writer = config.writer;
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } ,order : { createdAt : "DESC"}} );
+            const surveyData = await this.getLatestSurveyData(userId);
             if (writer) {
                 writer(`Pobieranie danych o zainteresowaniach użytkownika o id ${userId}...`);
             }
@@ -222,7 +289,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     )
     getAbilitiesTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } ,order : { createdAt : "DESC"}} );
+            const surveyData = await this.getLatestSurveyData(userId);
             if (!surveyData) {
                 return "Brak danych o umiejętnościach dla tego użytkownika.";
             
@@ -242,7 +309,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
 
     getTimeleftTool = tool(
         async ({userID}) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId : userID} ,order : { createdAt : "DESC"}} );
+            const surveyData = await this.getLatestSurveyData(userID);
             if (!surveyData) {
                 return "Brak danych o czasie pozostałym do dyspozycji dla tego użytkownika.";
             }
@@ -259,9 +326,7 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
     )
     getGoalTool = tool(
         async ({ userId }) => {
-            const surveyData = await this.surveysRepository.findOne({ where: { userId } , order : { createdAt : "DESC"}} ,
-                
-             );
+            const surveyData = await this.getLatestSurveyData(userId);
             if (!surveyData) {
                 return "Brak danych o celach zawodowych dla tego użytkownika.";
             }
@@ -277,22 +342,72 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
             }),
         }
     )
+
+    getProfileSnapshotTool = tool(
+        async ({ userId }) => {
+            const surveyData = await this.getLatestSurveyData(userId);
+            if (!surveyData) {
+                return {
+                    userId,
+                    found: false,
+                    message: "Brak ankiety dla tego użytkownika."
+                };
+            }
+
+            return {
+                userId,
+                found: true,
+                education: {
+                    major: surveyData.Major,
+                    yearOfStudy: surveyData.YearOfStudy,
+                    university: surveyData.University,
+                    graduationYear: surveyData.GraduationYear,
+                },
+                experience: surveyData.Expierience,
+                sideProjects: surveyData.SideProjectsHobby,
+                interests: surveyData.Inrest,
+                strengths: surveyData.Strengths,
+                weaknesses: surveyData.Weaknesses,
+                goal: surveyData.PreferredInternshipType,
+                timeLeftMonths: surveyData.TimeLeft,
+            };
+        },
+        {
+            name: "get_profile_snapshot",
+            description: "Zwraca pełny profil użytkownika z ankiety jednym odczytem bazy.",
+            schema: z.object({
+                userId: z.string().uuid().describe("Id użytkownika (UUID)"),
+            }),
+        },
+    );
+
     async getAgentResponse(userId: string, userPrompt: string) {
+        this.enforceUsageLimits(userId, userPrompt);
+
         const agent = createAgent({
             model: this.model,
-            tools: [this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve , this.getAbilitiesTool,this.getTimeleftTool],
+            tools: [this.getProfileSnapshotTool, this.getEducationTool, this.getExperienceTool, this.getInterestTool, this.getGoalTool, this.retrieve , this.getAbilitiesTool,this.getTimeleftTool],
             middleware: [this.dynamicModelSelection ,this.handleToolErros],
             systemPrompt: `${this.prompt}\n\n=================\nID AKTUALNEGO UŻYTKOWNIKA TO: ${userId}. Użyj tego ID jako parametru userId wywołując wszystkie cztery narzędzia przed zredagowaniem odpowiedzi.\n=================`,
         });
 
-        console.log(this.model )    
-        const result = await agent.invoke(
-            {
-                messages: [{ role: "user", content: userPrompt }]
+        try {
+            const result = await agent.invoke(
+                {
+                    messages: [{ role: "user", content: userPrompt }]
 
+                }
+            );
+            return await this.extractAndSavePlan(userId, result);
+        } catch (error: any) {
+            console.error("Błąd wywołania modelu AI:", error);
+            if (this.isModelUnavailable(error)) {
+                throw new ServiceUnavailableException("Model AI jest chwilowo niedostępny lub przeciążony. Spróbuj ponownie za moment.");
             }
-        );
-        return await this.extractAndSavePlan(userId, result);
+            throw new ServiceUnavailableException("Nie udało się wygenerować odpowiedzi AI. Spróbuj ponownie później.");
+        } finally {
+            this.releaseInFlight(userId);
+        }
     }
 
     getTools() {
