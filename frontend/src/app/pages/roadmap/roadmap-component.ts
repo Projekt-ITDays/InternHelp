@@ -7,19 +7,8 @@ import { RoadmapStorageService } from '../../core/services/roadmap-storage.servi
 import { AuthService } from '../../core/services/auth.service';
 import { marked } from 'marked';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  heroInformationCircle,
-  heroWrenchScrewdriver,
-  heroAcademicCap,
-  heroRocketLaunch,
-  heroCheck,
-  heroClipboardDocumentList,
-  heroXMark,
-  heroChevronUp,
-  heroChevronDown,
-  heroChevronLeft,
-  heroChevronRight
-} from '@ng-icons/heroicons/outline';
+import { heroCheck, heroClipboardDocumentList, heroXMark, heroChevronUp, heroChevronDown, heroChevronLeft, heroChevronRight, heroInformationCircle, heroWrenchScrewdriver, heroAcademicCap, heroRocketLaunch } from '@ng-icons/heroicons/outline';
+import { ExperienceService } from '../../core/services/experience.service';
 
 @Component({
   selector: 'app-roadmap',
@@ -57,11 +46,9 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   topicStack: any[] = [];
   isFetchingExtra: boolean = false;
 
-  // Interaction Modal state
   selectedCell: any | null = null;
   isSelectingDifficulty: boolean = false;
 
-  // Panning state
   isDragging = false;
   startX = 0;
   startY = 0;
@@ -98,7 +85,8 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private storage: RoadmapStorageService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private experienceService: ExperienceService
   ) { }
 
   updateParsedContent() {
@@ -368,7 +356,13 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
   loadFromLocalStorage(): boolean {
     if (!this.selectedPlan?._id) return false;
-    const saved = localStorage.getItem(`roadmap_state_${this.selectedPlan._id}`);
+
+    // Próba wczytania po ID, a jeśli nie ma - fallback do tytułu
+    let saved = localStorage.getItem(`roadmap_state_${this.selectedPlan._id}`);
+    if (!saved) {
+      saved = localStorage.getItem(`roadmap_state_${this.careerPath}`);
+    }
+
     if (saved) {
       try {
         const state = JSON.parse(saved);
@@ -608,6 +602,10 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
       this.checkCellCompletion();
       this.saveToLocalStorage();
+
+      // Dodawanie EXP do bazy SQL
+      const expGain = diff === 'Łatwy' ? 25 : (diff === 'Średni' ? 75 : 200);
+      this.experienceService.addExperience(expGain).catch(err => console.error('Błąd zapisu EXP:', err));
     } else {
       this.closedTasksError[taskIdx] = true;
     }
@@ -639,6 +637,10 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
         this.checkCellCompletion();
         this.saveToLocalStorage();
+
+        // Dodawanie EXP do bazy SQL
+        const expGain = (diff === 'Łatwy' ? 25 : (diff === 'Średni' ? 75 : 200)) * score;
+        this.experienceService.addExperience(expGain).catch(err => console.error('Błąd zapisu EXP:', err));
       } else {
         this.openTaskFeedbacks[taskIdx] = `Wynik: 0/2 pkt. Spróbuj ponownie: ${res?.feedback}`;
       }

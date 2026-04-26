@@ -1,10 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="app-container">
-  <!-- Original header removed to use unified Navbar -->
-
   <main class="main-content">
-    <!-- ... same as before ... -->
     <div class="input-section hero-style" *ngIf="!responseMessage">
       <div class="hero-info-column">
         <div class="info-badge">Wygeneruj swój plan</div>
@@ -50,7 +47,6 @@
         </div>
 
         <div class="search-bar-wrapper">
-          <span class="search-icon">🔍</span>
           <textarea [(ngModel)]="prompt"
             (keydown.enter)="!loading && prompt.trim() ? sendRequest() : null; $event.preventDefault()"
             [disabled]="loading"
@@ -73,7 +69,6 @@
         </div>
 
         <div class="survey-hint" (click)="goToSurvey()">
-          <div class="survey-hint-icon">📋</div>
           <div class="survey-hint-text">
             <strong>Uzyskaj lepsze powiązania z rynkiem!</strong>
             <span>Po wypełnieniu ankiety profilowej nasza sztuczna inteligencja zaproponuje znacznie precyzyjniejszą i

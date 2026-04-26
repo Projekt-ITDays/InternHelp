@@ -30,4 +30,20 @@ export class ExperienceHandlerController {
     async getUserProgress(@Req() req: Request & { user: { sub: string } }) {
         return this.experienceHandlerService.getUserProgress(req.user.sub);
     }
+
+    @Post('add')
+    async addExperience(
+        @Req() req: Request & { user: { sub: string } },
+        @Body('amount') amount: number
+    ) {
+        return this.experienceHandlerService.addExperience(req.user.sub, amount || 0);
+    }
+
+    @Post('remove')
+    async removeExperience(
+        @Req() req: Request & { user: { sub: string } },
+        @Body('amount') amount: number
+    ) {
+        return this.experienceHandlerService.removeExperience(req.user.sub, amount || 0);
+    }
 }

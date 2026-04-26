@@ -98,14 +98,28 @@
 
     <ng-template #loginFormTemplate>
         <div class="login-card">
-            <form class="login-form" (submit)="onLoginSubmit($event)" novalidate>
+            <form class="login-form" (submit)="isRegisterMode() ? onRegisterSubmit($event) : onLoginSubmit($event)" novalidate>
+                <h2 class="auth-title">{{ isRegisterMode() ? 'Stwórz konto' : 'Zaloguj się' }}</h2>
                 <p class="error-message">{{ loginError() }}</p>
+                
                 <div class="credentials-group">
                     <input type="text" name="username" class="username-input" [value]="username()"
                         (input)="onUsernameInput($event)" autocomplete="username" placeholder="Login" />
+                    
+                    @if (isRegisterMode()) {
+                        <input type="email" name="email_placeholder" class="username-input" 
+                               placeholder="Email (placeholder)" disabled />
+                    }
+
                     <input type="password" name="password" class="password-input" [value]="password()"
                         (input)="onPasswordInput($event)" autocomplete="current-password" placeholder="Hasło" />
+
+                    @if (isRegisterMode()) {
+                        <input type="password" name="confirmPassword" class="password-input" [value]="confirmPassword()"
+                            (input)="onConfirmPasswordInput($event)" autocomplete="new-password" placeholder="Powtórz hasło" />
+                    }
                 </div>
+
                 <div class="captcha-box">
                     <ngx-recaptcha2 #captchaElem
                         [siteKey]="recaptchaSiteKey"
@@ -116,31 +130,34 @@
                         (expire)="handleCaptchaExpired()">
                     </ngx-recaptcha2>
                 </div>
-                <button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
-                    Nie pamiętam hasła
-                </button>
 
-                <div class="login-actions">
-                    <button type="submit" class="login-button">Zaloguj</button>
-                    <button type="button" class="register-button" (click)="openRegistration()">
-                        Zarejestruj
+                @if (!isRegisterMode()) {
+                    <button type="button" class="forgot-button" (click)="onForgotPasswordClick()">
+                        Nie pamiętam hasła
                     </button>
-                </div>
 
-                <div class="oauth-placeholder">
-                    <button type="button" class="google-login-button" (click)="loginWithGoogle()">
-                        <img class="google-login-icon" src="/google-icon.svg" alt="" aria-hidden="true" />
-                        <span>Zaloguj przez Google</span>
-                    </button>
-                </div>
+                    <div class="login-actions">
+                        <button type="submit" class="login-button">Zaloguj</button>
+                        <button type="button" class="register-button secondary" (click)="openRegistration()">
+                            Zarejestruj
+                        </button>
+                    </div>
+
+                    <div class="oauth-placeholder">
+                        <button type="button" class="google-login-button" (click)="loginWithGoogle()">
+                            <img class="google-login-icon" src="/google-icon.svg" alt="" aria-hidden="true" />
+                            <span>Zaloguj przez Google</span>
+                        </button>
+                    </div>
+                } @else {
+                    <div class="login-actions">
+                        <button type="submit" class="login-button">Zarejestruj się</button>
+                        <button type="button" class="forgot-button" (click)="cancelRegistration()">
+                            Wróć do logowania
+                        </button>
+                    </div>
+                }
             </form>
         </div>
     </ng-template>
-</div>
-@if (showRegistration()) {
-  <app-registration 
-    (close)="showRegistration.set(false)"
-    [initialEmail]="username()" 
-    [initialPassword]="password()"
-  />
-}
+</div>

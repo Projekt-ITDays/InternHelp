@@ -93,6 +93,36 @@ export class ExperienceHandlerService {
         };
     }
 
+    async addExperience(userId: string, amount: number) {
+        const user = await this.userRepository.findOne({ where: { id: userId } });
+        if (!user) throw new NotFoundException('Użytkownik nie znaleziony');
+
+        await this.dataSource.transaction(async (manager) => {
+            await manager.increment(userEntity, { id: userId }, 'experience', amount);
+            const updatedUser = await manager.findOne(userEntity, { where: { id: userId } });
+            if (updatedUser) {
+                updatedUser.level = this.calculateLevel(updatedUser.experience);
+                await manager.save(updatedUser);
+            }
+        });
+
+        return this.getUserProgress(userId);
+    }
+
+    async removeExperience(userId: string, amount: number) {
+        const user = await this.userRepository.findOne({ where: { id: userId } });
+        if (!user) throw new NotFoundException('Użytkownik nie znaleziony');
+
+        await this.dataSource.transaction(async (manager) => {
+            const newXp = Math.max(0, user.experience - amount);
+            user.experience = newXp;
+            user.level = this.calculateLevel(newXp);
+            await manager.save(user);
+        });
+
+        return this.getUserProgress(userId);
+    }
+
     async getUserProgress(userId: string) {
         // Jedno zapytanie JOIN zamiast dwóch osobnych SELECT-ów
         const user = await this.userRepository.findOne({

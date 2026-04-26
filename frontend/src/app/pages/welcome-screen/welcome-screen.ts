@@ -66,6 +66,8 @@ export class WelcomeScreen implements OnInit, OnDestroy {
   protected activeFeatureId = signal<string>(this.featureCards[0].id);
   protected username = signal<string>('');
   protected password = signal<string>('');
+  protected confirmPassword = signal<string>('');
+  protected isRegisterMode = signal<boolean>(false);
   protected captchaToken = signal<string | null>(null);
   protected showErrorWidget = signal<boolean>(false);
   protected loginError = signal<string>('');
@@ -158,6 +160,10 @@ export class WelcomeScreen implements OnInit, OnDestroy {
 
   protected onPasswordInput(event: Event): void {
     this.password.set(this.getInputValue(event));
+  }
+
+  protected onConfirmPasswordInput(event: Event): void {
+    this.confirmPassword.set(this.getInputValue(event));
   }
 
   protected async onLoginSubmit(event: Event): Promise<void> {
@@ -255,9 +261,59 @@ export class WelcomeScreen implements OnInit, OnDestroy {
     this.router.navigate(['/ai/ask']);
   }
 
-  protected showRegistration = signal(false);
   protected openRegistration() {
-    this.showRegistration.set(true);
+    this.isRegisterMode.set(true);
+    this.loginError.set('');
+  }
+
+  protected cancelRegistration() {
+    this.isRegisterMode.set(false);
+    this.loginError.set('');
+  }
+
+  protected async onRegisterSubmit(event?: Event): Promise<void> {
+    if (event) event.preventDefault();
+    
+    const user = this.username().trim();
+    const pass = this.password().trim();
+    const confirm = this.confirmPassword().trim();
+
+    if (!user || !pass || !confirm) {
+      this.loginError.set('Wypełnij wszystkie pola.');
+      this.showErrorWidget.set(true);
+      return;
+    }
+
+    if (pass !== confirm) {
+      this.loginError.set('Hasła nie są zgodne.');
+      this.showErrorWidget.set(true);
+      return;
+    }
+
+    if (!this.captchaToken()) {
+      this.loginError.set('Zaznacz pole "Nie jestem robotem".');
+      this.showErrorWidget.set(true);
+      return;
+    }
+
+    const payload: LoggingDto = {
+      username: this.username(),
+      password: this.password(),
+      captchaToken: this.captchaToken() || '',
+    };
+
+    try {
+      await this.authService.register(payload).toPromise();
+      Swal.fire({
+        icon: 'success',
+        title: 'Rejestracja pomyślna!',
+        text: 'Teraz możesz się zalogować.',
+      });
+      this.isRegisterMode.set(false);
+    } catch (error) {
+      this.loginError.set(this.extractLoginErrorMessage(error));
+      this.showErrorWidget.set(true);
+    }
   }
 
   private extractErrorMessage(err: unknown, fallback: string): string {
