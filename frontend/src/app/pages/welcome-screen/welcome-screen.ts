@@ -311,6 +311,7 @@ export class WelcomeScreen implements OnInit, OnDestroy {
       });
       this.isRegisterMode.set(false);
     } catch (error) {
+      this.resetCaptchaState();
       this.loginError.set(this.extractLoginErrorMessage(error));
       this.showErrorWidget.set(true);
     }

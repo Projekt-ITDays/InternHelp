@@ -10,5 +10,9 @@ export class LoggingCredentialsDto {
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'Hasło musi zawierać wielką literę, małą literę oraz cyfrę lub znak specjalny',
   })  
-  password: string ;
+    @IsString()
+    password: string ;
+
+    @IsString()
+    captchaToken: string;
 }
