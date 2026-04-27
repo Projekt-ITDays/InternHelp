@@ -11,15 +11,15 @@ export class AuthController {
 
     constructor(
         private authService: AuthService
-    ){
+    ) {
 
     }
-    
+
     @Post('login')
-    async login(@Body() payload: LoginDto, @Res({passthrough : true}) res: Response)  {
-        const resoult =  await this.authService.login(payload)
+    async login(@Body() payload: LoginDto, @Res({ passthrough: true }) res: Response) {
+        const resoult = await this.authService.login(payload)
         // secure false dla pordukcji bo nie mamy https
-        res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax',maxAge: 3 * 24 * 60 * 60 * 1000 })
+        res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax', maxAge: 3 * 24 * 60 * 60 * 1000 })
         return {
             accesstoken: resoult.accesstoken,
             userId: resoult.userId,
@@ -29,38 +29,38 @@ export class AuthController {
     }
 
     @Post('register')
-    async register(@Body() payload: LoggingCredentialsDto)  {
+    async register(@Body() payload: LoggingCredentialsDto) {
         await this.authService.register(payload)
     }
     @Post('refresh')
-    async refreshToken(@Req() req: Request, @Res({passthrough : true}) res: Response) {
+    async refreshToken(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
         const refreshToken = req.cookies['refreshToken']
-        if(!refreshToken) {
+        if (!refreshToken) {
             throw new Error('No refresh token provided')
         }
         const resoult = await this.authService.refreshToken(refreshToken)
         // Tutaj tak samo wylacznie do produkcji secure true
-        res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax',maxAge: 3 * 24 * 60 * 60 * 1000 })
+        res.cookie('refreshToken', resoult.refreshToken, { httpOnly: true, secure: false, sameSite: 'lax', maxAge: 3 * 24 * 60 * 60 * 1000 })
         return {
             accesstoken: resoult.accesstoken,
-            
+
         }
     }
     @UseGuards(AuthGuard)
     @Post('logout')
-    async logout(@Req() req: Request & { user: { sub: string } }, @Res({passthrough : true}) res: Response) {
-         await this.authService.logout(req.user.sub)
-         res.clearCookie('refreshToken', { httpOnly: true, secure: false, sameSite: 'lax' })
+    async logout(@Req() req: Request & { user: { sub: string } }, @Res({ passthrough: true }) res: Response) {
+        await this.authService.logout(req.user.sub)
+        res.clearCookie('refreshToken', { httpOnly: true, secure: false, sameSite: 'lax' })
         return { message: `Użytkownik został wylogowany` };
     }
     @UseGuards(GoogleGuard)
     @Get('google/login')
-    async googleLogin() {}
-    
-     @UseGuards(GoogleGuard)
+    async googleLogin() { }
+
+    @UseGuards(GoogleGuard)
     @Get('google/callback')
-    async googleCallback(@Req() req: Request & { user: any },@Res() res: Response) {
-        const response  = await this.authService.generateToken(req.user.id)
-        res.redirect(`http://localhost?token=${encodeURIComponent(response.accesstoken)}&username=${encodeURIComponent(req.user.username)}&role=${encodeURIComponent(req.user.role)}`)
+    async googleCallback(@Req() req: Request & { user: any }, @Res() res: Response) {
+        const response = await this.authService.generateToken(req.user.id)
+        res.redirect(`http://localhost?token=${encodeURIComponent(response.accesstoken)}&username=${encodeURIComponent(req.user.username)}&role=${encodeURIComponent(req.user.role)}&userId=${encodeURIComponent(req.user.id)}`)
     }
 }
