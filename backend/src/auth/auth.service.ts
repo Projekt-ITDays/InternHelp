@@ -104,6 +104,7 @@ export class AuthService {
                 })
             });
 
+            const data = await response.json() as any;
             console.log('reCAPTCHA Response Data:', data);
 
             if (data.tokenProperties && data.tokenProperties.valid === true) {
