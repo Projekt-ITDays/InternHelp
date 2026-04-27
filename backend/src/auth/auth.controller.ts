@@ -61,6 +61,7 @@ export class AuthController {
     @Get('google/callback')
     async googleCallback(@Req() req: Request & { user: any }, @Res() res: Response) {
         const response = await this.authService.generateToken(req.user.id)
-        res.redirect(`http://localhost?token=${encodeURIComponent(response.accesstoken)}&username=${encodeURIComponent(req.user.username)}&role=${encodeURIComponent(req.user.role)}&userId=${encodeURIComponent(req.user.id)}`)
+        const frontendURL = process.env.FRONTEND_URL || 'http://localhost'
+        res.redirect(`${frontendURL}?token=${encodeURIComponent(response.accesstoken)}&username=${encodeURIComponent(req.user.username)}&role=${encodeURIComponent(req.user.role)}&userId=${encodeURIComponent(req.user.id)}`)
     }
 }
