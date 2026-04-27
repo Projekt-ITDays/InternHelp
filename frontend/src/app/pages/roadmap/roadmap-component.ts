@@ -121,12 +121,17 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       this.selectedPlan = plan;
       this.careerPath = this.getPlanTitle(plan);
 
-      // Spróbuj wczytać z localStorage, jeśli nie ma - inicjalizuj
-      if (!this.loadFromLocalStorage()) {
+      // 1. Spróbuj wczytać z MongoDB
+      const serverState = await this.storage.getGridState(planId);
+      if (serverState) {
+        this.applyState(serverState);
+      }
+      // 2. Jeśli nie ma na serwerze, spróbuj localStorage (fallback)
+      else if (!this.loadFromLocalStorage()) {
+        // 3. Jeśli nigdzie nie ma, inicjalizuj od zera
         await this.initializeGraph();
       }
 
-      // Obsługa parametrów z dashboardu (otwieranie konkretnego zadania)
       this.route.queryParams.subscribe(params => {
         if (params['topic']) {
           this.handleAutoOpenTask(params['topic'], params['diff'], params['tab']);
@@ -351,7 +356,25 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       currentLevel: this.currentLevel,
       careerPath: this.careerPath
     };
+
+    // Zapis lokalny (szybki fallback)
     localStorage.setItem(`roadmap_state_${this.selectedPlan._id}`, JSON.stringify(state));
+
+    // Zapis w MongoDB
+    this.storage.saveGridState(this.selectedPlan._id, state);
+  }
+
+  applyState(state: any) {
+    if (!state || !state.gridCells || state.gridCells.length !== 150) {
+      return;
+    }
+    this.gridCells = state.gridCells;
+    this.totalScore = state.totalScore || 0;
+    this.pointsPerDifficulty = state.pointsPerDifficulty || { 'Łatwy': 0, 'Średni': 0, 'Trudny': 0 };
+    this.topicStack = state.topicStack || [];
+    this.currentLevel = state.currentLevel || 1;
+    this.isGenerating = false;
+    this.cdr.detectChanges();
   }
 
   loadFromLocalStorage(): boolean {

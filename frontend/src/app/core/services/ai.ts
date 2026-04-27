@@ -115,4 +115,12 @@ export class Ai {
   async deleteUserSurvey(id: number): Promise<any> {
     return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/surveys/${id}`, { withCredentials: true }));
   }
+
+  async saveGridState(planId: string, state: any): Promise<any> {
+    return firstValueFrom(this.http.patch<any>(`${environment.apiUrl}/ai/plans/${planId}/grid-state`, state, { withCredentials: true }));
+  }
+
+  async getGridState(planId: string): Promise<any> {
+    return firstValueFrom(this.http.get<any>(`${environment.apiUrl}/ai/plans/${planId}/grid-state`, { withCredentials: true }));
+  }
 }

@@ -102,7 +102,7 @@ export class AiController {
   @Patch('plans/:id/grid-state')
   async saveGridState(
     @Param('id') planId: string,
-    @Body() body: { gridCells: any[]; topicStack: any[]; currentLevel: number },
+    @Body() body: { gridCells: any[]; topicStack: any[]; currentLevel: number; totalScore: number; pointsPerDifficulty: any },
     @Req() req: Request & { user: { sub: string } }
   ) {
     try {
@@ -119,7 +119,7 @@ export class AiController {
     @Req() req: Request & { user: { sub: string } }
   ) {
     const state = await this.aiAgentService.getGridState(planId, req.user.sub);
-    return { gridState: state };
+    return state;
   }
 
   @UseGuards(AuthGuard)
