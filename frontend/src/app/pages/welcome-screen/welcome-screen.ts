@@ -302,6 +302,9 @@ export class WelcomeScreen implements OnInit, OnDestroy {
       captchaToken: this.captchaToken() || '',
     };
 
+    console.log('Sending registration payload:');
+    console.table(payload);
+
     try {
       await this.authService.register(payload).toPromise();
       Swal.fire({
@@ -311,6 +314,10 @@ export class WelcomeScreen implements OnInit, OnDestroy {
       });
       this.isRegisterMode.set(false);
     } catch (error) {
+      console.error('Registration error occurred:', error);
+      if (error instanceof HttpErrorResponse) {
+        console.error('Backend error details:', error.error);
+      }
       this.resetCaptchaState();
       this.loginError.set(this.extractLoginErrorMessage(error));
       this.showErrorWidget.set(true);

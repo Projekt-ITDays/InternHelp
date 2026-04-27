@@ -10,5 +10,6 @@ export class LoginDto {
   password: string;
 
   @IsString()
+  @IsNotEmpty({ message: 'Token CAPTCHA jest wymagany' })
   captchaToken: string;
 }
