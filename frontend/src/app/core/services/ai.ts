@@ -107,4 +107,12 @@ export class Ai {
   async updatePlanTitle(planId: string, title: string): Promise<any> {
     return firstValueFrom(this.http.patch<any>(`${environment.apiUrl}/ai/plans/${planId}/title`, { title }, { withCredentials: true }));
   }
+
+  async getUserSurveys(): Promise<any[]> {
+    return firstValueFrom(this.http.get<any[]>(`${environment.apiUrl}/ai/surveys`, { withCredentials: true }));
+  }
+
+  async deleteUserSurvey(id: number): Promise<any> {
+    return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/surveys/${id}`, { withCredentials: true }));
+  }
 }

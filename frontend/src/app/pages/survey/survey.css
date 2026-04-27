@@ -196,34 +196,65 @@
 }
 
 .actions {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--ih-surface-a14);
+}
+
+.btn-save-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--ih-surface-a14);
+    border-radius: 2rem;
+    color: var(--ih-ink-soft);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-save-secondary:hover {
+    border-color: var(--ih-accent);
+    color: var(--ih-accent);
+    background: var(--ih-accent-soft);
 }
 
 .btn-submit-survey {
-	border: none;
-	background: var(--ih-button-bg);
-	color: var(--ih-button-text);
-	border-radius: 12px;
-	padding: 1rem 2rem;
-	font-size: 1.05rem;
-	font-weight: 700;
-	cursor: pointer;
-	transition: all 0.2s ease;
-	box-shadow: var(--ih-shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: var(--ih-bg-soft);
+    border: 1px solid var(--ih-surface-a14);
+    border-radius: 2rem;
+    color: var(--ih-ink);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--ih-shadow-sm);
 }
 
 .btn-submit-survey:hover:not(:disabled) {
-	background: var(--ih-button-bg-hover);
-	transform: translateY(-2px);
-	box-shadow: var(--ih-shadow-lg);
-	filter: brightness(1.1);
+    border-color: var(--ih-accent);
+    background: var(--ih-accent-soft);
+    color: var(--ih-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--ih-shadow-md);
 }
 
 .btn-submit-survey:disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
 }
 
 @media (max-width: 860px) {
@@ -236,4 +267,198 @@
 	.year-chips {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
+}
+
+.survey-header {
+    position: relative;
+    padding-top: 1rem;
+}
+
+.profiles-dropdown-container {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.header-actions-left {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+}
+
+.btn-quick-save {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--ih-bg-soft);
+    border: 1px solid var(--ih-surface-a14);
+    border-radius: 2rem;
+    color: var(--ih-ink);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-quick-save:hover {
+    border-color: #10b981; /* Greenish success color */
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.btn-toggle-profiles {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--ih-bg-soft);
+    border: 1px solid var(--ih-surface-a14);
+    border-radius: 2rem;
+    color: var(--ih-ink);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle-profiles:hover, .btn-toggle-profiles.active {
+    border-color: var(--ih-accent);
+    background: var(--ih-accent-soft);
+    color: var(--ih-accent);
+}
+
+.profiles-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 280px;
+    background: var(--ih-bg);
+    border: 1px solid var(--ih-surface-a14);
+    border-radius: 1rem;
+    box-shadow: var(--ih-shadow-lg);
+    z-index: 100;
+    overflow: hidden;
+    animation: dropdownSlide 0.2s ease-out;
+}
+
+@keyframes dropdownSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header {
+    padding: 0.75rem 1rem;
+    background: var(--ih-bg-soft);
+    border-bottom: 1px solid var(--ih-surface-a14);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ih-ink-soft);
+    font-weight: 700;
+}
+
+.dropdown-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid var(--ih-surface-a14);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: var(--ih-bg-soft);
+}
+
+.dropdown-empty {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: var(--ih-ink-soft);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    text-align: left;
+}
+
+.item-info strong {
+    font-size: 0.85rem;
+    color: var(--ih-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.item-info span {
+    font-size: 0.7rem;
+    color: var(--ih-ink-soft);
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
+
+.item-date {
+    font-size: 0.65rem !important;
+    color: #94a3b8 !important; /* A bit more readable gray */
+    opacity: 0.8;
+}
+
+.btn-delete-small {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--ih-ink-soft);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-delete-small:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .profiles-dropdown-container {
+        position: static;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    .profiles-dropdown {
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+.spin {
+    animation: ih-spin 1s linear infinite;
+}
+
+@keyframes ih-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

@@ -6,7 +6,6 @@
   background-color: var(--ih-bg);
 }
 
-/* Text line clamp (Tailwind v4 supports it, but Angular needs explicit) */
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
@@ -15,7 +14,6 @@
   line-clamp: 2;
 }
 
-/* Loading spinner */
 .plan-loader {
   width: 24px;
   height: 24px;
