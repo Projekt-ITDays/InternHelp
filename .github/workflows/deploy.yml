@@ -82,6 +82,7 @@ jobs:
             RECAPTCHA_PROJECT_ID=${{ secrets.RECAPTCHA_PROJECT_ID }}
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             RECAPTCHA_SITE_KEY=${{ secrets.RECAPTCHA_SITE_KEY }}
+            DB_SSL=true
             MANGO_URL=${{ secrets.MANGO_URL }}
             PORT=3000
 
