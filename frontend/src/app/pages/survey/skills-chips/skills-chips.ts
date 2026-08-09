@@ -57,6 +57,7 @@ export class SkillsChipsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Opcje do tego podkomponentu trzymamy wyłącznie w assets/soft-skills.json.
     this.http.get<any[]>('assets/soft-skills.json').pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (skills) => {
         this.allSkills = skills;
@@ -64,18 +65,10 @@ export class SkillsChipsComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: () => {
-        this.http.get<any[]>('assets/umiejetnosci_miekkie.json').pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-            next: (legacy) => {
-                this.allSkills = legacy.map((s: any) => ({id: s.nr, name: s.umiejetnosc}));
-                this.onRefreshSuggestions();
-                this.cdr.detectChanges();
-            },
-            error: () => {
-                this.allSkills = [{id: 1, name: 'Komunikacja'}, {id: 2, name: 'Praca zespołowa'}];
-                this.onRefreshSuggestions();
-                this.cdr.detectChanges();
-            }
-        });
+        // Jeśli asset nie wstanie, zostawiamy mały lokalny fallback zamiast starej, zaginionej nazwy pliku.
+        this.allSkills = [{id: 1, name: 'Komunikacja'}, {id: 2, name: 'Praca zespołowa'}];
+        this.onRefreshSuggestions();
+        this.cdr.detectChanges();
       }
     });
 
