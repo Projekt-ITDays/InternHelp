@@ -247,6 +247,7 @@ export class WelcomeScreen implements OnInit, OnDestroy {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
     const username = params.get('username');
+    const userId = params.get('userId');
 
     if (!token) {
       return;
@@ -255,6 +256,10 @@ export class WelcomeScreen implements OnInit, OnDestroy {
     this.authService.setAccessToken(token);
     if (username) {
       localStorage.setItem('username', username);
+    }
+
+    if (userId) {
+      localStorage.setItem('userId', userId);
     }
     // Zmiana aiapi -> ai/ask
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -273,7 +278,7 @@ export class WelcomeScreen implements OnInit, OnDestroy {
 
   protected async onRegisterSubmit(event?: Event): Promise<void> {
     if (event) event.preventDefault();
-    
+
     const user = this.username().trim();
     const pass = this.password().trim();
     const confirm = this.confirmPassword().trim();
