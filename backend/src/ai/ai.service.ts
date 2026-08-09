@@ -132,13 +132,54 @@ export class AiService {
   }
 
 
-  async sendSurveyData(surveyData: SurveyDto) {
+  async sendSurveyData(userId: string, surveyData: SurveyDto) {
+    const existingSurveys = await this.getUserSurveys(userId);
+    const normalize = (val: any) => String(val || "").trim().toLowerCase();
+
+    const duplicate = existingSurveys.find(s => {
+      const sSkills = Array.isArray(s.skills) ? [...s.skills].sort() : [];
+      const dSkills = Array.isArray(surveyData.skills) ? [...surveyData.skills].sort() : [];
+      
+      return (
+        normalize(s.Major) === normalize(surveyData.Major) &&
+        Number(s.YearOfStudy || 0) === Number(surveyData.YearOfStudy || 0) &&
+        normalize(s.PreferredInternshipType) === normalize(surveyData.PreferredInternshipType) &&
+        Number(s.TimeLeft || 0) === Number(surveyData.TimeLeft || 0) &&
+        normalize(s.Inrest) === normalize(surveyData.Inrest) &&
+        normalize(s.Expierience) === normalize(surveyData.Expierience) &&
+        JSON.stringify(sSkills) === JSON.stringify(dSkills) &&
+        normalize(s.AbilitiesLevel) === normalize(surveyData.AbilitiesLevel) &&
+        normalize(s.SideProjectsHobby) === normalize(surveyData.SideProjectsHobby) &&
+        normalize(s.Strengths) === normalize(surveyData.Strengths) &&
+        normalize(s.Weaknesses) === normalize(surveyData.Weaknesses) &&
+        normalize(s.University) === normalize(surveyData.University) &&
+        Number(s.GraduationYear || 0) === Number(surveyData.GraduationYear || 0)
+      );
+    });
+
+    if (duplicate) {
+      duplicate.createdAt = new Date();
+      await this.surveysRepository.save(duplicate);
+      return { isDuplicate: true, id: duplicate.id };
+    }
 
     const surveyEntity = this.surveysRepository.create({
       ...surveyData,
+      userId,
       createdAt: new Date()
     });
-    return this.surveysRepository.save(surveyEntity);
+    const saved = await this.surveysRepository.save(surveyEntity);
+    return { isDuplicate: false, id: saved.id };
+  }
+  async getUserSurveys(userId: string) {
+    return this.surveysRepository.find({
+      where: { userId },
+      order: { createdAt: 'DESC' }
+    });
+  }
+
+  async deleteUserSurvey(id: number, userId: string) {
+    return this.surveysRepository.delete({ id, userId });
   }
 
   async verifyOpenTask(challenge: string, userAnswer: string) {

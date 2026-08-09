@@ -22,6 +22,8 @@ export class AgentResponse {
         gridCells: any[];
         topicStack: any[];
         currentLevel: number;
+        totalScore: number;
+        pointsPerDifficulty: any;
         updatedAt: number;
     };
 }

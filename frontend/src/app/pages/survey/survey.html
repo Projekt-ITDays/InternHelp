@@ -5,6 +5,45 @@
         <header class="survey-header text-center">
             <div class="survey-kicker badge-style">Profil kandydata</div>
             <h1>Zbudujmy Twój profil</h1>
+            
+            <div class="header-actions-left">
+                <button type="button" class="btn-quick-save" (click)="onRestoreLatest()">
+                    <ng-icon name="heroArrowPath"></ng-icon>
+                    <span>Ostatni profil</span>
+                </button>
+            </div>
+
+            <div class="profiles-dropdown-container">
+                <button type="button" class="btn-toggle-profiles" (click)="showProfiles = !showProfiles" [class.active]="showProfiles">
+                    <ng-icon name="heroClock"></ng-icon>
+                    <span>Historia profili</span>
+                </button>
+                
+                @if (showProfiles) {
+                    <div class="profiles-dropdown">
+                        <div class="dropdown-header">Zapisane profile</div>
+                        <div class="dropdown-list">
+                            @for (survey of userSurveys; track survey.id) {
+                                <div class="dropdown-item" (click)="onSurveySelect(survey); showProfiles = false">
+                                    <div class="item-info">
+                                        <strong>{{ survey.Major }}</strong>
+                                        <div class="item-details">
+                                            <span>Rok {{ survey.YearOfStudy }}</span>
+                                            <span class="item-date">{{ survey.createdAt | date:'dd.MM.yyyy HH:mm' }}</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-delete-small" (click)="onDeleteSurvey($event, survey.id)">
+                                        <ng-icon name="heroXMark"></ng-icon>
+                                    </button>
+                                </div>
+                            } @empty {
+                                <div class="dropdown-empty">Brak zapisanych profili. Wyślij ankietę, aby ją zapisać!</div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
             <p>Podziel się z nami swoimi planami i doświadczeniem, a nasz agent AI przygotuje dla Ciebie
                 spersonalizowaną ścieżkę rozwoju oraz interaktywną mapę kariery.</p>
         </header>
@@ -153,8 +192,13 @@
             </div>
 
             <footer class="actions">
-                <button type="submit" [disabled]="surveyForm.invalid" class="btn-submit-survey">Zapisz profil i
-                    wygeneruj plan ✨</button>
+                <button type="button" class="btn-save-secondary" [disabled]="surveyForm.invalid || isLoading" (click)="onSaveOnly()">
+                    <ng-icon [name]="isLoading ? 'heroArrowPath' : 'heroArrowDownOnSquare'" [class.spin]="isLoading"></ng-icon>
+                    <span>{{ isLoading ? 'Zapisywanie...' : 'Zapisz profil' }}</span>
+                </button>
+                <button type="submit" [disabled]="surveyForm.invalid || isLoading" class="btn-submit-survey">
+                    {{ isLoading ? 'Przetwarzanie...' : 'Zapisz profil i wygeneruj plan' }}
+                </button>
             </footer>
         </form>
     </article>

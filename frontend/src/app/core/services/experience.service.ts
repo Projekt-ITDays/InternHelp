@@ -36,5 +36,15 @@ export class ExperienceService {
     );
   }
 
+  async addExperience(amount: number): Promise<ProgressData> {
+    return firstValueFrom(
+      this.http.post<ProgressData>(`${this.apiUrl}/add`, { amount }, { withCredentials: true })
+    );
+  }
 
+  async removeExperience(amount: number): Promise<ProgressData> {
+    return firstValueFrom(
+      this.http.post<ProgressData>(`${this.apiUrl}/remove`, { amount }, { withCredentials: true })
+    );
+  }
 }

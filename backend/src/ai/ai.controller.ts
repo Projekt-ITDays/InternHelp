@@ -52,12 +52,34 @@ export class AiController {
     }
     return this.aiService.generateTasksForTopic(topic, difficulty);
   }
+  @UseGuards(AuthGuard)
   @Post('survey')
-  async submitSurvey(@Body() surveyData: SurveyDto) {
-    console.log('Received survey data:', surveyData);
+  async submitSurvey(
+    @Body() surveyData: SurveyDto,
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    const userId = req.user.sub;
+    const result = await this.aiService.sendSurveyData(userId, surveyData);
+    return { 
+      message: result.isDuplicate ? 'Duplicate profile detected' : 'Survey data saved', 
+      isDuplicate: !!result.isDuplicate, 
+      id: result.id 
+    };
+  }
 
-    this.aiService.sendSurveyData(surveyData);
-    return { message: 'Survey data received' };
+  @UseGuards(AuthGuard)
+  @Get('surveys')
+  async getUserSurveys(@Req() req: Request & { user: { sub: string } }) {
+    return this.aiService.getUserSurveys(req.user.sub);
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete('surveys/:id')
+  async deleteUserSurvey(
+    @Param('id') id: number,
+    @Req() req: Request & { user: { sub: string } }
+  ) {
+    return this.aiService.deleteUserSurvey(id, req.user.sub);
   }
   @UseGuards(AuthGuard)
   @Post('survey-results')
@@ -80,7 +102,7 @@ export class AiController {
   @Patch('plans/:id/grid-state')
   async saveGridState(
     @Param('id') planId: string,
-    @Body() body: { gridCells: any[]; topicStack: any[]; currentLevel: number },
+    @Body() body: { gridCells: any[]; topicStack: any[]; currentLevel: number; totalScore: number; pointsPerDifficulty: any },
     @Req() req: Request & { user: { sub: string } }
   ) {
     try {
@@ -97,7 +119,7 @@ export class AiController {
     @Req() req: Request & { user: { sub: string } }
   ) {
     const state = await this.aiAgentService.getGridState(planId, req.user.sub);
-    return { gridState: state };
+    return state;
   }
 
   @UseGuards(AuthGuard)

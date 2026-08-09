@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder } from '@nestjs/swagger/dist/document-builder';
 import { SwaggerModule } from '@nestjs/swagger/dist/swagger-module';
-import { ValidationPipe } from '@nestjs/common';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
@@ -22,6 +22,10 @@ async function bootstrap() {
     whitelist: true,
     forbidNonWhitelisted: true,
     transform: true,
+    exceptionFactory: (errors) => {
+      console.error('Validation Errors:', JSON.stringify(errors, null, 2));
+      return new BadRequestException(errors);
+    },
   }))
 
   // CORS: jeden middleware, jawne originy (wymagane przy credentials: true)

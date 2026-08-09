@@ -27,8 +27,18 @@ export class AuthService {
         await this.refreshTokenRepository.delete({ userId })
     }
     async register(payload : LoggingCredentialsDto) {
+        console.log('Backend register attempt for user:', payload.username);
+        const isRecaptchaValid = await this.validateRecaptcha(payload.captchaToken);
+        console.log('reCAPTCHA validation result:', isRecaptchaValid);
+        
+        if (!isRecaptchaValid) {
+            console.error('reCAPTCHA failed for user:', payload.username);
+            throw new BadRequestException('Weryfikacja CAPTCHA nieudana');
+        }
+
         const user = await this.userRepository.findOne({where: {username: payload.username}})
         if(user) {
+            console.warn('User already exists:', payload.username);
             throw new ConflictException('Użytkownik już istnieje')
         }
 

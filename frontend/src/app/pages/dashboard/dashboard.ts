@@ -146,33 +146,23 @@ export class Dashboard implements OnInit {
   async ngOnInit() {
     this.isLoadingTasks.set(true);
     try {
-      const progress = await this.experienceService.getProgress();
-      this.level.set(progress.level);
-      this.levelProgress.set(progress.progressPercent);
-      this.xpCurrent.set(progress.experience);
-      this.xpMax.set(progress.xpForNextLevel);
-
-      if (progress.level >= 20) {
-        this.levelLabel.set('Ekspert');
-      } else if (progress.level >= 10) {
-        this.levelLabel.set('Zaawansowany');
-      } else {
-        this.levelLabel.set('Początkujący');
-      }
-    } catch (error) {
-      console.error('Błąd podczas pobierania postępów:', error);
-    }
-
-    try {
       const hasToken = await this.authService.ensureAccessToken();
       if (!hasToken) {
         this.plansLoading.set(false);
+        this.isLoadingTasks.set(false);
         return;
+      }
+
+
+      try {
+        const progress = await this.experienceService.getProgress();
+        this.updateExperienceUI(progress);
+      } catch (error) {
+        console.error('Błąd podczas pobierania postępów:', error);
       }
 
       const userPlans = await this.aiService.getUserPlans();
       if (userPlans && userPlans.length > 0) {
-        // Apply saved order if exists
         const savedOrder = localStorage.getItem('dashboard_plans_order');
         if (savedOrder) {
           try {
@@ -193,7 +183,7 @@ export class Dashboard implements OnInit {
         this.loadDashboardTasks(userPlans);
       }
     } catch (error) {
-      console.error('Błąd podczas pobierania planów:', error);
+      console.error('Błąd podczas inicjalizacji dashboardu:', error);
     } finally {
       this.plansLoading.set(false);
       this.isLoadingTasks.set(false);
@@ -212,7 +202,13 @@ export class Dashboard implements OnInit {
     let allTasks: any[] = [];
     for (const plan of plans) {
       const title = this.getPlanTitle(plan);
-      const saved = localStorage.getItem(`roadmap_state_${title}`);
+
+      // Próba wczytania po ID (nowy sposób) lub po tytule (stary sposób / fallback)
+      let saved = localStorage.getItem(`roadmap_state_${plan._id}`);
+      if (!saved) {
+        saved = localStorage.getItem(`roadmap_state_${title}`);
+      }
+
       if (saved) {
         try {
           const state = JSON.parse(saved);
@@ -227,7 +223,7 @@ export class Dashboard implements OnInit {
           const tasksWithPlan = cells.map((c: any) => ({ ...c, _planTitle: title, _planId: plan._id }));
           allTasks = allTasks.concat(tasksWithPlan);
         } catch (e) {
-          console.error("Błąd wczytywania zadań:", e);
+          console.error("Błąd wczytywania zadań dla planu:", plan._id, e);
         }
       }
     }
@@ -435,6 +431,46 @@ export class Dashboard implements OnInit {
           color: 'var(--ih-surface)'
         });
       }
+    }
+  }
+
+  async testAddExp(amount: number) {
+    try {
+      const progress = await this.experienceService.addExperience(amount);
+      this.updateExperienceUI(progress);
+    } catch (e) {
+      console.error('Błąd testowego dodawania EXP:', e);
+    }
+  }
+
+  async testRemoveExp(amount: number) {
+    try {
+      const progress = await this.experienceService.removeExperience(amount);
+      this.updateExperienceUI(progress);
+    } catch (e) {
+      console.error('Błąd testowego odejmowania EXP:', e);
+    }
+  }
+
+  private updateExperienceUI(progress: any) {
+    this.level.set(progress.level);
+    this.levelProgress.set(progress.progressPercent);
+    this.xpCurrent.set(progress.experience);
+    this.xpMax.set(progress.xpForNextLevel);
+
+    const lvl = progress.level;
+    if (lvl >= 30) {
+      this.levelLabel.set('Mistrz');
+    } else if (lvl >= 19) {
+      this.levelLabel.set('Ekspert');
+    } else if (lvl >= 13) {
+      this.levelLabel.set('Specjalista');
+    } else if (lvl >= 8) {
+      this.levelLabel.set('Praktykant');
+    } else if (lvl >= 4) {
+      this.levelLabel.set('Amator');
+    } else {
+      this.levelLabel.set('Nowicjusz');
     }
   }
 }

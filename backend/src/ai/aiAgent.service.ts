@@ -537,6 +537,8 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         gridCells: any[];
         topicStack: any[];
         currentLevel: number;
+        totalScore: number;
+        pointsPerDifficulty: any;
     }) {
         const plan = await this.agentResponseModel.findOne({ _id: planId, userId });
         if (!plan) {

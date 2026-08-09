@@ -7,6 +7,8 @@ export interface GridState {
   gridCells: any[];
   topicStack: any[];
   currentLevel: number;
+  totalScore: number;
+  pointsPerDifficulty: any;
   updatedAt?: number;
 }
 
@@ -35,12 +37,12 @@ export class RoadmapStorageService {
   async getGridState(planId: string): Promise<GridState | null> {
     try {
       const res = await firstValueFrom(
-        this.http.get<{ gridState: GridState | null }>(
+        this.http.get<GridState | null>(
           `${this.baseUrl}/${planId}/grid-state`,
           { withCredentials: true }
         )
       );
-      return res.gridState ?? null;
+      return res;
     } catch (err) {
       console.error('Nie udało się pobrać stanu grafu z MongoDB:', err);
       return null;

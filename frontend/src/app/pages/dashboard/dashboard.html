@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<main class="mx-auto max-w-[1600px] px-6 py-8">
+<main class="w-full px-6 py-8">
   <div class="flex flex-col gap-8">
     <div class="flex flex-col gap-8">
       <div class="flex flex-col gap-5 sm:flex-row">
@@ -30,11 +30,23 @@
               <ng-icon name="heroTrophy" size="24" class="text-[var(--ih-accent)]" />
             </div>
           </div>
-
-          <div class="relative h-3 overflow-hidden rounded-full bg-[var(--ih-bg-soft)]">
+          <div class="relative h-2 w-full rounded-full bg-[var(--ih-bg-soft)] overflow-hidden">
             <div class="absolute inset-y-0 left-0 rounded-full bg-[var(--ih-accent)] transition-all duration-700"
               [style.width.%]="levelProgress()">
             </div>
+          </div>
+
+          <!-- placeholder -->
+          <div class="mt-4 flex flex-wrap gap-2 p-2 bg-[var(--ih-bg-soft)] rounded-lg border border-[var(--ih-border)]">
+            <span class="text-[10px] uppercase tracking-wider text-[var(--ih-ink-soft)] w-full mb-1">Debug EXP</span>
+            <button (click)="testAddExp(10)"
+              class="btn-debug bg-green-500/10 text-green-500 hover:bg-green-500/20">+10</button>
+            <button (click)="testAddExp(50)"
+              class="btn-debug bg-green-500/20 text-green-500 hover:bg-green-500/30">+50</button>
+            <button (click)="testRemoveExp(10)"
+              class="btn-debug bg-red-500/10 text-red-500 hover:bg-red-500/20">-10</button>
+            <button (click)="testRemoveExp(50)"
+              class="btn-debug bg-red-500/20 text-red-500 hover:bg-red-500/30">-50</button>
           </div>
 
           <div class="flex justify-between text-xs text-[var(--ih-ink-soft)]">
@@ -67,7 +79,7 @@
           </div>
         </div>
         }
- @else if (sourcePlans().length === 0) {
+        @else if (sourcePlans().length === 0) {
         <div
           class="flex flex-col items-center justify-center gap-4 rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-10 text-center shadow-md">
           <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ih-bg-soft)]">
@@ -81,18 +93,13 @@
           </button>
         </div>
         } @else {
-        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" 
-             cdkDropList 
-             cdkDropListOrientation="mixed"
-             (cdkDropListDropped)="onDropPlan($event)">
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" cdkDropList cdkDropListOrientation="mixed"
+          (cdkDropListDropped)="onDropPlan($event)">
           @for (plan of visiblePlans(); track plan._id) {
-          <div
-            cdkDrag
-            class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md
+          <div cdkDrag class="cursor-pointer rounded-2xl border border-[var(--ih-border-dark)] bg-[var(--ih-bg-a94)] p-5 shadow-md
                       transition-[transform,border-color,box-shadow,background-color] duration-200 
                       hover:-translate-y-0.5 hover:border-[var(--ih-accent)]/30 hover:shadow-lg
-                      flex flex-col h-full relative group"
-            (click)="openPlan(plan)">
+                      flex flex-col h-full relative group" (click)="openPlan(plan)">
 
             <!-- Custom Placeholder while dragging -->
             <div *cdkDragPlaceholder class="cdk-drag-placeholder"></div>
@@ -113,9 +120,9 @@
                 {{ plan.status || 'active' }}
               </span>
               <div class="flex items-center gap-2">
-                <button (click)="deletePlan($event, plan._id)" 
-                        class="p-1.5 rounded-lg hover:bg-red-500/10 text-[var(--ih-ink-soft)] hover:text-red-400 transition-all opacity-0 group-hover:opacity-100"
-                        title="Usuń plan">
+                <button (click)="deletePlan($event, plan._id)"
+                  class="p-1.5 rounded-lg hover:bg-red-500/10 text-[var(--ih-ink-soft)] hover:text-red-400 transition-all opacity-0 group-hover:opacity-100"
+                  title="Usuń plan">
                   <ng-icon name="heroTrash" size="16" />
                 </button>
                 <ng-icon name="heroChevronRight" size="16" class="text-[var(--ih-ink-soft)]" />
@@ -124,9 +131,9 @@
 
             <div class="mb-1 flex items-center gap-2 group/title">
               <h3 class="font-semibold text-[var(--ih-surface)] leading-tight">{{ getPlanTitle(plan) }}</h3>
-              <button (click)="editPlanTitle($event, plan)" 
-                      class="p-1 rounded-md hover:bg-[var(--ih-bg-soft)] text-[var(--ih-ink-soft)] hover:text-[var(--ih-accent)] transition-all opacity-0 group-hover:opacity-100"
-                      title="Zmień nazwę">
+              <button (click)="editPlanTitle($event, plan)"
+                class="p-1 rounded-md hover:bg-[var(--ih-bg-soft)] text-[var(--ih-ink-soft)] hover:text-[var(--ih-accent)] transition-all opacity-0 group-hover:opacity-100"
+                title="Zmień nazwę">
                 <ng-icon name="heroPencilSquare" size="14" />
               </button>
             </div>
@@ -149,18 +156,20 @@
             <div class="mt-auto pt-4 border-t border-[var(--ih-border-dark)]/30 flex items-end justify-between">
               <div class="flex items-center flex-wrap gap-1.5">
                 @for (stage of plan.planData.plan.slice(0, 3); track $index) {
-                <span class="inline-flex items-center rounded-md bg-[var(--ih-bg-soft)] px-2.5 py-1 text-[10px] font-medium text-[var(--ih-ink-soft)] border border-[var(--ih-border-dark)]/50 leading-none mb-0">
+                <span
+                  class="inline-flex items-center rounded-md bg-[var(--ih-bg-soft)] px-2.5 py-1 text-[10px] font-medium text-[var(--ih-ink-soft)] border border-[var(--ih-border-dark)]/50 leading-none mb-0">
                   Etap {{ $index + 1 }}
                 </span>
                 }
                 @if ((plan.planData.plan.length || 0) > 3) {
-                <span class="inline-flex items-center rounded-md bg-[var(--ih-bg-soft)] px-2 py-1 text-[10px] font-medium text-[var(--ih-accent)] border border-[var(--ih-accent)]/20 leading-none mb-0">
+                <span
+                  class="inline-flex items-center rounded-md bg-[var(--ih-bg-soft)] px-2 py-1 text-[10px] font-medium text-[var(--ih-accent)] border border-[var(--ih-accent)]/20 leading-none mb-0">
                   +{{ (plan.planData.plan.length || 0) - 3 }}
                 </span>
                 }
               </div>
-              
-              <button 
+
+              <button
                 class="shrink-0 px-3 py-1.5 text-[11px] font-bold rounded-lg border border-[var(--ih-border-dark)] 
                        text-[var(--ih-ink-soft)] bg-[var(--ih-bg-soft)] transition-all 
                        hover:bg-[var(--ih-accent)] hover:text-white hover:border-[var(--ih-accent)] active:scale-95 shadow-sm mb-0"

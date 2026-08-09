@@ -13,6 +13,6 @@ export class SurveyService {
     ) {}
     private readonly apiUrl = `${environment.apiUrl}/ai/survey`;
     postSurvey(payload : SurveyDto){
-        return this.http.post(this.apiUrl, payload);
+        return this.http.post(this.apiUrl, payload, { withCredentials: true });
     }
 }

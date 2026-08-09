@@ -7,19 +7,8 @@ import { RoadmapStorageService } from '../../core/services/roadmap-storage.servi
 import { AuthService } from '../../core/services/auth.service';
 import { marked } from 'marked';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  heroInformationCircle,
-  heroWrenchScrewdriver,
-  heroAcademicCap,
-  heroRocketLaunch,
-  heroCheck,
-  heroClipboardDocumentList,
-  heroXMark,
-  heroChevronUp,
-  heroChevronDown,
-  heroChevronLeft,
-  heroChevronRight
-} from '@ng-icons/heroicons/outline';
+import { heroCheck, heroClipboardDocumentList, heroXMark, heroChevronUp, heroChevronDown, heroChevronLeft, heroChevronRight, heroInformationCircle, heroWrenchScrewdriver, heroAcademicCap, heroRocketLaunch } from '@ng-icons/heroicons/outline';
+import { ExperienceService } from '../../core/services/experience.service';
 
 @Component({
   selector: 'app-roadmap',
@@ -57,11 +46,9 @@ export class RoadmapComponent implements OnInit, OnDestroy {
   topicStack: any[] = [];
   isFetchingExtra: boolean = false;
 
-  // Interaction Modal state
   selectedCell: any | null = null;
   isSelectingDifficulty: boolean = false;
 
-  // Panning state
   isDragging = false;
   startX = 0;
   startY = 0;
@@ -98,7 +85,8 @@ export class RoadmapComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private storage: RoadmapStorageService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private experienceService: ExperienceService
   ) { }
 
   updateParsedContent() {
@@ -133,12 +121,17 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       this.selectedPlan = plan;
       this.careerPath = this.getPlanTitle(plan);
 
-      // Spróbuj wczytać z localStorage, jeśli nie ma - inicjalizuj
-      if (!this.loadFromLocalStorage()) {
+      // 1. Spróbuj wczytać z MongoDB
+      const serverState = await this.storage.getGridState(planId);
+      if (serverState) {
+        this.applyState(serverState);
+      }
+      // 2. Jeśli nie ma na serwerze, spróbuj localStorage (fallback)
+      else if (!this.loadFromLocalStorage()) {
+        // 3. Jeśli nigdzie nie ma, inicjalizuj od zera
         await this.initializeGraph();
       }
 
-      // Obsługa parametrów z dashboardu (otwieranie konkretnego zadania)
       this.route.queryParams.subscribe(params => {
         if (params['topic']) {
           this.handleAutoOpenTask(params['topic'], params['diff'], params['tab']);
@@ -363,12 +356,36 @@ export class RoadmapComponent implements OnInit, OnDestroy {
       currentLevel: this.currentLevel,
       careerPath: this.careerPath
     };
+
+    // Zapis lokalny (szybki fallback)
     localStorage.setItem(`roadmap_state_${this.selectedPlan._id}`, JSON.stringify(state));
+
+    // Zapis w MongoDB
+    this.storage.saveGridState(this.selectedPlan._id, state);
+  }
+
+  applyState(state: any) {
+    if (!state || !state.gridCells || state.gridCells.length !== 150) {
+      return;
+    }
+    this.gridCells = state.gridCells;
+    this.totalScore = state.totalScore || 0;
+    this.pointsPerDifficulty = state.pointsPerDifficulty || { 'Łatwy': 0, 'Średni': 0, 'Trudny': 0 };
+    this.topicStack = state.topicStack || [];
+    this.currentLevel = state.currentLevel || 1;
+    this.isGenerating = false;
+    this.cdr.detectChanges();
   }
 
   loadFromLocalStorage(): boolean {
     if (!this.selectedPlan?._id) return false;
-    const saved = localStorage.getItem(`roadmap_state_${this.selectedPlan._id}`);
+
+    // Próba wczytania po ID, a jeśli nie ma - fallback do tytułu
+    let saved = localStorage.getItem(`roadmap_state_${this.selectedPlan._id}`);
+    if (!saved) {
+      saved = localStorage.getItem(`roadmap_state_${this.careerPath}`);
+    }
+
     if (saved) {
       try {
         const state = JSON.parse(saved);
@@ -608,6 +625,10 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
       this.checkCellCompletion();
       this.saveToLocalStorage();
+
+      // Dodawanie EXP do bazy SQL
+      const expGain = diff === 'Łatwy' ? 25 : (diff === 'Średni' ? 75 : 200);
+      this.experienceService.addExperience(expGain).catch(err => console.error('Błąd zapisu EXP:', err));
     } else {
       this.closedTasksError[taskIdx] = true;
     }
@@ -639,6 +660,10 @@ export class RoadmapComponent implements OnInit, OnDestroy {
 
         this.checkCellCompletion();
         this.saveToLocalStorage();
+
+        // Dodawanie EXP do bazy SQL
+        const expGain = (diff === 'Łatwy' ? 25 : (diff === 'Średni' ? 75 : 200)) * score;
+        this.experienceService.addExperience(expGain).catch(err => console.error('Błąd zapisu EXP:', err));
       } else {
         this.openTaskFeedbacks[taskIdx] = `Wynik: 0/2 pkt. Spróbuj ponownie: ${res?.feedback}`;
       }
