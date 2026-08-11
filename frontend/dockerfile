@@ -1,10 +1,11 @@
-FROM node:20-alpine as build
+# syntax=docker/dockerfile:1.7
+FROM node:20-alpine AS build
 
 ARG BUILD_CONFIGURATION=production
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN --mount=type=cache,target=/root/.npm npm ci
 COPY . .
 RUN npm run build -- --configuration=${BUILD_CONFIGURATION}
 FROM nginx:stable-alpine
