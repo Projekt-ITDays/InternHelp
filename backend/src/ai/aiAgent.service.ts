@@ -586,6 +586,20 @@ ZASADY DLA INNYCH PYTAŃ (Jeśli pytanie NIE dotyczy planu, np. "Jak mam na imi�
         await plan.save();
         return { success: true };
     }
+
+    async explainPlan(content : string) {
+        const explantaionPrompt = new SystemMessage(`Jesteś doświadczonym mentorem kariery, który pomaga użytkownikom zrozumieć ich plany rozwoju zawodowego. Otrzymujesz fragment planu rozwoju kariery, który może być niejasny lub skomplikowany. Twoim zadaniem jest wyjaśnienie tego fragmentu w prosty, zrozumiały sposób, tak jakbyś tłumaczył go osobie bez doświadczenia w branży IT. Skup się na tym, co oznaczają poszczególne etapy, jakie umiejętności są wymagane i jakie korzyści przyniosą poszczególne zadania. Odpowiedz w sposób empatyczny i wspierający, aby pomóc użytkownikowi poczuć się pewniej w realizacji swojego planu.`)
+        const agent = createAgent({
+            model: this.model,
+            systemPrompt: explantaionPrompt,
+        })
+        return await agent.invoke({
+            messages: [{
+                role: "user",
+                content: content
+            }]
+        });
+    }
     retrieveSchema = z.object({ query: z.string() });
     retrieve = tool(
         async ({ query }) => {

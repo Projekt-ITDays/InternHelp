@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LoggingCredentialsDto } from 'src/dto/loggingCredentials.dto';
 import { LoginDto } from 'src/dto/login.dto';
@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 import { v4 as uuidv4 } from 'uuid'
+import { NotFoundError } from 'rxjs';
 
 type GoogleProfileData = {
     email: string
@@ -52,17 +53,16 @@ export class AuthService {
 
     async login(payload: LoginDto) {
         const isRecaptchaValid = await this.validateRecaptcha(payload.captchaToken);
-        //jak wam nie działa captcha to to wyłączcie
         if (!isRecaptchaValid) {
-            throw new BadRequestException('Weryfikacja CAPTCHA nieudana');
+            throw new UnauthorizedException('Weryfikacja CAPTCHA nieudana');
         }
 
         const user = await this.userRepository.findOne({ where: { username: payload.username } })
         if (!user) {
-            throw new UnauthorizedException('Niepoprawny login lub hasło')
+            throw new NotFoundException('User not found')
         }
-        if (!(await bcrypt.compare(payload.password, user.password))) {
-            throw new UnauthorizedException('Niepoprawny login lub hasło')
+        if(!(await bcrypt.compare(payload.password, user.password))) {
+            throw new UnauthorizedException('Nieprawidłowa nazwa użytkownika lub hasło')
         }
         const token = await this.generateToken(user.id)
         console.log(user.id)
@@ -81,15 +81,6 @@ export class AuthService {
         const apiKey = process.env.RECAPTCHA_API_KEY;
         const siteKey = process.env.RECAPTCHA_SITE_KEY;
 
-        if (!projectId || !apiKey || !siteKey) {
-            const isProduction = process.env.NODE_ENV === 'production';
-            if (!isProduction) {
-                console.warn('reCAPTCHA config missing. CAPTCHA validation skipped in non-production environment.');
-                return true;
-            }
-            return false;
-        }
-
         const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
 
         try {
@@ -99,13 +90,16 @@ export class AuthService {
                 body: JSON.stringify({
                     event: {
                         token: token,
-                        siteKey: siteKey
+                        siteKey: siteKey,
+                        expectedAction: 'login'
                     }
                 })
             });
 
             const data = await response.json() as any;
-            console.log('reCAPTCHA Response Data:', data);
+
+            // Log assessment for debugging (optional)
+            console.log('reCAPTCHA Assessment:', data);
 
             if (data.tokenProperties && data.tokenProperties.valid === true) {
                 return true;
