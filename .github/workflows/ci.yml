@@ -68,6 +68,10 @@ jobs:
       - name: Install backend dependencies
         run: npm ci --prefer-offline --no-audit
 
+      - name: Run Backend Tests (Non-blocking)
+        run: npm run test
+        continue-on-error: true
+
       - name: Check NestJS compilation
         run: npm run build
 
@@ -102,6 +106,10 @@ jobs:
 
       - name: Install frontend dependencies
         run: npm ci --prefer-offline --no-audit
+
+      - name: Run Angular unit tests
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        continue-on-error: true
 
       - name: Check Angular compilation
         run: npm run build -- --configuration=production
