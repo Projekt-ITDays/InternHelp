@@ -1,21 +1,24 @@
-FROM node:20-alpine AS base
+# syntax=docker/dockerfile:1.7
+FROM node:22-alpine AS base
 WORKDIR /usr/src/app
 COPY  package*.json ./
 
 FROM base AS dev
-RUN npm install
+RUN --mount=type=cache,target=/root/.npm npm ci
 COPY . . 
+USER node
 EXPOSE 3000
 CMD [ "npm" , "run" ,"start:dev" ]
 
 FROM base AS build
-RUN npm install
+RUN npm --mount=type=cache,target=/root/.npm ci
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
 FROM base AS prod
 ENV NODE_ENV=production
-RUN npm install --only=production
+COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/dist ./dist
 USER node
 EXPOSE 3000
