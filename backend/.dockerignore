@@ -2,3 +2,9 @@ node_modules
 dist
 .env
 npm-debug.log
+.gitignore
+.prettierc
+dockerfile
+.dockerignore
+README.md
+test

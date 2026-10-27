@@ -4,3 +4,7 @@ dist
 npm-debug.log
 .vscode
 .editorconfig
+.gitignore
+dockerfile
+.dockerignore
+README.md
