@@ -100,6 +100,14 @@ export class Ai {
     return firstValueFrom(this.http.get<any[]>(`${environment.apiUrl}/ai/plans`, { withCredentials: true }));
   }
 
+  async getUserSurveys(): Promise<any[]> {
+    return firstValueFrom(this.http.get<any[]>(`${environment.apiUrl}/ai/surveys`, { withCredentials: true }));
+  }
+
+  async deleteUserSurvey(id: number): Promise<any> {
+    return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/surveys/${id}`, { withCredentials: true }));
+  }
+
   async deleteUserPlan(planId: string): Promise<any> {
     return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/plans/${planId}`, { withCredentials: true }));
   }
