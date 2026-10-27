@@ -35,13 +35,6 @@ import { MongooseModule } from "@nestjs/mongoose";
       //   },                                                      // |
       //   family: 4,                                              // |
       // },                                                        // |
-      ssl: process.env.DB_SSL === 'true',
-      extra: {
-        ssl: process.env.DB_SSL === 'true' ? {
-          rejectUnauthorized: false,
-        } : undefined,
-        family: 4,
-      },
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),

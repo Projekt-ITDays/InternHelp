@@ -100,14 +100,6 @@ export class Ai {
     return firstValueFrom(this.http.get<any[]>(`${environment.apiUrl}/ai/plans`, { withCredentials: true }));
   }
 
-  async deleteUserPlan(planId: string): Promise<any> {
-    return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/plans/${planId}`, { withCredentials: true }));
-  }
-
-  async updatePlanTitle(planId: string, title: string): Promise<any> {
-    return firstValueFrom(this.http.patch<any>(`${environment.apiUrl}/ai/plans/${planId}/title`, { title }, { withCredentials: true }));
-  }
-
   async getUserSurveys(): Promise<any[]> {
     return firstValueFrom(this.http.get<any[]>(`${environment.apiUrl}/ai/surveys`, { withCredentials: true }));
   }
@@ -116,11 +108,15 @@ export class Ai {
     return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/surveys/${id}`, { withCredentials: true }));
   }
 
-  async saveGridState(planId: string, state: any): Promise<any> {
-    return firstValueFrom(this.http.patch<any>(`${environment.apiUrl}/ai/plans/${planId}/grid-state`, state, { withCredentials: true }));
+  async deleteUserPlan(planId: string): Promise<any> {
+    return firstValueFrom(this.http.delete<any>(`${environment.apiUrl}/ai/plans/${planId}`, { withCredentials: true }));
   }
 
-  async getGridState(planId: string): Promise<any> {
-    return firstValueFrom(this.http.get<any>(`${environment.apiUrl}/ai/plans/${planId}/grid-state`, { withCredentials: true }));
+  async updatePlanTitle(planId: string, title: string): Promise<any> {
+    return firstValueFrom(this.http.patch<any>(`${environment.apiUrl}/ai/plans/${planId}/title`, { title }, { withCredentials: true }));
+  }
+
+  async explainPartofPlan(content : string) : Promise<any> {
+    return firstValueFrom(this.http.post<any>(`${environment.apiUrl}/ai/explain-part`, { content }, { withCredentials: true }));
   }
 }
