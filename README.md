@@ -1,27 +1,29 @@
-# 🎓 InternHelp
+# InternHelp
 
-An **AI-powered career guidance platform** built for AGH IT Days — helping students find their path in IT by generating personalized learning roadmaps, skill assessments, and career plans powered by an intelligent AI agent.
+InternHelp is an autonomous career planning engine that turns job requirements into verified, step-by-step technical roadmaps for students entering IT.
 
-> Built in collaboration with a mentor from Google. 🚀
+Most students graduate into a competitive market with general computer science theory, but lack a clear path toward production-grade engineering roles. Static roadmaps fail to account for what an applicant already knows, while raw LLM prompts lack market data. InternHelp replaces both with a multi-agent workflow built on NestJS and LangGraph. The pipeline evaluates candidate skills, scrapes live technical requirements, and compiles an interactive milestone roadmap with measurable task progression.
 
----
-
-## ✨ What it does
-
-InternHelp analyzes a student's skills, experience, and goals through a survey, then uses an AI agent to generate a fully personalized career roadmap — complete with learning resources, milestones, and XP-based gamification to keep them motivated.
-
-### Core Features
-
-- 🤖 **AI Career Agent** — LangChain-powered agent that analyzes user input and generates tailored roadmaps
-- 🗺️ **Interactive Roadmap** — visual honeycomb-style roadmap with completable milestones and XP progression
-- 📋 **Smart Survey** — collects skills, tools, and goals with tag-based input for cleaner AI processing
-- 🏆 **Gamification** — XP system, levels, and rewards for completing learning tasks
-- 📊 **Dashboard** — overview of all generated plans with detailed breakdowns
-- 🌐 **Web Scraper** — custom scraper that feeds up-to-date resources into the AI knowledge base
+> Built in collaboration with a mentor from Google for AGH University IT Days.
 
 ---
 
-## 🚀 Tech Stack
+## What it does
+
+Students complete a skills and goals survey. An AI agent processes the responses, queries a curated resource database, and builds a milestone roadmap with XP tracking.
+
+### Core features
+
+- **AI career agent.** LangChain and LangGraph agent that turns survey responses into structured roadmaps.
+- **Interactive roadmap.** Visual honeycomb grid with completable milestones and XP progression.
+- **Skill survey.** Tag-based input for skills, tools, and career targets.
+- **Gamification.** XP system with levels and task completion tracking.
+- **Dashboard.** Overview and status of generated career plans.
+- **Web scraper.** Scrapes technical learning resources to keep the agent knowledge base current.
+
+---
+
+## Tech stack
 
 ### Frontend
 | Technology | Purpose |
@@ -34,26 +36,26 @@ InternHelp analyzes a student's skills, experience, and goals through a survey, 
 | Technology | Purpose |
 |---|---|
 | NestJS | REST API framework |
-| LangChain | AI Agent & LLM orchestration |
-| LangGraph | Agent workflow management |
+| LangChain | LLM orchestration |
+| LangGraph | Agent workflow graph |
 | MongoDB | Database |
 | TypeScript | Language |
 
 ### Infrastructure
 | Technology | Purpose |
 |---|---|
-| Docker / Docker Compose | Containerization |
-| Git / GitHub Actions | Version control & CI |
+| Docker, Docker Compose | Container runtime |
+| GitHub Actions | CI and automated checks |
 
 ---
 
-## 🏗️ Monorepo Structure
+## Monorepo structure
 
 ```
 InternHelp/
-├── backend/          # NestJS API + AI Agent
+├── backend/          # NestJS API and AI agent
 │   ├── src/
-│   │   ├── agent/    # LangChain AI Agent
+│   │   ├── agent/    # LangChain agent
 │   │   ├── scraper/  # Web scraper for knowledge base
 │   │   └── plans/    # Career plan generation
 │   └── package.json
@@ -71,14 +73,14 @@ InternHelp/
 
 ---
 
-## 🛠️ Getting Started
+## Getting started
 
 ### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Node.js](https://nodejs.org/)
 
-### Run with Docker (recommended)
+### Run with Docker
 
 ```bash
 git clone https://github.com/Projekt-ITDays/InternHelp.git
@@ -86,55 +88,55 @@ cd InternHelp
 docker-compose up --build
 ```
 
-### Install dependencies (for local dev / VS Code IntelliSense)
+### Install dependencies locally
 
 ```bash
 cd backend && npm install
 cd ../frontend && npm install
 ```
 
-The app will be available at:
+The application runs at:
 - Frontend: `http://localhost:4200`
 - Backend API: `http://localhost:3000`
 
 ---
 
-## 🤖 AI Agent
+## AI agent
 
-The core of InternHelp is a **LangChain AI Agent** that:
+The agent processes user input in four steps:
 
-1. Receives user data from the survey (skills, goals, experience level)
-2. Queries the knowledge base built by the custom web scraper
-3. Generates a structured career roadmap with milestones and resources
-4. Returns personalized learning paths tailored to the student's profile
-
----
-
-## 🗺️ Roadmap — Planned Features
-
-- [ ] Interactive tag input for skills in the survey
-- [ ] Delete / archive generated plans from dashboard
-- [ ] Clickable resource URLs in roadmap steps
-- [ ] XP animations and confetti on task completion
-- [ ] Export career plan to PDF
+1. Collects survey data, including skills, goals, and experience level.
+2. Queries the knowledge base populated by the web scraper.
+3. Generates a structured roadmap with milestones and learning resources.
+4. Returns the roadmap to the frontend.
 
 ---
 
-## 👥 Team
+## Planned features
 
-Built by students of AGH University of Science and Technology as part of **IT Days** university fair project.
+- [ ] Tag input for skills in the survey
+- [ ] Plan deletion and archiving in the dashboard
+- [ ] Direct links on roadmap milestone resources
+- [ ] Task completion animations
+- [ ] PDF export for generated plans
+
+---
+
+## Team
+
+Built by students of AGH University of Science and Technology for IT Days.
 
 | Role | Person |
 |---|---|
-| Team Lead & Software Engineer | [Bartosz Brańka](https://github.com/Dyzio9666) |
+| Team Lead, Software Engineer | [Bartosz Brańka](https://github.com/Dyzio9666) |
 | DevOps | Adam Batko |
 | Software Engineer | Mikołaj Buczyński |
 | Software Engineer | Krzysztof Chowaniec |
 
 ---
 
-## 📄 Docs
 
-- [features.md](./features.md) — planned UX improvements
-- [tasks.md](./tasks.md) — team task board
-- [quests.md](./quests.md) — project quests & milestones
+## Video generated using the `/brag` skill
+
+https://github.com/user-attachments/assets/e3d1370f-e50e-406c-8a40-001aa4d0b8ae
+
